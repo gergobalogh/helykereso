@@ -1,5 +1,5 @@
 {
- "generatas": "2026-10-08T11:58:00.721Z",
+ "generatas": "2026-10-08T12:34:38.901Z",
  "forras": "Wikidata (CC0) + javitasok.json",
  "telepulesOsztaly": [
   "Q1187811",
@@ -388,6 +388,16 @@
    "kozseg": "Q16426147",
    "kozsegNev": "Jósikafalva község",
    "wikidata": "https://www.wikidata.org/wiki/Q4500321"
+  },
+  {
+   "q": "Q12081821",
+   "hu": "Balkujtelep",
+   "ro": "Bălcești",
+   "de": null,
+   "megye": "CJ",
+   "kozseg": "Q12724715",
+   "kozsegNev": "Magyarkapus község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12081821"
   },
   {
    "q": "Q823172",
@@ -1520,6 +1530,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q1834666"
   },
   {
+   "q": "Q2943394",
+   "hu": "Hasadát",
+   "ro": "Hășdate",
+   "de": null,
+   "megye": "CJ",
+   "kozseg": "Q12725199",
+   "kozsegNev": "Tordaszentlászló község",
+   "wikidata": "https://www.wikidata.org/wiki/Q2943394"
+  },
+  {
    "q": "Q823126",
    "hu": "Havasasszonyfalva",
    "ro": "Săcel",
@@ -2470,6 +2490,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q12118221"
   },
   {
+   "q": "Q8113067",
+   "hu": "Lárgatanya",
+   "ro": "Văleni",
+   "de": null,
+   "megye": "CJ",
+   "kozseg": "Q16426161",
+   "kozsegNev": "Magyarkályán község",
+   "wikidata": "https://www.wikidata.org/wiki/Q8113067"
+  },
+  {
    "q": "Q3889979",
    "hu": "Légen",
    "ro": "Legii",
@@ -2680,6 +2710,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q725705"
   },
   {
+   "q": "Q3891887",
+   "hu": "Magyaróság",
+   "ro": "Pădureni",
+   "de": null,
+   "megye": "CJ",
+   "kozseg": "Q16426178",
+   "kozsegNev": "Csürülye község",
+   "wikidata": "https://www.wikidata.org/wiki/Q3891887"
+  },
+  {
    "q": "Q591983",
    "hu": "Magyarpalatka",
    "ro": "Pălatca",
@@ -2718,6 +2758,16 @@
    "kozseg": "Q12725178",
    "kozsegNev": "Magyarszentpál község",
    "wikidata": "https://www.wikidata.org/wiki/Q724244"
+  },
+  {
+   "q": "Q723793",
+   "hu": "Magyarszarvaskend",
+   "ro": "Cornești",
+   "de": null,
+   "megye": "CJ",
+   "kozseg": "Q5067667",
+   "kozsegNev": "Magyarszarvaskend község",
+   "wikidata": "https://www.wikidata.org/wiki/Q723793"
   },
   {
    "q": "Q1076069",
@@ -2938,6 +2988,16 @@
    "kozseg": "Q12724941",
    "kozsegNev": "Mócs község",
    "wikidata": "https://www.wikidata.org/wiki/Q577392"
+  },
+  {
+   "q": "Q2585692",
+   "hu": "Mezőkók",
+   "ro": "Pădureni",
+   "de": null,
+   "megye": "CJ",
+   "kozseg": "Q12725216",
+   "kozsegNev": "Alsódetrehem község",
+   "wikidata": "https://www.wikidata.org/wiki/Q2585692"
   },
   {
    "q": "Q823133",
@@ -3670,6 +3730,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q820710"
   },
   {
+   "q": "Q4967027",
+   "hu": "Sólyomtelke",
+   "ro": "Cornești",
+   "de": null,
+   "megye": "CJ",
+   "kozseg": "Q16426202",
+   "kozsegNev": "Magyargorbó község",
+   "wikidata": "https://www.wikidata.org/wiki/Q4967027"
+  },
+  {
    "q": "Q727608",
    "hu": "Sósszentmárton",
    "ro": "Gligorești",
@@ -3778,6 +3848,16 @@
    "kozseg": "Q16426220",
    "kozsegNev": "Mikeháza község",
    "wikidata": "https://www.wikidata.org/wiki/Q660611"
+  },
+  {
+   "q": "Q12158093",
+   "hu": "Szávatanya",
+   "ro": "Straja",
+   "de": null,
+   "megye": "CJ",
+   "kozseg": "Q16426185",
+   "kozsegNev": "Kolozs község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12158093"
   },
   {
    "q": "Q1090075",
@@ -3930,6 +4010,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q267794"
   },
   {
+   "q": "Q1076050",
+   "hu": "Szépkenyerűszentmárton",
+   "ro": "Sânmărtin",
+   "de": null,
+   "megye": "CJ",
+   "kozseg": null,
+   "kozsegNev": null,
+   "wikidata": "https://www.wikidata.org/wiki/Q1076050"
+  },
+  {
    "q": "Q659384",
    "hu": "Széplak",
    "ro": "Bunești",
@@ -4068,6 +4158,16 @@
    "kozseg": null,
    "kozsegNev": null,
    "wikidata": "https://www.wikidata.org/wiki/Q209809"
+  },
+  {
+   "q": "Q3893391",
+   "hu": "Tordaegres",
+   "ro": "Livada",
+   "de": null,
+   "megye": "CJ",
+   "kozseg": "Q12725032",
+   "kozsegNev": "Magyarpeterd község",
+   "wikidata": "https://www.wikidata.org/wiki/Q3893391"
   },
   {
    "q": "Q3889928",
@@ -4710,6 +4810,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q755799"
   },
   {
+   "q": "Q11421552",
+   "hu": "Avrămești",
+   "ro": "Avrămești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q1820095",
+   "kozsegNev": "Lepus község",
+   "wikidata": "https://www.wikidata.org/wiki/Q11421552"
+  },
+  {
    "q": "Q10858441",
    "hu": "Avrămești",
    "ro": "Avrămești",
@@ -4830,6 +4940,26 @@
    "wikidata": "https://www.wikidata.org/wiki/Q11083980"
   },
   {
+   "q": "Q4220563",
+   "hu": "Bârlești",
+   "ro": "Bârlești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425212",
+   "kozsegNev": "Bisztra község",
+   "wikidata": "https://www.wikidata.org/wiki/Q4220563"
+  },
+  {
+   "q": "Q12082629",
+   "hu": "Bârlești",
+   "ro": "Bârlești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425349",
+   "kozsegNev": "Aranyosfő község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12082629"
+  },
+  {
    "q": "Q10862264",
    "hu": "Bârlești-Cătun",
    "ro": "Bârlești-Cătun",
@@ -4878,6 +5008,16 @@
    "kozseg": "Q16425359",
    "kozsegNev": "Aranyosszohodol község",
    "wikidata": "https://www.wikidata.org/wiki/Q4222626"
+  },
+  {
+   "q": "Q791815",
+   "hu": "Bedellő",
+   "ro": "Izvoarele",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425290",
+   "kozsegNev": "Úrháza község",
+   "wikidata": "https://www.wikidata.org/wiki/Q791815"
   },
   {
    "q": "Q1092886",
@@ -4980,6 +5120,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q12083019"
   },
   {
+   "q": "Q12083021",
+   "hu": "Bobărești",
+   "ro": "Bobărești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425359",
+   "kozsegNev": "Aranyosszohodol község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12083021"
+  },
+  {
    "q": "Q10863019",
    "hu": "Bocești",
    "ro": "Bocești",
@@ -5018,6 +5168,16 @@
    "kozseg": "Q16425313",
    "kozsegNev": "Mogos község",
    "wikidata": "https://www.wikidata.org/wiki/Q12083294"
+  },
+  {
+   "q": "Q12083295",
+   "hu": "Bogdănești",
+   "ro": "Bogdănești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425383",
+   "kozsegNev": "Alsóvidra község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12083295"
   },
   {
    "q": "Q12083319",
@@ -5220,6 +5380,26 @@
    "wikidata": "https://www.wikidata.org/wiki/Q3889908"
   },
   {
+   "q": "Q12084371",
+   "hu": "Botești",
+   "ro": "Botești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q855187",
+   "kozsegNev": "Topánfalva",
+   "wikidata": "https://www.wikidata.org/wiki/Q12084371"
+  },
+  {
+   "q": "Q4151131",
+   "hu": "Botești",
+   "ro": "Botești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425349",
+   "kozsegNev": "Aranyosfő község",
+   "wikidata": "https://www.wikidata.org/wiki/Q4151131"
+  },
+  {
    "q": "Q4222879",
    "hu": "Brădeana",
    "ro": "Brădeana",
@@ -5388,6 +5568,16 @@
    "kozseg": "Q16425359",
    "kozsegNev": "Aranyosszohodol község",
    "wikidata": "https://www.wikidata.org/wiki/Q12085730"
+  },
+  {
+   "q": "Q10863022",
+   "hu": "Butești",
+   "ro": "Butești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425313",
+   "kozsegNev": "Mogos község",
+   "wikidata": "https://www.wikidata.org/wiki/Q10863022"
   },
   {
    "q": "Q824184",
@@ -5628,6 +5818,16 @@
    "kozseg": "Q935480",
    "kozsegNev": "Podsága község",
    "wikidata": "https://www.wikidata.org/wiki/Q12113310"
+  },
+  {
+   "q": "Q12113564",
+   "hu": "Costești",
+   "ro": "Costești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q1027784",
+   "kozsegNev": "Fehérvölgy község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12113564"
   },
   {
    "q": "Q4221730",
@@ -5940,6 +6140,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q7475813"
   },
   {
+   "q": "Q11222749",
+   "hu": "Dealu Frumos",
+   "ro": "Dealu Frumos",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q12087211",
+   "kozsegNev": "Aranyosvágás község",
+   "wikidata": "https://www.wikidata.org/wiki/Q11222749"
+  },
+  {
    "q": "Q7665025",
    "hu": "Dealu Goiești",
    "ro": "Dealu Goiești",
@@ -6210,6 +6420,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q10858426"
   },
   {
+   "q": "Q11979733",
+   "hu": "Dumbrava",
+   "ro": "Dumbrava",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q207196",
+   "kozsegNev": "Zalatna",
+   "wikidata": "https://www.wikidata.org/wiki/Q11979733"
+  },
+  {
    "q": "Q12102863",
    "hu": "Dumbrăvița",
    "ro": "Dumbrăvița",
@@ -6238,6 +6458,16 @@
    "kozseg": "Q12696316",
    "kozsegNev": "Nagylupsa község",
    "wikidata": "https://www.wikidata.org/wiki/Q11110676"
+  },
+  {
+   "q": "Q12102934",
+   "hu": "După Deal",
+   "ro": "După Deal",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425333",
+   "kozsegNev": "Nagyponor község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12102934"
   },
   {
    "q": "Q12102927",
@@ -6640,6 +6870,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q11862749"
   },
   {
+   "q": "Q12165798",
+   "hu": "Florești",
+   "ro": "Florești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q2285124",
+   "kozsegNev": "Remete község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12165798"
+  },
+  {
    "q": "Q9198387",
    "hu": "Florești",
    "ro": "Florești",
@@ -6648,6 +6888,26 @@
    "kozseg": "Q855187",
    "kozsegNev": "Topánfalva",
    "wikidata": "https://www.wikidata.org/wiki/Q9198387"
+  },
+  {
+   "q": "Q11668360",
+   "hu": "Florești",
+   "ro": "Florești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425220",
+   "kozsegNev": "Bucsony község",
+   "wikidata": "https://www.wikidata.org/wiki/Q11668360"
+  },
+  {
+   "q": "Q12165800",
+   "hu": "Florești",
+   "ro": "Florești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425349",
+   "kozsegNev": "Aranyosfő község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12165800"
   },
   {
    "q": "Q3892812",
@@ -6668,6 +6928,16 @@
    "kozseg": "Q855187",
    "kozsegNev": "Topánfalva",
    "wikidata": "https://www.wikidata.org/wiki/Q9196830"
+  },
+  {
+   "q": "Q12166409",
+   "hu": "Furduiești",
+   "ro": "Furduiești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425359",
+   "kozsegNev": "Aranyosszohodol község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12166409"
   },
   {
    "q": "Q4967565",
@@ -6940,6 +7210,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q7498349"
   },
   {
+   "q": "Q7473015",
+   "hu": "Hanășești",
+   "ro": "Hănășești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425268",
+   "kozsegNev": "Felsőgirda község",
+   "wikidata": "https://www.wikidata.org/wiki/Q7473015"
+  },
+  {
    "q": "Q4222142",
    "hu": "Hănășești",
    "ro": "Hănășești",
@@ -7068,6 +7348,16 @@
    "kozseg": "Q16425359",
    "kozsegNev": "Aranyosszohodol község",
    "wikidata": "https://www.wikidata.org/wiki/Q4255364"
+  },
+  {
+   "q": "Q12167399",
+   "hu": "Hoancă",
+   "ro": "Hoancă",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425383",
+   "kozsegNev": "Alsóvidra község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12167399"
   },
   {
    "q": "Q10816114",
@@ -7260,6 +7550,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q11421032"
   },
   {
+   "q": "Q7480103",
+   "hu": "Izvoarele",
+   "ro": "Izvoarele",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425268",
+   "kozsegNev": "Felsőgirda község",
+   "wikidata": "https://www.wikidata.org/wiki/Q7480103"
+  },
+  {
    "q": "Q7503415",
    "hu": "Jeflești",
    "ro": "Jeflești",
@@ -7288,6 +7588,16 @@
    "kozseg": "Q935480",
    "kozsegNev": "Podsága község",
    "wikidata": "https://www.wikidata.org/wiki/Q3893401"
+  },
+  {
+   "q": "Q12074865",
+   "hu": "Jencsest",
+   "ro": "Incești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425205",
+   "kozsegNev": "Felsővidra község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12074865"
   },
   {
    "q": "Q3890946",
@@ -7358,6 +7668,16 @@
    "kozseg": "Q207196",
    "kozsegNev": "Zalatna",
    "wikidata": "https://www.wikidata.org/wiki/Q372610"
+  },
+  {
+   "q": "Q3894374",
+   "hu": "Kerpenyes",
+   "ro": "Cărpiniș",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425265",
+   "kozsegNev": "Szászorbó község",
+   "wikidata": "https://www.wikidata.org/wiki/Q3894374"
   },
   {
    "q": "Q713981",
@@ -7540,6 +7860,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q680059"
   },
   {
+   "q": "Q3888342",
+   "hu": "Küküllőlonka",
+   "ro": "Lunca",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425379",
+   "kozsegNev": "Hosszúaszó község",
+   "wikidata": "https://www.wikidata.org/wiki/Q3888342"
+  },
+  {
    "q": "Q935602",
    "hu": "Küküllővár",
    "ro": "Cetatea de Baltă",
@@ -7560,6 +7890,26 @@
    "wikidata": "https://www.wikidata.org/wiki/Q835580"
   },
   {
+   "q": "Q12116909",
+   "hu": "Laz",
+   "ro": "Laz",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425386",
+   "kozsegNev": "Alvinc község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12116909"
+  },
+  {
+   "q": "Q11222771",
+   "hu": "Lăzești",
+   "ro": "Lăzești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q12087211",
+   "kozsegNev": "Aranyosvágás község",
+   "wikidata": "https://www.wikidata.org/wiki/Q11222771"
+  },
+  {
    "q": "Q11082339",
    "hu": "Lazuri",
    "ro": "Lazuri",
@@ -7568,6 +7918,16 @@
    "kozseg": "Q12696316",
    "kozsegNev": "Nagylupsa község",
    "wikidata": "https://www.wikidata.org/wiki/Q11082339"
+  },
+  {
+   "q": "Q12116975",
+   "hu": "Lazuri",
+   "ro": "Lazuri",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425359",
+   "kozsegNev": "Aranyosszohodol község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12116975"
   },
   {
    "q": "Q12117796",
@@ -7670,6 +8030,26 @@
    "wikidata": "https://www.wikidata.org/wiki/Q4255444"
   },
   {
+   "q": "Q11083068",
+   "hu": "Lunca",
+   "ro": "Lunca",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q12696316",
+   "kozsegNev": "Nagylupsa község",
+   "wikidata": "https://www.wikidata.org/wiki/Q11083068"
+  },
+  {
+   "q": "Q12118832",
+   "hu": "Lunca",
+   "ro": "Lunca",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425383",
+   "kozsegNev": "Alsóvidra község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12118832"
+  },
+  {
    "q": "Q7583852",
    "hu": "Lunca Bisericii",
    "ro": "Lunca Bisericii",
@@ -7698,6 +8078,16 @@
    "kozseg": "Q16425383",
    "kozsegNev": "Alsóvidra község",
    "wikidata": "https://www.wikidata.org/wiki/Q7583886"
+  },
+  {
+   "q": "Q10816111",
+   "hu": "Lunca Largă",
+   "ro": "Lunca Largă",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425212",
+   "kozsegNev": "Bisztra község",
+   "wikidata": "https://www.wikidata.org/wiki/Q10816111"
   },
   {
    "q": "Q4220505",
@@ -7808,6 +8198,16 @@
    "kozseg": "Q16425220",
    "kozsegNev": "Bucsony község",
    "wikidata": "https://www.wikidata.org/wiki/Q12122135"
+  },
+  {
+   "q": "Q12122137",
+   "hu": "Măgura",
+   "ro": "Măgura",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425261",
+   "kozsegNev": "Alsógáld község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12122137"
   },
   {
    "q": "Q12122155",
@@ -8180,6 +8580,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q4151625"
   },
   {
+   "q": "Q12123091",
+   "hu": "Mătișești",
+   "ro": "Mătișești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425238",
+   "kozsegNev": "Csurulyásza község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12123091"
+  },
+  {
    "q": "Q3641442",
    "hu": "Mătișești",
    "ro": "Mătișești",
@@ -8300,6 +8710,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q1942196"
   },
   {
+   "q": "Q7665199",
+   "hu": "Modolești",
+   "ro": "Modolești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425383",
+   "kozsegNev": "Alsóvidra község",
+   "wikidata": "https://www.wikidata.org/wiki/Q7665199"
+  },
+  {
    "q": "Q913650",
    "hu": "Mogos",
    "ro": "Mogoș",
@@ -8338,6 +8758,16 @@
    "kozseg": "Q624236",
    "kozsegNev": "Balázsfalva",
    "wikidata": "https://www.wikidata.org/wiki/Q756974"
+  },
+  {
+   "q": "Q12130043",
+   "hu": "Morărești",
+   "ro": "Morărești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425238",
+   "kozsegNev": "Csurulyásza község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12130043"
   },
   {
    "q": "Q7731356",
@@ -9080,6 +9510,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q12140688"
   },
   {
+   "q": "Q12140689",
+   "hu": "Plai",
+   "ro": "Plai",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425268",
+   "kozsegNev": "Felsőgirda község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12140689"
+  },
+  {
    "q": "Q3892694",
    "hu": "Plaintelep",
    "ro": "Plaiuri",
@@ -9170,6 +9610,26 @@
    "wikidata": "https://www.wikidata.org/wiki/Q11222783"
   },
   {
+   "q": "Q10816092",
+   "hu": "Poiana",
+   "ro": "Poiana",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425212",
+   "kozsegNev": "Bisztra község",
+   "wikidata": "https://www.wikidata.org/wiki/Q10816092"
+  },
+  {
+   "q": "Q12143116",
+   "hu": "Poiana",
+   "ro": "Poiana",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425220",
+   "kozsegNev": "Bucsony község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12143116"
+  },
+  {
    "q": "Q12143081",
    "hu": "Poiana Galdei",
    "ro": "Poiana Galdei",
@@ -9190,6 +9650,26 @@
    "wikidata": "https://www.wikidata.org/wiki/Q12143106"
   },
   {
+   "q": "Q12143176",
+   "hu": "Poieni",
+   "ro": "Poieni",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425215",
+   "kozsegNev": "Maroskarna község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12143176"
+  },
+  {
+   "q": "Q12143177",
+   "hu": "Poieni",
+   "ro": "Poieni",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425383",
+   "kozsegNev": "Alsóvidra község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12143177"
+  },
+  {
    "q": "Q10862270",
    "hu": "Poienile-Mogoș",
    "ro": "Poienile-Mogoș",
@@ -9208,6 +9688,16 @@
    "kozseg": "Q1820095",
    "kozsegNev": "Lepus község",
    "wikidata": "https://www.wikidata.org/wiki/Q11421139"
+  },
+  {
+   "q": "Q12143196",
+   "hu": "Poienița",
+   "ro": "Poienița",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425386",
+   "kozsegNev": "Alvinc község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12143196"
   },
   {
    "q": "Q10816090",
@@ -9450,6 +9940,36 @@
    "wikidata": "https://www.wikidata.org/wiki/Q12148958"
   },
   {
+   "q": "Q11980187",
+   "hu": "Runc",
+   "ro": "Runc",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q207196",
+   "kozsegNev": "Zalatna",
+   "wikidata": "https://www.wikidata.org/wiki/Q11980187"
+  },
+  {
+   "q": "Q4151024",
+   "hu": "Runc",
+   "ro": "Runc",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425349",
+   "kozsegNev": "Aranyosfő község",
+   "wikidata": "https://www.wikidata.org/wiki/Q4151024"
+  },
+  {
+   "q": "Q7583178",
+   "hu": "Runc",
+   "ro": "Runc",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425383",
+   "kozsegNev": "Alsóvidra község",
+   "wikidata": "https://www.wikidata.org/wiki/Q7583178"
+  },
+  {
    "q": "Q10816101",
    "hu": "Runcuri",
    "ro": "Runcuri",
@@ -9538,6 +10058,16 @@
    "kozseg": "Q16425343",
    "kozsegNev": "Szászcsór község",
    "wikidata": "https://www.wikidata.org/wiki/Q757197"
+  },
+  {
+   "q": "Q4968785",
+   "hu": "Sebeskákova",
+   "ro": "Dumbrava",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425343",
+   "kozsegNev": "Szászcsór község",
+   "wikidata": "https://www.wikidata.org/wiki/Q4968785"
   },
   {
    "q": "Q1166604",
@@ -9648,6 +10178,16 @@
    "kozseg": "Q12148992",
    "kozsegNev": "Verespatak község",
    "wikidata": "https://www.wikidata.org/wiki/Q12172162"
+  },
+  {
+   "q": "Q4512185",
+   "hu": "Sohodol",
+   "ro": "Sohodol",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q1027784",
+   "kozsegNev": "Fehérvölgy község",
+   "wikidata": "https://www.wikidata.org/wiki/Q4512185"
   },
   {
    "q": "Q12172189",
@@ -10370,6 +10910,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q3656547"
   },
   {
+   "q": "Q12162721",
+   "hu": "Trifești (Nagylupsa község)",
+   "ro": "Trifești",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q12696316",
+   "kozsegNev": "Nagylupsa község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12162721"
+  },
+  {
    "q": "Q10816093",
    "hu": "Trișorești",
    "ro": "Trișorești",
@@ -10700,6 +11250,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q1544484"
   },
   {
+   "q": "Q12087579",
+   "hu": "Valea Poienii",
+   "ro": "Valea Poienii",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425220",
+   "kozsegNev": "Bucsony község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12087579"
+  },
+  {
    "q": "Q12087664",
    "hu": "Valea Șesii",
    "ro": "Valea Șesii",
@@ -10708,6 +11268,16 @@
    "kozseg": "Q16425220",
    "kozsegNev": "Bucsony község",
    "wikidata": "https://www.wikidata.org/wiki/Q12087664"
+  },
+  {
+   "q": "Q12087665",
+   "hu": "Valea Șesii",
+   "ro": "Valea Șesii",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q12696316",
+   "kozsegNev": "Nagylupsa község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12087665"
   },
   {
    "q": "Q10862268",
@@ -10768,6 +11338,26 @@
    "kozseg": "Q16425227",
    "kozsegNev": "Bokajfelfalu község",
    "wikidata": "https://www.wikidata.org/wiki/Q3894315"
+  },
+  {
+   "q": "Q12088206",
+   "hu": "Văleni",
+   "ro": "Văleni",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q16425220",
+   "kozsegNev": "Bucsony község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12088206"
+  },
+  {
+   "q": "Q11271488",
+   "hu": "Vâltori",
+   "ro": "Vâltori",
+   "de": null,
+   "megye": "AB",
+   "kozseg": "Q12087211",
+   "kozsegNev": "Aranyosvágás község",
+   "wikidata": "https://www.wikidata.org/wiki/Q11271488"
   },
   {
    "q": "Q11421493",
@@ -11608,6 +12198,16 @@
    "kozseg": null,
    "kozsegNev": null,
    "wikidata": "https://www.wikidata.org/wiki/Q685869"
+  },
+  {
+   "q": "Q3892429",
+   "hu": "Földvár",
+   "ro": "Feldioara",
+   "de": null,
+   "megye": "BV",
+   "kozseg": "Q2621192",
+   "kozsegNev": "Alsóucsa község",
+   "wikidata": "https://www.wikidata.org/wiki/Q3892429"
   },
   {
    "q": "Q1190843",
@@ -14300,6 +14900,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q585694"
   },
   {
+   "q": "Q850696",
+   "hu": "Bucsin",
+   "ro": "Bucin",
+   "de": null,
+   "megye": "HR",
+   "kozseg": "Q5057410",
+   "kozsegNev": "Gyergyóalfalu község",
+   "wikidata": "https://www.wikidata.org/wiki/Q850696"
+  },
+  {
    "q": "Q723402",
    "hu": "Bükkhavaspataka",
    "ro": "Poiana Fagului",
@@ -14588,6 +15198,16 @@
    "kozseg": "Q5056716",
    "kozsegNev": "Csíkszentmárton",
    "wikidata": "https://www.wikidata.org/wiki/Q876091"
+  },
+  {
+   "q": "Q876070",
+   "hu": "Csíkszentmihály",
+   "ro": "Mihăileni",
+   "de": null,
+   "megye": "HR",
+   "kozseg": "Q5058709",
+   "kozsegNev": "Csíkszentmihály",
+   "wikidata": "https://www.wikidata.org/wiki/Q876070"
   },
   {
    "q": "Q569924",
@@ -15490,6 +16110,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q727813"
   },
   {
+   "q": "Q934655",
+   "hu": "Kisbükk",
+   "ro": "Făgețel",
+   "de": null,
+   "megye": "HR",
+   "kozseg": "Q5064072",
+   "kozsegNev": "Gyergyóremete község",
+   "wikidata": "https://www.wikidata.org/wiki/Q934655"
+  },
+  {
    "q": "Q520946",
    "hu": "Kisgalambfalva",
    "ro": "Porumbenii Mici",
@@ -15798,6 +16428,16 @@
    "kozseg": "Q16426683",
    "kozsegNev": "Csíkszentgyörgy község",
    "wikidata": "https://www.wikidata.org/wiki/Q1212879"
+  },
+  {
+   "q": "Q718019",
+   "hu": "Miklósfalva",
+   "ro": "Nicolești",
+   "de": null,
+   "megye": "HR",
+   "kozseg": "Q5058039",
+   "kozsegNev": "Kányád község",
+   "wikidata": "https://www.wikidata.org/wiki/Q718019"
   },
   {
    "q": "Q655834",
@@ -16880,6 +17520,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q2912267"
   },
   {
+   "q": "Q3569924",
+   "hu": "Álun",
+   "ro": "Alun",
+   "de": null,
+   "megye": "HD",
+   "kozseg": "Q852006",
+   "kozsegNev": "Bunyila község",
+   "wikidata": "https://www.wikidata.org/wiki/Q3569924"
+  },
+  {
    "q": "Q684741",
    "hu": "Alváca",
    "ro": "Vața de Jos",
@@ -17178,6 +17828,16 @@
    "kozseg": "Q1093059",
    "kozsegNev": "Marossolymos község",
    "wikidata": "https://www.wikidata.org/wiki/Q12128195"
+  },
+  {
+   "q": "Q3545190",
+   "hu": "Bikótelep",
+   "ro": "Rovina",
+   "de": null,
+   "megye": "HD",
+   "kozseg": "Q849028",
+   "kozsegNev": "Branyicska község",
+   "wikidata": "https://www.wikidata.org/wiki/Q3545190"
   },
   {
    "q": "Q3483825",
@@ -19400,6 +20060,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q1960176"
   },
   {
+   "q": "Q12122811",
+   "hu": "Merisor",
+   "ro": "Merișor",
+   "de": null,
+   "megye": "HD",
+   "kozseg": "Q851711",
+   "kozsegNev": "Bukaresd község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12122811"
+  },
+  {
    "q": "Q3890975",
    "hu": "Merisor",
    "ro": "Merișoru de Munte",
@@ -19418,6 +20088,16 @@
    "kozseg": "Q841511",
    "kozsegNev": "Brád",
    "wikidata": "https://www.wikidata.org/wiki/Q573138"
+  },
+  {
+   "q": "Q2109772",
+   "hu": "Mesztákon",
+   "ro": "Mesteacăn",
+   "de": null,
+   "megye": "HD",
+   "kozseg": "Q1084732",
+   "kozsegNev": "Reketyefalva község",
+   "wikidata": "https://www.wikidata.org/wiki/Q2109772"
   },
   {
    "q": "Q826692",
@@ -19660,6 +20340,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q1069542"
   },
   {
+   "q": "Q826649",
+   "hu": "Nyavalyásfalva",
+   "ro": "Lunca",
+   "de": null,
+   "megye": "HD",
+   "kozseg": "Q12081678",
+   "kozsegNev": "Boica község",
+   "wikidata": "https://www.wikidata.org/wiki/Q826649"
+  },
+  {
    "q": "Q3294943",
    "hu": "Nyegojlunka",
    "ro": "Negoiu",
@@ -19890,6 +20580,26 @@
    "wikidata": "https://www.wikidata.org/wiki/Q639788"
   },
   {
+   "q": "Q2622501",
+   "hu": "Pestere",
+   "ro": "Peștera",
+   "de": null,
+   "megye": "HD",
+   "kozseg": "Q999551",
+   "kozsegNev": "Felsőszálláspatak község",
+   "wikidata": "https://www.wikidata.org/wiki/Q2622501"
+  },
+  {
+   "q": "Q2898996",
+   "hu": "Pestyere",
+   "ro": "Peștera",
+   "de": null,
+   "megye": "HD",
+   "kozseg": "Q12081678",
+   "kozsegNev": "Boica község",
+   "wikidata": "https://www.wikidata.org/wiki/Q2898996"
+  },
+  {
    "q": "Q579667",
    "hu": "Petrény",
    "ro": "Petreni",
@@ -20050,6 +20760,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q3560904"
   },
   {
+   "q": "Q3892279",
+   "hu": "Pojény",
+   "ro": "Poieni",
+   "de": null,
+   "megye": "HD",
+   "kozseg": "Q903830",
+   "kozsegNev": "Demsus község",
+   "wikidata": "https://www.wikidata.org/wiki/Q3892279"
+  },
+  {
    "q": "Q2650554",
    "hu": "Pojénytanya",
    "ro": "Poieni",
@@ -20100,6 +20820,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q3892000"
   },
   {
+   "q": "Q1239323",
+   "hu": "Porkura",
+   "ro": "Vălișoara",
+   "de": null,
+   "megye": "HD",
+   "kozseg": "Q5054485",
+   "kozsegNev": "Balsa község",
+   "wikidata": "https://www.wikidata.org/wiki/Q1239323"
+  },
+  {
    "q": "Q825395",
    "hu": "Pottingány",
    "ro": "Potingani",
@@ -20128,6 +20858,16 @@
    "kozseg": "Q684741",
    "kozsegNev": "Alváca",
    "wikidata": "https://www.wikidata.org/wiki/Q3272191"
+  },
+  {
+   "q": "Q12145413",
+   "hu": "Prihodest",
+   "ro": "Prihodiște",
+   "de": null,
+   "megye": "HD",
+   "kozseg": "Q684741",
+   "kozsegNev": "Alváca",
+   "wikidata": "https://www.wikidata.org/wiki/Q12145413"
   },
   {
    "q": "Q2912479",
@@ -20418,6 +21158,16 @@
    "kozseg": "Q837154",
    "kozsegNev": "Piski",
    "wikidata": "https://www.wikidata.org/wiki/Q1314831"
+  },
+  {
+   "q": "Q12159245",
+   "hu": "Sebeshely",
+   "ro": "Sibișel",
+   "de": null,
+   "megye": "HD",
+   "kozseg": "Q1021928",
+   "kozsegNev": "Malomvíz község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12159245"
   },
   {
    "q": "Q585088",
@@ -21208,6 +21958,16 @@
    "kozseg": "Q2607633",
    "kozsegNev": "Tomesd",
    "wikidata": "https://www.wikidata.org/wiki/Q2369352"
+  },
+  {
+   "q": "Q12088209",
+   "hu": "Valény",
+   "ro": "Văleni",
+   "de": null,
+   "megye": "HD",
+   "kozseg": "Q1017982",
+   "kozsegNev": "Algyógy",
+   "wikidata": "https://www.wikidata.org/wiki/Q12088209"
   },
   {
    "q": "Q2110059",
@@ -22170,6 +22930,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q737182"
   },
   {
+   "q": "Q912561",
+   "hu": "Dányán",
+   "ro": "Daia",
+   "de": null,
+   "megye": "MS",
+   "kozseg": "Q5056704",
+   "kozsegNev": "Bonyha község",
+   "wikidata": "https://www.wikidata.org/wiki/Q912561"
+  },
+  {
    "q": "Q94888",
    "hu": "Déda",
    "ro": "Deda",
@@ -22470,6 +23240,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q997330"
   },
   {
+   "q": "Q998013",
+   "hu": "Fekete",
+   "ro": "Fânațe",
+   "de": null,
+   "megye": "MS",
+   "kozseg": "Q12080772",
+   "kozsegNev": "Mezőbánd",
+   "wikidata": "https://www.wikidata.org/wiki/Q998013"
+  },
+  {
    "q": "Q998622",
    "hu": "Feketelak",
    "ro": "Negrenii de Câmpie",
@@ -22598,6 +23378,16 @@
    "kozseg": "Q16427019",
    "kozsegNev": "Mezőrücs",
    "wikidata": "https://www.wikidata.org/wiki/Q784942"
+  },
+  {
+   "q": "Q775432",
+   "hu": "Fönácé",
+   "ro": "Fânațe",
+   "de": null,
+   "megye": "MS",
+   "kozseg": "Q5057323",
+   "kozsegNev": "Faragó község",
+   "wikidata": "https://www.wikidata.org/wiki/Q775432"
   },
   {
    "q": "Q1004133",
@@ -22990,6 +23780,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q713508"
   },
   {
+   "q": "Q1034977",
+   "hu": "Hegymegett",
+   "ro": "După Deal",
+   "de": null,
+   "megye": "MS",
+   "kozseg": "Q5057897",
+   "kozsegNev": "Kutyfalva község",
+   "wikidata": "https://www.wikidata.org/wiki/Q1034977"
+  },
+  {
    "q": "Q1057402",
    "hu": "Héjjasfalva",
    "ro": "Vânători",
@@ -23250,6 +24050,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q1106210"
   },
   {
+   "q": "Q589057",
+   "hu": "Keménynagyszőlős",
+   "ro": "Seleuș",
+   "de": null,
+   "megye": "MS",
+   "kozseg": "Q5064390",
+   "kozsegNev": "Dános",
+   "wikidata": "https://www.wikidata.org/wiki/Q589057"
+  },
+  {
    "q": "Q267756",
    "hu": "Keménytelke",
    "ro": "Cipaieni",
@@ -23348,6 +24158,16 @@
    "kozseg": "Q5058150",
    "kozsegNev": "Görgényszentimre község",
    "wikidata": "https://www.wikidata.org/wiki/Q739992"
+  },
+  {
+   "q": "Q1108764",
+   "hu": "Kincstáribirtok",
+   "ro": "Fânațe",
+   "de": null,
+   "megye": "MS",
+   "kozseg": "Q5066370",
+   "kozsegNev": "Mezőtóhát község",
+   "wikidata": "https://www.wikidata.org/wiki/Q1108764"
   },
   {
    "q": "Q736583",
@@ -23688,6 +24508,16 @@
    "kozseg": "Q167792",
    "kozsegNev": "Nagysármás",
    "wikidata": "https://www.wikidata.org/wiki/Q1160191"
+  },
+  {
+   "q": "Q1160193",
+   "hu": "Lárgatelep",
+   "ro": "Larga",
+   "de": null,
+   "megye": "MS",
+   "kozseg": "Q5058150",
+   "kozsegNev": "Görgényszentimre község",
+   "wikidata": "https://www.wikidata.org/wiki/Q1160193"
   },
   {
    "q": "Q248995",
@@ -24450,6 +25280,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q740575"
   },
   {
+   "q": "Q1416951",
+   "hu": "Mezőkirályfalva",
+   "ro": "Crăiești",
+   "de": null,
+   "megye": "MS",
+   "kozseg": null,
+   "kozsegNev": null,
+   "wikidata": "https://www.wikidata.org/wiki/Q1416951"
+  },
+  {
    "q": "Q713976",
    "hu": "Mezőkölpény",
    "ro": "Culpiu",
@@ -25100,6 +25940,26 @@
    "wikidata": "https://www.wikidata.org/wiki/Q221523"
   },
   {
+   "q": "Q725620",
+   "hu": "Oroszidecs",
+   "ro": "Deleni",
+   "de": null,
+   "megye": "MS",
+   "kozseg": "Q5059154",
+   "kozsegNev": "Alsóidecs község",
+   "wikidata": "https://www.wikidata.org/wiki/Q725620"
+  },
+  {
+   "q": "Q1414367",
+   "hu": "Ökröstó",
+   "ro": "Deleni",
+   "de": null,
+   "megye": "MS",
+   "kozseg": "Q5059255",
+   "kozsegNev": "Mezőpagocsa község",
+   "wikidata": "https://www.wikidata.org/wiki/Q1414367"
+  },
+  {
    "q": "Q930101",
    "hu": "Ölyvespatak",
    "ro": "Valea Ulieșului",
@@ -25138,6 +25998,16 @@
    "kozseg": "Q5058150",
    "kozsegNev": "Görgényszentimre község",
    "wikidata": "https://www.wikidata.org/wiki/Q249516"
+  },
+  {
+   "q": "Q1242726",
+   "hu": "Pârâu Crucii",
+   "ro": "Pârâu Crucii",
+   "de": null,
+   "megye": "MS",
+   "kozseg": "Q5059255",
+   "kozsegNev": "Mezőpagocsa község",
+   "wikidata": "https://www.wikidata.org/wiki/Q1242726"
   },
   {
    "q": "Q1087048",
@@ -25440,6 +26310,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q736431"
   },
   {
+   "q": "Q714332",
+   "hu": "Somosd",
+   "ro": "Cornești",
+   "de": null,
+   "megye": "MS",
+   "kozseg": "Q5057526",
+   "kozsegNev": "Nyárádkarácson község",
+   "wikidata": "https://www.wikidata.org/wiki/Q714332"
+  },
+  {
    "q": "Q741908",
    "hu": "Somostelke",
    "ro": "Șomoștelnic",
@@ -25518,6 +26398,16 @@
    "kozseg": "Q5056754",
    "kozsegNev": "Mezőzáh község",
    "wikidata": "https://www.wikidata.org/wiki/Q1412299"
+  },
+  {
+   "q": "Q1291978",
+   "hu": "Strinatanya",
+   "ro": "Satu Nou",
+   "de": null,
+   "megye": "MS",
+   "kozseg": "Q5057113",
+   "kozsegNev": "Uzdiszentpéter község",
+   "wikidata": "https://www.wikidata.org/wiki/Q1291978"
   },
   {
    "q": "Q593162",
@@ -26318,6 +27208,16 @@
    "kozseg": "Q5056596",
    "kozsegNev": "Mezőceked község",
    "wikidata": "https://www.wikidata.org/wiki/Q1401140"
+  },
+  {
+   "q": "Q1401149",
+   "hu": "Valea Sânpetrului",
+   "ro": "Valea Sânpetrului",
+   "de": null,
+   "megye": "MS",
+   "kozseg": "Q5059255",
+   "kozsegNev": "Mezőpagocsa község",
+   "wikidata": "https://www.wikidata.org/wiki/Q1401149"
   },
   {
    "q": "Q578455",
@@ -28008,6 +28908,16 @@
    "kozseg": "Q5057041",
    "kozsegNev": "Veresmart község",
    "wikidata": "https://www.wikidata.org/wiki/Q3891975"
+  },
+  {
+   "q": "Q3892397",
+   "hu": "Szászvessződ",
+   "ro": "Veseud",
+   "de": null,
+   "megye": "SB",
+   "kozseg": "Q12153852",
+   "kozsegNev": "Szelindek község",
+   "wikidata": "https://www.wikidata.org/wiki/Q3892397"
   },
   {
    "q": "Q207102",
@@ -29710,6 +30620,16 @@
    "wikidata": "https://www.wikidata.org/wiki/Q725546"
   },
   {
+   "q": "Q12087519",
+   "hu": "Máriavölgy",
+   "ro": "Valea Mare",
+   "de": null,
+   "megye": "BN",
+   "kozseg": "Q5067115",
+   "kozsegNev": "Újradna község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12087519"
+  },
+  {
    "q": "Q824605",
    "hu": "Marosborgó",
    "ro": "Mureșenii Bârgăului",
@@ -29998,6 +30918,16 @@
    "kozseg": null,
    "kozsegNev": null,
    "wikidata": "https://www.wikidata.org/wiki/Q1188906"
+  },
+  {
+   "q": "Q12102843",
+   "hu": "Nyírmezőtanya",
+   "ro": "Dumbrava",
+   "de": null,
+   "megye": "BN",
+   "kozseg": "Q5065240",
+   "kozsegNev": "Apanagyfalu község",
+   "wikidata": "https://www.wikidata.org/wiki/Q12102843"
   },
   {
    "q": "Q3890604",

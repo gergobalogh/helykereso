@@ -21,7 +21,7 @@
 
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
-import { nemHelyseg, deRomanEkezet } from "./szabalyok.mjs";
+import { nemHelyseg, deRomanEkezet, ugyanazAHely } from "./szabalyok.mjs";
 
 const VEGEGPL = "https://query.wikidata.org/sparql";
 const USER_AGENT = "mivelkezdjem.hu helynevekereso (https://mivelkezdjem.hu)";
@@ -388,30 +388,55 @@ async function main() {
   }
   if (nincsMegye) console.warn(`  figyelem: ${nincsMegye} helynél nem sikerült a megyét, kihagyva`);
 
-  // Ugyanaz a román név kétszer, ugyanabban a megyében: ugyanarról a
-  // helyről van két Wikidata-elem (ilyen például a Kolozsvár: Q100188 és
-  // Q16898189). A kisebb Q-számú nyer, mert a Wikidata sorszámai korán
-  // létrejött elemekre utalnak — ez a kanonikus bejegyzés.
+  // Ugyanaz a román név kétszer, ugyanabban a megyében. Ez LÉTEBNEK tűnik
+  // duplikátumnak, de NEM mind az: két különböző falunak lehet ugyanaz a
+  // román neve (Alba megyében több "Botești" és "Florești" község alatt is
+  // van). A puszta nevük alapján szűrni ezért 67 valódi helyet törölt ki.
+  //
+  // Ez csak akkor duplikátum, ha azonos a hely: vagy ugyanaz a Q-szám (a
+  // Kolozsvár Q100188 és Q16898189 alatt is megvan), vagy az egyik elem a
+  // másik községe ("Ajton község" és az "Ajton" falu), vagy mindkettő
+  // közvetlenül a megye alatt van (a megyeszékhely és a duplikált bejegyzése).
   //
   // Két megyében lehet ugyanaz a név, és az NEM duplikátum: Dăbâca/Doboka
-  // egyszer Kolozsvár, egyszer Hunyad megyében valódi két falu. Azokat
-  // megtartjuk mindkettőt.
-  const nevre = new Map();
+  // egyszer Kolozsvár, egyszer Hunyad megyében valódi két falu.
+  const nevre = new Map(); // kulcs -> az ilyen nevű sorok
   for (const h of helyek) {
     const kulcs = `${h.megye}|${h.ro.toLowerCase()}`;
-    const eddig = nevre.get(kulcs);
-    if (!eddig) {
-      nevre.set(kulcs, h);
+    if (!nevre.has(kulcs)) nevre.set(kulcs, []);
+    nevre.get(kulcs).push(h);
+  }
+  // A kisebb Q-számú nyer, mert a Wikidata sorszámai korán létrejött
+  // elemekre utalnak — ez a kanonikus bejegyzés.
+  const marad = [];
+  const tobbValodi = [];
+  for (const [kulcs, tagok] of nevre) {
+    if (tagok.length === 1) {
+      marad.push(tagok[0]);
       continue;
     }
-    if (h.qSzam < eddig.qSzam) nevre.set(kulcs, h);
-    duplikalt++;
+    // Egy csoporton belül az nyer, akihez nincs kisebb Q-számú igazi
+    // másolata. Ha két különböző hely marad bent, az nem duplikátum.
+    const bent = tagok.filter(
+      (h) => !tagok.some((o) => o !== h && ugyanazAHely(h, o) && o.qSzam < h.qSzam),
+    );
+    duplikalt += tagok.length - bent.length;
+    marad.push(...bent);
+    if (bent.length > 1) tobbValodi.push({ kulcs, bent });
   }
   if (duplikalt) {
-    console.log(`  ${duplikalt} duplikált Wikidata-elemet elhagytunk (ugyanaz a hely kétszer ugyanabban a megyében)`);
+    console.log(`  ${duplikalt} duplikált Wikidata-elemet elhagytunk (ugyanarról a helyről van két elem)`);
+  }
+  // Ha egy néven több valódi hely maradt, kimondjuk: a szűrés ezeket
+  // NEM érintette, és ha a szabály valaha szűkülne, ez a lista szól.
+  if (tobbValodi.length) {
+    console.log(`  ${tobbValodi.length} néven több valódi hely van, mind megtartva:`);
+    for (const { kulcs, bent } of tobbValodi) {
+      console.log(`    ${kulcs}: ${bent.map((h) => `${h.q} ${h.hu} (${h.kozseg ? nevek.get(h.kozseg)?.hu : "nincs községe"})`).join("  |  ")}`);
+    }
   }
   helyek.length = 0;
-  helyek.push(...nevre.values());
+  helyek.push(...marad);
   for (const h of helyek) delete h.qSzam;
 
   helyek.sort(

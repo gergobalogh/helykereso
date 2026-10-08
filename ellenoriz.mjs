@@ -12,6 +12,7 @@ import {
   huMondat,
   dePerjel,
   deRomanEkezet,
+  ugyanazAHely,
 } from "./szabalyok.mjs";
 
 const adat = JSON.parse(await readFile(new URL("./helyek.json", import.meta.url)));
@@ -93,21 +94,41 @@ for (const [n, v] of dupHu.slice(0, 6)) {
 
 // Két megyében lehet ugyanaz a név, és az nem hiba (Doboka/Dăbâca egyszer
 // Kolozsvár, egyszer Hunyad megyében valódi két falu). Ugyanabban a
-// megyében viszont a letöltőnek össze kellett volna szűrnie — kivéve, ha
-// a magyar nevek is eltérnek, mert akkor nem ugyanaz a hely.
+// megyében viszont akkor sem hiba, ha a községük különbözik: Alba
+// megyében több "Butești" és "Florești" község alatt is van valódi falu.
+// Csak a KÖZÖS község alatti, azonos nevű kettős duplikátum — és azt a
+// `letolt.mjs` eleve kiszűri, tehát ha itt látszik, hiba van a szűrésben.
 const dupUgyanMegyeben = [...ro.entries()].filter(
   ([, v]) =>
     v.length > 1 &&
     new Set(v.map((h) => h.megye)).size === 1 &&
-    new Set(v.map((h) => h.hu)).size === 1,
+    new Set(v.map((h) => h.hu)).size === 1 &&
+    v.some((a, i) => v.some((b, j) => i !== j && ugyanazAHely(a, b))),
 );
 if (dupUgyanMegyeben.length) {
-  hiba(`${dupUgyanMegyeben.length} román név kétszer, ugyanazzal a magyar névvel, ugyanabban a megyében`);
+  hiba(`${dupUgyanMegyeben.length} román név kétszer, ugyanazzal a magyar névvel, ugyanabban a megyében — ezt a letöltőnek ki kellett volna szűrnie`);
   for (const [n, v] of dupUgyanMegyeben.slice(0, 6)) {
     console.log(`    ${n}: ${v.map((h) => `${h.q}(${megyeNev.get(h.megye)})`).join(" , ")}`);
   }
 } else {
   rendben("nincs valódi duplikátum (nincs két azonos nevű hely egy megyében)");
+}
+
+// Az utóbbi szabály túl szigorú lett volna: két különböző község alatt
+// lehet ugyanaz a román és magyar név, és az két valódi hely. Kimondjuk,
+// hogy a letöltő ezt megtartotta, hogy ne tűnjön véletlennek.
+const valodiKettos = [...ro.entries()].filter(
+  ([, v]) =>
+    v.length > 1 &&
+    new Set(v.map((h) => h.megye)).size === 1 &&
+    new Set(v.map((h) => h.hu)).size === 1 &&
+    !v.some((a, i) => v.some((b, j) => i !== j && ugyanazAHely(a, b))),
+);
+if (valodiKettos.length) {
+  console.log(`  ${valodiKettos.length} néven két valódi hely van ugyanabban a megyében (ez a szándék):`);
+  for (const [n, v] of valodiKettos.slice(0, 6)) {
+    console.log(`    ${n}: ${v.map((h) => `${h.q}(${h.kozsegNev ?? "nincs községe"})`).join(" , ")}`);
+  }
 }
 
 // Ugyanaz a magyar és román név: nincs magyar exonim, nem hiba.

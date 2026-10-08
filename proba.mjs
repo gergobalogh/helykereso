@@ -266,6 +266,36 @@ for (const szo of AGGLO) {
   }
 }
 
+// Regresszió: két KÜLÖNBÖZŐ falu, aminek ugyanaz a román neve, mindkettő
+// létezik. Alba megyében a "Butești" a Mogos és az Arada község alatt is
+// valós falu. A letöltő 2026-10-08-ig a `megye|ro` kulcs alapján szűrte
+// ki, így a második falu csendben eltűnt a keresőből — kivétel nélkül,
+// és semmi nem szólt róla. Ez a legkisebb elhangzású hiba, amit a
+// projektben találtam: nem rossz adat, hanem hiányzó adat.
+console.log("\n--- Két azonos nevű, de különböző falu megmarad:");
+// Mindhárom példa ugyanarra a hibára fog kimenni: a két falu román neve
+// azonos, a megyéjük is azonos, csak a községük tér el. Ezért a
+// megyeszűrő nem segít, és a sorban a KÖZSÉGNÉV különbözik — azt
+// nézzük, nem a sorszámot, mert a többi megye soraival együtt számolna.
+const KETTOS = [
+  ["Butești", ["Mogos község", "Arada község"]],
+  ["Bârlești", ["Bisztra község", "Aranyosfő község", "Mogos község"]],
+  ["Lazuri", ["Nagylupsa község", "Aranyosszohodol község"]],
+];
+for (const [szo, kozsegek] of KETTOS) {
+  await mezo.fill(szo);
+  await oldal.waitForTimeout(220);
+  const szoveg = await sorok.allInnerTexts();
+  const sorszam = await szures.innerText();
+  const hiany = kozsegek.filter((k) => !szoveg.some((s) => s.includes(k)));
+  if (hiany.length) {
+    bukott++;
+    console.log(`  ✗ "${szo}" → ${hiany.length} valódi hely hiányzik: ${hiany.join(", ")} (${sorszam})`);
+  } else {
+    console.log(`  ✓ "${szo}" → mind a ${kozsegek.length} falu megvan (${sorszam})`);
+  }
+}
+
 console.log(
   hibak.length ? `\nKONZOLHIBÁK:\n${hibak.map((h) => "  " + h).join("\n")}` : "\nNincs konzolhiba.",
 );

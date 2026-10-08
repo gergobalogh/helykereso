@@ -55,6 +55,34 @@ export function nemHelyseg({ hu, ro, de }) {
   return [hu, ro, de].some(nemHelysegEgy);
 }
 
+/**
+ * Igaz, ha két sor UGYANAZT a helyet írja le — akkor a duplikátum.
+ *
+ * Ezt a szabályt először a `letolt.mjs`-ben írtam meg, és csak a román
+ * nevet nézte (`megye|ro`), hogy kiszűrje a kétszer szereplő Wikidata-
+ * elemeket. Ez 67 valódi helyet törölt ki: Alba megyében több "Botești"
+ * és "Florești" község alatt is van, tehát a nevük ütközik, de nem ugyanaz
+ * a falu. A `kutatas.md` ezt "néma adatvesztés"-nek nevezi.
+ *
+ * A döntéshez három dolog kell, és egyik sem a név:
+ *   - ugyanaz a `q`: egyértelmű duplikátum (Kolozsvár Q100188 és Q16898189),
+ *   - az egyik a másik községe: "Ajton község" és az "Ajton" falu, egy hely,
+ *   - mindkettő közvetlenül a megye alatt áll: a megyeszékhely és a
+ *     duplikált bejegyzése.
+ * Ha egyik sem igaz, akkor két különböző hely, és BOTH megmarad — akkor
+ * is, ha azonos a román nevük, mert a községük eltér.
+ *
+ * Az `ellenoriz.mjs` ugyanezt használja, hogy a kész adaton ne tekintse
+ * duplikátumnak a valódi kettősöket.
+ */
+export function ugyanazAHely(a, b) {
+  if (!a || !b) return false;
+  if (a.q && a.q === b.q) return true;
+  if (a.kozseg && a.kozseg === b.q) return true;
+  if (b.kozseg && b.kozseg === a.q) return true;
+  return a.kozseg == null && b.kozseg == null;
+}
+
 // ───────────────────────────────────────────────────────────────────────────
 // A nyelvi ellenőrzések
 //

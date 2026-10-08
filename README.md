@@ -160,18 +160,45 @@ valódi böngészőben nézi meg, amit az ember látni fog.
 
 ## A "duplikátumok" a számlálóban
 
-Az ellenőrző 197 ismétlődő románnevet mutat, és ez jó hír, nem rossz: 38
-magyar név és 197 román név szerepel egynél többször, de **egyik sem ugyanabban
-a megyében**. Két megyében lehet ugyanaz a név, és az két valódi hely. A
+Az ellenőrző sok ismétlődő románnevet mutat, és ez jó hír, nem rossz: a magyar
+és a román név is szerepel egynél többször, de **egyik sem ugyanabban a
+megyében**. Két megyében lehet ugyanaz a név, és az két valódi hely. A
 `Doboka` (Dăbâca) például egyszer Kolozsvár, egyszer Hunyad megyében valódi
 két falu, magyarul mindkettő Doboka. Ezeket szándékosan megtartjuk.
 
-Ami kiszűnik: ha ugyanabban a megyében kétszer ugyanaz a *magyar és* román
-név, az duplikátum. Ebből az első letöltésben 632 volt (a Kolozsvár például
-`Q100188` és `Q16898189` alatt is létezik). A 2026-10-08-i letöltés 642-t
-számolt, mert a Wikidata azóta további duplikált elemeket kapott: 3716
-nyers sorból 642 esett ki, 3074 maradt. A szám a forrástól függ, nem a
-számláló hibája — ha kívüli, a `node letolt.mjs` minden futáskor kiírja.
+**Ugyanabban a megyében sem duplikátum minden ütközés.** Ez a legsúlyosabb
+néma hiba, amit a projektben találtam, és a saját dokumentációnk mondta el
+ellenkezőleg. A README korábban azt írta: *„ha ugyanabban a megyében kétszer
+ugyanaz a magyar **és** román név, az duplikátum"* — de a kód csak a román
+nevet nézte:
+
+```js
+const kulcs = `${h.megye}|${h.ro.toLowerCase()}`;
+```
+
+Alba megyében viszont több valódi falu neve éppen ütközik: a `Butești` a Mogos
+**és** az Arada község alatt is létezik, a `Lazuri` a Nagylupsa és az
+Aranyosszohodol község alatt, és így tovább. Ezek nem másolatai egymásnak,
+hanem két külön falu — csak a nevük azonos. A szűrés **93 valódi helyet
+törölt ki** csendben: kivétel nem dobott, és semmi nem szólt róla. A kereső
+egyszerűen nem találta meg őket.
+
+A javítás nem a néven, hanem a **helyen** dönt, és ez a szabály most a
+`szabalyok.mjs`-ben van (`ugyanazAHely()`), hogy a szűrő és az ellenőrző ne
+csúszzon el:
+
+| | |
+|---|---|
+| ugyanaz a `q` | duplikátum (Kolozsvár `Q100188` és `Q16898189`) |
+| az egyik a másik községe | ugyanaz a hely (`Ajton község` és az `Ajton` falu) |
+| mindkettő a megye alatt | duplikált megyeszékhely-bejegyzés |
+| különböző község | **két valódi hely — mindkettő megmarad** |
+
+3716 nyers sorból 549 esett ki, 3167 maradt (3074 helyett). A letöltő
+kilistázza a több-valós névre ütközéseket, hogy a szabály szűkülése azonnal
+látszódjon, és a `proba.mjs` ellenőrzi, hogy a `Butești`, `Bârlești` és
+`Lazuri` falvai tényleg megmaradnak — leellenőriztem, hogy a hiba
+visszahozásával mindhárom bukik.
 
 ## Mire figyelj, ha módosítod
 
@@ -250,7 +277,7 @@ Ezért itt nem javítunk semmit, és ezt szándékosan így értjük:
 - **Nem írunk bele magyar nevet**, mert akkor kitalálnánk egyet.
 - **Nem töröljük a hamis magyar címkét a Wikidata-n**, mert a lekérdezés
   `FILTER(LANG(?hu) = "hu")`-val kötelezővé teszi, tehát a törlés nem
-  névnéven hagyja a falut, hanem **kitörli a keresőből** (3074 → 2997). Ma a
+  névnéven hagyja a falut, hanem **kitörli a keresőből** (3167 → 3090). Ma a
   felhasználó `Dealu Mare (Kolozsvár)`-t lát, ami románul is elmondható;
   törlés után „Nincs találat" lenne. Ez egyértelmű veszteség.
 

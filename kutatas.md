@@ -287,9 +287,88 @@ külső forrás **megvan**, és épp ez bizonyítja, hogy **nincs mit
 származtatni**. Egy javítható adat hiánya és egy nem-létező adat között a
 különbség az, hogy az elsőhöz *keresni* kell, a másodikhoz *dönteni*.
 
+## A néma adatvesztés: 93 eltűnt falu
+
+A „Következő lépés" óta a legnagyobb tétel nem a 77 magyar név volt, hanem
+egy hiba, amit a saját ellenőrzőm sem talált meg, mert **a rossz adat
+eltűnt**, tehát nem volt mit ellenőrizni.
+
+### Hogyan jött elő
+
+A duplikátum-szűrésre gyanakodtam, mert három község (`Q5057624` Viișoara,
+`Q10811999` Rișca, `Q16426683` Ciucsângeorgiu) nem volt az adatban. Kis
+mérőszámmal indultam, aztán kimértem az egészet, és kiderült, hogy ez nem
+három elveszett község, hanem **93**.
+
+### A hiba
+
+A szűrés kulcsa ez volt:
+
+```js
+const kulcs = `${h.megye}|${h.ro.toLowerCase()}`;
+```
+
+Ez azt mondja ki: „ha egy megyében ugyanaz a román név, akkor ugyanaz a
+hely". **Ez hamis.** Alba megyében a `Butești` a Mogos *és* az Arada község
+alatt is valódi falu, a `Lazuri` a Nagylupsa és az Aranyosszohodol alatt,
+a `Bârlești` három helyen. Különböző községek, azonos név. A szűrés ezeket
+„duplikátumnak" nézte, és az egyiket mindig eldobta.
+
+A legkisebb elhangzású hiba, amit ez a projekt talált: **nem rossz adatot
+írt, hanem jót törölt el.** Kivétel nem dobott, konzol nem írt, és a
+`README` még azt is állította, hogy a szabály a magyar *és* román nevet
+nézi — vagyis a dokumentáció helyesen írta le a szándékot, és a kód nem
+azt csinálta.
+
+### A mérés
+
+A dedupba egy `DEBUG_DEDUP` kiírást tettem, és minden eldobott sort
+kinézve osztottam három osztályba:
+
+| | darab |
+|---|---|
+| a nyertes község saját székhely-fala (`Ajton község` / `Ajton`) | 544 |
+| valódi Wikidata-értelmezésű duplikátum (Kolozsvár `Q100188`/`Q16898189`) | 5 |
+| **különböző község, tehát két valódi hely** | **93** |
+
+### A javítás
+
+A döntést a névből áthelyeztem a helyre. A `szabalyok.mjs`-ben van most
+`ugyanazAHely()`, és négy esetet ismer:
+
+| feltétel | jelentés |
+|---|---|
+| ugyanaz a `q` | duplikátum |
+| az egyik `kozseg` a másik `q` | egy hely (község és székhelye) |
+| mindkettő `kozseg` nélküli | megyeszékhely és a duplikált bejegyzése |
+| különböző község | **két hely — mindkettő bent** |
+
+A szabály a `szabalyok.mjs`-ben van, mert pontosan ez a fajta „a szűrő és az
+ellenőrző nem ugyanaz a leképezés" hiba okozta korábban a
+Marosvásárhely-ügyet is. Egy hely, két fogyasztó.
+
+Eredmény: **3074 → 3167 helység**. A 13 néven, ahol két megmaradt helynek
+még a magyar neve is azonos (`Butești`, `Florești`, `Lazuri`, `Hoancă`…), a
+sorok megkülönböztethetők, mert a sorban a község neve is látszik.
+
+### Amit ez felszólított
+
+**A duplikátum-szűrésnél a név sosem elég.** Helynévnél a név *azonosító*,
+nem *azonosítás*: azt mondja el, hogy két dolgot hogyan hívnak, nem azt,
+hogy ugyanazok-e. A magyar Wikipedia pontosan ezt a hibát követi el, amikor
+a „magyar név = Dealu Mare" mezőt a román névből tölti ki — és az a 77
+magyar név is ugyanez.
+
+Van itt egy csalódás, amit érdemes kimondani: a *letöltő* javítása nem a
+helyeket hozza vissza, hanem **a felismerést**. Előbb nem tudtam, hogy 93
+hely hiányzik, mert a `helyek.json`-ban nem voltak. Egy ellenőrzés nem
+tudhatja meg, mit dobott el a kód — ezt a kódnak kell kimondania. Ezért
+listázza a letöltő a „több valódi hely egy néven" eseteket, és a
+`proba.mjs` konkrét falvakra néz, nem számot hasonlít.
+
 ## A közös tanulság: ellenőrizd a láthatatlant is
 
-Ez a projektben három csendes hiba van, és mindhárom ugyanazt a mintát követi:
+Ez a projektben **négy** csendes hiba van, és mind ugyanazt a mintát követi:
 **egy ellenőrzés megnézte, hogy valami *előfordul-e*, nem hogy *jó-e*.**
 
 | Ellenőrzés | Amit nézett | Amit kellett volna |
@@ -297,8 +376,15 @@ Ez a projektben három csendes hiba van, és mindhárom ugyanazt a mintát köve
 | `NEM_HELYSEG` szűrés | a szabályos `metropolisztérséget` | hogy bármi agglomeráció bent van-e |
 | `proba.mjs` linkpróba | a link szövegét: "Wikidata" | a `href`-et, hogy odamegy-e |
 | `nemetNev()` 3. szabály | hogy ugyanazok-e a betűk | hogy német-e a nyelv |
+| dedup kulcsa | hogy ugyanaz-e a román név | hogy ugyanaz-e a *hely* |
 
-Mindhárom átment a saját tesztjén. A gyökér az, hogy a teszt mindig azt
+Mindhárom átment a saját tesztjén. A negyediknél (a dedupnál) ráadásul nem
+is lehetett volna átmenni: nem rossz adatot írt, hanem jót törölt el, tehát
+**az ellenőrzésnek nem volt tárgya**. Ez a negyedik mutatja, hogy a „néma
+hiba" alatt nemcsak rossz adat van, hanem **hiányzó** adat is, és ahhoz
+minden más ellenőrzés vak.
+
+A gyökér az, hogy a teszt mindig azt
 ellenőrizte, ami *könnyen* lekérdezhető volt, nem azt, ami *fontos*. A
 `de` mezőnél ez különösen fájdalmas: a `de` jelölés ígéri, hogy német nevet
 látunk, tehát a nyelv maga az állítás — és ezt senki nem ellenőrizte.
