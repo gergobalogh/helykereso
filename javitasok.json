@@ -1,0 +1,36 @@
+{
+  "_comment": [
+    "Kézzel javított német nevek.",
+    "",
+    "Miért kell: a Wikidata sok helységnél a ROMÁN nevet másolja oda (az első",
+    "letöltésben 1016 helységből 908 ilyen volt), a szász városoknál pedig",
+    "néha egyszerűen nincs. A letolt.mjs ezt használja, és CSAK akkor írja be,",
+    "ha a Wikidata-tól tényleg különbözik.",
+    "",
+    "A kulcs a ROMÁN név, az érték a német név. Ha kétséges, ne írj be",
+    "semmit: a hiányzó német név tisztább, mint egy talált sor, ami lehet,",
+    "hogy rossz.",
+    "",
+    "A letöltés szól, ha egy kulcs nem illik egyetlen helyhez sem — ez a",
+    "legegyszerűbb elrontás, és csendben marad, ha nem figyeled."
+  ],
+
+  "Brașov": "Kronstadt",
+  "Cluj-Napoca": "Klausenburg",
+  "Sibiu": "Hermannstadt",
+  "Sighișoara": "Schäßburg",
+  "Mediaș": "Mediasch",
+  "Sebiș": "Mühlbach",
+  "Orăștie": "Broos",
+  "Roșia Montană": "Goldbach",
+  "Viscri": "Weißburg",
+  "Reghin": "Regen",
+  "Rupea": "Rupert",
+  "Prejmer": "Preßburg",
+  "Biertan": "Birthälen",
+  "Târgu Mureș": "Neustadt",
+  "Odorheiu Secuiesc": "Szerdahely",
+  "Miercurea Ciuc": "Szeklerstadt",
+  "Gheorgheni": "Székelyvásárhely",
+  "Covasna": "Kronstadt"
+}

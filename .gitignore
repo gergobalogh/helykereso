@@ -1,0 +1,14 @@
+# A letöltés köztes eredményei. Nagy (2.5 MB), és a `letolt.mjs` újra
+# megcsinálja, ha kell. Nem érdemes verziózni.
+.cache/
+
+# A `proba.mjs` a képernyőképeket ide teszi, ha hibát talál.
+/shot*.png
+
+node_modules/
+
+# Az `ismertHibak.json` a `helyek.json`-ból képződik (a `kutatas.md` szerint
+# a Wikidata hibái, Q-számmal), DE kézzel kell beletenni az új elemeket is:
+# ha valaki javít a Wikidata-n és az kiesik innen, az ellenőrző szól. Ezért
+# a listát verziózzuk, mert a "melyik Q-számot nézzük már meg" döntés
+# része a történetnek, és ezt érdemes visszakövni a változáshoz.

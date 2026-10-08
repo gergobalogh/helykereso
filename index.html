@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Helynévkereső · erdélyi helyek nevei magyarul, románul, németül</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%C4%91%3C/text%3E%3C/svg%3E"
+    />
+    <meta
+      name="description"
+      content="Nézd meg, hogy hívják Kolozsvárt románul és németül. Keress bármely erdélyi helységet, és lásd mindhárom nevét egymás mellett."
+    />
+    <style>
+      :root {
+        --sotet: #14161a;
+        --sotet2: #1c1f26;
+        --sor: #2a2f3a;
+        --vilagos: #f0efe9;
+        --szurke: #9aa0ab;
+        --sarga: #e8b04b;
+        --kek: #6fa8dc;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--sotet);
+        color: var(--vilagos);
+        font: 16px/1.6 -apple-system, "Segoe UI", Roboto, sans-serif;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 32px 20px 80px;
+      }
+      h1 {
+        font-size: 1.7rem;
+        margin: 0 0 4px;
+      }
+      .bemutato {
+        color: var(--szurke);
+        margin: 0 0 28px;
+      }
+      .keres {
+        width: 100%;
+        padding: 14px 16px;
+        font-size: 1.1rem;
+        background: var(--sotet2);
+        border: 1px solid var(--sor);
+        border-radius: 8px;
+        color: var(--vilagos);
+      }
+      .keres:focus {
+        outline: 2px solid var(--kek);
+        outline-offset: -1px;
+      }
+      .szures {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 12px 0 0;
+        color: var(--szurke);
+        font-size: 0.85rem;
+        min-height: 1.2em;
+      }
+      #megye {
+        background: var(--sotet2);
+        color: var(--vilagos);
+        border: 1px solid var(--sor);
+        border-radius: 6px;
+        padding: 5px 8px;
+        font-size: 0.85rem;
+      }
+      .talalat {
+        margin-top: 24px;
+        display: grid;
+        gap: 8px;
+      }
+      .sor {
+        background: var(--sotet2);
+        border: 1px solid var(--sor);
+        border-radius: 8px;
+        padding: 12px 14px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 4px 12px;
+      }
+      .nev {
+        font-weight: 600;
+        font-size: 1.05rem;
+      }
+      .nev .kiemel {
+        color: var(--sarga);
+      }
+      .masik {
+        color: var(--szurke);
+        font-size: 0.95rem;
+      }
+      .cimke {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--szurke);
+        border: 1px solid var(--sor);
+        border-radius: 4px;
+        padding: 1px 5px;
+        margin-right: 4px;
+      }
+      .kozseg {
+        font-size: 0.8rem;
+        color: var(--szurke);
+        width: 100%;
+      }
+      /* A forrás linkjei: halka, de Kurzweil-stílusban tartalmat hordoznak.
+         Nincs aláhúzás alapból, mert a sorban sok a szöveg, és a két link
+         ("Wikidata", "javítása") inkább menühöz hasonlítson. */
+      .kozseg a {
+        text-decoration: none;
+      }
+      .kozseg a:hover {
+        text-decoration: underline;
+      }
+      .ures {
+        color: var(--szurke);
+        margin-top: 32px;
+        text-align: center;
+      }
+      footer {
+        margin-top: 48px;
+        padding-top: 20px;
+        border-top: 1px solid var(--sor);
+        color: var(--szurke);
+        font-size: 0.85rem;
+      }
+      a {
+        color: var(--kek);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Helynévkereső</h1>
+      <p class="bemutato">
+        Bármely erdélyi helység magyar, román és német neve egymás mellett.
+      </p>
+
+      <input
+        class="keres"
+        id="mezo"
+        type="search"
+        placeholder="pl. Marosvásárhely, Targu Mures, Kolozsvár..."
+        autocomplete="off"
+        autofocus
+      />
+
+      <div class="szures">
+        <select id="megye">
+          <option value="">minden megye</option>
+        </select>
+        <span id="szures"></span>
+      </div>
+
+      <div class="talalat" id="talalat"></div>
+
+      <footer>
+        <p>
+          Adatok: <a href="https://www.wikidata.org/">Wikidata</a> (CC0), letöltve
+          <span id="datum"></span>. Német nevet akkor lát, ha a helynek van
+          ilyen neve (főleg a szász városoknak).
+        </p>
+        <p>
+          Ha valami nem stimmel — furcsa magyar név, hiányzó német név — a
+          találat melletti <strong>javítása</strong> linkkel magad szerkesztheted
+          a Wikidata-n. Ez tartósabb, mint itt javítani: ezt a
+          Helynévkereső következő letöltése újra átveszi, és más is ugyanazt
+          látja.
+        </p>
+      </footer>
+    </main>
+
+    <script type="module" src="./keres.js"></script>
+  </body>
+</html>

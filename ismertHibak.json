@@ -1,0 +1,223 @@
+{
+ "_comment": [
+  "A Wikidata-ból átjött, DE AZ ADATFÁJLBAN KESZÜLT HIBAJÁLISMERT Q-SZÁMOK.",
+  "Olvassa az ellenoriz.mjs.",
+  "",
+  "Miért kell: ezek a hibák a WIKIDATA-n vannak, nem a kódban. A letolt.mjs",
+  "csak átmásolja őket (a SPARQL-lekérdezés már megköveteli a magyar",
+  "címkét, tehát nincs kódoldali visszaesés). A kutatas.md ezt élőben",
+  "megállapította: Q1822117 hu=\"Dealu Mare\", Q12087397 hu=\"Valea Albá\".",
+  "",
+  "MIT CSINÁL AZ ELLENŐRZŐ: azokat a hibákat, amikrole ez a lista szól,",
+  "NEM számítja hibának — hiszen a kutatás dokumentálta őket. Amit viszont",
+  "ebben az osztályban ÚJON talál, azt hibának jelenti. Ez a különbség a",
+  "lényeg: ha minden ismert hiba piros lenne, a kimenet már első futáskor",
+  "tele lenne szöveggel, és az új hibát senki nem látná meg.",
+  "",
+  "AZ ÜRÍTÉS IRÁNYA: ha kijavítasz valamit a Wikidata-n és újrafuttatod a",
+  "letöltést, az elem KIESIK a listából, és az ellenőrző KÉRDEZI, hogy",
+  "már javított-e — ezt töröld ki, ne hagyd üresen.",
+  "",
+  "A _nev/_darab/_pelda kulcsok tájékoztatóak, az ellenőrző nem olvassa őket.",
+  "Az egy Q-szám több osztályban is szerepelhet (Q12146286 \"Pirita",
+  "(Románia)\" egyszerre zárójeles és román szót tartalmazó mondat), és ez",
+  "nem hiba: az ellenőrző osztályonként számol."
+ ],
+ "huRomanSzo": {
+  "_nev": "A magyar mezőbe másolt román helynév",
+  "_darab": 77,
+  "_pelda": [
+   {
+    "q": "Q1822117",
+    "hu": "Dealu Mare",
+    "ro": "Dealu Mare",
+    "de": null
+   },
+   {
+    "q": "Q12734590",
+    "hu": "Lunca Bonțului",
+    "ro": "Lunca Bonțului",
+    "de": null
+   },
+   {
+    "q": "Q4122287",
+    "hu": "Moara de Pădure",
+    "ro": "Moara de Pădure",
+    "de": null
+   }
+  ],
+  "Q1822117": "Dealu Mare",
+  "Q12734590": "Lunca Bonțului",
+  "Q4122287": "Moara de Pădure",
+  "Q829234": "Oaș",
+  "Q1243511": "Pădurea Iacobeni",
+  "Q12110802": "Coasta Henții",
+  "Q9196772": "Coasta Vâscului",
+  "Q11421465": "Dealu Bajului",
+  "Q12103056": "Dealu Bistrii",
+  "Q9196575": "Dealu Capsei",
+  "Q10858428": "Dealu Crișului",
+  "Q12103064": "Dealu Doștatului",
+  "Q7475813": "Dealu Frumos",
+  "Q7665025": "Dealu Goiești",
+  "Q12103068": "Dealu Lămășoi",
+  "Q4221243": "Dealu Muntelui",
+  "Q7474087": "Dealu Ordâncușii",
+  "Q12103088": "Dealu Roatei",
+  "Q7664887": "Dosu Luncii",
+  "Q7664914": "Dosu Văsești",
+  "Q11110676": "După Deal",
+  "Q12102927": "După Plese",
+  "Q4221981": "Făgetu de Jos",
+  "Q4222059": "Făgetu de Sus",
+  "Q12165325": "Fața",
+  "Q9196627": "Fața Abrudului",
+  "Q11421107": "Fața Cristesei",
+  "Q11421018": "Fața Lăpușului",
+  "Q4151206": "Fața Lăzești",
+  "Q12098479": "Gura Cuțului",
+  "Q12098446": "Gura Izbitei",
+  "Q12098489": "Gura Sohodol",
+  "Q7583852": "Lunca Bisericii",
+  "Q7583855": "Lunca de Jos",
+  "Q7583886": "Lunca Goiești",
+  "Q4220505": "Lunca Merilor",
+  "Q7583858": "Lunca Vesești",
+  "Q12139340": "Pădurea",
+  "Q9196432": "Peste Valea Bistrii",
+  "Q12143081": "Poiana Galdei",
+  "Q12143106": "Poiana Ursului",
+  "Q12087317": "Vale în Jos",
+  "Q12087392": "Valea Abruzel",
+  "Q12087397": "Valea Albă",
+  "Q10862265": "Valea Bârluțești",
+  "Q9196688": "Valea Bistrii",
+  "Q12087422": "Valea Bucurului",
+  "Q12087453": "Valea Caselor",
+  "Q11088728": "Valea Cerbului",
+  "Q10862272": "Valea Cocești",
+  "Q12087650": "Valea Făgetului",
+  "Q10903927": "Valea Holhorii",
+  "Q11756292": "Valea Inzelului",
+  "Q12016347": "Valea lui Mihai",
+  "Q10858431": "Valea Maciului",
+  "Q10862260": "Valea Mică",
+  "Q10862266": "Valea Mlacii",
+  "Q7485804": "Valea Morii",
+  "Q12087548": "Valea Negrilesii",
+  "Q1544484": "Valea Poienii",
+  "Q12087664": "Valea Șesii",
+  "Q10862268": "Valea Țupilor",
+  "Q10858427": "Valea Uțului",
+  "Q11756226": "Valea Uzei",
+  "Q12087430": "Valea Verde",
+  "Q2898991": "Fața Roșie",
+  "Q3294121": "Gura Bordului",
+  "Q2898574": "Valea",
+  "Q3325704": "Valea Babii",
+  "Q1401136": "Valea Glodului",
+  "Q1401140": "Valea Pădurii",
+  "Q578455": "Valea Șurii",
+  "Q821241": "Vále",
+  "Q852362": "Dealu Ștefăniței",
+  "Q12118801": "Lunca Borlesei",
+  "Q12118810": "Lunca Leșului",
+  "Q517274": "Lunca Sătească"
+ },
+ "huZarojeles": {
+  "_nev": "A magyar mező zárójeles megkülönböztetést tartalmaz",
+  "_darab": 10,
+  "_pelda": [
+   {
+    "q": "Q714800",
+    "hu": "Mogyorókeréke (Magyarókereke)",
+    "ro": "Alunișu",
+    "de": "Mären"
+   },
+   {
+    "q": "Q4221730",
+    "hu": "Costești (Feketevölgy község)",
+    "ro": "Costești",
+    "de": null
+   },
+   {
+    "q": "Q12146286",
+    "hu": "Pirita (Románia)",
+    "ro": "Pirita",
+    "de": null
+   }
+  ],
+  "Q714800": "Mogyorókeréke (Magyarókereke)",
+  "Q4221730": "Costești (Feketevölgy község)",
+  "Q12146286": "Pirita (Románia)",
+  "Q658130": "Almás (Románia)",
+  "Q793937": "Berény (település)",
+  "Q1104574": "Kardos (Románia)",
+  "Q1176194": "Mesterháza (Románia)",
+  "Q1215233": "Nagyvölgy (Románia)",
+  "Q1286601": "Sebespatak (Románia)",
+  "Q1009955": "Gertia (Gersa II)"
+ },
+ "huMondat": {
+  "_nev": "A magyar mező magyarázó mondat, nem név",
+  "_darab": 1,
+  "_pelda": [
+   {
+    "q": "Q3889960",
+    "hu": "Rudafalu Romániában, Hunyad megyében",
+    "ro": "Ruda",
+    "de": null
+   }
+  ],
+  "Q3889960": "Rudafalu Romániában, Hunyad megyében"
+ },
+ "dePerjel": {
+  "_nev": "A német mező két nevet fűzött össze perjellel",
+  "_darab": 2,
+  "_pelda": [
+   {
+    "q": "Q724226",
+    "hu": "Erdőcsinád",
+    "ro": "Pădureni",
+    "de": "Pădureni / Erdőcsinád"
+   },
+   {
+    "q": "Q714327",
+    "hu": "Sövényfalva",
+    "ro": "Cornești",
+    "de": "Cornești / Sövényfalva"
+   }
+  ],
+  "Q724226": "Pădureni / Erdőcsinád",
+  "Q714327": "Cornești / Sövényfalva"
+ },
+ "deRomanEkezet": {
+  "_nev": "A német mezőben román ékezet van",
+  "_darab": 5,
+  "_pelda": [
+   {
+    "q": "Q261457",
+    "hu": "Nagyesküllő",
+    "ro": "Așchileu Mare",
+    "de": "Așchileu"
+   },
+   {
+    "q": "Q724226",
+    "hu": "Erdőcsinád",
+    "ro": "Pădureni",
+    "de": "Pădureni / Erdőcsinád"
+   },
+   {
+    "q": "Q221571",
+    "hu": "Erdőidecs",
+    "ro": "Idicel-Pădure",
+    "de": "Idecel-Pădure"
+   }
+  ],
+  "Q261457": "Așchileu",
+  "Q724226": "Pădureni / Erdőcsinád",
+  "Q221571": "Idecel-Pădure",
+  "Q1031621": "Glăjerie",
+  "Q714327": "Cornești / Sövényfalva"
+ }
+}
