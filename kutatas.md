@@ -192,6 +192,101 @@ letöltött mező egyáltalán nem kell hozzá. A próba mostantól a `href`-et 
 és csalás ellenére is bukik, ha visszaírom a hibás `encodeURIComponent`-et
 (leellenőriztem).
 
+## A 77 magyar név
+
+A 77 „hibás magyar címke” a legnagyobb nyitott tétel. Először azt írtam ide,
+ hogy a KIA magyar nevlista (`kia.hu/kiakonyvtar/konyltar/erdely/erd2002/
+ hnevta02.pdf`) megoldja. **Nem oldja meg — és nem is lehet, ahogy hittem.**
+
+### Először két hamis érvelés, amit ellenőrizni kellett
+
+**1. „A magyar Wikipedia segít."** Nem. Mind a 77 elemnek van magyar
+Wikipedia-cikkje, de a *címük* is a román név (`Dealu Mare`, `Oaș`,
+`Valea Albă`), a *redirect* nincs, és a *magyar alias* nulla 77-ből 77-ből.
+A cikk infoboxában a `magyar név =` mező **üres**. Vagyis a magyar Wikipedia
+nem független forrás: ugyanazt a hibás címkét másolta, ahogy a Wikidata.
+
+**2. „A KIA megmondja a magyar nevet."** A KIA PDF (371 oldal) valóban
+letölthető — de a README-ben megadott út **404**. A jó út `konyltar` helyett
+`konyvtar`:
+
+    https://www.kia.hu/kiakonyvtar/konyvtar/erdely/erd2002/hnevta02.pdf
+
+(Ezt érdemes lenne a README-be is javítani.)
+
+### A PDF elemzése — és három saját parse-hiba
+
+A `pdftotext -layout` két hasábos kimenetet ad. Eleinte **71,6%** egyezést
+mértem a már jó magyar nevű helységeken, és ebből azt a következtetést vontam,
+hogy a KIA túl pontatlan a automatikus alkalmazáshoz. **Ez a szám téves volt,
+és mindhárom ok magamtól ment:**
+
+| Hiba | Javítás | Egyezés |
+|---|---|---|
+| kulcs = román név csak | `fold(ro)\|megye` — több `Valea Albă` van, más-más megyében | 71,6% → 86,1% |
+| nem szeltem le a pont | `)` után jön a magyar név, aztán `.` — de a pont lehet az elején is | 86,1% → 86,1% |
+| a pont után `U+F017` | ez a PDF privát használatos területén lévő pont (Wingdings bullet) | 86,1% → **87,6%** |
+
+Vagyis a KIA **nem** pontatlan: jól olvasható. A 13,9% valódi eltérés pedig
+nem hiba, hanem **nyelvjárási változat**: `Oprisvölgye` (KIA) kontra
+`Oprisvölgy` (Wikidata), `Keresztesvölgy` kontra `Buzapuszta`. A KIA 2002-es
+nyelvrajzi feljegyzés, nem a mai hivatalos névhatóság.
+
+### Az igazi eredmény
+
+A 77-et rászúrtam a KIA helységnévtárra (megyével kulcsolva):
+
+| | darab |
+|---|---|
+| KIA-bejegyzés van | 42 |
+| ...ebből magyar nevet **ad** | **2** (mindkettő hibás: `Valeaglodului`, `La padure`) |
+| ...ebből a magyar név **üres** | **40** |
+| KIA-bejegyzés nincs | 35 |
+
+**Tehát a 77-ből nulla használható magyar nevet sikerült előhúzni.** A
+hivatalos 2002-es forrás a 40-nél üresen hagyja a magyar nevet. Ezek a
+falvak magyar lakossága 1910-reolvadt, a KIA pedig nem őrzi a nevüket.
+
+Vagyis a „77 hiba" nem 77 hibás *magyar* nevet jelent. A Wikidata-n
+`magyar név: Dealu Mare` áll, és ez **állítás**, hogy létezik magyar neve
+`Dealu Mare`-nek. Nem létezik.
+
+### A lehetséges javítás, és amitől döntést kér
+
+Nem tudok magyar nevet írni oda — de **törölhetem** a hamis magyar címkét.
+Csakhogy ennek ára van, és ezt mérni kellett:
+
+A `letolt.mjs` lekérdezésében a magyar címke kötelező:
+
+```sparql
+?hely rdfs:label ?hu . FILTER(LANG(?hu) = "hu")
+```
+
+Nincs `OPTIONAL`. Tehát ha a hamis magyar címkét törlöm a Wikidata-n, akkor
+a helység **egyáltalán nem jelenik meg** a keresőben — nem lesz
+névtelenül, hanem *eltűnik*. 3074-ből 2997.
+
+Ez két okból rossz ötlet:
+
+1. A magyar lakosság nélküli falvak is léteznek és léteztek; a „Helynévkereső"
+   egy magyar utazó segédje, aki ott jár — a neve románul is elmondható.
+2. A román név **szebb és beszédesebb**, mint a magyar nevüket nem létező
+   fals `Dealu Mare`. Ma a felhasználó ezt látja: *„Dealu Mare (Kolozsvár)"*.
+   Törölve a magyar címkét ezt kapná: *„Nincs találat."* — az egyértelmű
+   veszteség.
+
+**Ezért a 77-et nem bántom meg.** Ehelyett a `kutatas.md` ezt rögzíti, és a
+Wikidata-szerkesztő űrlapja (a „javítása" link) az egyetlen reális út: ha
+valaki tudja a magyar nevet, az oda írja. Ez a 77 **ismert hiba**, tehát az
+`ellenoriz.mjs` nem hibának számolja, nem is zúg — pontosan ahogy kell.
+
+### Amit ez a 77 tanított
+
+A kutatás elején azt írtam: „nem tudom származtatni, adj külső forrást". A
+külső forrás **megvan**, és épp ez bizonyítja, hogy **nincs mit
+származtatni**. Egy javítható adat hiánya és egy nem-létező adat között a
+különbség az, hogy az elsőhöz *keresni* kell, a másodikhoz *dönteni*.
+
 ## A közös tanulság: ellenőrizd a láthatatlant is
 
 Ez a projektben három csendes hiba van, és mindhárom ugyanazt a mintát követi:
@@ -221,11 +316,9 @@ második bizonyítja a helyességet.
    Wikidata-hibákat sorolja fel, hogy az újaktól meg lehessen különböztetni.
 2. ~~A hamis német nevek (5 helység) kiszűrése.~~ **Kész 2026-10-08-án**,
    lásd az 5. pontot.
-3. A **77** hibás magyar címke javítása — de valódi magyar neveket kell hozzá,
-   azokat nem a román alakból lehet kitalálni. Forrás lehet a KIA magyar
-   nevlista (`kia.hu/kiakonyvtar/konyltar/erdely/erd2002/hnevta02.pdf`). Ez
-   a legnagyobb és legtisztább hátralévő munka, és nem is itt kezdődik: a
-   végleges hely a Wikidata.
+3. A **77** hibás magyar címke — lásd a [„A 77 magyar név"](#a-77-magyar-nev)
+   cikket. Meglepő eredmény: a hivatalos forrásban **nincs** magyar nevük.
+   Nem kitalálható, de törölhető is — az már döntés.
 3. ~~A „report a mistake" link.~~ **Kész 2026-10-08-án.** Minden találat
    mellett van egy **javítása** link, ami a Wikidata szerkesztő űrlapját nyitja
    magyarul (`?action=edit&uselang=hu`). Ez a helyes irány, mert a fenti 77

@@ -234,9 +234,28 @@ Ezek a hibák a **Wikidata-n** vannak, nem nálunk: a SPARQL-lekérdezés már
 megköveteli a magyar címkét, tehát nincs kódoldali visszaesés. Az
 `ismertHibak.json` felsorolja őket Q-számmal, hogy az `ellenoriz.mjs` ne
 tételezze hibának a már dokumentáltat, de szóljon, ha **új** elem jelenik meg
-ebben az osztályban. A tartós javítás a Wikidata-n van: a magyar nevet nem a
-román alakból lehet kitalálni, hanem a KIA magyar nevlistájából
-(`kia.hu/kiakonyvtar/konyltar/erdely/erd2002/hnevta02.pdf`) kell venni.
+ebben az osztályban.
+
+A magyar nevet nem a román alakból lehet kitalálni. A KIA helységnévtára
+(`kia.hu/kiakonyvtar/**konyvtar**/erdely/erd2002/hnevta02.pdf` — a `konyltar`
+elírás 404) rászúrva viszont kiderül, hogy **a 77-ből egyetlen használható
+magyar nevet sem ad**: 40-nél a magyar né mező üres, 35-nek nincs bejegyzése,
+a 2 „nevet" adó pedig a másik hasábból származó tévedés
+(`Valeaglodului`, `La padure`). Ezeknél a falvaknál a magyar név egyszerűen
+**nem létezik** — a 1910 körüli magyar lakosság olvadt fel, és a forrás nem
+őrzi a nevüket.
+
+Ezért itt nem javítunk semmit, és ezt szándékosan így értjük:
+
+- **Nem írunk bele magyar nevet**, mert akkor kitalálnánk egyet.
+- **Nem töröljük a hamis magyar címkét a Wikidata-n**, mert a lekérdezés
+  `FILTER(LANG(?hu) = "hu")`-val kötelezővé teszi, tehát a törlés nem
+  névnéven hagyja a falut, hanem **kitörli a keresőből** (3074 → 2997). Ma a
+  felhasználó `Dealu Mare (Kolozsvár)`-t lát, ami románul is elmondható;
+  törlés után „Nincs találat" lenne. Ez egyértelmű veszteség.
+
+A reális út a **javítása** link: aki ismeri a magyar nevet, a Wikidata-n írja
+be. A részletes mérés a [`kutatas.md` „A 77 magyar név"](kutatas.md) fejezetében.
 
 424 helységen a magyar név megegyezik a románnal (nincs magyar exonim) — ez
 nem hiba, csak így jött, és a számláló kileli, ha érdekel.
