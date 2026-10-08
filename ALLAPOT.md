@@ -19,6 +19,10 @@ sehová. A munkafa tiszta.
 | `df937fe` | a hamis német nevek kiszűrése (135 → 130 valódi) |
 | `035f701` | a 77 magyar név megmérése: a KIA sem tud magyar nevet adni |
 | `11281e4` | **a nev alapú dedup 93 valós falut törölt ki** (3074 → 3167) |
+| `350c52a` | az ellenőrző duplikátum-szűrése is hibás volt: 9 valós párt rejtett el |
+
+A kettő utóbbi ugyanaz a leképezés két helyen: a `11281e4` a letöltőben, a
+`350c52a` az ellenőrzőben. Mindkettőben a megye rossz helyen volt.
 
 ## A jelenlegi adat — ellenőrizve
 
