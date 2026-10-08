@@ -99,6 +99,26 @@ német neve "Cluj-Napoca". Három szabály van a `nemetNev()`-ben, a harmadik
 pedig betűrendben hasonlít, mert a hiba néha csak a végződésen látszik
 ("Hodaie" → "Hodaei").
 
+**A betűrendi hasonlítás önmagában nem elég: öt helyen átment rajta.** Ha a
+Wikidata a román névben elront *egyet* a betűt, a szó már nem ugyanazok a
+betűk, tehát átcsúszik, és a kereső `de` jelöléssel román nevet mutat:
+
+| Q | hu | amit a `de` mutatott |
+|---|---|---|
+| Q221571 | Erdőidecs | `Idecel-Pădure` (román: `Idicel-Pădure`) |
+| Q1031621 | Görgényüvegcsűr | `Glăjerie` (román: `Glăjărie`) |
+| Q714327 | Sövényfalva | `Cornești / Sövényfalva` |
+| Q724226 | Erdőcsinád | `Pădureni / Erdőcsinád` |
+| Q261457 | Nagyesküllő | `Așchileu` |
+
+Ezért van a `nemetNev()` **negyedik szabálya**: ami román ékezetet tartalmaz
+(`ă â î ș ț`), az nem német név. A német ábécében ilyen betű nincs, tehát a
+jel biztos — és nem téveszt szót a magyar `ő`/`ű`, mert az közös ékezet.
+Öt helységen így 135 helyett **130** valódi német név maradt.
+
+A hiányzó név tisztább, mint a hamis: ezt a `javitasok.json` szabálya is
+mondja, és ugyanez érvényes a szűrésre.
+
 **632 duplikált Wikidata-elem.** Ugyanarról a helyről van két elem (a
 Kolozsvár például `Q100188` és `Q16898189` is). A kisebb Q-számú nyer, mert a
 Wikidata sorszámai a korábban létrejött elemekre utalnak.

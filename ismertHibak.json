@@ -173,51 +173,12 @@
  },
  "dePerjel": {
   "_nev": "A német mező két nevet fűzött össze perjellel",
-  "_darab": 2,
-  "_pelda": [
-   {
-    "q": "Q724226",
-    "hu": "Erdőcsinád",
-    "ro": "Pădureni",
-    "de": "Pădureni / Erdőcsinád"
-   },
-   {
-    "q": "Q714327",
-    "hu": "Sövényfalva",
-    "ro": "Cornești",
-    "de": "Cornești / Sövényfalva"
-   }
-  ],
-  "Q724226": "Pădureni / Erdőcsinád",
-  "Q714327": "Cornești / Sövényfalva"
+  "_darab": 0,
+  "_megjegyzés": "A letöltő már kiszűri (román ékezet a német mezőben), nem ez a validator."
  },
  "deRomanEkezet": {
   "_nev": "A német mezőben román ékezet van",
-  "_darab": 5,
-  "_pelda": [
-   {
-    "q": "Q261457",
-    "hu": "Nagyesküllő",
-    "ro": "Așchileu Mare",
-    "de": "Așchileu"
-   },
-   {
-    "q": "Q724226",
-    "hu": "Erdőcsinád",
-    "ro": "Pădureni",
-    "de": "Pădureni / Erdőcsinád"
-   },
-   {
-    "q": "Q221571",
-    "hu": "Erdőidecs",
-    "ro": "Idicel-Pădure",
-    "de": "Idecel-Pădure"
-   }
-  ],
-  "Q261457": "Așchileu",
-  "Q724226": "Pădureni / Erdőcsinád",
-  "Q221571": "Idecel-Pădure",
-  "Q1031621": "Glăjerie",
-  "Q714327": "Cornești / Sövényfalva"
+  "_darab": 0,
+  "_megjegyzés": "A letöltő már kiszűri (román ékezet a német mezőben), nem ez a validator."
  }
 }

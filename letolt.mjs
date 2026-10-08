@@ -21,7 +21,7 @@
 
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
-import { nemHelyseg } from "./szabalyok.mjs";
+import { nemHelyseg, deRomanEkezet } from "./szabalyok.mjs";
 
 const VEGEGPL = "https://query.wikidata.org/sparql";
 const USER_AGENT = "mivelkezdjem.hu helynevekereso (https://mivelkezdjem.hu)";
@@ -291,6 +291,11 @@ async function main() {
   let duplikalt = 0;
   let agglomeracio = 0;
   const kihagyottAglomeraciok = [];
+  // A hamis német nevek nem kiesnek a listából (a helység valós), csak a
+  // német nevük lesz üres. Ezért Map kell, nem számláló: később, a duplikátumok
+  // kiszűrése UTÁN szűrjük, hogy csak azok maradjanak benne, akiknek a
+  // sora tényleg az adatfájlba került.
+  const hamisNemet = new Map();
 
   for (const [q, adat] of [...kozsegek, ...falvak]) {
     // Ha a helynek BÁRMELYIK osztálya a nem-önálló-lakhelyek közül van,
@@ -333,12 +338,25 @@ async function main() {
     // együtt ("Ajton község"), a faluét meg az egyértelmű "Ajton"-t. Ezt
     // NEM levágjuk: sok községnek pont az egyetlen faluja azonos nevű, és
     // levágás után 556 duplikált sor keletkezett.
+    const de = nemetNev(s.de, ro, javitasok);
+    // Pontosan azokat számoljuk, amit KIZÁRÓLAG a 4. (ékezet-) szabály vett
+    // ki: lefuttatjuk a függvényt a szabály nélkül is, és ha akkor jött volna
+    // név, akkor a 4. pont döntött.
+    //
+    // E nélkül a szám 562 lenne, és félrevezető: a legtöbb ilyen helyet a 3.
+    // (betűrendi) szabály is kiszűr, tehát az ékezet-szabály csak ötöt adott
+    // hozzá. A "melyik szabály miért" a kimenet legfontosabb információja
+    // itt, mert ezek csendes szűrések.
+    if (s.de && !de && nemetNev(s.de, ro, javitasok, { ekezet: false })) {
+      hamisNemet.set(q, { q, hu, ro, de: s.de });
+    }
+
     helyek.push({
       q,
       qSzam: Number(q.slice(1)),
       hu,
       ro,
-      de: nemetNev(s.de, ro, javitasok),
+      de,
       megye: megye.kod,
       kozseg: kozsegek.has(q) ? null : celQid,
       kozsegNev: kozsegek.has(q) ? null : nevek.get(celQid)?.hu ?? null,
@@ -412,6 +430,24 @@ async function main() {
   await writeFile(KIMENET, JSON.stringify(kimenet, null, 1));
   await writeFile(KIMENET_LEPEG, JSON.stringify(kimenet));
 
+  // Az ékezet-szabály által kiszűrt hamis német neveket kilistázzuk. A
+  // "Kész: N német nevet kapott" szám önmagában nem árulja el, hogy miért
+  // kevesebb, mint korábban, és a szűlés névre épül, tehát egy
+  // Wikidata-átírás után csendben változhatna.
+  //
+  // A duplikátummal kiszűrtakkal nem számolunk: ha egy sor a
+  // duplikátum-szűrés miatt nem kerül az adatfájlba, akkor a hamis német
+  // neve sem jelenik meg sehol, tehát nincs mit javítani rajta.
+  const bentHamisNemet = [...hamisNemet.values()].filter((x) =>
+    helyek.some((h) => h.q === x.q),
+  );
+  if (bentHamisNemet.length) {
+    console.log(
+      `  ${bentHamisNemet.length} német nevet hagytunk ki, mert román ékezet volt benne:`,
+    );
+    for (const x of bentHamisNemet) console.log(`    ${x.q} ${x.hu} / ${x.ro} / ${x.de}`);
+  }
+
   console.log(`\nKész: ${helyek.length} helység, ${helyek.filter((h) => h.de).length} német nevet kapott.`);
   for (const m of MEGYEK) {
     console.log(`  ${m.kod} ${m.hu}: ${helyek.filter((h) => h.megye === m.kod).length}`);
@@ -420,17 +456,24 @@ async function main() {
 }
 
 /**
- * A német név, három szabály szerint:
+ * A német név, négy szabály szerint:
  *  1. ha szerepel a javitasok.json-ban, az az igazi (kézzel ellenőrzött),
- *  2. ha a Wikidata oda szinte a román nevet másolta, nincs német nevenk,
- *  3. zárójeles magyarázatot ("Luna (Cluj)") levágjuk, mert az nem név.
+ *  2. zárójeles magyarázatot ("Luna (Cluj)") levágjuk, mert az nem név,
+ *  3. ha a Wikidata oda szinte a román nevet másolta, nincs német nevünk,
+ *  4. a "német" név, amiben román ékezet van (ă â î ș ț), szintén nem német.
  *
- * A 2. pont trükkös: a Wikidata gyakran a román névből csinál "német" nevet,
+ * A 3. pont trükkös: a Wikidata gyakran a román névből csinál "német" nevet,
  * csak a végződésen ront egy kicsit ("Hodaie" -> "Hodaei"). Ezért nem
  * szövegesen hasonlítunk, hanem a betűk sorrendjétől függetlenül: ha ugyan
  * azok a betűk, ugyanaz a szó.
+ *
+ * A 4. pont azt fogja meg, amit a 3. átenged. A betűrendi egyezés nem
+ * elég, mert a Wikidata olykor egyet elront a román névben
+ * ("Idicel-Pădure" -> "Idecel-Pădure", "Glăjărie" -> "Glăjerie"), és ilyenkor
+ * már nem ugyanazok a betűk. A német ábécében viszont nincs ă/â/î/ș/ț,
+ * tehát ez a jel biztos: öt helységnél a román nevet mutatta "de" jelöléssel.
  */
-function nemetNev(deWikidata, ro, javitasok) {
+function nemetNev(deWikidata, ro, javitasok, { ekezet = true } = {}) {
   if (!deWikidata && !(ro in javitasok)) return null;
   const tisztitott = deWikidata
     ? deWikidata.replace(/\s*\([^)]*\)\s*$/u, "").trim()
@@ -438,7 +481,19 @@ function nemetNev(deWikidata, ro, javitasok) {
   // A kézi javítás elsőbbséget élvez, de az se lehet, ami a román nevét
   // ismétli: az nem német név.
   const jelolt = ro in javitasok ? javitasok[ro] : tisztitott;
-  return ugyanazSzo(jelolt, ro) ? null : jelolt;
+  if (ugyanazSzo(jelolt, ro)) return null;
+  // A német ábécében nincs ă, â, î, ș vagy ț. Ha ezek egyike szerepel a
+  // "német" névben, akkor az biztosan nem német: a Wikidata a román nevet
+  // másolta oda, esetleg két nevet fűzve össze ("Cornești / Sövényfalva").
+  //
+  // Ez azért döntő, mert a magyar ő/ű KÖZÖS ékezet, az nem számít — a
+  // "Sövényfalva" magyarul valóban lehetne német helységnév. De a román
+  // betűk kizárólag a román nyelvben léteznek.
+  //
+  // Fontos: a hiányzó német név tisztább, mint egy hamis. A README ezt
+  // írja a javitasok.json-ról is: "ha kétséges, ne írj be semmit".
+  if (ekezet && deRomanEkezet(jelolt)) return null;
+  return jelolt;
 }
 
 /** Igaz, ha a két szó ugyanazok betűkből áll, bár más sorrendben. */

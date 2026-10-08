@@ -83,9 +83,24 @@ tesztet kapott: a régi adattal 2 hibával bukik, az újjal 0-val.
 
 Q714327 `de = "Cornești / Sövényfalva"`, Q261457 `de = "Pădureni / Erdőcsinád"`.
 
-### 5. Román ékezet a német mezőben — 2 helység
+### 5. Román ékezet a német mezőben — 5 helység
 
-Q261457 `de = "Așchileu"` (román `ș`), Q714327 `de = "Cornești"`.
+Q261457 `de = "Așchileu"` (román `ș`), Q714327 `de = "Cornești"`, Q221571
+`de = "Idecel-Pădure"`, Q1031621 `de = "Glăjerie"`, Q724226 `de = "Pădureni / Erdőcsinád"`.
+
+**Megjavítva 2026-10-08-án — a negyedik szabály a `nemetNev()`-ben.** A
+betűrendi hasonlítás (3. szabály) azért nem fogta meg őket, mert a Wikidata a
+román névben *egyet* elront: `Idicel-Pădure` → `Idecel-Pădure`, `Glăjărie` →
+`Glăjerie`. Így már nem ugyanazok a betűk, tehát a hasonlítás átengedte.
+
+Az új szabály: ami román ékezetet tartalmaz (`ă â î ș ț`), az nem német név.
+A német ábécében ilyen betű nincs, tehát biztos jel — és nem téveszt szót a
+magyar `ő`/`ű`, mert az közös ékezet. Ez **öt** hamis `de` nevet vett ki
+(135 → 130 valódi). A `dePerjel` és `deRomanEkezet` osztály az
+`ismertHibak.json`-ban kiürült: ezt már nem a Wikidata, hanem a kód javítja.
+
+A negyedik szabály után **nulla** olyan sor maradt, aminek a `de` mezőjében
+román ékezet vagy perjel lenne, ezt a `proba.mjs` is ellenőrzi.
 
 ## Amit az `ellenoriz.mjs` nem kapott el — és már megvan
 
@@ -177,13 +192,36 @@ letöltött mező egyáltalán nem kell hozzá. A próba mostantól a `href`-et 
 és csalás ellenére is bukik, ha visszaírom a hibás `encodeURIComponent`-et
 (leellenőriztem).
 
+## A közös tanulság: ellenőrizd a láthatatlant is
+
+Ez a projektben három csendes hiba van, és mindhárom ugyanazt a mintát követi:
+**egy ellenőrzés megnézte, hogy valami *előfordul-e*, nem hogy *jó-e*.**
+
+| Ellenőrzés | Amit nézett | Amit kellett volna |
+|---|---|---|
+| `NEM_HELYSEG` szűrés | a szabályos `metropolisztérséget` | hogy bármi agglomeráció bent van-e |
+| `proba.mjs` linkpróba | a link szövegét: "Wikidata" | a `href`-et, hogy odamegy-e |
+| `nemetNev()` 3. szabály | hogy ugyanazok-e a betűk | hogy német-e a nyelv |
+
+Mindhárom átment a saját tesztjén. A gyökér az, hogy a teszt mindig azt
+ellenőrizte, ami *könnyen* lekérdezhető volt, nem azt, ami *fontos*. A
+`de` mezőnél ez különösen fájdalmas: a `de` jelölés ígéri, hogy német nevet
+látunk, tehát a nyelv maga az állítás — és ezt senki nem ellenőrizte.
+
+**Ha ebből a projektből valamit tovább vinnél:** az ellenőrzés ne azt kérdezze
+„van-e ilyen elvétett hiba?”, hanem azt, hogy „ha ez a mező azt állítja, akkor
+az állítás igaz-e?". A különbség az, hogy az első felsorolja a tüneteket, a
+második bizonyítja a helyességet.
+
 **Következőkre, ha van kedv:**
 
 1. ~~A metropoliszövezet-védelem javítása és az öt új ellenőrzés beépítése.~~
    **Kész 2026-10-08-án.** A szabály a `szabalyok.mjs`-ben van (a letöltő és
    az ellenőrző is onnan veszi), az `ismertHibak.json` pedig a tudott
    Wikidata-hibákat sorolja fel, hogy az újaktól meg lehessen különböztetni.
-2. A **77** hibás magyar címke javítása — de valódi magyar neveket kell hozzá,
+2. ~~A hamis német nevek (5 helység) kiszűrése.~~ **Kész 2026-10-08-án**,
+   lásd az 5. pontot.
+3. A **77** hibás magyar címke javítása — de valódi magyar neveket kell hozzá,
    azokat nem a román alakból lehet kitalálni. Forrás lehet a KIA magyar
    nevlista (`kia.hu/kiakonyvtar/konyltar/erdely/erd2002/hnevta02.pdf`). Ez
    a legnagyobb és legtisztább hátralévő munka, és nem is itt kezdődik: a

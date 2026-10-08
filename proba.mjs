@@ -210,6 +210,37 @@ if (eltert.length) {
   console.log("  ✓ minden sorban szabályos, kódolatlan Wikidata link van");
 }
 
+// Német névként nem jelenik meg román szó. A `de` jelölés azt ígéri, hogy
+// német nyelvű nevet látunk, tehát román ékezet (ă â î ș ț) lehetetlen
+// benne. Ez 2026-10-08-ig átment: öt helyen a kereső `de` jelöléssel a
+// román nevet mutatta, mert a letöltő csak betűrendben hasonlított, és a
+// Wikidata a román névben egyet elrontott ("Idicel-Pădure" ->
+// "Idecel-Pădure"), így már nem voltak ugyanazok a betűk.
+console.log("\n--- A német név csak német lehet:");
+const ROMAN_EKEZET = /[ăâîșşțţ]/;
+const ellenorizt = await oldal.evaluate(() => {
+  return fetch("./helyek.min.json").then((v) => v.json());
+});
+const deHelyek = ellenorizt.helyek.filter((h) => h.de);
+const hamis = deHelyek.filter((h) => ROMAN_EKEZET.test(h.de));
+console.log(`    ${deHelyek.length} helységnek van német neve`);
+if (hamis.length) {
+  bukott++;
+  console.log(`  ✗ ${hamis.length} ilyen "német" névben román ékezet van:`);
+  for (const h of hamis.slice(0, 6)) console.log(`      ${h.hu} / ${h.de}`);
+} else {
+  console.log("  ✓ egyikben sincs román ékezet, tehát mind német nyelvű");
+}
+// A két nevet perjellel összefűzött név ugyanígy hiba: nem egyetlen név.
+const perjeles = deHelyek.filter((h) => /[/()]/.test(h.de));
+if (perjeles.length) {
+  bukott++;
+  console.log(`  ✗ ${perjeles.length} német név több nevet fűz össze perjellel vagy zárójellel:`);
+  for (const h of perjeles.slice(0, 6)) console.log(`      ${h.hu} / ${h.de}`);
+} else {
+  console.log("  ✓ egyik sem fűz össze több nevet");
+}
+
 // Regresszió: az agglomeráció NEM jelenik meg találatként. Ez a hiba
 // 2026-10-08-ig csendben benne volt, mert a szűrés a "metropolisztérséget"
 // kereste, a Wikidata pedig "Metropoliszövezetet" írt, és csak a magyar
