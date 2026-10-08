@@ -351,6 +351,34 @@ Eredmény: **3074 → 3167 helység**. A 13 néven, ahol két megmaradt helynek
 még a magyar neve is azonos (`Butești`, `Florești`, `Lazuri`, `Hoancă`…), a
 sorok megkülönböztethetők, mert a sorban a község neve is látszik.
 
+### A második hiba: ugyanez, csak az ellenőrzőben
+
+A javítás után nem 13-at, hanem **22-t** írt ki az ellenőrző — és ez
+gyanús volt, mert a letöltő 93-at adott vissza. Kiderült, hogy az
+ellenőrző szűréje *magának* volt egy második, külön hiba:
+
+```js
+// a régi alak:
+[...ro.entries()].filter(([, v]) =>
+  v.length > 1 &&
+  new Set(v.map((h) => h.megye)).size === 1 &&   // <- ez a hiba
+  ...
+```
+
+A megye itt **feltétel** volt, nem **kulcs**. Ezért az `Avrămești` — ami
+Albában két valódi falu, és Erdélyben meg kettő más — nem számított
+egyik csoportba sem: a négy elem három megyébe esik, tehát a
+`size === 1` hamis. Vagyis a szűrő kimondta „nincs ilyen hiba" olyan
+névnél, hol van. Kilenc valós párt rejtett el.
+
+Ugyanez a hiba, másik oldalról: az ellenőrző a letöltő *névszerinti*
+csoportját nézte, a letöltő meg `megye|ro` szerint kulcsolt. Két különböző
+felosztás ugyanarra a listára. A javítás a megyét a kulcsba tette, hogy a
+kettő egy leképezés legyen — épp az `ugyanazAHely()` sharing filozófiája.
+
+**22 az igazi szám**, és a 36 néven megoszló helyből 22 az, ahol a magyar
+név is azonos.
+
 ### Amit ez felszólított
 
 **A duplikátum-szűrésnél a név sosem elég.** Helynévnél a név *azonosító*,

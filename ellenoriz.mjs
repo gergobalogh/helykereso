@@ -98,10 +98,20 @@ for (const [n, v] of dupHu.slice(0, 6)) {
 // megyében több "Butești" és "Florești" község alatt is van valódi falu.
 // Csak a KÖZÖS község alatti, azonos nevű kettős duplikátum — és azt a
 // `letolt.mjs` eleve kiszűri, tehát ha itt látszik, hiba van a szűrésben.
-const dupUgyanMegyeben = [...ro.entries()].filter(
-  ([, v]) =>
+// A szűrő NEM a teljes névlista megyének egyenlőségét nézi, hanem a
+// MEGYENKÉNTI párokat. Ez különbség: az "Avrămești" Albában kétszer van
+// valódi falu, Erdélyben meg kétszer más, és a régi szűrő emiatt egyik
+// csoportot sem számolta, mert a négy elem három megyébe esik. Vagyis a
+// megye a KULCS része, nem a feltétel.
+const megyenkenti = new Map(); // megye|ro -> az ilyen nevű sorok
+for (const h of helyek) {
+  const kulcs = `${h.megye}|${h.ro.toLowerCase()}`;
+  if (!megyenkenti.has(kulcs)) megyenkenti.set(kulcs, []);
+  megyenkenti.get(kulcs).push(h);
+}
+const dupUgyanMegyeben = [...megyenkenti.values()].filter(
+  (v) =>
     v.length > 1 &&
-    new Set(v.map((h) => h.megye)).size === 1 &&
     new Set(v.map((h) => h.hu)).size === 1 &&
     v.some((a, i) => v.some((b, j) => i !== j && ugyanazAHely(a, b))),
 );
@@ -117,17 +127,16 @@ if (dupUgyanMegyeben.length) {
 // Az utóbbi szabály túl szigorú lett volna: két különböző község alatt
 // lehet ugyanaz a román és magyar név, és az két valódi hely. Kimondjuk,
 // hogy a letöltő ezt megtartotta, hogy ne tűnjön véletlennek.
-const valodiKettos = [...ro.entries()].filter(
+const valodiKettos = [...megyenkenti.entries()].filter(
   ([, v]) =>
     v.length > 1 &&
-    new Set(v.map((h) => h.megye)).size === 1 &&
     new Set(v.map((h) => h.hu)).size === 1 &&
     !v.some((a, i) => v.some((b, j) => i !== j && ugyanazAHely(a, b))),
 );
 if (valodiKettos.length) {
   console.log(`  ${valodiKettos.length} néven két valódi hely van ugyanabban a megyében (ez a szándék):`);
-  for (const [n, v] of valodiKettos.slice(0, 6)) {
-    console.log(`    ${n}: ${v.map((h) => `${h.q}(${h.kozsegNev ?? "nincs községe"})`).join(" , ")}`);
+  for (const [k, v] of valodiKettos.slice(0, 6)) {
+    console.log(`    ${k}: ${v.map((h) => `${h.q}(${h.kozsegNev ?? "nincs községe"})`).join(" , ")}`);
   }
 }
 
