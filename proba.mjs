@@ -5,12 +5,17 @@
 // npx által letöltött példányból húzzuk be. Ha ez az út nem létezik,
 // telepítsd: npm i -D playwright && npx playwright install chromium
 import { createRequire } from "node:module";
+import { existsSync, readdirSync } from "node:fs";
 const require = createRequire(import.meta.url);
 let chromium;
-for (const ut of [
-  "/home/jack/.npm/_npx/9833c18b2d85bc59/node_modules/playwright",
-  "playwright",
-]) {
+// Az npx gyorsítótara a hash-csúcsokkal együtt változik újratelepítéskor,
+// ezért nem egy konkrét útvonalat nézünk meg, hanem mindegyiket.
+const npxJatekterek = existsSync("/home/jack/.npm/_npx")
+  ? readdirSync("/home/jack/.npm/_npx").map(
+      (d) => `/home/jack/.npm/_npx/${d}/node_modules/playwright`,
+    )
+  : [];
+for (const ut of [...npxJatekterek, "playwright"]) {
   try {
     ({ chromium } = require(ut));
     break;
@@ -147,6 +152,93 @@ await mezo.fill("");
 await oldal.waitForTimeout(200);
 console.log(`\n--- Üres mező: "${await szures.innerText()}"`);
 console.log(`    megjelenített sorok: ${await sorok.count()}`);
+
+// A megkülönböztető toldalék a böngészőben. A `letolt.mjs` az adatba írja,
+// de ez itt arról szól, hogy a KERESŐ tényleg ki is írja-e — a 2026-10-08-ig
+// meglévő állapotban két azonos nevű falu két egyforma sort adott, és a
+// felhasználó nem tudta, melyik az övé. Ez a hiba nem látszik az adatban
+// (a sorok megvannak), csak itt.
+console.log("\n--- A megkülönböztető toldalék megjelenik:");
+// Mindhárom példa ugyanarra a hibára fog kimenni: két valós falu, ugyanaz a
+// magyar és román név, ugyanaz a megye, csak a községük tér el.
+const UTKOZOK = [
+  ["Butești", ["Mogos község", "Arada község"]],
+  ["Bârlești", ["Bisztra község", "Aranyosfő község"]],
+  ["Poieni", ["Maroskarna község", "Alsóvidra község"]],
+];
+for (const [szo, kozsegek] of UTKOZOK) {
+  await mezo.fill(szo);
+  await oldal.waitForTimeout(220);
+  // Csak a NÉVET nézzük (a .sor végén a toldalék már a sor elején is ott van,
+  // és a megye minden sorban ugyanaz, tehát az nem különböztet).
+  const nevek = await oldal.locator(".sor .nev").allInnerTexts();
+  const hiany = kozsegek.filter((k) => !nevek.some((n) => n.includes(k)));
+  if (hiany.length) {
+    bukott++;
+    console.log(`  ✗ "${szo}" → a név mellől hiányzik a toldalék: ${hiany.join(", ")}`);
+    for (const n of nevek.slice(0, 4)) console.log(`      "${n}"`);
+  } else {
+    console.log(`  ✓ "${szo}" → ${nevek.map((n) => `"${n}"`).join(", ")}`);
+  }
+}
+
+// A toldalék nem csak szöveg: kereshető is. Ez a második fele teszi hasznossá
+// — ha a felhasználó a soron látja, hogy "Mogos község", akkor ezt be is
+// írhatja, és csak az ő faluja jön vissza. A toldalék nélkül a "Butești
+// Mogos" keresés nulla találatot adott.
+console.log("\n--- Toldalékra keresve csak az a falu jön vissza:");
+const KERESES_TOLDALEKRA = [
+  ["Butești Mogos", "Mogos község", "Arada község"],   // a másik falu nem lehet bent
+  ["Poieni Alsóvidra", "Alsóvidra község", "Maroskarna község"],
+];
+for (const [bevitel, vart, nemVart] of KERESES_TOLDALEKRA) {
+  await mezo.fill(bevitel);
+  await oldal.waitForTimeout(220);
+  const nevek = await oldal.locator(".sor .nev").allInnerTexts();
+  const sorszam = await szures.innerText();
+  const jo = nevek.some((n) => n.includes(vart));
+  const szurt = nevek.some((n) => n.includes(nemVart));
+  if (jo && !szurt) {
+    console.log(`  ✓ "${bevitel}" → ${nevek.map((n) => `"${n}"`).join(", ")} (${sorszam})`);
+  } else {
+    bukott++;
+    console.log(`  ✗ "${bevitel}" → ${jo ? "" : `nincs "${vart}"`}${szurt ? `, de bent van a másik ("${nemVart}")` : ""} (${sorszam})`);
+    for (const n of nevek.slice(0, 4)) console.log(`      "${n}"`);
+  }
+}
+
+// Ékezet nélkül is működjön, hiszen a toldalék magyar és román községnevet
+// egyaránt adhat ("Őraljaboldogfalva", "Măgura").
+//
+// A "Poieni" / "Alsóvidra" párt választottuk, nem a "Butești" / "Mogos"
+// párt: a román ț a leegyszerűsítésben t-t ad, tehát a "Butești" "butesti"-re
+// fordul, és a "butes" szó így el sem találja — ez a `normaliz()` meglévő
+// tulajdonsága, nem a toldalék hibája, és nem tartozik ide.
+console.log("\n--- Ékezet nélkül is, és a kiemelés a toldalékra esik:");
+await mezo.fill("poieni alsovidra");
+await oldal.waitForTimeout(220);
+const kiemeltNev = await oldal.locator(".sor .nev .kiemel").allInnerTexts();
+console.log(`    kiemelve: ${kiemeltNev.map((k) => `"${k}"`).join(", ")}`);
+// A `kiemeles()` a teljes, összefüggő keresett szöveget emeli ki, tehát itt
+// a "Poieni (Alsóvidra" rész fényes: a kiemelés átfogja a helynevet ÉS a
+// toldalékot is. Ez a kívánt eredmény — a felhasználó látja, hogy a második
+// szó a toldalékban található meg. Ha csak a "Poieni" része világítana, akkor
+// a toldalék kereshetetlen volna, és ezt a sor nem árulná el.
+// A kiemelt részben ékezetes betű van ("Alsóvidra"), a mi szövegünkben
+// ékezet nélküli, tehát az összevetés előtt leegyszerűsítjük — ugyanazt a
+// szabályt, amit a kereső `normaliz()`-a alkalmaz.
+const kiem = kiemeltNev
+  .join(" ")
+  .normalize("NFD")
+  .replace(/\p{M}/gu, "")
+  .toLowerCase();
+const atfogja = (szo) => kiem.includes(szo);
+if (kiemeltNev.length === 1 && atfogja("poieni") && atfogja("alsovidra")) {
+  console.log('  ✓ egy kiemelés fogja át a helynevet és a toldalékot is');
+} else {
+  bukott++;
+  console.log(`  ✗ a kiemelés nem fedi a toldalékot: ${kiemeltNev.map((k) => `"${k}"`).join(", ")}`);
+}
 
 // A forrás linkjeit egy tényleges találaton nézzük, hiszen üres mezőnél
 // nincs sor.

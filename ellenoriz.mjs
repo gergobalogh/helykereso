@@ -13,6 +13,8 @@ import {
   dePerjel,
   deRomanEkezet,
   ugyanazAHely,
+  utalok,
+  utaloUtkozes,
 } from "./szabalyok.mjs";
 
 const adat = JSON.parse(await readFile(new URL("./helyek.json", import.meta.url)));
@@ -117,8 +119,13 @@ const dupUgyanMegyeben = [...megyenkenti.values()].filter(
 );
 if (dupUgyanMegyeben.length) {
   hiba(`${dupUgyanMegyeben.length} román név kétszer, ugyanazzal a magyar névvel, ugyanabban a megyében — ezt a letöltőnek ki kellett volna szűrnie`);
-  for (const [n, v] of dupUgyanMegyeben.slice(0, 6)) {
-    console.log(`    ${n}: ${v.map((h) => `${h.q}(${megyeNev.get(h.megye)})`).join(" , ")}`);
+  // A `values()` a SOROKAT adja, nem a [kulcs, sorok] párt, tehát a
+  // szétdobás a kulcsot is kihagyja — a hibaüzenet a nevét mondja ki, mert
+  // az többet számít a megyénél. (A korábbi `for (const [n, v] of ...)`
+  // ezt elrontotta: `v` egy sor lett, nem egy sorlista, és a kiírás
+  // TypeError-rel állt le — vagyis épp akkor csúszott el, amikor hiba volt.)
+  for (const v of dupUgyanMegyeben.slice(0, 6)) {
+    console.log(`    ${v[0].ro}: ${v.map((h) => `${h.q}(${megyeNev.get(h.megye)})`).join(" , ")}`);
   }
 } else {
   rendben("nincs valódi duplikátum (nincs két azonos nevű hely egy megyében)");
@@ -143,6 +150,46 @@ if (valodiKettos.length) {
 // Ugyanaz a magyar és román név: nincs magyar exonim, nem hiba.
 const nincsExonim = helyek.filter((h) => h.hu === h.ro);
 console.log(`  ${nincsExonim.length} helység, ahol a magyar név megegyezik a románnal`);
+
+// 3b. A megkülönböztető toldalék. A fenti "két valódi hely" sorokban a
+// magyar név önmagában nem mond semmit: a felhasználó két egyforma sort lát,
+// és a megye — ami egyformára szól — nem választja szét őket. Ezért a sor
+// neve a szülő községgel bővül ("Butești (Mogos község)").
+//
+// A szabály a `szabalyok.mjs`-ben van, és itt ugyanazt futtatjuk a kész
+// adaton. Ez nem új ellenőrzés, hanem a régi kockázat fordítottja: amíg a
+// toldalék nem volt, két azonos sor látszott szándék nélkül; ha most
+// eltűnik, ugyanaz a néma hiba tér vissza.
+console.log("\n--- Megkülönböztető toldalék (azonos magyar név egy megyében):");
+const varakozottUtalok = utalok(helyek);
+const utaloEltérés = helyek.filter((h) => (h.utalo ?? null) !== (varakozottUtalok.get(h.q) ?? null));
+if (utaloEltérés.length) {
+  hiba(
+    `${utaloEltérés.length} helység toldaléka nem egyezik a szabállyal ` +
+      `(az adatban "${utaloEltérés[0].utalo}", a szabály szerint ` +
+      `"${varakozottUtalok.get(utaloEltérés[0].q) ?? "nincs"}")`,
+  );
+  for (const h of utaloEltérés.slice(0, 6)) {
+    console.log(`    ${h.q} ${h.hu} (${h.kozsegNev ?? "nincs községe"}): utalo=${h.utalo}`);
+  }
+} else {
+  rendben(`${varakozottUtalok.size} helységnél egyezik a toldalék, a többi ${helyek.length - varakozottUtalok.size}-nál szándékosan nincs`);
+}
+
+// A toldalék csak akkor hasznos, ha KÜLÖNBÖZTET. Két azonos nevű hely ugyanabban
+// a megyében, ugyanabban a községben — vagy szülő község nélkül — erre nem
+// alkalmas: akár a toldalék után is két egyforma sor maradna. Ma ilyen nincs,
+// de ha lenne, ez néma hiba lenne, mert a sorok száma nem változna.
+const utaloAzos = utaloUtkozes(helyek);
+if (utaloAzos.length) {
+  hiba(
+    `${utaloAzos.length} néven ugyanabban a megyében két hely van, amelyeket ` +
+      `a toldalék sem választ szét (azonos vagy hiányzó szülő község)`,
+  );
+  for (const [k, v] of utaloAzos.slice(0, 6)) {
+    console.log(`    ${k}: ${v.map((h) => `${h.q} (${h.kozsegNev ?? "nincs községe"})`).join(" , ")}`);
+  }
+}
 
 // 4. Német nevek
 console.log("\n--- Német nevek:");
@@ -276,7 +323,7 @@ console.log(`  ${roHelyseg.length} "község"/"város" toldalékú magyar név (
 
 // 7. Amit az oldal keresője elhasznál
 console.log("\n--- Amit a kereső használ:");
-const mezok = ["hu", "ro", "de", "megye", "kozsegNev", "wikidata"];
+const mezok = ["hu", "ro", "de", "megye", "kozsegNev", "utalo", "wikidata"];
 for (const m of mezok) {
   const nincs = helyek.filter((h) => h[m] === undefined).length;
   if (nincs) hiba(`${nincs} helységből hiányzik a(z) "${m}" mező`);
@@ -322,8 +369,17 @@ console.log(
   `  a ${hasznos.length} "felesleges" közül lehet, hogy csak azért látszik így, mert a Wikidata a román nevet adta (ilyenkor a javítás kell)`,
 );
 
+// A "Kézdiszentvincent" és a "Borosjenő" tudottan hiányzik (a Wikidata-n sincs
+// magyar nevük), és ez a két hiba minden futáskor megjelenik. A számot mégsem
+// írjuk be mereven: ha egy új hiba jelenik meg, a sor ennyivel lesz hosszabb,
+// és a "2 hiba" állítás már nem mond igazat.
+const TUDOTTAN_HIBAS = 2;
+const ujHibak = Math.max(0, hibak - TUDOTTAN_HIBAS);
 console.log(
   hibak
-    ? `\n${hibak} hiba (a fentiek közül a "Kézdiszentvincent" és a "Borosjenő" tudottan hiányzik).`
+    ? `\n${hibak} hiba, ebből ${TUDOTTAN_HIBAS} tudottan hiányzó hely ` +
+        `("Kézdiszentvincent", "Borosjenő"). ÚJ hiba: ${ujHibak}` +
+        (ujHibak ? " — nézd meg a fenti ✗ sorokat." : "")
     : "\nNincs hiba a fő ellenőrzéseken.",
 );
+if (ujHibak) process.exitCode = 1;

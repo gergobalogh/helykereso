@@ -95,6 +95,20 @@ function wikidataLink(h) {
   return `https://www.wikidata.org/wiki/${q}`;
 }
 
+/**
+ * A sorban megjelenő név, megkülönböztető toldalékkal együtt.
+ *
+ * Ha ugyanabban a megyében másik helynek is ugyanaz a magyar neve van
+ * ("Butești" a Mogos és az Arada község alatt is valós falu), a sor
+ * neve önmagában nem mond semmit, és a megye sem választja szét őket —
+ * ezért a szülő község odakerül: "Butești (Mogos község)". A toldalékot
+ * a `letolt.mjs` számolja ki, mert ez az adat tulajdonsága, nem a
+ * megjelenéséé, és az `ellenoriz.mjs` ugyanazt nézi.
+ */
+function megjelenitettNev(h) {
+  return h.utalo ? `${h.hu} (${h.utalo})` : h.hu;
+}
+
 function kirajzol(lista, keresett) {
   talalat.innerHTML = "";
   talalat.style.display = lista.length ? "grid" : "none";
@@ -105,7 +119,7 @@ function kirajzol(lista, keresett) {
 
     const hu = document.createElement("span");
     hu.className = "nev";
-    hu.innerHTML = kiemeles(h.hu, keresett);
+    hu.innerHTML = kiemeles(megjelenitettNev(h), keresett);
     sor.append(hu);
 
     const ro = document.createElement("span");
@@ -126,7 +140,11 @@ function kirajzol(lista, keresett) {
     const resz = [];
     // A letöltő már beírta a szülő község nevét ("Ajton község"), és a
     // toldalék is benne van, úgyhogy nem kell hozzáfűznünk.
-    if (h.kozsegNev) resz.push(h.kozsegNev);
+    //
+    // Kivétel az a toldalék, amit a sor elején már kiraktunk: ugyanaz a
+    // szöveg kétszer a sorban ("Butești (Mogos község) · Mogos község ·
+    // Nagy-Albás megye") csak egy sort szolgálna.
+    if (h.kozsegNev && h.kozsegNev !== h.utalo) resz.push(h.kozsegNev);
     const m = megyek.get(h.megye);
     // A megyeszékhely neve ugyanaz, mint a megyé: akkor sem írjuk ki, ha
     // önmagában áll a sorban ("Kolozsvár · Kolozsvár megye"), mert nem
@@ -160,9 +178,13 @@ function kirajzol(lista, keresett) {
  *   1 a neve azzal kezdődik ("cluj" -> "cluj napoca")
  *   2 valamelyik szavára illeszkedik elölről ("maros" -> "marosvásárhely")
  *   3 csak a megye neve illeszkedik rá (a hely neve nem is tartalmazza)
+ *
+ * A megjelenített nevet nézzük, tehát a toldalék is beleszámít: a
+ * "Butești Mogos" keresés a Mogos községi Butești-t hozza elöl, nem az
+ * Arada községit — pedig a magyar nevük egyformára szól.
  */
 function pont(h, keresett) {
-  const mezok = [h.hu, h.ro, h.de].filter(Boolean);
+  const mezok = [megjelenitettNev(h), h.ro, h.de].filter(Boolean);
   const megye = megyek.get(h.megye);
   let legjobb = 3;
   for (const n of mezok) {
@@ -236,10 +258,15 @@ async function betolt() {
   // találatot adna, és a találatok listájában sehol nem lenne látható, hogy
   // miért illik bele oda (mert a megyébe esik). Ehelyett van egy
   // megyeválasztó, ami látszik, és szűkít.
+  //
+  // A toldalékot viszont igen, mert az a NÉV része: amit a sorban kiírtunk,
+  // azt keresni is lehet. Csak azokon a sorokon, amelyeken tényleg látszik
+  // is — minden falu községnevét indexelni épp az lenne, amit a megyénévvel
+  // éppen elkerültünk.
   for (const h of helyek) {
-    const szoveg = [h.hu, h.ro, h.de ?? ""].filter(Boolean).join(" ");
+    const szoveg = [h.hu, h.ro, h.de ?? "", h.utalo ?? ""].filter(Boolean).join(" ");
     const { ki } = normaliz(szoveg);
-    nevek.set(h.q, { hu: h.hu, szavak: ki.split(" ").filter(Boolean) });
+    nevek.set(h.q, { hu: megjelenitettNev(h), szavak: ki.split(" ").filter(Boolean) });
   }
 
   // A megyeválasztó feltöltése.

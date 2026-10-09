@@ -29,6 +29,16 @@ megyét akarod böngészni.
 | `helyek.min.json` | Ugyanez egy sorban. Ezt olvassa az oldal. |
 | `.cache/` | A `letolt.mjs` köztes eredményei, hogy részleges adatból is újra lehessen futtatni. |
 
+A `helyek.json` egy helységének a mezői:
+
+| mező | mi |
+|---|---|
+| `q`, `hu`, `ro`, `de` | a Wikidata-azonosító és a magyar, román, német név (`de` lehet `null`) |
+| `megye` | a román megyekód (`AB`, `CJ`, …) |
+| `kozseg`, `kozsegNev` | a szülő község azonosítója és neve (`null`, ha nincs ilyen) |
+| `wikidata` | az elem oldala |
+| `utalo` | megkülönböztető toldalék, ha ugyanabban a megyében másik helynek is ugyanaz a magyar neve van (`null` egyébként) — lásd alább |
+
 Nincs építési lépés és nincs függőség: a `letolt.mjs` Node.js-t használ
 (szabányos `fetch`), minden más statikus fájl. A `proba.mjs`-hez kell a
 Playwright, de csak a próbához, nem az oldalhoz.
@@ -199,6 +209,80 @@ kilistázza a több-valós névre ütközéseket, hogy a szabály szűkülése a
 látszódjon, és a `proba.mjs` ellenőrzi, hogy a `Butești`, `Bârlești` és
 `Lazuri` falvai tényleg megmaradnak — leellenőriztem, hogy a hiba
 visszahozásával mindhárom bukik.
+
+## A megkülönböztető toldalék
+
+**A fenti javításnak volt egy következménye, amit külön kellett kezelni.** Ha
+két valós falu ugyanabban a megyében ugyanazt a magyar nevet viseli, akkor
+mindkettő megmarad — ez a helyes eredmény. De a felhasználó most **két
+egyenforma sort** lát, és nem tudja, melyik az övé:
+
+```
+Butești   ro Butești   · Nagy-Albás megye · Wikidata · javítása
+Butești   ro Butești   · Nagy-Albás megye · Wikidata · javítása
+```
+
+A sor végén a megye mindkettőnél ugyanaz, tehát nem választja szét őket. A
+szülő község választotta volna (`Mogos község` és `Arada község`), de az a
+sor legalsó, leghalványabb részén volt, ahol a szem már elsiklik mellette.
+
+Ezért a szülő község felkerül a **neve mellé** — ott, ahova az ember néz:
+
+```
+Butești (Mogos község)   ro Butești   · Nagy-Albás megye · …
+Butești (Arada község)   ro Butești   · Nagy-Albás megye · …
+```
+
+Ez a `letolt.mjs`-ben dől el, az `utalo` mezőben, mert **az adat tulajdonsága,
+nem a megjelenéséé**: ugyanaz a leképezés kell a szűrőnek és az ellenőrzőnek
+is, különben elcsúsznak egymástól (a `szabalyok.mjs`-ben van, az
+`ellenoriz.mjs` ugyanazt futtatja a kész adaton).
+
+**A kulcs a megye és a név együtt**, nem a név önmagában. Két megyében
+ugyanaz a név nem baj: a `Doboka` Kolozsvár megyei és Hunyad megyei
+`Doboka`-ja a sor végén álló megyefelirat miatt már megkülönbözik. 36 néven
+ütközik a megyén belül, ezért **76 helységnek** van toldaléka — a többi 3091
+szándékosan marad toldalék nélkül.
+
+**Nem új adatot vezettünk be, hanem oda tettük, ami már ott volt.** A
+szülő község neve (`kozsegNev`) a soron eleve látszott, csak a sor végén. És
+a toldalékot a kereső indexeli is, tehát **meg lehet írva**:
+
+```
+Butești Mogos  →  Butești (Mogos község)     (1 találat, nem kettő)
+```
+
+Ez a második fele az, ami hasznossá teszi: nem csak megmondjuk, melyik
+falu, hanem rá is lehet keresni. A toldalék nélkül ez a keresés nulla
+találatot adott volna.
+
+Amit ez nem old meg: ahol a magyar név önmagában **nem mond semmit** —
+`Poieni`, `Botești`, `Valea Albá` —, ott a toldalék a községet mondja el,
+nem a falut. Az ilyen név **a Wikidata hibája**, és az a `javítása` linkkel
+javítható, nem nálunk.
+
+Két dolog, amit a toldalék nem csinál, és szándékosan:
+
+- **nem pótolja ki a hiányzó magyar nevet** — nem találunk ki neveket;
+- **nem indexeli minden falu községnevét**, mert az épp az a hiba lenne,
+  amit a `README` eleve elkerült: a "kolozsvár" keresés 426 találatot adna,
+  és a listán nem derülne ki, miért illik oda valami.
+
+### Amit ez a toldalék NEM tud, és ezért ellenőrzi is
+
+Az `ellenoriz.mjs` három dolgot néz a kész adaton, mert ezek csendben
+rothadnak:
+
+1. **egyezik-e a toldalék a szabállyal** — se túl sok, se túl kevés. Ha a
+   `szabalyok.mjs` szűkülne, a toldalék csendben eltűnik, és megint két
+   egyforma sor lesz (ez volt a 2026-10-09-i állapot előtti helyzet);
+2. **különböztet-e** — ha két azonos nevű helynek ugyanaz a szülő községe
+   lenne, a toldalék sem választaná szét őket, és ezen csendben át lehetne
+   csúszni, mert a sorok száma nem változna. Ma ilyen nincs.
+
+Mindkettőt leellenőriztem, hogy tényleg buknak: a toldalék nullázásával az
+ellenőrző új hibát jelez, a `keres.js`-ben a megjelenítés kikapcsolásával a
+böngészős próba 9 hibát jelez.
 
 ## Mire figyelj, ha módosítod
 

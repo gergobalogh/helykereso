@@ -21,7 +21,7 @@
 
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
-import { nemHelyseg, deRomanEkezet, ugyanazAHely } from "./szabalyok.mjs";
+import { nemHelyseg, deRomanEkezet, ugyanazAHely, utalok } from "./szabalyok.mjs";
 
 const VEGEGPL = "https://query.wikidata.org/sparql";
 const USER_AGENT = "mivelkezdjem.hu helynevekereso (https://mivelkezdjem.hu)";
@@ -438,6 +438,33 @@ async function main() {
   helyek.length = 0;
   helyek.push(...marad);
   for (const h of helyek) delete h.qSzam;
+
+  // A fentebb kilistázott "több valós hely" esetek következménye: a sorban
+  // most két egyforma név áll ("Butești" a Mogos és az Arada község alatt
+  // is), és a megye nem elég, hogy megkülönböztesse őket. Ezért a
+  // magyar név mellé odakerül a szülő község — "Butești (Mogos község)".
+  //
+  // Ez NEM új adat: a `kozsegNev` a sor végén már ott volt, csak a szülő
+  // községre nem lehet ránézni. A szabály a `szabalyok.mjs`-ben van,
+  // mert az `ellenoriz.mjs`-nek a kész adaton ugyanezt kell ellenőriznie:
+  // ha a kettő elcsúszik, a toldalék csendben eltűnik.
+  const utalo = utalok(helyek);
+  for (const h of helyek) h.utalo = utalo.get(h.q) ?? null;
+  const utaloNev = new Map(); // megye|hu -> az ilyen sorok
+  for (const h of helyek) {
+    if (!h.utalo) continue;
+    const kulcs = `${h.megye}|${h.hu}`;
+    if (!utaloNev.has(kulcs)) utaloNev.set(kulcs, []);
+    utaloNev.get(kulcs).push(h);
+  }
+  if (utalo.size) {
+    console.log(
+      `  ${utaloNev.size} néven ütközik a megyén belül (ez a szándék), mind toldalékot kapott:`,
+    );
+    for (const [kulcs, sorok] of utaloNev) {
+      console.log(`    ${kulcs}: ${sorok.map((h) => `${h.q} (${h.utalo})`).join("  |  ")}`);
+    }
+  }
 
   helyek.sort(
     (a, b) =>

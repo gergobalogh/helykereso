@@ -6,12 +6,11 @@ megerősített hibákkal és a mérési számokkal); a **hogyan** a
 [`README.md`](README.md)-ben (a kód használata); itt csak a folytatáshoz
 szükséges tények állnak.
 
-**Utolsó frissítés: 2026-10-08.**
+**Utolsó frissítés: 2026-10-09.**
 
 ## Ahol tartunk
 
-Négy commit, `master` ágon, **nincs remote** — tehát semmi nincs feltöltve
-sehová. A munkafa tiszta.
+`master` ágon, **nincs remote** — tehát semmi nincs feltöltve sehová.
 
 | commit | tartalom |
 |---|---|
@@ -20,9 +19,40 @@ sehová. A munkafa tiszta.
 | `035f701` | a 77 magyar név megmérése: a KIA sem tud magyar nevet adni |
 | `11281e4` | **a nev alapú dedup 93 valós falut törölt ki** (3074 → 3167) |
 | `350c52a` | az ellenőrző duplikátum-szűrése is hibás volt: 9 valós párt rejtett el |
+| `3d2dbbe` | az eddigi munkamenet összefoglalója (ez a fájl) |
+| *munkanélkül* | **a megkülönböztető toldalék a 36 ütköző névre (76 hely)** — lásd lentebb |
 
-A kettő utóbbi ugyanaz a leképezés két helyen: a `11281e4` a letöltőben, a
-`350c52a` az ellenőrzőben. Mindkettőben a megye rossz helyen volt.
+A kettő utóbbi commit ugyanaz a leképezés két helyen: a `11281e4` a
+letöltőben, a `350c52a` az ellenőrzőben. Mindkettőben a megye rossz helyen
+volt.
+
+### Amit ma csináltam: a megkülönböztető toldalék
+
+Az „Amit érdemes folytatni" 1. pontja kész. A 22 (a mérés pontosan 36)
+azonos nevű hely most `Butești (Mogos község)` alakban jelenik meg, tehát a
+magyar nevéhez odakerül a szülő községe, a sor elején.
+
+- `letolt.mjs`: az új `utalo` mező, a szabály `szabalyok.mjs`-ben
+- `keres.js`: a toldalék megjelenik a néven, és **kereshető is**
+  (`Butești Mogos` → 1 találat, a Mogos községi)
+- `ellenoriz.mjs`: ellenőrzi, hogy a toldalék egyezik-e a szabállyal, és
+  különböztet-e; a kiírás végén a "hány új hiba" is külön számot kap, és
+  a kilépési kód is ezt tükrözi
+- `proba.mjs`: böngészős próba a megjelenésre, a kereshetőségre és a
+  kiemelésre
+
+**76 helységnek** van toldaléka, 3091-nek nincs. Nem új adat: a szülő
+község neve amúgy is a sor végén volt.
+
+Mellékben találtam és javítottam egy **korábbi összeomlást** az
+`ellenoriz.mjs`-ben (a 123. sor): a duplikátum-kiírás `for (const [n, v] of
+...)` alakú volt egy olyan listán, aminek elemei sorok, nem `[kulcs, sorok]`
+párok. Ezért `v.map` TypeError-t dobott — vagyis épp akkor állt le, amikor
+volt hiba, tehát soha. Most kiírja a nevet is.
+
+Leellenőriztem, hogy az új ellenőrzések tényleg buknak: a 76 toldalék
+nullázásával az ellenőrző 3 új hibát jelez, a `keres.js` megjelenítésének
+kikapcsolásával a böngészős próba 9 hibát.
 
 ## A jelenlegi adat — ellenőrizve
 
@@ -42,17 +72,20 @@ A kettő utóbbi ugyanaz a leképezés két helyen: a `11281e4` a letöltőben, 
 
 - 468 helységen a magyar név megegyezik a románnal (nincs magyar exonim — nem hiba)
 - 130 német név, mind ellenőrzötten német (nincs román ékezet, nincs perjel)
-- **22** néven két valós hely van **ugyanazzal a magyar és román névvel** ugyanabban
-  a megyében (ez a szándék; a sorok a községnevükön különböznek). Összesen
-  **36** néven oszlik meg két vagy több hely, de a másik 14-ben a magyar nevek
-  eltérnek (`Kissebes`/`Bucsum-Pojén`, `Eckentelep`/`Avrămești`) — ezt a
-  `README` eleve így tervezte.
+- **36** néven oszlik meg két vagy több hely ugyanabban a megyében, összesen
+  **76** helységgel (ez a szándék; a sorok a községnevükön különböznek).
+  Ebből 33 néven pontosan kettő, 2-nél három, 1-nél négy (`Florești`) van,
+  és 27-nél a román név is egyforma — vagyis a felhasználó **76 sort lát
+  megkülönböztető toldalék nélkül** (ez 2026-09-09-ig így volt, ma mind
+  megvan).
+  A maradás maga a `README` tervezése: a magyar nevek eltérése önmagában nem
+  zárja ki, hogy két megyében ugyanaz a falu-név létezik.
 
 ### Ellenőrzés: minden zöld
 
 ```
 node letolt.mjs     → 3167 helység, 549 duplikátum kiszűrve, 75 "több valós hely" eset kilistázva
-node ellenoriz.mjs   → 2 hiba, mindkettő tudottan hiányzó (Kézdiszentvincent, Borosjenő)
+node ellenoriz.mjs   → 2 hiba, mindkettő tudottan hiányzó (Kézdiszentvincent, Borosjenő), 0 új
 node proba.mjs      → Minden próba sikerült (a http.server 8123-en fut)
 ```
 
@@ -100,17 +133,8 @@ Ez termékdöntés, adatpolitika, nem technikai. Nem nyúltam hozzá.
 
 ## Amit érdemes lehet folytatni
 
-1. **A 22 néven, ahol két megmaradt helynek a magyar neve is azonos**
-   (`Butești`, `Florești`, `Lazuri`, `Hoancă`, `Bogdănești`, `Măgura`,
-   `Plai`, `Poieni`, `Runc`…). Ezek a sorok a községnevükön különböznek, de a
-   magyar nevük önmagában nem mond semmit — a felhasználó két azonos nevű sort
-   lát, és nem tudja, melyik az övé. Lehetne toldalékot („Butești (Mogos
-   község)") — a `README` már leírja, hogy erre a célra van a toldalék, és a
-   többi ütköző név pont így oldja meg. Ez a dedup-javítás *következménye*,
-   nem új hiba.
-   Megjegyzés: a 22 pár mindegyike 46 hely, és ezekből **18 párban egyik
-   helynek sincs magyar neve** (`hu == ro`, pl. `Botești`, `Poieni`) — tehát
-   ez a 77 magyar név problémájának kistestvére, csak nagyobb mértékben.
+1. ~~**A 22 néven, ahol két megmaradt helynek a magyar neve is azonos**~~
+   — **kész 2026-10-09-én**, lásd fent.
 2. **A visszanyert 93 hely nagy része még „nincs magyar nevük"** (`Poiana`,
    `Lunca`, `Botești`…) — ugyanaz a Wikidata-hiba, mint a 77, csak más
    falvaknál. A 13-at felvettük az `ismertHibak.json`-ba, de a többi
@@ -142,6 +166,9 @@ Három parancs, és mindent tudsz:
 
 ```bash
 node letolt.mjs      # újragenerálja a helyek.json-t a .cache/-ből
-node ellenoriz.mjs    # az adat ellenőrzése — 2 hiba a várt
+node ellenoriz.mjs    # az adat ellenőrzése — 2 hiba a várt, 0 új
 python3 -m http.server 8123 & node proba.mjs   # a valódi böngészőben
 ```
+
+Az `ellenoriz.mjs` és a `proba.mjs` is hibás kilépési kóddal tér vissza, ha
+új hiba van, tehát CI-ba (vagy egy `&&`-láncba) bedobható.

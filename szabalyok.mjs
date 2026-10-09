@@ -84,6 +84,102 @@ export function ugyanazAHely(a, b) {
 }
 
 // ───────────────────────────────────────────────────────────────────────────
+// A megkülönböztető toldalék
+//
+// Ez a `ugyanazAHely()` javításának következménye, nem új hiba: ha két
+// különböző hely ugyanabban a megyében ugyanazt a magyar nevet viseli, akkor
+// mindkettő megmarad (őket különbözteti meg a községük), és a felhasználó
+// két sort lát, amelyek egyformák. Alba megyében a "Butești" a Mogos ÉS az
+// Arada község alatt is valós falu.
+// ───────────────────────────────────────────────────────────────────────────
+
+/**
+ * Az a toldalék, ami tényleg megkülönbözteti a sort — vagy `null`, ha nincs.
+ *
+ * Egy sor kétféleképpen lehet megkülönböztethetetlen: ha nincs szülő
+ * községe, amiből toldalékot írhatnánk, vagy ha a magyar nevében már ott a
+ * zárójel ("Trifești (Nagylupsa község)", a `huZarojeles` osztályba tartozó
+ * Wikidata-hiba) — utóbbinál a sor eleje már elválasztja a testvérétől, és
+ * egy második zárójel csak "Trifești (Nagylupsa község) (Nagylupsa
+ * község)"-t adna.
+ */
+function toldalek(h) {
+  if (!h.kozsegNev) return null;
+  return h.hu.endsWith(`(${h.kozsegNev})`) ? null : h.kozsegNev;
+}
+
+/** A csoportosítás kulcsa: a megye és a magyar név együtt. */
+function utaloKulcs(h) {
+  return `${h.megye}|${h.hu.toLowerCase()}`;
+}
+
+/**
+ * Megmondja, melyik helységek kapnak megkülönböztető toldalékot.
+ *
+ * Kulcs a MEGYE és a magyar név együtt, nem a név önmagában: két megyében
+ * lehet ugyanaz a név ("Doboka" Kolozsvár- és Hunyad megyében is), és
+ * ott a sor végén álló megyefelirat már elválasztja őket. Ugyanabban a
+ * megyében viszont a megye nem segít, mert mindkettő ugyanott van.
+ *
+ * A toldalék a hely szülő községének neve — ezt a sor amúgy is megmutatja,
+ * tehát nem új adatot vezetünk be, csak oda tesszük, ahol a felhasználó
+ * nézi: a neve mellé ("Butești (Mogos község)"). Ennek két feltétele van,
+ * és mindkettőt az `ellenoriz.mjs` nézi a kész adaton:
+ *   - minden ilyen helynek van szülő községe, különben nincs mit írni mellé,
+ *   - az azonos nevű csoporton belül a községek különböznek, különben a
+ *     toldalék sem választaná szét őket.
+ *
+ * A visszaadott Map `q -> toldalék`. Akinek nincs benne, annak az azonos
+ * megyében egyedül van a neve, tehát toldalék sem kell.
+ */
+export function utalok(helyek) {
+  const csoport = new Map(); // megye|hu -> az ilyen nevű sorok
+  for (const h of helyek) {
+    const kulcs = utaloKulcs(h);
+    if (!csoport.has(kulcs)) csoport.set(kulcs, []);
+    csoport.get(kulcs).push(h);
+  }
+  const ki = new Map();
+  for (const sorok of csoport.values()) {
+    if (sorok.length < 2) continue;
+    for (const h of sorok) {
+      // Ha nincs mit írni mellé, nem találunk ki helyette semmit: az
+      // `ellenoriz.mjs` szól, ha ez egyáltalán előfordul, mert akkor két
+      // sor marad megkülönböztetés nélkül.
+      const t = toldalek(h);
+      if (t) ki.set(h.q, t);
+    }
+  }
+  return ki;
+}
+
+/**
+ * Azok a csoportok, ahol a toldalék nem elég a megkülönböztetéshez: két
+ * azonos nevű hely ugyanabban a megyében, ugyanabban a községben — vagy
+ * nincs is községük, tehát egyáltalán nincs miről toldalékot írni.
+ *
+ * Ilyen ma nincs, de ha lenne, a keresőnk két azonos sort mutatna, és ezt
+ * csendben tenné — ezért ez a visszatérési érték az ellenőrzőé.
+ */
+export function utaloUtkozes(helyek) {
+  const csoport = new Map();
+  for (const h of helyek) {
+    const kulcs = utaloKulcs(h);
+    if (!csoport.has(kulcs)) csoport.set(kulcs, []);
+    csoport.get(kulcs).push(h);
+  }
+  return [...csoport.entries()].filter(([, sorok]) => {
+    if (sorok.length < 2) return false;
+    // Akinek nincs mit megkülönböztetnie, az biztosan egyforma marad a
+    // testvérei mellett; a többinél az elég, ha egyik toldalék sem ugyanaz,
+    // mint a másiké.
+    const toldalekok = sorok.map(toldalek);
+    if (toldalekok.includes(null)) return true;
+    return new Set(toldalekok).size < sorok.length;
+  });
+}
+
+// ───────────────────────────────────────────────────────────────────────────
 // A nyelvi ellenőrzések
 //
 // Mindegyik abból indul ki, hogy a magyar címke magyar nyelvű SZÓ kell legyen,
