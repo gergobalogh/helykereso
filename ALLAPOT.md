@@ -23,6 +23,7 @@ szükséges tények állnak.
 | `06e85da` | **a megkülönböztető toldalék a 36 ütköző névre (76 hely)** |
 | `8f91c99` | **az adatverzió a footerben**, és a `helyek.min.json` ellenőrzése |
 | `f2af276` | **a 93 visszanyert hely magyar nevének mérése**, `javitasokHu.json`, a „nincs magyar neve" jelölés (121 hely) |
+| `c6ff588` | **a KIA-mérés a projektbe költözik** (`kia.mjs`, `kiaMagyarNev.json`), és a kétforrás-szabály ellenőrzött |
 
 A kettő utóbbi commit ugyanaz a leképezés két helyen: a `11281e4` a
 letöltőben, a `350c52a` az ellenőrzőben. Mindkettőben a megye rossz helyen
@@ -215,15 +216,19 @@ Ez termékdöntés, adatpolitika, nem technikai. Nem nyúltam hozzá.
    név bejavítva, a többi jelölve. Lásd fent.
 3. ~~**A `place-search` verziózása**~~ — **kész 2026-10-09-én**:
    `szabalyok.mjs` → `helyek.json` → footer, és a `CHANGELOG.md` szabályai.
-4. **A 468 `hu == ro` helyből a maradék 347-et is végigjárni** a KIA-val
-   és a magyar Wikipediával, mint a 44-et. A 13 találatból kettő lett
-   bejavítás, tehát a módszer működik, csak lassú. Ha ez kész, a
-   `nincsMagyarNev.json` lista lesz teljes, és a `hu == ro` ellenőrzés
-   valódi állításellenőrzéssé válhat.
-5. **A KIA PDF feldolgozása a kódba** (`letolt.mjs` nem tud magyar nevet
-   kérni a Wikidata-tól, mert az nincs is ott). Ha beépülne, a „van-e
-   magyar neve" kérdésre nem kellene kézzel mérni — és a
-   `javitasokHu.json` is automatikusan ellenőrizhető lenne.
+4. ~~**A 468 `hu == ro` helyből a maradékot is végigjárni**~~ — **kész
+   2026-10-09-én** (`c6ff588`): a `kia.mjs` mér, a `kiaMagyarNev.json`
+   minősít, az ellenőrző pedig szól, ha feldolgozatlan (`merve`) bejegyzés
+   marad. Eredmény: **17 KIA-jelölt, 2 elfogadva, 15 elutasítva.**
+5. **A KIA PDF beépítése a `letolt.mjs`-be** — a mérés most a KIA-t, de a
+   letöltő továbbra is csak a Wikidata-ot olvassa, tehát a magyar név
+   javítása kézi. Ha a KIA-bejegyzés a letölés része lenne, a
+   `javitasokHu.json` nem kellene.
+6. **A `nincsMagyarNev.json` 121-es listája kézzel mért.** A KIA-mérés
+   lefedte a 566-os `hu == ro` halmazt, de a jelöléshez **két negatív
+   bizonyíték** kell (nincs KIA-név ÉS nincs Wikipedia-infoboxid), és a
+   negatív bizonyíték a KIA-nál gyenge (a KIA ritkán írja ki az azonos
+   nevet). Ha ez a lista kézi, ez a leggyengébb láncszem a projektben.
 
 ## Egyéb tudnivaló
 
