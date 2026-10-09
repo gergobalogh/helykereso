@@ -165,6 +165,13 @@ function kozsegTvor(kia) {
  * parse-ot körülvevő try önmagában nem elég, az `Object.entries(undefined)`
  * dob, és nem tudjuk megállapítani, hogy nem hiba, hanem türelem kell.
  *
+ * NEM KELL `&maxlag=5` A PARAMÉTER. A maxlag a QUERY SERVICE (wdqs)
+ * terhelését nézi, nem az API-ét, és a wdqs 2026-10-09-én több száz
+ * másodperces várólistával állt — miközben a `wbgetentities` egyáltalán nem
+ * használja a query service-t. A paraméterrel a `kia.mjs` 25 percig nem
+ * tudott végigfutni; nélkül ugyanaz a kérés 0,3 másodperc. A mérés egyetlen
+ * API-hívása nem a türelmet igényelte, hanem egy felesleges korlátot.
+ *
  * Ez negyedre csúszott bele a mérésbe a látvány kedvéért: ha ez nincs
  * megírva, a mérés csendben megszakad, és a részleges eredmény úgy látszik,
  * mintha kész lenne.
@@ -290,7 +297,7 @@ async function main() {
         const resz = kell.slice(i, i + 25);
         const j = await api(
           "https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=labels" +
-            `&languages=ro%7Cen%7Cde&ids=${resz.join("%7C")}&maxlag=5`,
+            `&languages=ro%7Cen%7Cde&ids=${resz.join("%7C")}`,
         );
         for (const [id, e] of Object.entries(j.entities ?? {})) {
           kozsegNev.set(
