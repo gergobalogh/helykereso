@@ -21,7 +21,7 @@
 
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
-import { nemHelyseg, deRomanEkezet, ugyanazAHely, utalok } from "./szabalyok.mjs";
+import { nemHelyseg, deRomanEkezet, ugyanazAHely, utalok, VERZIO } from "./szabalyok.mjs";
 
 const VEGEGPL = "https://query.wikidata.org/sparql";
 const USER_AGENT = "mivelkezdjem.hu helynevekereso (https://mivelkezdjem.hu)";
@@ -473,6 +473,7 @@ async function main() {
   );
 
   const kimenet = {
+    verzio: VERZIO,
     generatas: new Date().toISOString(),
     forras: "Wikidata (CC0) + javitasok.json",
     telepulesOsztaly: [...telepulesOsztaly].sort(),
@@ -500,7 +501,7 @@ async function main() {
     for (const x of bentHamisNemet) console.log(`    ${x.q} ${x.hu} / ${x.ro} / ${x.de}`);
   }
 
-  console.log(`\nKész: ${helyek.length} helység, ${helyek.filter((h) => h.de).length} német nevet kapott.`);
+  console.log(`\nKész: ${helyek.length} helység, ${helyek.filter((h) => h.de).length} német nevet kapott. (verzió ${VERZIO})`);
   for (const m of MEGYEK) {
     console.log(`  ${m.kod} ${m.hu}: ${helyek.filter((h) => h.megye === m.kod).length}`);
   }

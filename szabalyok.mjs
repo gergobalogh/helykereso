@@ -266,3 +266,26 @@ export function dePerjel(de) {
 export function deRomanEkezet(de) {
   return Boolean(de) && /[ăâîșşțţ]/.test(de);
 }
+
+/**
+ * Az adat és a felület verziója.
+ *
+ * Miért kell: a `helyek.json` a `letolt.mjs`-ben készül, az oldal ezt
+ * olvassa, és a kettő nem egyszerre frissül — a git be van kapcsolva, de a
+ * site-on futó példányról nem látszik, melyik commit adatait látja a
+ * felhasználó. A footerben megjelenő verzió ezt megmondja: ha a szám
+ * nem egyezik a `CHANGELOG.md` legfrissebb bejegyzésével, akkor a
+ * `helyek.json` nincs a legfrissebb letöltésből.
+ *
+ * Mikor kell emelni:
+ *   - nagyobb (2.0.0): a felület vagy az adat értelme megváltozott (pl. a
+ *     toldalék megjelent, új mező, törölt helység);
+ *   - kisebb (1.1.0): új ellenőrzés, új szabály, ami nem változtatja meg a
+ *     felhasználó által látott adatot;
+ *   - egyébként nem: a napi letöltés nem ír új verziót.
+ *
+ * A szám a `letolt.mjs`-ben kerül a `helyek.json`-ba, a `keres.js` a
+ * footerben mutatja, az `ellenoriz.mjs` pedig egyezést szól kő, ha hiányzik
+ * vagy nem egyezik a `szabalyok.mjs`-belivel.
+ */
+export const VERZIO = "1.0.0";

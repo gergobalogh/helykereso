@@ -15,6 +15,7 @@ import {
   ugyanazAHely,
   utalok,
   utaloUtkozes,
+  VERZIO,
 } from "./szabalyok.mjs";
 
 const adat = JSON.parse(await readFile(new URL("./helyek.json", import.meta.url)));
@@ -329,6 +330,42 @@ for (const m of mezok) {
   if (nincs) hiba(`${nincs} helységből hiányzik a(z) "${m}" mező`);
 }
 console.log(`  minden helységben megvan: ${mezok.join(", ")}`);
+
+// 7b. A verzió és a leképezés, amit az oldal tényleg olvas.
+//
+// Az adatot a `letolt.mjs` írja, a `keres.js` a footerben mutatja, a
+// `szabalyok.mjs` mondja meg, melyik az aktuális. Ha a kettő elcsúszik, a
+// felhasználó egy régebbi adathalmazt néz, és azt nem tudja, hiszen minden
+// más zöld. Ez pontosan az a hibaosztály, amit ez a projekt megtanult: ami
+// néma, az nem látható.
+if (adat.verzio === undefined) {
+  hiba("a helyek.json-ból hiányzik a verzio mező — újragenerálás kell (node letolt.mjs)");
+} else if (adat.verzio !== VERZIO) {
+  hiba(
+    `az adat verziója (${adat.verzio}) nem egyezik a szabályokéval (${VERZIO}) — ` +
+      "vagy a helyek.json maradt régen, vagy a szabalyok.mjs-ben kell emelni a VERZIO-t",
+  );
+} else {
+  rendben(`az adat verziója ${VERZIO}, egyezik a szabályokéval`);
+}
+
+// A `keres.js` NEM a helyek.json-t olvassa, hanem a helyek.min.json-t. A
+// kettő külön fájl, szóval elcsúszhatnak — és akkor minden ellenőrzés
+// zöld, miközben az oldal régebbi adatot mutat. Ez a hiba eddig láthatatlan
+// volt, mert senki nem hasonlította össze a kettőt.
+const min = JSON.parse(
+  await readFile(new URL("./helyek.min.json", import.meta.url), "utf8"),
+);
+if (JSON.stringify(min) !== JSON.stringify(adat)) {
+  hiba(
+    "a helyek.min.json (amit az oldal olvas) nem egyezik a helyek.json-nal " +
+      `(min: ${min.helyek?.length} helység, verzio ${min.verzio ?? "nincs"}; ` +
+      `json: ${adat.helyek.length} helység, verzio ${adat.verzio ?? "nincs"}) — ` +
+      "újragenerálás kell (node letolt.mjs)",
+  );
+} else {
+  rendben(`a helyek.min.json is friss (${min.helyek.length} helység)`);
+}
 const kodok = new Set(helyek.map((h) => h.megye));
 const ismeretlen = [...kodok].filter((k) => !megyek.some((m) => m.kod === k));
 if (ismeretlen.length) {

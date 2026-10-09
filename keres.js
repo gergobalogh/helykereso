@@ -5,6 +5,7 @@ const valaszt = document.getElementById("megye");
 const talalat = document.getElementById("talalat");
 const szures = document.getElementById("szures");
 const datum = document.getElementById("datum");
+const verzio = document.getElementById("verzio");
 
 let helyek = [];
 let megyek = new Map();
@@ -280,6 +281,14 @@ async function betolt() {
   valaszt.addEventListener("change", keres);
 
   datum.textContent = adat.generatas.slice(0, 10);
+  // A verzió a footerben. Azért kell, mert a helyek.json és az oldal nem
+  // egyszerre frissül: ebből látszik, hogy a felhasználó melyik adathalmazt
+  // látja, és a szám egyezik-e a CHANGELOG.md legfrissebb bejegyzésével.
+  //
+  // Régi helyek.json (verzio nélkül) esetén ezt csendben kiírjuk, nem
+  // szaladunk meg: az adat jó, csak a jelölés hiányzik. Ha a mező
+  // egyáltalán nem lenne a kimenetben, a `verzio` undefined lenne.
+  verzio.textContent = `adatverzió ${adat.verzio ?? "ismeretlen"} · ${helyek.length} helység`;
   keres();
 }
 

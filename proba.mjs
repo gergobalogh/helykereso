@@ -388,6 +388,25 @@ for (const [szo, kozsegek] of KETTOS) {
   }
 }
 
+// A footerben látszik, hogy a felhasználó melyik adatverziót nézi. Ez a
+// hibaosztály ("minden zöld, de az oldal régebbi adatot mutat") néma, ezért
+// kell róla szó: a számnak meg kell lennie, és a helységszámnak egyeznie
+// kell a szűrési számlálóval.
+const verzio = await oldal.locator("#verzio").innerText();
+const vartVerzio = await (await fetch("http://localhost:8123/helyek.min.json")).json();
+if (!/adatverzió \d+\.\d+\.\d+/.test(verzio)) {
+  bukott++;
+  console.log(`  ✗ a footerben nincs verzió: "${verzio}"`);
+} else if (verzio !== `adatverzió ${vartVerzio.verzio} · ${vartVerzio.helyek.length} helység`) {
+  bukott++;
+  console.log(
+    `  ✗ a footer elcsúszott: "${verzio}" — az adatfájlban ` +
+      `"${vartVerzio.verzio}" / ${vartVerzio.helyek.length} helység van`,
+  );
+} else {
+  console.log(`  ✓ a footer verziója egyezik az adatfájllal: ${verzio}`);
+}
+
 console.log(
   hibak.length ? `\nKONZOLHIBÁK:\n${hibak.map((h) => "  " + h).join("\n")}` : "\nNincs konzolhiba.",
 );

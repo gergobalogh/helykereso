@@ -18,6 +18,7 @@ megyét akarod böngészni.
 | Fájl | Mit csinál |
 |---|---|
 | `letolt.mjs` | Letölti a Wikidata-ról a helyeket, és megírja a `helyek.json`-t. |
+| `szabalyok.mjs` és `VERZIO` | Az adat verziója egy helyen (`szabalyok.mjs` → `VERZIO`), a története a [`CHANGELOG.md`](CHANGELOG.md)-ben. |
 | `index.html` | Az oldal. |
 | `keres.js` | A keresés és a találatok kirajzolása. |
 | `javitasok.json` | Kézzel javított német nevek. Olvassa a `letolt.mjs`. |
@@ -309,6 +310,18 @@ rövidebb, és egy puszta `indexOf` rossz helyen vágna.
 **Az `ellenoriz.mjs` a te barátod.** Mielőtt bárkinek megmutatod, futtasd le.
 Ez a hibaosztályok — rossz megyekód, hiányzó város — itt kijönnek, mert
 egyébként csendben vannak.
+
+**Ha megváltoztatod, amit a felhasználó lát, emeld a `VERZIO`-t.** A szám a
+`szabalyok.mjs` tetején (nem a `letolt.mjs`-ben), onnan kerül az adatfájlba,
+a footerben jelenik meg, és az `ellenoriz.mjs` egyezést szól kő, ha
+hiányzik. A szabály: **2.0.0**, ha a felület vagy az adat értelme változik
+(új mező a sorban, törölt helység); **1.1.0**, ha csak új szabály vagy
+ellenőrzés jön. A napi letöltés nem ír új verziót — különben a szám hetente
+nőne, és semmit nem mond. Bővebben a [`CHANGELOG.md`](CHANGELOG.md)-ben.
+
+**Az oldal a `helyek.min.json`-t olvassa, nem a `helyek.json`-t.** Ezért az
+ellenőrző a kettőt összehasonlítja: ha elcsúsznak, minden más zöld, és az
+oldal mégis régebbi adatot mutat.
 
 ## A beállítás, amit írd át
 
