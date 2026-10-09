@@ -24,6 +24,8 @@ megyét akarod böngészni.
 | `javitasok.json` | Kézzel javított **német** nevek. Olvassa a `letolt.mjs`. |
 | `javitasokHu.json` | Kézzel javított **magyar** nevek, ugyanerre a célra. |
 | `nincsMagyarNev.json` | Azok a Q-számok, amelyeknek nincs magyar nevük, de a Wikidata-on van. A kereső megjelöli őket. |
+| `kia.mjs` | A KIA helységnévtár kiértékelése: hol van magyar név, amit a Wikidata nem őriz? Kutatási eszköz, a `letolt.mjs` nem hívja. |
+| `kiaMagyarNev.json` | A KIA-mérés eredménye, Q-számmal és a kézi minősítéssel (`javítva` / `elutasítva`). Írja a `kia.mjs`, a minősítést kézzel kell megadni. |
 | `szabalyok.mjs` | A letöltő és az ellenőrző közös szabályai (egy helyen, hogy ne divergáljanak). |
 | `ismertHibak.json` | A Wikidata ismert adathibái, Q-számmal. Olvassa az `ellenoriz.mjs`. |
 | `ellenoriz.mjs` | Ellenőrzés az adatfájlon: megvannak-e a fontos helységek, jól vannak-e besorolva. |
@@ -307,6 +309,39 @@ Ha ilyen helynek találsz magyar nevet, két lépés kell: a
 `javitasokHu.json`-ba írod (kézi javítás), és kiveszed a Q-számot a
 `nincsMagyarNev.json`-ból. Az ellenőrző nézi mindkettőt, és szól, ha
 ellentmond egymásnak.
+
+### Honnan tudjuk, hogy két forrás kell
+
+Mert a KIA magyar-név-mezőébe nem mindig magyar név kerül. A mérés
+(`kia.mjs`) 17 ilyen helyet talált, és a második forrás — a magyar
+Wikipedia infoboxának `magyar név =` mezője — **15-öt elvetett**:
+
+| amit a KIA ad | miért nem magyar név |
+|---|---|
+| `La padure`, `Valea surei`, `La poduri` | román szöveg a magyar mezőben |
+| `Ungefug`, `Rohrau` | szász (német) név |
+| `Galbina községrész` | leírás, nem név |
+| `Bobája` | átírás (á/ă), nem magyar név |
+| `Csunzshavas`, `Dorozsman`, `Ohábaponor` | másik, összeomlott falu neve |
+
+Ezért van a `kiaMagyarNev.json`-ban egy `allapot` mező: a `kia.mjs` csak a
+mérést írja be (`merve`), a döntést (`javítva` / `elutasítva`) kézzel
+adjuk, és az `ellenoriz.mjs` szól, ha valami `merve` marad — vagyis ha
+a kétforrás-szabály felületén túlcsúszott valaki.
+
+A mérés maga is tanulságos: **négy csendes hiba** buktatta meg, mindegyik
+úgy tűnt, mintha azt mérné, amit mérni kell:
+
+1. a PDF szövege `ş`/`ţ` alakot használ, nem `ș`/`ț`-t → 0 találat mindenre;
+2. a pont után nem whitespace, hanem PDF-jel (`•`) van → a szabályos
+   `\.\s*Név:` nem illeszkedik;
+3. a szöveg **két hasábos**, tehát a bejegyzések fele nem a sor elején
+   kezdődik → a `^`-hoz kötött szűrés a második hasábot kihagyta;
+4. a községnevek többségében `ș`/`ț` van, és ez kimaradt a magyar betűk
+   osztályából → egyetlen község sem illeszkedett.
+
+Mindegyik csendben „nulla találatot” adott, tehát a mérés azt mondta
+„nincs magyar nevük”, holott a hiba a mérésben volt.
 
 ## Mire figyelj, ha módosítod
 

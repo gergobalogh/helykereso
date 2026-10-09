@@ -1,0 +1,134 @@
+{
+ "_comment": [
+  "A KIA helységnévtárból mért magyar nevek, Q-szám szerint — csak ahol",
+  "a magyar név ELTÉR a romántól. A `kia.mjs` írja a nevét, de a",
+  "minősítését KÉZZEL kell megadni, és a program megőrzi újrafuttatáskor.",
+  "",
+  "Forrás: kia.hu/kiakonyvtar/konyvtar/erdely/erd2002/hnevta02.pdf",
+  "VÉTELEN azok a bejegyzések, ahol a magyar nevét a KIA kiírja, és nem",
+  "azonos a románnal. A KIA ritkán kiírja az azonosat is (a kalibráció",
+  "a kia.mjs kimenetében), ezért a HIÁNY itt nem bizonyítja, hogy",
+  "nincs magyar név — csak azt, hogy a KIA nem adja meg.",
+  "",
+  "AZ ALLAPOT:",
+  "  \"merve\"    — a kia.mjs találta, de még senki nem döntött róla;",
+  "               az ellenőrző EGYELŐRE nem zúg rá, de szól, ha",
+  "               ilyen marad (két forrás kell, nem egy)",
+  "  \"javítva\"  — két forrás mondja (KIA + magyar Wikipedia infobox),",
+  "               bekerült a javitasokHu.json-ba",
+  "  \"elutasítva\" — a KIA nem magyar nevet adott, hanem románt",
+  "               (\"La padure\"), szaxont (\"Ungefug\", \"Rohrau\"), vagy",
+  "               éppen leírást (\"Galbina községrész\"); az \"ok\" mező",
+  "               mondja meg, melyik",
+  "",
+  "AZ ELLENŐRZŐ NÉZI: a javitasokHu.json minden kulcsa itt van \"javítva\"",
+  "állapottal, a nincsMagyarNev.json egyik Q-száma sem lehet itt",
+  "\"javítva\" állapottal (mert akkor volna magyar neve, és a jelölés hamis",
+  "lenne), és nem maradhat feldolgozatlan \"merve\" bejegyzés — mert az",
+  "éppen a kétforrás-szabály felülete.",
+  "",
+  "A MÉRÉS HATÓKÖRE NEM A TELJES ADAT: ha a község románnevét nem",
+  "sikerült megkapni (a Wikidata API lassú volt), a hely kimarad, és",
+  "a kia.mjs ezt kiírja — nem hallgatja el."
+ ],
+ "Q3889216": {
+  "nev": "Zepogy",
+  "allapot": "elutasítva",
+  "ok": "a magyar Wikipedia infoboza Gugát ad, tehát a KIA Zepogy neve más falvaké",
+  "huWiki": "Guga"
+ },
+ "Q11717176": {
+  "nev": "Dumest",
+  "allapot": "javítva",
+  "huWiki": "Dumest"
+ },
+ "Q12165732": {
+  "nev": "Csunzshavas",
+  "allapot": "elutasítva",
+  "ok": "a Csunzshavas egy másik, összeomlott falvak neve; a Wikipedia infoboza üres",
+  "huWiki": ""
+ },
+ "Q10945639": {
+  "nev": "Monostor",
+  "allapot": "javítva",
+  "huWiki": "Monostor"
+ },
+ "Q1315617": {
+  "nev": "Dorozsman",
+  "allapot": "elutasítva",
+  "ok": "a Dorozsman másik község faluja; a Wikipedia infoboza üres",
+  "huWiki": ""
+ },
+ "Q12089533": {
+  "nev": "Vurtop",
+  "allapot": "elutasítva",
+  "ok": "a magyar Wikipedia infoboza magát a Vartopot adja",
+  "huWiki": "Vartop"
+ },
+ "Q610937": {
+  "nev": "Gyergyólibántelep",
+  "allapot": "elutasítva",
+  "ok": "a magyar Wikipedia infoboza magát a Libánt adja",
+  "huWiki": "Libán"
+ },
+ "Q2912250": {
+  "nev": "Bobája",
+  "allapot": "elutasítva",
+  "ok": "a KIA Bobája csak átírás (á/ă), nem magyar név; a Wikipedia infoboza nem ad nevet",
+  "huWiki": "7"
+ },
+ "Q1007582": {
+  "nev": "Galbina községrész",
+  "allapot": "elutasítva",
+  "ok": "a KIA nem nevet ad, hanem leírást (községrész) — ez nem név",
+  "huWiki": ""
+ },
+ "Q3082946": {
+  "nev": "Parospestere",
+  "allapot": "elutasítva",
+  "ok": "a Wikipedia infoboza Párost ad, vagyis a Wikidata már jó; a KIA neve más falvaké",
+  "huWiki": "Páros"
+ },
+ "Q3728303": {
+  "nev": "Ohábaponor",
+  "allapot": "elutasítva",
+  "ok": "a Wikipedia infoboza magát a Ponort adja, tehát ez a neve; az Ohábaponor másik falu",
+  "huWiki": "Ponor"
+ },
+ "Q2912479": {
+  "nev": "Prihodest",
+  "allapot": "elutasítva",
+  "ok": "egyetlen forrás, a Wikipedia infoboza üres",
+  "huWiki": ""
+ },
+ "Q769678": {
+  "nev": "Ungefug",
+  "allapot": "elutasítva",
+  "ok": "az Ungefug a szász (német) név, nem magyar; a Wikipedia infoboza Angofát ad",
+  "huWiki": "Angofa"
+ },
+ "Q1237872": {
+  "nev": "La poduri",
+  "allapot": "elutasítva",
+  "ok": "egyetlen forrás, és a KIA neve román (La poduri)",
+  "huWiki": ""
+ },
+ "Q1413433": {
+  "nev": "Rohrau",
+  "allapot": "elutasítva",
+  "ok": "a Rohrau a szász név; a Wikipedia infoboza Rórát ad",
+  "huWiki": "Róra"
+ },
+ "Q1401140": {
+  "nev": "La padure",
+  "allapot": "elutasítva",
+  "ok": "a KIA magyar-nev-mezője román (La padure); a Wikipedia infoboza üres",
+  "huWiki": ""
+ },
+ "Q578455": {
+  "nev": "Valea surei",
+  "allapot": "elutasítva",
+  "ok": "a KIA magyar-nev-mezője román átírás (Valea surei); a Wikipedia infoboza üres",
+  "huWiki": ""
+ }
+}

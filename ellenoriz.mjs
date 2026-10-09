@@ -398,6 +398,68 @@ if (javHuHatott.length !== javHuKulcsok.length) {
   rendben(`mind a ${javHuKulcsok.length} kézi magyar név látszik az adatban`);
 }
 
+// A két magyar forrás összevetése a KIA mérésével.
+//
+// A `javitasokHu.json` szabálya: KÉT forrás kell (KIA + magyar Wikipedia),
+// tehát minden kézi javításnak meg kell lennie a `kiaMagyarNev.json`-ban is.
+// És fordítva: a `nincsMagyarNev.json` állítja, hogy az adott helynek nincs
+// magyar neve — ha a KIA mégis ad magyar nevet, a jelölés HAMIS.
+//
+// Ez a két sor eddig kézi mérésből jött, tehát elavulhatott. A `kia.mjs`
+// újrafuttatásával frissíthető, és az ellenőrző szól, ha kettőjük
+// összecsúszik.
+const kiaHu = JSON.parse(
+  await readFile(new URL("./kiaMagyarNev.json", import.meta.url), "utf8"),
+);
+const kiaQ = Object.keys(kiaHu).filter((k) => !k.startsWith("_"));
+const kiaJav = kiaQ.filter((q) => kiaHu[q].allapot === "javítva");
+
+// A "merve" állapot a kétforrás-szabály felülete: a KIA nevet adott, de
+// senki nem döntött róla. Ez nem hiba, hanem feltétlen munka — de ha
+// bentmarad, a szabály körbe jár: a javítás megvárja a mérést, a mérés a
+// javítást.
+const feldolgozatlan = kiaQ.filter((q) => kiaHu[q].allapot === "merve");
+if (feldolgozatlan.length) {
+  hiba(
+    `${feldolgozatlan.length} KIA-bejegyzés még feldolgozatlan (allapot: "merve"): ` +
+      `${feldolgozatlan.map((q) => `${q} (${kiaHu[q].nev})`).join(", ")} — ` +
+      "nézd meg a magyar Wikipedia cikkét, és írd be a javítást vagy az elutasítást",
+  );
+}
+
+const javHuNincsKia = javHuKulcsok.filter((k) => !(k in kiaHu));
+if (javHuNincsKia.length) {
+  hiba(
+    `a javitasokHu.json ${javHuNincsKia.length} bejegyzésének nincs KIA-megerősítése: ` +
+      `${javHuNincsKia.join(", ")} — két forrás szabály (a kia.mjs újrafuttatásával ` +
+      "érdemes ellenőrizni, hogy a KIA tényleg nem ad magyar nevet)",
+  );
+}
+const javHuNemJav = javHuKulcsok.filter(
+  (k) => kiaHu[k] && kiaHu[k].allapot !== "javítva",
+);
+if (javHuNemJav.length) {
+  hiba(
+    `a javitasokHu.json ${javHuNemJav.length} bejegyzése a KIA-mérésben nem "javítva": ` +
+      javHuNemJav.map((k) => `${k} (${kiaHu[k].allapot})`).join(", "),
+  );
+}
+
+// Aki magyar nevet kapott, annak nem lehet "nincs magyar neve" jelölése.
+const jelzesKia = nincsQ.filter((q) => kiaJav.includes(q));
+if (jelzesKia.length) {
+  hiba(
+    `${jelzesKia.length} hely "nincs magyar neve" jelölésben van, de a KIA magyar nevet ` +
+      `ad nekik: ${jelzesKia.map((q) => `${q} (${kiaHu[q].nev})`).join(", ")} — ` +
+      "a jelölés valószínűleg téves, vagy a javítás be kell kerülni a javitasokHu.json-ba",
+  );
+} else {
+  rendben(
+    `a ${kiaQ.length} KIA-bejegyzés (${kiaJav.length} elfogadva) és a ${nincsQ.length} ` +
+      "jelölés nem mond ellent egymásnak",
+  );
+}
+
 // 7b. A verzió és a leképezés, amit az oldal tényleg olvas.
 //
 // Az adatot a `letolt.mjs` írja, a `keres.js` a footerben mutatja, a

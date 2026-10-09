@@ -41,6 +41,24 @@ A „nincs magyar neve" jelölés, plusz két új kézi forrásfájl.
   `javitasokHu.json` minden kulcsa érvényesül; a kézi javítás és a jelölés
   nem mond ellent egymásnak.
 
+### Kiegészítés: a KIA-mérés a projektbe költözött
+
+- `kia.mjs`: kiértékeli a KIA helységnévtárat (.cache-ből letöltve), és
+  megmondja, hol van magyar név, amit a Wikidata nem őriz. Kutatási
+  eszköz, nem része a letöltésnek.
+- `kiaMagyarNev.json`: a mérés eredménye (17 hely), mindegyikhez kézi
+  minősítés: **2 elfogadva** (Monostor, Dumest), **15 elutasítva** — a KIA
+  magyar-név-mezőjébe román, szaxon vagy leírás került.
+- új ellenőrzések: a `javitasokHu.json` minden bejegyzésének van KIA-
+  megerősítése és `javítva` minősítése; a `nincsMagyarNev.json` egyik
+  Q-száma sem lehet elfogadott magyar név; és nem maradhat feldolgozatlan
+  (`merve`) bejegyzés.
+- a `kia.mjs` megőrzi a kézi döntéseket újrafuttatáskor.
+
+Négy csendes hiba buktatta meg a mérést (a `ş`/`ţ` alak, a pont utáni
+PDF-jel, a két hasáb, és a községnevek `ș`/`ț` betűi) — mindegyik úgy
+tűnt, mintha azt mérné, amit mér. A részletek a README-ben.
+
 **Miért 1.1.0 és nem 2.0.0:** a találatok neve nem változik, csak kiegészül
 egy jelöléssel. A szabály a 2.0.0-ra akkor lenne igaz, ha a felhasználó
 egy másik helyet kapna.
