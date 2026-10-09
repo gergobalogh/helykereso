@@ -407,6 +407,49 @@ if (!/adatverzió \d+\.\d+\.\d+/.test(verzio)) {
   console.log(`  ✓ a footer verziója egyezik az adatfájllal: ${verzio}`);
 }
 
+// A "nincs magyar neve" jelölés. Két irányban kell igaz: a jelölt helyen
+// látszik, és NEM jelenik meg ott, ahol van magyar név. A második a
+// fontosabb: egy jelölés, ami mindig ott van, nem jelent semmit.
+console.log("\n--- A ’nincs magyar neve’ jelölés:");
+// Ezek biztosan a listán vannak (a nincsMagyarNev.json 121-es osztályából),
+// és a nevük románul is kereshető.
+const NINCS_NEV = [
+  ["Poienița", "Alvinc"],       // román név, magyar neve nincs
+  ["Izvoarele", "Felsőgirda"],  // románul is "források"
+];
+for (const [bevitel, kozseg] of NINCS_NEV) {
+  await mezo.fill(bevitel);
+  await oldal.waitForTimeout(200);
+  const sor = oldal.locator(".sor", { hasText: kozseg }).first();
+  const jelzes = await sor.locator(".nincsneve").count();
+  if (!jelzes) {
+    bukott++;
+    console.log(`  ✗ "${bevitel}" (${kozseg}) → nincs "nincs magyar neve" jelölés`);
+  } else {
+    console.log(`  ✓ "${bevitel}" (${kozseg}) → jelölve: "${(await sor.locator(".nincsneve").innerText()).trim()}"`);
+  }
+}
+// Itt van magyar neve, tehát a jelölés HAMIS lenne.
+await mezo.fill("Kolozsvár");
+await oldal.waitForTimeout(200);
+const hamisJelzes = await oldal.locator(".sor .nincsneve").count();
+if (hamisJelzes) {
+  bukott++;
+  console.log(`  ✗ a "Kolozsvár" soron ${hamisJelzes} jelölés van, pedig van magyar neve`);
+} else {
+  console.log('  ✓ a "Kolozsvár" soron nincs jelölés (annak van magyar neve)');
+}
+// És a kereshetőség megmarad: a jelölés nem cserélte le a nevet.
+await mezo.fill("Poienița");
+await oldal.waitForTimeout(200);
+const poienita = await oldal.locator(".sor").first().innerText();
+if (!poienita.includes("Poienița")) {
+  bukott++;
+  console.log(`  ✗ a jelölés felvette a hely nevét: ${poienita.replace(/\n/g, " | ")}`);
+} else {
+  console.log('  ✓ a jelölés mellett is a román név látszik, tehát kereshető maradt');
+}
+
 console.log(
   hibak.length ? `\nKONZOLHIBÁK:\n${hibak.map((h) => "  " + h).join("\n")}` : "\nNincs konzolhiba.",
 );

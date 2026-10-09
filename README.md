@@ -21,7 +21,9 @@ megyét akarod böngészni.
 | `szabalyok.mjs` és `VERZIO` | Az adat verziója egy helyen (`szabalyok.mjs` → `VERZIO`), a története a [`CHANGELOG.md`](CHANGELOG.md)-ben. |
 | `index.html` | Az oldal. |
 | `keres.js` | A keresés és a találatok kirajzolása. |
-| `javitasok.json` | Kézzel javított német nevek. Olvassa a `letolt.mjs`. |
+| `javitasok.json` | Kézzel javított **német** nevek. Olvassa a `letolt.mjs`. |
+| `javitasokHu.json` | Kézzel javított **magyar** nevek, ugyanerre a célra. |
+| `nincsMagyarNev.json` | Azok a Q-számok, amelyeknek nincs magyar nevük, de a Wikidata-on van. A kereső megjelöli őket. |
 | `szabalyok.mjs` | A letöltő és az ellenőrző közös szabályai (egy helyen, hogy ne divergáljanak). |
 | `ismertHibak.json` | A Wikidata ismert adathibái, Q-számmal. Olvassa az `ellenoriz.mjs`. |
 | `ellenoriz.mjs` | Ellenőrzés az adatfájlon: megvannak-e a fontos helységek, jól vannak-e besorolva. |
@@ -39,6 +41,7 @@ A `helyek.json` egy helységének a mezői:
 | `kozseg`, `kozsegNev` | a szülő község azonosítója és neve (`null`, ha nincs ilyen) |
 | `wikidata` | az elem oldala |
 | `utalo` | megkülönböztető toldalék, ha ugyanabban a megyében másik helynek is ugyanaz a magyar neve van (`null` egyébként) — lásd alább |
+| `huNincsNeve` | igaz, ha a magyar név helyén a román áll (nincs magyar neve) — lásd alább |
 
 Nincs építési lépés és nincs függőség: a `letolt.mjs` Node.js-t használ
 (szabányos `fetch`), minden más statikus fájl. A `proba.mjs`-hez kell a
@@ -285,6 +288,26 @@ Mindkettőt leellenőriztem, hogy tényleg buknak: a toldalék nullázásával a
 ellenőrző új hibát jelez, a `keres.js`-ben a megjelenítés kikapcsolásával a
 böngészős próba 9 hibát jelez.
 
+## A „nincs magyar neve" jelölés
+
+A magyar Wikipedia 121 ilyen helyet tart számon: a magyar mezőben a román
+név áll. Törölni nem lehet — a lekérdezés `FILTER(LANG(?hu) = "hu")`-val
+kötelező, tehát a törlés nem névnéven hagyná a falut, hanem **kitörölné a
+keresőből**. Ezért a `nincsMagyarNev.json` felsorolja őket, a letöltő
+`huNincsNeve` mezőt állít, és a soron apró jelölés jelenik meg. A **név
+nem változik**, tehát a falu kereshető marad, csak kimondjuk, hogy amit
+lát, az románul van.
+
+A `hu == ro` önmagában nem hiba: 468 helynél ez a helyzet, és a többségnél
+az a neve (a magyar Wikipedia infoboza is ugyanazt adja — a „Ponor", az
+„Angofa"). Csak a mért 121-nél nincs magyar nevük, ezért a lista nem
+automatikus, hanem a KIA és a magyar Wikipedia végigjárása.
+
+Ha ilyen helynek találsz magyar nevet, két lépés kell: a
+`javitasokHu.json`-ba írod (kézi javítás), és kiveszed a Q-számot a
+`nincsMagyarNev.json`-ból. Az ellenőrző nézi mindkettőt, és szól, ha
+ellentmond egymásnak.
+
 ## Mire figyelj, ha módosítod
 
 **POST, nem GET.** Nagy `VALUES` listánál a GET 414-es hibát ad
@@ -333,6 +356,10 @@ szolgál, a Wikidata-azonosító kell a lekérdezéshez.
 A `javitasok.json`-ba akkor írj, ha a Wikidata német neve rossz vagy hiányzik.
 A kulcs a **román** név, az érték a német név. Csak akkor írd be, ha tényleg
 nincs rendes német név a Wikidata-n — különben felülírod a helyes adatot.
+A magyar nevekre a `javitasokHu.json` való, ott a kulcs a **Q-szám**, és
+nagyobb az önfegyelem: két független forrás (KIA + magyar Wikipedia
+infobox) kell hozzá, mert a KIA sok helyen csak átírást ad magyar nevként
+(„Ránta", „Bobája"), ami nem igazi magyar név.
 
 ## A tudás, amire épül
 

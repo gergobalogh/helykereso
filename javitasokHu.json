@@ -1,0 +1,26 @@
+{
+  "_comment": [
+    "Kézzel javított MAGYAR nevek. Ugyanaz a szerepe, mint a javitasok.json-nak,",
+    "csak a magyar nyelvnél. A kulcs a Q-szám (nem a román név, mert a",
+    "magyar névnél nincs olyan természetes kulcsunk, amit ne írnánk át),",
+    "az érték a magyar név.",
+    "",
+    "MIÉRT KELL: a SPARQL-lekérdezés a magyar címkét kötelezően",
+    "kérdezi le (FILTER(LANG(?hu) = \"hu\")), tehát a letöltő mindig kap",
+    "valamit. A Wikidata-on viszont sok helyen a román nevét másolták oda,",
+    "mert nincs magyar neve — ilyenkor a magyar Wikipedia infoboxának",
+    "\"magyar név\" mezője az, ami eldönti, hogy a forrás mit mond.",
+    "",
+    "CSAK OLYAN KERÜLJÖN BE, amit KÉT FÜGGETLEN FORRÁS is alátámaszt:",
+    "a KIA helységnévtár (kia.hu/kiakonyvtar/konyvtar/erdely/erd2002/",
+    "hnevta02.pdf) és a magyar Wikipedia cikkének infoboxa. Egyetlen",
+    "forrásból jövő név gyanús: a KIA sok helyen átírást adott magyar",
+    "nevként (\"Ránta\", \"Bobája\", \"Dumest\"), ami nem igazi magyar név,",
+    "és a bejegyzés a szomszédos falvak régi neve is lehet.",
+    "",
+    "HA JAVÍTOL A WIKIDATÁ-N: töröld ki a bejegyzést, és az ellenőrző",
+    "kérdezi, hogy még kell-e."
+  ],
+  "Q10945639": "Monostor",
+  "Q11717176": "Dumest"
+}

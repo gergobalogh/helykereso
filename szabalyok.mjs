@@ -288,4 +288,41 @@ export function deRomanEkezet(de) {
  * footerben mutatja, az `ellenoriz.mjs` pedig egyezést szól kő, ha hiányzik
  * vagy nem egyezik a `szabalyok.mjs`-belivel.
  */
-export const VERZIO = "1.0.0";
+export const VERZIO = "1.1.0";
+
+/**
+ * Ugyanaz a név, csak más betűkkel: "Vále" / "Vale",
+ * "După Plese" / "După Pleșe", "Dealul Ștefăniței" / "Dealu Ștefăniței".
+ *
+ * Miért kell: a `nincsMagyarNev.json` állítása az, hogy "amit a sorban
+ * látsz, az a román név". Ez bizonyos magyar nevű helyen is igaz lenne,
+ * ha valaki éppen magyarul írta át (a "Vále" a magyar helységnévtárban is
+ * így jelenik meg) — tehát a KÉT betűsoros összehasonlítás hamis
+ * ellenőrzés lenne, és a 121-ből 4-et feleslegesen zúgna rá.
+ *
+ * Ez ugyanaz a leegyszerűsítés, amit a `keres.js` `normaliz()` csinál a
+ * kereséshez (ékezet, pont, kötőjel, kis-nagybetű), csak itt nincs szó,
+ * ahol a találat lenne.
+ *
+ * A definitív szócikk váltakozik is: "Dealu Ștefăniței" és
+ * "Dealul Ștefăniței" ugyanaz a földrajzi név, tehát az "-u" / "-ul" nem
+ * hordoz jelentést. Ezért a mássalhangzó előtt álló "ul"-t "u"-ra
+ * egyszerűsítjük. Csak ezen az ellenőrzésen fut: nem keresési találatra,
+ * hanem az állítás igazságára.
+ */
+export function ugyanazANev(a, b) {
+  if (!a || !b) return false;
+  const egyszer = (s) =>
+    s
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .replace(/[ăâ]/g, "a")
+      .replace(/î/g, "i")
+      .replace(/[șş]/g, "s")
+      .replace(/[țţ]/g, "t")
+      .replace(/[^a-z0-9]+/g, "")
+      .trim();
+  const cikk = (s) => s.replace(/([aeiou])l(?=[bcdfghjklmnpqrstvwxz])/g, "$1").replace(/l$/, "");
+  return cikk(egyszer(a)) === cikk(egyszer(b));
+}

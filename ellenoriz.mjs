@@ -16,6 +16,7 @@ import {
   utalok,
   utaloUtkozes,
   VERZIO,
+  ugyanazANev,
 } from "./szabalyok.mjs";
 
 const adat = JSON.parse(await readFile(new URL("./helyek.json", import.meta.url)));
@@ -324,12 +325,78 @@ console.log(`  ${roHelyseg.length} "község"/"város" toldalékú magyar név (
 
 // 7. Amit az oldal keresője elhasznál
 console.log("\n--- Amit a kereső használ:");
-const mezok = ["hu", "ro", "de", "megye", "kozsegNev", "utalo", "wikidata"];
+const mezok = ["hu", "ro", "de", "megye", "kozsegNev", "utalo", "wikidata", "huNincsNeve"];
 for (const m of mezok) {
   const nincs = helyek.filter((h) => h[m] === undefined).length;
   if (nincs) hiba(`${nincs} helységből hiányzik a(z) "${m}" mező`);
 }
 console.log(`  minden helységben megvan: ${mezok.join(", ")}`);
+
+// 7a. A "nincs magyar neve" jelölés.
+//
+// Ez a felhasználónak szól, tehát a kérdés nem az, hogy "van-e ilyen
+// mező", hanem hogy "igaz-e, amit a mező állít". Ez a projekt tanulsága.
+// Két irányban nézzük:
+//   - minden jelölt helynél a magyar név megegyezik a románnal (különben
+//     a jelölés hazug lenne);
+//   - a nincsMagyarNev.json minden Q-száma megvan az adatban, és a
+//     javitasokHu.json nem mond ellent neki (két forrás, ellentmondás
+//     nélkül: ha van kézzel javított magyar neve, akkor van).
+const jelzettek = helyek.filter((h) => h.huNincsNeve);
+const hamisJelzes = jelzettek.filter((h) => !ugyanazANev(h.hu, h.ro));
+if (hamisJelzes.length) {
+  hiba(
+    `${hamisJelzes.length} helyen "nincs magyar neve" jelölés van, de a magyar és a román ` +
+      `név nem ugyanaz a szó: ${hamisJelzes.slice(0, 5).map((h) => `${h.q} ${h.hu}/${h.ro}`).join(", ")}`,
+  );
+} else {
+  rendben(
+    `a ${jelzettek.length} jelölt helyen a magyar név valóban a román neve (nincs hamis jelölés)`,
+  );
+}
+
+const nincsMagyarNev = JSON.parse(
+  await readFile(new URL("./nincsMagyarNev.json", import.meta.url), "utf8"),
+);
+const nincsQ = Object.keys(nincsMagyarNev).filter((k) => !k.startsWith("_"));
+const nincsHianyos = nincsQ.filter((q) => !helyek.some((h) => h.q === q));
+if (nincsHianyos.length) {
+  hiba(
+    `a nincsMagyarNev.json ${nincsHianyos.length} Q-száma nincs az adatfájlban: ${nincsHianyos.slice(0, 5).join(", ")}`,
+  );
+}
+const nincsNemJelzott = nincsQ.filter(
+  (q) => helyek.some((h) => h.q === q) && !helyek.find((h) => h.q === q).huNincsNeve,
+);
+if (nincsNemJelzott.length) {
+  hiba(
+    `${nincsNemJelzott.length} hely a nincsMagyarNev.json-ban van, de nincs jelölve: ` +
+      `${nincsNemJelzott.slice(0, 5).join(", ")} — vagy a javitasokHu.json javította, ` +
+      "vagy a letöltő nem olvasta a listát",
+  );
+} else {
+  rendben(`a nincsMagyarNev.json mind a ${nincsQ.length} Q-száma jelölve van az adatban`);
+}
+
+// A kézi magyar nevek: hatottak-e? A rossz kulcs néma hiba.
+const javHu = JSON.parse(
+  await readFile(new URL("./javitasokHu.json", import.meta.url), "utf8"),
+);
+const javHuKulcsok = Object.keys(javHu).filter((k) => !k.startsWith("_"));
+const javHuHibas = javHuKulcsok.filter((k) => !helyek.some((h) => h.q === k));
+if (javHuHibas.length) {
+  hiba(
+    `a javitasokHu.json ${javHuHibas.length} Q-száma nincs az adatfájlban: ${javHuHibas.join(", ")}`,
+  );
+}
+const javHuHatott = javHuKulcsok.filter((k) => helyek.some((h) => h.q === k && h.hu === javHu[k]));
+if (javHuHatott.length !== javHuKulcsok.length) {
+  hiba(
+    `csak ${javHuHatott.length}/${javHuKulcsok.length} kézi magyar név érvényesült az adatfájlban`,
+  );
+} else {
+  rendben(`mind a ${javHuKulcsok.length} kézi magyar név látszik az adatban`);
+}
 
 // 7b. A verzió és a leképezés, amit az oldal tényleg olvas.
 //

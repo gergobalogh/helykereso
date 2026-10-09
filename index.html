@@ -110,6 +110,16 @@
         padding: 1px 5px;
         margin-right: 4px;
       }
+      /* A "nincs magyar neve" jelölés. Szándékosan halka: a használható
+         név a sor elején marad, ez csak kimondja, hogy az nem magyar. */
+      .nincsneve {
+        font-size: 0.7rem;
+        color: var(--szurke);
+        border: 1px dashed var(--sor);
+        border-radius: 4px;
+        padding: 1px 5px;
+        cursor: help;
+      }
       .kozseg {
         font-size: 0.8rem;
         color: var(--szurke);
@@ -170,7 +180,10 @@
         <p>
           Adatok: <a href="https://www.wikidata.org/">Wikidata</a> (CC0), letöltve
           <span id="datum"></span> · <span id="verzio"></span>. Német nevet akkor
-          lát, ha a helynek van ilyen neve (főleg a szász városoknak).
+          lát, ha a helynek van ilyen neve (főleg a szász városoknak). A
+          „nincs magyar neve" jelölés azt mondja, hogy a magyar név helyén a
+          románt látod: ezeknek a falvaknak a magyar lakossága 1910 körül
+          olvadt fel, és a forrás nem őrzi a nevüket.
         </p>
         <p>
           Ha valami nem stimmel — furcsa magyar név, hiányzó német név — a

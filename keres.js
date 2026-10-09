@@ -123,6 +123,21 @@ function kirajzol(lista, keresett) {
     hu.innerHTML = kiemeles(megjelenitettNev(h), keresett);
     sor.append(hu);
 
+    // Nincs magyar neve: a fenti név románul van, és ezt megmondjuk.
+    //
+    // Nem a név helyéta "nincs magyar neve" szöveget írunk, mert akkor a
+    // felhasználó nem tudná keresni a falut (több mint száz ilyen van,
+    // és a nevük az egyetlen támpont). Ezért apró jelölés a soron.
+    if (h.huNincsNeve) {
+      const jelzes = document.createElement("span");
+      jelzes.className = "nincsneve";
+      jelzes.textContent = "nincs magyar neve";
+      jelzes.title =
+        "Ennek a helynek nincs magyar neve: amit látsz, az a román név. " +
+        "A KIA helységnévtár és a magyar Wikipedia sem őrzi a magyar nevét.";
+      sor.append(jelzes);
+    }
+
     const ro = document.createElement("span");
     ro.className = "masik";
     ro.innerHTML = '<span class="cimke">ro</span>' + kiemeles(h.ro, keresett);

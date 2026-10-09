@@ -110,6 +110,8 @@ const CACHE = new URL("./.cache/", import.meta.url);
 const KIMENET = new URL("./helyek.json", import.meta.url);
 const KIMENET_LEPEG = new URL("./helyek.min.json", import.meta.url);
 const JAVITASOK = new URL("./javitasok.json", import.meta.url);
+const JAVITASOK_HU = new URL("./javitasokHu.json", import.meta.url);
+const NINCS_MAGYAR_NEV = new URL("./nincsMagyarNev.json", import.meta.url);
 
 const varakozas = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -272,6 +274,10 @@ async function main() {
   }
 
   const javitasok = JSON.parse(await readFile(JAVITASOK, "utf8"));
+  const javitasokHu = JSON.parse(await readFile(JAVITASOK_HU, "utf8"));
+  const nincsMagyarNev = new Set(
+    Object.keys(JSON.parse(await readFile(NINCS_MAGYAR_NEV, "utf8"))).filter((k) => !k.startsWith("_")),
+  );
 
   // Egy helységnek sokféle P31-je lehet, és a nevét is többször kaptuk meg.
   // Egy-egy sort tartunk meg helységenként, de a német néves sort előnyben
@@ -331,7 +337,12 @@ async function main() {
     }
 
     const s = nevek.get(q);
-    const hu = s.hu;
+    // A magyar név: a Wikidata adja, kivéve a javitasokHu.json-t, ami a
+    // kézzel megjavított magyar neveket tartja (a magyar Wikipedia
+    // infoboxa és a KIA által is alátámasztva). Ez a magyar nyelv
+    // párja a német javitasok.json-nak.
+    const huJav = javitasokHu[q];
+    const hu = typeof huJav === "string" ? huJav : s.hu;
     const ro = s.ro;
 
     // A magyar címke a községnél a hivatalos nevet adja, "község" szóval
@@ -360,6 +371,14 @@ async function main() {
       megye: megye.kod,
       kozseg: kozsegek.has(q) ? null : celQid,
       kozsegNev: kozsegek.has(q) ? null : nevek.get(celQid)?.hu ?? null,
+      // Igaz, ha a fenti magyar név nem létezik, és a román áll helyette.
+      // Ekkor a magyar mező TARTALMA nem változik, csak a származása —
+      // ezért külön mező, és nem a `hu` lesz üres: a keresőnek a
+      // használható (román) nevet kell mutatnia, csak megjelölve.
+      //
+      // A javitasokHu.json ellentmondás esetén győz: ha van kézzel
+      // javított magyar név, akkor van magyar neve, tehát nincs jelölés.
+      huNincsNeve: huJav === undefined && nincsMagyarNev.has(q),
       wikidata: `https://www.wikidata.org/wiki/${q}`,
     });
   }
@@ -378,6 +397,29 @@ async function main() {
     );
   }
   console.log(`  ${javHatott.length}/${javKulcsok.length} kézi német név érvényesült`);
+
+  // Ugyanez a két néma hiba a magyar oldalon: a javitasokHu.json és a
+  // nincsMagyarNev.json kulcsa sem hiba, ha nem talál helyet, csak csendben
+  // nem csinál semmit. Ez a projekt legcsendőbb hibája éppen az volt, ezért
+  // mindkettőről szólunk, ha nem ér valamire.
+  const huKulcsok = Object.keys(javitasokHu).filter((k) => !k.startsWith("_"));
+  const huHibas = huKulcsok.filter((k) => !helyek.some((h) => h.q === k));
+  const huHatott = huKulcsok.filter((k) => helyek.some((h) => h.q === k && h.hu === javitasokHu[k]));
+  if (huHibas.length) {
+    console.log(
+      `  figyelem: a javitasokHu.json ${huHibas.length} Q-száma nincs az adatban: ${huHibas.join(", ")}`,
+    );
+  }
+  console.log(`  ${huHatott.length}/${huKulcsok.length} kézi magyar név érvényesült`);
+
+  const jelzettHibas = [...nincsMagyarNev].filter((k) => !helyek.some((h) => h.q === k));
+  const jelzett = helyek.filter((h) => h.huNincsNeve);
+  if (jelzettHibas.length) {
+    console.log(
+      `  figyelem: a nincsMagyarNev.json ${jelzettHibas.length} Q-száma nincs az adatban: ${jelzettHibas.join(", ")}`,
+    );
+  }
+  console.log(`  ${jelzett.length} helynek jeleztük, hogy nincs magyar neve`);
 
   if (agglomeracio) {
     // Kilistázzuk, mert a szűrés a névre épül, és ha a Wikidata átírja a
@@ -475,7 +517,7 @@ async function main() {
   const kimenet = {
     verzio: VERZIO,
     generatas: new Date().toISOString(),
-    forras: "Wikidata (CC0) + javitasok.json",
+    forras: "Wikidata (CC0) + javitasok.json + javitasokHu.json + nincsMagyarNev.json",
     telepulesOsztaly: [...telepulesOsztaly].sort(),
     megyek: MEGYEK,
     helyek,

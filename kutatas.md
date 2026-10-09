@@ -394,6 +394,85 @@ tudhatja meg, mit dobott el a kód — ezt a kódnak kell kimondania. Ezért
 listázza a letöltő a „több valódi hely egy néven" eseteket, és a
 `proba.mjs` konkrét falvakra néz, nem számot hasonlít.
 
+## A visszanyert 93 magyar neve: a hiba nem szűnt meg, csak átmérődött
+
+A 93 hely visszakerült, de felvetett egy kérdést, amire a korábbi
+munkamenetben nem válaszoltunk: **a visszanyert helyek közül hányban a
+magyar név csak a román neve?**
+
+### A mérés, és hogy hogyan lehetett reprodukálni
+
+A 93-at nem újraszámoltam: a jelenlegi `helyek.json`-on lejátszottam a
+*régi* dedup-szabályt (kulcs `megye|ro`, a kisebb Q-szám nyer), és az
+eldobott sorok közül kiszűrtem azokat, amikre a `ugyanazAHely()` nem
+mond igent. A szám **pontosan 93** — ez nem véletlen, hanem bizonyíték,
+hogy a mérés ugyanazt a hibát játssza újra, tehát amit a dedup eldobott,
+azt nézem most.
+
+Ebből **44** olyan, ahol a magyar név megegyezik a románnal.
+
+### A KIA mérleg
+
+A KIA helységnévtárat (`hnevta02.pdf`, 371 oldal) újra letöltöttem és
+szöveggé alakítottam, és mind a 44-nél megnéztem a bejegyzést — **községre
+szűkítve**, mert a puszta név három-négy különböző falut vonjon össze
+(„Runc" Alba megyében négy helységet jelöl).
+
+**Eredmény: egyiknél sincs magyar név.** Mindegyik bejegyzés
+`Közigazg.`-vel folytatódik magyar név nélkül, vagy a szomszédos falu régi
+nevével egyesül.
+
+### A mérés két hibája, amit menet közben javítani kellett
+
+1. **A KIA szövege `ş`/`ţ` alakot használ**, nem `ș`/`ț`-t. Emiatt az első
+   futás **0 találatot** adott mindenre, és majdnem elhittem, hogy egyik
+   helynek sincs magyar neve — mert tényleg nem volt *találatom*. Ugyanaz a
+   hibaosztály, mint a `metropolisztérség` ügye: a mérés azt mérte, hogy
+   sikerült-e a keresés, nem azt, hogy van-e a név.
+2. **A pont és a „Név:" között nem whitespace, hanem egy PDF-jel (`•`)
+   van**, tehát a szokásos `\.\s*Név:` regex nem talál. Ez volt a
+   különbség a 0 és a 13 között.
+
+### Amit ez eldöntött (és amit nem)
+
+A 44 **ugyanaz az osztály, mint a 77**: nincs magyar nevük, és a forrás
+nem őrzi. De a mérés kiterjesztése a teljes 468-as `hu == ro` halmazra
+kiderült, hogy **ez az osztály nem zárható le**:
+
+- a 468-ból **442**-nek van KIA-bejegyzése (községre szűkítve), és ezek
+  közül **13**-nál van magyar név, ami eltér a romántól;
+- ezekből **13-ból 2** áll két független forrásból is, mert a magyar
+  Wikipedia infoboxának „magyar név" mezője is ugyanaz: `Mănăstire` →
+  **Monostor**, `Dumești` → **Dumest** — ez a `javitasokHu.json` két
+  bejegyzése;
+- a többi 11 nem került be: a KIA átírást adott magyar nevként (`Ránta`,
+  `Bobája`, `Dumest`-szerű), vagy leírást (`Galbina községrész`), vagy
+  épp **másik falu** nevét (a `Csunzshavas` a Fântânele-bejegyzésben nem
+  az). Ezért a szabály: **két forrás kell**, nem egy.
+
+### A kalibráció, ami nélkül mindent rosszul mértünk volna
+
+Mielőtt azt mondtam, hogy „a KIA nem ad magyar nevet", meg kellett
+kérdezni: **az üres magyar mező jelenti-e, hogy nincs név?** Három
+számlálás a teljes helységnévtárból:
+
+| KIA-bejegyzések | darab |
+|---|---|
+| magyar név kiírva, és **azonos** a románnal | 38 |
+| magyar név kiírva, és eltér | 1202 |
+| **nincs magyar név** a sorban | 164 |
+
+Tehát a KIA kiírja az azonos nevet is (pl. `Adalin (Dragu, SJ) Adalin.`),
+csak ritkán (3,1%). Nem szabály, de **nem is szabálytalanság**: az üres
+mező érdemi jelzés, és a 1202 eltérő névvel együtt igen erős.
+
+### A termékoldali döntés
+
+A „nincs magyar neve" osztály tehát nem 77, hanem **legalább 121** hely (a
+92 ismert Wikidata-hiba 89-e az adatfájlban, plusz a 44-ből 32 új; 12
+átfedés). A felület most apró jelölést tesz melléjük — nem a név helyett,
+mert akkor a falu nem lenne kereshető.
+
 ## A közös tanulság: ellenőrizd a láthatatlant is
 
 Ez a projektben **négy** csendes hiba van, és mind ugyanazt a mintát követi:
