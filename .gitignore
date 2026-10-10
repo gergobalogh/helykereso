@@ -7,6 +7,10 @@
 
 node_modules/
 
+# Helyi OpenAI Sites-azonosító; a nyilvános GitHub/Cloudflare Pages
+# kiadáshoz nem szükséges.
+.openai/
+
 # Az `ismertHibak.json` a `helyek.json`-ból képződik (a `kutatas.md` szerint
 # a Wikidata hibái, Q-számmal), DE kézzel kell beletenni az új elemeket is:
 # ha valaki javít a Wikidata-n és az kiesik innen, az ellenőrző szól. Ezért

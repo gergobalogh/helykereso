@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f5f2eb"/>
+  <g fill="none" stroke="#cfc5b6" stroke-width="2" opacity=".6">
+    <path d="M760 67c79 53 57 132 123 163 72 34 157-16 231 47 42 36 38 99 7 145-53 78-175 99-269 52-83-42-132-143-91-225 24-47-45-122-1-182Z"/>
+    <path d="M829 111c55 36 37 90 91 110 55 21 119-11 171 32 38 32 16 94-19 123-65 55-169 54-232-6-42-40-65-110-31-158 19-27-12-77 20-101Z"/>
+    <path d="M887 154c33 27 14 62 55 78 42 16 82-8 116 23 26 24 4 66-23 82-46 28-111 15-145-27-23-29-33-74-8-102 13-15-15-37 5-54Z"/>
+  </g>
+  <rect x="80" y="78" width="76" height="76" rx="18" fill="#813b3b"/>
+  <path d="M100 102h36M100 116h24M100 130h31" fill="none" stroke="#fffefb" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="134" cy="116" r="10" fill="#f8dda0" stroke="#fffefb" stroke-width="3"/>
+  <text x="80" y="248" fill="#292522" font-family="Georgia, serif" font-size="82" font-weight="700">Helynévkereső</text>
+  <text x="80" y="318" fill="#813b3b" font-family="Georgia, serif" font-size="36" font-style="italic">Erdélyi helységnevek egy helyen</text>
+  <text x="80" y="404" fill="#716a62" font-family="Georgia, serif" font-size="28">magyarul · románul · németül</text>
+  <g font-family="Georgia, serif" font-size="24">
+    <rect x="80" y="454" width="290" height="54" rx="27" fill="#fffefb" stroke="#cfc5b6"/>
+    <text x="104" y="489" fill="#292522">Kolozsvár · Cluj-Napoca</text>
+    <rect x="386" y="454" width="240" height="54" rx="27" fill="#fffefb" stroke="#cfc5b6"/>
+    <text x="410" y="489" fill="#292522">Brassó · Kronstadt</text>
+  </g>
+  <text x="1120" y="570" text-anchor="end" fill="#813b3b" font-family="Georgia, serif" font-size="22" font-weight="700">6 622 helység</text>
+</svg>

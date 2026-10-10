@@ -3,14 +3,94 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Helynévkereső · erdélyi helyek nevei magyarul, románul, németül</title>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%C4%91%3C/text%3E%3C/svg%3E"
-    />
+    <title>Erdélyi helységnevek magyarul és románul | Helynévkereső</title>
     <meta
       name="description"
-      content="Nézd meg, hogy hívják Kolozsvárt románul és németül. Keress bármely erdélyi helységet, és lásd mindhárom nevét egymás mellett."
+      content="Keress több mint 6600 erdélyi, partiumi, bánsági és kárpátaljai helység magyar, román és német neve között, térképpel és hiteles forrásokkal."
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#f5f2eb" />
+    <link rel="canonical" href="https://helykereso.gergobalogh.me/" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" sizes="any" />
+    <link rel="manifest" href="./site.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="hu_HU" />
+    <meta property="og:site_name" content="Helynévkereső" />
+    <meta property="og:title" content="Erdélyi helységnevek magyarul és románul" />
+    <meta
+      property="og:description"
+      content="Több mint 6600 erdélyi, partiumi, bánsági és kárpátaljai helység neve magyarul, románul és németül."
+    />
+    <!-- production-url-meta:start -->
+    <meta property="og:url" content="https://helykereso.gergobalogh.me/" />
+    <meta property="og:image" content="https://helykereso.gergobalogh.me/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Helynévkereső – erdélyi helységnevek egy helyen" />
+    <meta name="twitter:image" content="https://helykereso.gergobalogh.me/og-image.png" />
+    <!-- production-url-meta:end -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Erdélyi helységnevek | Helynévkereső" />
+    <meta
+      name="twitter:description"
+      content="Keress több mint 6600 helység magyar, román és német neve között."
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "name": "Helynévkereső",
+            "alternateName": "Erdélyi helységnévtár",
+            "description": "Erdélyi, partiumi, bánsági és kárpátaljai helységek nevei magyarul, románul és németül.",
+            "inLanguage": "hu"
+          },
+          {
+            "@type": "WebApplication",
+            "name": "Helynévkereső",
+            "applicationCategory": "EducationalApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "JavaScriptot támogató webböngésző",
+            "isAccessibleForFree": true,
+            "inLanguage": "hu",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "HUF"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Balogh Gergő",
+              "url": "https://gergobalogh.me/"
+            }
+          },
+          {
+            "@type": "Dataset",
+            "name": "Helynévkereső helységnévadatai",
+            "description": "Több mint 6600 Kárpát-medencei helység magyar, román és német neve, megyéje, koordinátája és forrása.",
+            "inLanguage": ["hu", "ro", "de"],
+            "dateModified": "2026-10-10",
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "isBasedOn": "https://www.wikidata.org/",
+            "distribution": [
+              {
+                "@type": "DataDownload",
+                "encodingFormat": "application/json",
+                "contentUrl": "./helyek.json"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,17 +100,19 @@
     />
     <style>
       :root {
-        --papir: #faf5e9;
-        --papir-2: #fffdf6;
-        --tinta: #2c2620;
-        --tinta-halvany: #6f6353;
-        --vonal: #ddd0b6;
-        --vonal-sotet: #c4b28e;
-        --bordó: #7c2d2d;
-        --bordó-sotet: #5f2121;
-        --moha: #4c5f3f;
+        --papir: #f5f2eb;
+        --papir-2: #fffefb;
+        --tinta: #292522;
+        --tinta-halvany: #716a62;
+        --vonal: #e4ded3;
+        --vonal-sotet: #cfc5b6;
+        --bordó: #813b3b;
+        --bordó-sotet: #652b2b;
+        --bordó-halvany: #f4e9e7;
+        --moha: #53644b;
         --arany: #9a7618;
-        --kiemel-hatter: #fbe3a2;
+        --kiemel-hatter: #f8dda0;
+        --arnyek: 0 14px 36px rgba(67, 52, 36, 0.08);
       }
       * {
         box-sizing: border-box;
@@ -39,46 +121,47 @@
         margin: 0;
         color: var(--tinta);
         font-family: "Lora", Georgia, "Times New Roman", serif;
-        font-size: 17px;
-        line-height: 1.65;
+        font-size: 16px;
+        line-height: 1.6;
         background:
-          radial-gradient(1200px 400px at 50% -80px, #fffdf4 0%, transparent 60%),
-          repeating-linear-gradient(
-            0deg,
-            transparent 0 26px,
-            rgba(122, 96, 50, 0.035) 26px 27px
-          ),
+          radial-gradient(900px 440px at 50% -180px, #fffdf7 0%, transparent 75%),
           var(--papir);
       }
       main {
-        max-width: 760px;
+        max-width: 860px;
         margin: 0 auto;
-        padding: 40px 22px 80px;
+        padding: 56px 24px 80px;
+      }
+      .fejlec {
+        max-width: 660px;
+        margin-bottom: 30px;
       }
       .szemoldok {
         font-family: "Lora", serif;
-        font-size: 0.72rem;
-        letter-spacing: 0.22em;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
         color: var(--bordó);
-        margin: 0 0 10px;
+        margin: 0 0 12px;
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 9px;
       }
-      .szemoldok::after {
+      .szemoldok::before {
         content: "";
-        flex: 1;
-        height: 1px;
-        background: var(--vonal-sotet);
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--bordó);
       }
       h1 {
         font-family: "Fraunces", Georgia, serif;
         font-weight: 650;
-        font-size: clamp(2.4rem, 6vw, 3.4rem);
-        line-height: 1.02;
-        letter-spacing: -0.02em;
-        margin: 0 0 10px;
+        font-size: clamp(2.7rem, 7vw, 4.35rem);
+        line-height: 0.98;
+        letter-spacing: -0.035em;
+        margin: 0 0 16px;
         color: var(--tinta);
       }
       h1 em {
@@ -87,93 +170,228 @@
         color: var(--bordó);
       }
       .bemutato {
-        font-style: italic;
-        font-size: 1.08rem;
+        font-size: 1.02rem;
         color: var(--tinta-halvany);
-        margin: 0 0 6px;
-        max-width: 36em;
-      }
-      .disz {
-        color: var(--vonal-sotet);
-        letter-spacing: 0.6em;
-        font-size: 0.9rem;
-        margin: 14px 0 22px;
-        user-select: none;
+        margin: 0;
+        max-width: 39em;
       }
       .keres-wrap {
         position: sticky;
         top: 12px;
-        z-index: 5;
+        z-index: 500;
+        padding: 14px;
+        border: 1px solid rgba(207, 197, 182, 0.9);
+        border-radius: 16px;
+        background: rgba(255, 254, 251, 0.94);
+        box-shadow: var(--arnyek);
+        backdrop-filter: blur(12px);
+      }
+      .keres-racs {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(190px, 0.42fr);
+        gap: 10px;
+      }
+      .mezo-csoport {
+        display: grid;
+        gap: 6px;
+        min-width: 0;
+      }
+      .mezo-cimke {
+        color: var(--tinta-halvany);
+        font-size: 0.69rem;
+        font-weight: 600;
+        letter-spacing: 0.11em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+      .keres,
+      #megye {
+        width: 100%;
+        min-height: 52px;
+        font-family: "Lora", serif;
+        font-size: 1rem;
+        background-color: #fff;
+        border: 1px solid var(--vonal-sotet);
+        border-radius: 10px;
+        color: var(--tinta);
+        transition: border-color 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
       }
       .keres {
-        width: 100%;
-        padding: 16px 18px 16px 48px;
-        font-family: "Lora", serif;
-        font-size: 1.12rem;
-        background: var(--papir-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%237c2d2d' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E") no-repeat 16px center;
-        border: 1.5px solid var(--vonal-sotet);
-        border-radius: 4px;
-        color: var(--tinta);
-        box-shadow:
-          0 1px 0 #fff inset,
-          0 8px 24px rgba(90, 70, 30, 0.12);
+        padding: 13px 16px 13px 45px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23813b3b' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: 15px center;
       }
       .keres::placeholder {
         font-style: italic;
-        color: #a8977a;
+        color: #9a9185;
       }
-      .keres:focus {
-        outline: 2px solid var(--bordó);
-        outline-offset: 2px;
+      .keres:hover,
+      #megye:hover {
         border-color: var(--bordó);
+      }
+      .keres:focus,
+      #megye:focus {
+        outline: none;
+        border-color: var(--bordó);
+        box-shadow: 0 0 0 3px rgba(129, 59, 59, 0.13);
+      }
+      .select-wrap {
+        position: relative;
+        display: block;
+      }
+      .select-wrap::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 17px;
+        width: 8px;
+        height: 8px;
+        border-right: 1.5px solid var(--bordó);
+        border-bottom: 1.5px solid var(--bordó);
+        pointer-events: none;
+        transform: translateY(-70%) rotate(45deg);
+      }
+      #megye {
+        appearance: none;
+        padding: 13px 42px 13px 15px;
+        cursor: pointer;
       }
       .szures {
         display: flex;
-        align-items: center;
-        gap: 10px;
-        margin: 12px 2px 0;
+        align-items: flex-start;
+        gap: 8px;
+        margin: 11px 2px 0;
         color: var(--tinta-halvany);
-        font-size: 0.88rem;
+        font-size: 0.8rem;
         font-style: italic;
         min-height: 1.4em;
       }
-      #megye {
-        font-family: "Lora", serif;
+      .szures::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        background: var(--moha);
+        opacity: 0.75;
+        margin-top: 0.55em;
+      }
+      .keres-wrap.kereses-folyamatban .szures::before {
+        background: var(--arany);
+        animation: keres-pulzus 700ms ease-in-out infinite alternate;
+      }
+      .talalat,
+      .terkep-panel {
+        transition: opacity 160ms ease, transform 160ms ease;
+      }
+      .talalat.kereses-folyamatban,
+      .keres-wrap.kereses-folyamatban ~ .terkep-panel {
+        opacity: 0.55;
+        pointer-events: none;
+        transform: translateY(2px);
+      }
+      @keyframes keres-pulzus {
+        from { opacity: 0.4; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1.15); }
+      }
+      .terkep-panel {
+        margin-top: 22px;
+        overflow: hidden;
+        border: 1px solid var(--vonal);
+        border-radius: 14px;
+        background: var(--papir-2);
+        box-shadow: 0 8px 24px rgba(67, 52, 36, 0.06);
+      }
+      .terkep-panel[hidden] {
+        display: none;
+      }
+      .terkep-fej {
+        min-height: 48px;
+        padding: 10px 15px;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        border-bottom: 1px solid var(--vonal);
+        color: var(--tinta-halvany);
+        font-size: 0.82rem;
+        font-style: italic;
+      }
+      .terkep-fej strong {
+        color: var(--tinta);
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 1rem;
         font-style: normal;
+        font-weight: 650;
+      }
+      .terkep {
+        width: 100%;
+        height: 320px;
+        background: #e9e4d7;
+        z-index: 0;
+      }
+      .terkep.nem-elerheto {
+        height: auto;
+        min-height: 76px;
+        display: grid;
+        place-items: center;
+        padding: 18px;
+        color: var(--tinta-halvany);
+        font-style: italic;
+        text-align: center;
+      }
+      .leaflet-container {
+        font-family: "Lora", Georgia, serif;
+      }
+      .leaflet-popup-content-wrapper,
+      .leaflet-popup-tip {
         background: var(--papir-2);
         color: var(--tinta);
-        border: 1px solid var(--vonal);
-        border-radius: 999px;
-        padding: 6px 12px;
-        font-size: 0.86rem;
-        cursor: pointer;
       }
-      #megye:focus {
-        outline: 2px solid var(--bordó);
-        outline-offset: 1px;
+      .leaflet-popup-content strong {
+        display: block;
+        margin-bottom: 2px;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 1.04rem;
+      }
+      .leaflet-popup-content .popup-nevek {
+        color: var(--tinta-halvany);
+        font-size: 0.84rem;
+      }
+      .leaflet-popup-content .popup-linkek {
+        margin-top: 6px;
+        font-size: 0.82rem;
       }
       .talalat {
-        margin-top: 26px;
+        margin-top: 22px;
         display: grid;
-        gap: 12px;
+        gap: 10px;
       }
       .sor {
         background: var(--papir-2);
         border: 1px solid var(--vonal);
-        border-left: 4px solid var(--bordó);
-        border-radius: 3px;
-        padding: 13px 16px 11px;
+        border-radius: 12px;
+        padding: 15px 17px 13px;
         display: flex;
         flex-wrap: wrap;
         align-items: baseline;
         gap: 4px 12px;
-        box-shadow: 0 2px 10px rgba(90, 70, 30, 0.07);
+        box-shadow: 0 3px 12px rgba(67, 52, 36, 0.045);
+        transition: border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
       }
-      .sor:nth-child(3n) {
-        border-left-color: var(--moha);
+      .sor.terkepes {
+        cursor: pointer;
       }
-      .sor:nth-child(3n + 1) {
-        border-left-color: var(--arany);
+      .sor.terkepes:hover {
+        border-color: var(--vonal-sotet);
+        box-shadow: 0 8px 20px rgba(67, 52, 36, 0.08);
+        transform: translateY(-1px);
+      }
+      .sor.kivalasztva {
+        border-color: var(--bordó);
+        background: #fffdfa;
+        box-shadow: 0 0 0 3px rgba(129, 59, 59, 0.11), 0 8px 20px rgba(67, 52, 36, 0.08);
       }
       .nev {
         font-family: "Fraunces", serif;
@@ -202,11 +420,11 @@
         text-transform: uppercase;
         letter-spacing: 0.1em;
         color: var(--bordó);
-        border: 1px solid var(--vonal-sotet);
+        border: 0;
         border-radius: 999px;
-        padding: 1px 7px;
+        padding: 2px 7px;
         margin-right: 6px;
-        background: #f7efdb;
+        background: var(--bordó-halvany);
       }
       .nincsneve {
         font-size: 0.72rem;
@@ -217,6 +435,22 @@
         padding: 1px 8px;
         cursor: help;
         background: transparent;
+      }
+      .terkepre {
+        appearance: none;
+        padding: 0;
+        border: 0;
+        border-bottom: 1px dotted currentColor;
+        background: transparent;
+        color: var(--bordó);
+        font: inherit;
+        font-style: italic;
+        cursor: pointer;
+      }
+      .terkepre:hover,
+      .terkepre:focus-visible {
+        color: var(--bordó-sotet);
+        border-bottom-style: solid;
       }
       .kozseg {
         font-size: 0.84rem;
@@ -240,10 +474,53 @@
         margin-top: 36px;
         text-align: center;
       }
+      .tajekoztato {
+        margin-top: 48px;
+        padding: 28px;
+        border: 1px solid var(--vonal);
+        border-radius: 14px;
+        background: rgba(255, 254, 251, 0.72);
+      }
+      .tajekoztato h2 {
+        margin: 0 0 10px;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: clamp(1.55rem, 4vw, 2rem);
+        line-height: 1.15;
+      }
+      .tajekoztato p {
+        margin: 0;
+      }
+      .tajekoztato p + p {
+        margin-top: 12px;
+      }
+      .tajekoztato a {
+        font-weight: 600;
+      }
+      .pelda-linkek {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 18px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+      .pelda-linkek a {
+        display: block;
+        padding: 5px 10px;
+        border: 1px solid var(--vonal-sotet);
+        border-radius: 999px;
+        background: var(--papir-2);
+        font-size: 0.86rem;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .pelda-linkek a:hover {
+        border-color: var(--bordó);
+      }
       footer {
         margin-top: 52px;
-        padding-top: 20px;
-        border-top: 3px double var(--vonal-sotet);
+        padding-top: 22px;
+        border-top: 1px solid var(--vonal-sotet);
         color: var(--tinta-halvany);
         font-size: 0.87rem;
         font-style: italic;
@@ -255,40 +532,96 @@
         color: var(--bordó);
       }
       @media (max-width: 560px) {
-        main { padding-top: 28px; }
+        main { padding: 32px 16px 60px; }
+        .fejlec { margin-bottom: 24px; }
+        h1 { font-size: clamp(2.7rem, 14vw, 3.6rem); }
+        .bemutato { font-size: 0.96rem; }
         .keres-wrap { top: 8px; }
+        .keres-racs { grid-template-columns: 1fr; }
+        .keres,
+        #megye { min-height: 48px; }
+        .terkep { height: 255px; }
+        .terkep-fej { align-items: flex-start; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .talalat,
+        .terkep-panel {
+          transition: none;
+        }
+        .keres-wrap.kereses-folyamatban .szures::before {
+          animation: none;
+        }
       }
     </style>
   </head>
   <body>
     <main>
-      <p class="szemoldok">Erdély · helységnévtár · Wikidata</p>
-      <h1>Helynév<em>kereső</em></h1>
-      <p class="bemutato">
-        Bármely erdélyi helység magyar, román és német neve egymás mellett —
-        mint egy régi térkép széljegyzete.
-      </p>
-      <div class="disz" aria-hidden="true">❦ ❦ ❦</div>
+      <header class="fejlec">
+        <p class="szemoldok">Erdély · helységnévtár · Wikidata</p>
+        <h1>Helynév<em>kereső</em></h1>
+        <p class="bemutato">
+          Bármely erdélyi helység magyar, román és német neve egymás mellett —
+          mint egy régi térkép széljegyzete.
+        </p>
+      </header>
 
-      <div class="keres-wrap">
-        <input
-          class="keres"
-          id="mezo"
-          type="search"
-          placeholder="pl. Marosvásárhely, Targu Mures, Kolozsvár…"
-          autocomplete="off"
-          autofocus
-        />
+      <div class="keres-wrap" role="search" aria-label="Helységnévkereső">
+        <div class="keres-racs">
+          <label class="mezo-csoport" for="mezo">
+            <span class="mezo-cimke">Helységnév</span>
+            <input
+              class="keres"
+              id="mezo"
+              type="search"
+              placeholder="pl. Marosvásárhely, Targu Mures…"
+              autocomplete="off"
+              autofocus
+            />
+          </label>
+          <label class="mezo-csoport" for="megye">
+            <span class="mezo-cimke">Megye</span>
+            <span class="select-wrap">
+              <select id="megye">
+                <option value="">Minden megye</option>
+              </select>
+            </span>
+          </label>
+        </div>
+        <div class="szures" aria-live="polite">
+          <span id="szures"></span>
+        </div>
       </div>
 
-      <div class="szures">
-        <select id="megye">
-          <option value="">minden megye</option>
-        </select>
-        <span id="szures"></span>
-      </div>
+      <section class="terkep-panel" id="terkep-panel" aria-label="Találatok térképe" hidden>
+        <div class="terkep-fej">
+          <strong>Térkép</strong>
+          <span id="terkep-uzenet" aria-live="polite"></span>
+        </div>
+        <div class="terkep" id="terkep" aria-label="Interaktív térkép"></div>
+      </section>
 
-      <div class="talalat" id="talalat"></div>
+      <section class="talalat" id="talalat" aria-label="Keresési találatok"></section>
+
+      <section class="tajekoztato" aria-labelledby="mi-ez">
+        <h2 id="mi-ez">Erdélyi helységnevek egy helyen</h2>
+        <p>
+          A Helynévkereső Erdély, a Partium, a Bánság, Kárpátalja és a
+          környező határvidék településneveit teszi kereshetővé. Magyar,
+          román és német névvel is kereshetsz, ékezetek nélkül is; a
+          találatoknál a megye, a térkép, valamint a Wikipedia- és
+          Wikidata-forrás is elérhető.
+        </p>
+        <p>
+          Böngésznél inkább? Nyisd meg a
+          <a href="./megyek/">megyék és régiók teljes, keresők által is olvasható jegyzékét</a>.
+        </p>
+        <ul class="pelda-linkek" aria-label="Példakeresések">
+          <li><a href="?q=Kolozsv%C3%A1r">Kolozsvár · Cluj-Napoca · Klausenburg</a></li>
+          <li><a href="?q=Marosv%C3%A1s%C3%A1rhely">Marosvásárhely · Târgu Mureș</a></li>
+          <li><a href="?q=Brass%C3%B3">Brassó · Brașov · Kronstadt</a></li>
+          <li><a href="?q=Nagyszeben">Nagyszeben · Sibiu · Hermannstadt</a></li>
+        </ul>
+      </section>
 
       <footer>
         <p>
@@ -312,6 +645,11 @@
       </footer>
     </main>
 
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
     <script type="module" src="./keres.js"></script>
   </body>
 </html>

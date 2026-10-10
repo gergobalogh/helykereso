@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://helykereso.gergobalogh.me/sitemap.xml

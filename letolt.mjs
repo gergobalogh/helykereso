@@ -1,15 +1,21 @@
-// Letölti a Wikidata-ról az erdélyi helységeket, és kiírja helyek.json-ba.
+// Letölti a Wikidata-ról a helységeket, és kiírja helyek.json-ba.
+// Erdély + Partium + Bánság + Kárpátalja + határmegyék (HU/RS), egyben.
 //
 // Három lépésben dolgozik, mindegyik azért külön, mert a `P131*` (átmenő
 // tulajdonság) lefut a SPARQL-végpont időkorlátjába:
 //
-//   A. minden, aminek van magyar és román neve, a megyék alatt — osztály
+//   A. minden, aminek van magyar neve, a megyék alatt — osztály
 //      szűrés nélkül. Ebből kiderülnek a használt osztályok.
 //   B. a földrajzi osztályok megkérdezése: melyik lakott helység? Ez a
 //      lépés azért külön, mert a `wdt:P279*` átmenő utat a végpont nem bírja
 //      a teljes adatbázison, de 180 osztályon át megy villámgyorsan.
-//   C. a A. lépésben talált községek és városok alatt minden, ami magyar és
-//      román nevű — megint osztály szűrés nélkül.
+//   C. a A. lépésben talált községek és városok alatt minden, ami magyar
+//      nevű — megint osztály szűrés nélkül.
+//
+// A román név 3.0.0 óta `OPTIONAL`: határon túl (HU, részben UA/RS) sok
+// helynek nincs román címkéje a Wikidata-n, és a kötelező szűrés
+// kitörölné őket a keresőből. Ahol nincs, ott a soron csak a magyar
+// (és ha van, a német) név látszik.
 //
 // Az A. és C. lépés eredményét helyben (JavaScriptben) szűrjük osztályra, az
 // osztálylistát a B. lépés adja. Így nem kell felsorolni a román
@@ -21,7 +27,8 @@
 
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
-import { nemHelyseg, deRomanEkezet, ugyanazAHely, utalok, VERZIO } from "./szabalyok.mjs";
+import { nemHelyseg, deRomanEkezet, ugyanazAHely, utalok, cirillAtir, VERZIO } from "./szabalyok.mjs";
+import { gazdagitTerkepAdattal } from "./terkepadat.mjs";
 
 const VEGEGPL = "https://query.wikidata.org/sparql";
 const USER_AGENT = "mivelkezdjem.hu helynevekereso (https://mivelkezdjem.hu)";
@@ -49,6 +56,7 @@ const TELEPULESC_IS_KOZIGAZGATAS = [
   "Q16858213", // town in Romania
   "Q15921247", // constituent locality
   "Q1907114", // metropolitan area
+  "Q783930", // municipality of Serbia — a vajdasági községek (opština)
 ];
 
 // Fordítva: vannak osztályok, amiket a Wikidata az "emberi lakhely" alá
@@ -95,24 +103,62 @@ const VETO_OSZTALY = [
 // Wikidata-azonosító. A `de` név akkor kell, ha biztos vagy benne; a `null`
 // azt jelenti "nincs rendes német nevem", és akkor a kereső sem próbál
 // rákeresni a megye német nevére.
+//
+// 2.0.0 óta Partium+Bánság is bent van (BH, SJ, SM, MM, AR, TM, CS),
+// 3.0.0 óta pedig a határon túli tömb: Kárpátalja (UA), négy magyar
+// megye és a bánsági körzetek (RS) — egy projektben, mert a történelem
+// nem állt meg Trianonnál. Az `orszag` mondja meg, melyik mai országban
+// van a megye: a lekérdezés `P17` szűrője és a sorvégi országjelölés
+// ebből jön. A magyar megyéknél a `ro` a magyar név átvétele (a román
+// a magyar neveket többnyire így használja); a bánsági körzeteknél rendes
+// román exonim van. A kárpátaljai bejegyzések járási szintűek (ld. alább).
 export const MEGYEK = [
-  { q: "Q182624", kod: "CJ", hu: "Kolozsvár", ro: "Cluj", de: "Klausenburg" },
-  { q: "Q45868", kod: "AB", hu: "Nagy-Albás", ro: "Alba", de: "Alba Iulia" },
-  { q: "Q182614", kod: "BV", hu: "Brassó", ro: "Brașov", de: "Kronstadt" },
-  { q: "Q188959", kod: "CV", hu: "Kovászna", ro: "Covasna", de: null },
-  { q: "Q190702", kod: "HR", hu: "Hargita", ro: "Harghita", de: "Hargitha" },
-  { q: "Q191071", kod: "HD", hu: "Hunyad", ro: "Hunedoara", de: "Hunyad" },
-  { q: "Q190711", kod: "MS", hu: "Maros", ro: "Mureș", de: "Marosburg" },
-  { q: "Q184797", kod: "SB", hu: "Szeben", ro: "Sibiu", de: "Hermannstadt" },
-  { q: "Q181513", kod: "BN", hu: "Beszterce-Nászád", ro: "Bistrița-Năsăud", de: "Bistritz" },
-  { q: "Q179588", kod: "BH", hu: "Bihar", ro: "Bihor", de: null },
-  { q: "Q190690", kod: "SJ", hu: "Szilágy", ro: "Sălaj", de: null },
-  { q: "Q165459", kod: "SM", hu: "Szatmár", ro: "Satu Mare", de: null },
-  { q: "Q188813", kod: "MM", hu: "Máramaros", ro: "Maramureș", de: null },
-  { q: "Q179559", kod: "AR", hu: "Arad", ro: "Arad", de: null },
-  { q: "Q185586", kod: "TM", hu: "Temes", ro: "Timiș", de: null },
-  { q: "Q187925", kod: "CS", hu: "Krassó-Szörény", ro: "Caraș-Severin", de: null },
+  { q: "Q182624", kod: "CJ", hu: "Kolozsvár", ro: "Cluj", de: "Klausenburg", orszag: "RO" },
+  { q: "Q45868", kod: "AB", hu: "Nagy-Albás", ro: "Alba", de: "Alba Iulia", orszag: "RO" },
+  { q: "Q182614", kod: "BV", hu: "Brassó", ro: "Brașov", de: "Kronstadt", orszag: "RO" },
+  { q: "Q188959", kod: "CV", hu: "Kovászna", ro: "Covasna", de: null, orszag: "RO" },
+  { q: "Q190702", kod: "HR", hu: "Hargita", ro: "Harghita", de: "Hargitha", orszag: "RO" },
+  { q: "Q191071", kod: "HD", hu: "Hunyad", ro: "Hunedoara", de: "Hunyad", orszag: "RO" },
+  { q: "Q190711", kod: "MS", hu: "Maros", ro: "Mureș", de: "Marosburg", orszag: "RO" },
+  { q: "Q184797", kod: "SB", hu: "Szeben", ro: "Sibiu", de: "Hermannstadt", orszag: "RO" },
+  { q: "Q181513", kod: "BN", hu: "Beszterce-Nászád", ro: "Bistrița-Năsăud", de: "Bistritz", orszag: "RO" },
+  { q: "Q179588", kod: "BH", hu: "Bihar", ro: "Bihor", de: null, orszag: "RO" },
+  { q: "Q190690", kod: "SJ", hu: "Szilágy", ro: "Sălaj", de: null, orszag: "RO" },
+  { q: "Q165459", kod: "SM", hu: "Szatmár", ro: "Satu Mare", de: null, orszag: "RO" },
+  { q: "Q188813", kod: "MM", hu: "Máramaros", ro: "Maramureș", de: null, orszag: "RO" },
+  { q: "Q179559", kod: "AR", hu: "Arad", ro: "Arad", de: null, orszag: "RO" },
+  { q: "Q185586", kod: "TM", hu: "Temes", ro: "Timiș", de: null, orszag: "RO" },
+  { q: "Q187925", kod: "CS", hu: "Krassó-Szörény", ro: "Caraș-Severin", de: null, orszag: "RO" },
+  // Kárpátalja: az ukrán lánc háromszintes (megye → járás → kistérség →
+  // falu), a letöltő viszont kettőt tud (megye → község → falu). Ezért itt
+  // a JÁRÁSOK a célok: alattuk a kistérségek, azok alatt a falvak — pont
+  // mint Romániában a községek alatt. A megye (oblaszty) külön bejegyzés,
+  // hogy a közvetlenül alája kötött városok (ha vannak) se vesszenek el.
+  // Mind a `ZK` kódon osztozik: a kijelzésben egy megye ("Kárpátalja").
+  { q: "Q170213", kod: "ZK", hu: "Kárpátalja", ro: "Transcarpatia", de: null, orszag: "UA" },
+  { q: "Q98659359", kod: "ZK", hu: "Kárpátalja", ro: "Transcarpatia", de: null, orszag: "UA" },
+  { q: "Q65203424", kod: "ZK", hu: "Kárpátalja", ro: "Transcarpatia", de: null, orszag: "UA" },
+  { q: "Q98637562", kod: "ZK", hu: "Kárpátalja", ro: "Transcarpatia", de: null, orszag: "UA" },
+  { q: "Q98663281", kod: "ZK", hu: "Kárpátalja", ro: "Transcarpatia", de: null, orszag: "UA" },
+  { q: "Q103820074", kod: "ZK", hu: "Kárpátalja", ro: "Transcarpatia", de: null, orszag: "UA" },
+  { q: "Q104539085", kod: "ZK", hu: "Kárpátalja", ro: "Transcarpatia", de: null, orszag: "UA" },
+  { q: "Q190518", kod: "SZB", hu: "Szabolcs-Szatmár-Bereg", ro: "Szabolcs-Szatmár-Bereg", de: null, orszag: "HU" },
+  { q: "Q185368", kod: "HJB", hu: "Hajdú-Bihar", ro: "Hajdú-Bihar", de: null, orszag: "HU" },
+  { q: "Q191616", kod: "BEK", hu: "Békés", ro: "Békés", de: null, orszag: "HU" },
+  { q: "Q193031", kod: "CSC", hu: "Csongrád-Csanád", ro: "Csongrád-Csanád", de: null, orszag: "HU" },
+  { q: "Q728041", kod: "EBN", hu: "Észak-Bánság", ro: "Banatul de Nord", de: null, orszag: "RS" },
+  { q: "Q425782", kod: "KBN", hu: "Közép-Bánság", ro: "Banatul Central", de: null, orszag: "RS" },
+  { q: "Q720030", kod: "DBN", hu: "Dél-Bánság", ro: "Banatul de Sud", de: null, orszag: "RS" },
 ];
+
+// Országok Wikidata-azonosítói a `P17` szűrőhöz. Külön kell, mert egy
+// kérés egy `VALUES ?cel` halmazt visz, és a megyék országonként más
+// `P17`-et kérnek — a kevert kérés vagy lassú, vagy rossz találatot ad.
+const ORSZAG_P17 = { RO: "Q218", UA: "Q212", HU: "Q28", RS: "Q403" };
+
+// Országnevek a sorvégi jelöléshez. A romániai sorokon nincs ország
+// (az az alapértelmezett, és a régi sorok nem változnak); a többin ott.
+export const ORSZAG_NEV = { HU: "Magyarország", UA: "Ukrajna", RS: "Szerbia" };
 
 // Egy-egy kérés ennyi helységet vehet fel. Nagyobb érték gyorsabb, de a
 // végpontnak is el kell bírnia a WHERE részt.
@@ -206,29 +252,50 @@ async function lekérdezHalmaz({ nev, celok, osszegyujt }) {
   return sorok;
 }
 
-/** Osztály szűrés NÉLKÜLI lekérdezés: minden magyar+román nevű dolog a célok alatt. */
-const KERDES = (cel) => `
-  SELECT DISTINCT ?hely ?cel ?osztaly ?hu ?ro ?de WHERE {
+/** Osztály szűrés NÉLKÜLI lekérdezés: minden magyar nevű dolog a célok alatt. */
+const KERDES = (cel, p17, altLang) => `
+  SELECT DISTINCT ?hely ?cel ?osztaly ?hu ?ro ?de ?alt WHERE {
     VALUES ?cel { ${cel.map((c) => "wd:" + c).join(" ")} }
     ?hely wdt:P131 ?cel .
     ?hely wdt:P31 ?osztaly .
-    ?hely rdfs:label ?hu . FILTER(LANG(?hu) = "hu")
-    ?hely rdfs:label ?ro . FILTER(LANG(?ro) = "ro")
+    OPTIONAL { ?hely rdfs:label ?hu . FILTER(LANG(?hu) = "hu") }
+    OPTIONAL { ?hely rdfs:label ?ro . FILTER(LANG(?ro) = "ro") }
     OPTIONAL { ?hely rdfs:label ?de . FILTER(LANG(?de) = "de") }
-    ?hely wdt:P17 wd:Q218 .
+    ${altLang ? `OPTIONAL { ?hely rdfs:label ?alt . FILTER(LANG(?alt) = "${altLang}") }` : ""}
+    ?hely wdt:P17 wd:${p17} .
   }`;
+
+// Tartalék nyelv országonként, ha nincs magyar címke. Kárpátalja falvainak
+// zöme ukrán címkés csak — nélkülük a `ZK` kódon 48 hely maradna 500 helyett.
+// A tartalékkal bejött sor pótolt nevű (`huPotolt`) és automatikusan
+// jelölt: a jelölés itt nem kézi mérés, hanem bizonyos tudás (nincs `hu`
+// címke a Wikidata-n), és a "javítása" linkkel pótolható.
+const ALT_NYELV = { UA: "uk", RS: "sr" };
 
 async function main() {
   await mkdir(CACHE, { recursive: true });
   const megyeQid = new Map(MEGYEK.map((m) => [m.q, m]));
-  const megyeSorrend = new Map(MEGYEK.map((m, i) => [m.kod, i]));
+  const megyeSorrend = new Map();
+  for (const [i, m] of MEGYEK.entries()) {
+    if (!megyeSorrend.has(m.kod)) megyeSorrend.set(m.kod, i);
+  }
+  const megyeOrszag = new Map(MEGYEK.map((m) => [m.q, m.orszag]));
 
-  console.log("A. Minden magyar+román nevű dolog a megyék alatt");
-  const megyeSorok = await lekérdezHalmaz({
-    nev: "megye",
-    celok: MEGYEK.map((m) => m.q),
-    osszegyujt: KERDES,
-  });
+  console.log("A. Minden magyar nevű dolog a megyék alatt");
+  const megyeSorok = [];
+  for (const cc of [...new Set(MEGYEK.map((m) => m.orszag))]) {
+    // Országonként külön kérés és külön gyorsítótár (`megye-RO-0.json`):
+    // más a `P17` (és a tartaléknyelv), és a kevert `VALUES` halmaz a
+    // végponton lassú.
+    const celok = MEGYEK.filter((m) => m.orszag === cc).map((m) => m.q);
+    megyeSorok.push(
+      ...(await lekérdezHalmaz({
+        nev: `megye-${cc}`,
+        celok,
+        osszegyujt: (darab) => KERDES(darab, ORSZAG_P17[cc], ALT_NYELV[cc]),
+      })),
+    );
+  }
 
   const kozsegek = new Map(); // q -> { cel: megyeQid, osztalyok: Set }
   const osztalyok = new Set();
@@ -242,12 +309,23 @@ async function main() {
   }
   console.log(`  ${kozsegek.size} különböző hely a megyék alatt, ${osztalyok.size} osztály`);
 
-  console.log("C. Minden magyar+román nevű dolog a községek alatt");
-  const kozsegSorok = await lekérdezHalmaz({
-    nev: "kozseg",
-    celok: [...kozsegek.keys()],
-    osszegyujt: KERDES,
-  });
+  console.log("C. Minden magyar nevű dolog a községek alatt");
+  const kozsegSorok = [];
+  const kozsegCelok = new Map(); // orszag -> község-Q-k
+  for (const q of kozsegek.keys()) {
+    const cc = megyeOrszag.get(kozsegek.get(q).cel);
+    if (!kozsegCelok.has(cc)) kozsegCelok.set(cc, []);
+    kozsegCelok.get(cc).push(q);
+  }
+  for (const [cc, celok] of kozsegCelok) {
+    kozsegSorok.push(
+      ...(await lekérdezHalmaz({
+        nev: `kozseg-${cc}`,
+        celok,
+        osszegyujt: (darab) => KERDES(darab, ORSZAG_P17[cc], ALT_NYELV[cc]),
+      })),
+    );
+  }
 
   const falvak = new Map(); // q -> { cel: kozsegQid, osztalyok: Set }
   for (const s of kozsegSorok) {
@@ -299,18 +377,29 @@ async function main() {
   // Egy helységnek sokféle P31-je lehet, és a nevét is többször kaptuk meg.
   // Egy-egy sort tartunk meg helységenként, de a német néves sort előnyben
   // részesítjük: ugyanannak a helynek lehet olyan sora is, ahol ?de üres.
+  // A román név 3.0.0 óta lehet üres is: Magyarországon és helyenként
+  // Kárpátalján/Vajdaságban a Wikidata-n nincs román címke (pl. Szőreg) —
+  // a kötelező `FILTER` kitörölné a falut a keresőből, ezért `OPTIONAL`.
+  // Ugyanígy a magyar név is `OPTIONAL`: ahol nincs, a tartaléknyelv
+  // (`uk`/`sr`) vagy a román adja a megjelenő nevet (lásd `huPotolt`).
   const nevek = new Map();
   for (const s of [...megyeSorok, ...kozsegSorok]) {
     const q = qid(s.hely.value);
     const eddig = nevek.get(q);
-    if (!eddig || (!eddig.de && s.de)) {
-      nevek.set(q, { hu: s.hu.value, ro: s.ro.value, de: s.de?.value });
+    if (!eddig || (!eddig.de && s.de) || (eddig.hu == null && s.hu)) {
+      nevek.set(q, {
+        hu: s.hu?.value ?? null,
+        alt: s.alt?.value ?? null,
+        ro: s.ro?.value ?? null,
+        de: s.de?.value,
+      });
     }
   }
 
   const helyek = [];
   let kiszurt = 0;
   let nincsMegye = 0;
+  let nevNelkul = 0;
   let duplikalt = 0;
   let agglomeracio = 0;
   const kihagyottAglomeraciok = [];
@@ -320,6 +409,7 @@ async function main() {
   // sora tényleg az adatfájlba került.
   const hamisNemet = new Map();
   const perjelNemet = new Map();
+  const altNemet = new Map();
 
   for (const [q, adat] of [...kozsegek, ...falvak]) {
     // Egy helységnek sok osztálya lehet: Temesvár egyszerre "nagyváros",
@@ -338,6 +428,13 @@ async function main() {
     // azokat a NÉV alapján szűrjük (`nemHelyseg`), és az ellenőrző is
     // ugyanazt nézi a kész adaton.
     const veto = [...adat.osztalyok].some((o) => VETO_OSZTALY.includes(o));
+    // A `Q21672098` ("village of Ukraine") ukrán falvakat jelöl — hiába
+    // hangzik közigazgatásnak a neve, a P279-ágon lakott hely, és a
+    // Kárpátalja A-szinten talált 506 ilyen eleme kivétel nélkül falu
+    // (Akli, Beregújfalu, Bilke…). Az igazi kistérségek (`Q104841013`,
+    // "hromada" — pl. "Ungvár község") nem a lakhely-ágon vannak, tehát
+    // maguktól kiesnek; ha egyszer egy kistérség `Q21672098`-címkét kapna,
+    // a sor nevéből látszana (…község).
     const lakottHely = !veto && [...adat.osztalyok].some(telepules);
     // Mindhárom névet nézzük, nem csak a magyart: a Wikidata ugyanazt az
     // agglomerációt magyarul "Metropoliszövezet"-nek, románul "Zona
@@ -366,19 +463,29 @@ async function main() {
     }
 
     const s = nevek.get(q);
+    // A megjelenő név: magyar, ha van; ha nincs, a tartaléknyelv (`uk`/`sr`)
+    // vagy a román. A pótolt nevű sor automatikusan jelölt (`huPotolt`):
+    // az nem kézi mérés, hanem bizonyos tudás — nincs `hu` címke, és a
+    // "javítása" linkkel pótolható a Wikidata-n.
+    const nev = s.hu ?? s.alt ?? s.ro ?? null;
+    if (!nev) {
+      nevNelkul++;
+      continue;
+    }
     // A magyar név: a Wikidata adja, kivéve a javitasokHu.json-t, ami a
     // kézzel megjavított magyar neveket tartja (a magyar Wikipedia
     // infoboxa és a KIA által is alátámasztva). Ez a magyar nyelv
     // párja a német javitasok.json-nak.
     const huJav = javitasokHu[q];
-    const hu = typeof huJav === "string" ? huJav : s.hu;
+    const hu = typeof huJav === "string" ? huJav : nev;
+    const huPotolt = huJav === undefined && !s.hu;
     const ro = s.ro;
 
     // A magyar címke a községnél a hivatalos nevet adja, "község" szóval
     // együtt ("Ajton község"), a faluét meg az egyértelmű "Ajton"-t. Ezt
     // NEM levágjuk: sok községnek pont az egyetlen faluja azonos nevű, és
     // levágás után 556 duplikált sor keletkezett.
-    const de = nemetNev(s.de, ro, javitasok);
+    const de = nemetNev(s.de, ro, javitasok, undefined, s.alt);
     // Pontosan azokat számoljuk, amit KIZÁRÓLAG a 4. (ékezet-) szabály vett
     // ki: a szabály nélkül megmaradnának. (A nyers alakra nézni nem elég:
     // a 3. szabály áldozatainak felében is van román ékezet, hiszen a
@@ -397,6 +504,16 @@ async function main() {
     ) {
       perjelNemet.set(q, { q, hu, ro, de: s.de });
     }
+    // Ugyanígy a 6. szabály áldozatait: a német név az ukrán/szerb név
+    // átírása. A próba a másik két szabály nélkül fut, hogy csak az
+    // látszódjék, amit kizárólag a 6. vett ki.
+    if (
+      s.de && !de && s.alt &&
+      nemetNev(s.de, ro, javitasok, { ekezet: false, perjel: false }, null) === null &&
+      nemetNev(s.de, ro, javitasok, { ekezet: false, perjel: false }, s.alt) !== null
+    ) {
+      altNemet.set(q, { q, hu, ro, de: s.de });
+    }
 
     helyek.push({
       q,
@@ -405,6 +522,7 @@ async function main() {
       ro,
       de,
       megye: megye.kod,
+      orszag: megye.orszag,
       kozseg: kozsegek.has(q) ? null : celQid,
       kozsegNev: kozsegek.has(q) ? null : nevek.get(celQid)?.hu ?? null,
       // Igaz, ha a fenti magyar név nem létezik, és a román áll helyette.
@@ -414,7 +532,8 @@ async function main() {
       //
       // A javitasokHu.json ellentmondás esetén győz: ha van kézzel
       // javított magyar név, akkor van magyar neve, tehát nincs jelölés.
-      huNincsNeve: huJav === undefined && nincsMagyarNev.has(q),
+      huNincsNeve: huPotolt || (huJav === undefined && nincsMagyarNev.has(q)),
+      huPotolt,
       wikidata: `https://www.wikidata.org/wiki/${q}`,
     });
   }
@@ -465,11 +584,12 @@ async function main() {
     for (const n of kihagyottAglomeraciok) console.log(`    ${n.q} ${n.hu}`);
   }
   if (nincsMegye) console.warn(`  figyelem: ${nincsMegye} helynél nem sikerült a megyét, kihagyva`);
+  if (nevNelkul) console.warn(`  figyelem: ${nevNelkul} helynek semmilyen megjeleníthető neve nincs (se hu, se tartalék, se ro), kihagyva`);
 
   // Ugyanaz a román név kétszer, ugyanabban a megyében. Ez LÉTEBNEK tűnik
   // duplikátumnak, de NEM mind az: két különböző falunak lehet ugyanaz a
   // román neve (Alba megyében több "Botești" és "Florești" község alatt is
-  // van). A puszta nevük alapján szűrni ezért 67 valódi helyet törölt ki.
+  // van). A puszta nevük alapján szűrni ezért 93 valódi helyet törölt ki.
   //
   // Ez csak akkor duplikátum, ha azonos a hely: vagy ugyanaz a Q-szám (a
   // Kolozsvár Q100188 és Q16898189 alatt is megvan), vagy az egyik elem a
@@ -478,9 +598,14 @@ async function main() {
   //
   // Két megyében lehet ugyanaz a név, és az NEM duplikátum: Dăbâca/Doboka
   // egyszer Kolozsvár, egyszer Hunyad megyében valódi két falu.
+  //
+  // A kulcs a MAGYAR név: az sosem üres (a pótolt nevű sorokban is van
+  // megjelenő név), a román viszont határon túl gyakran hiányzik — és a
+  // román szerinti kulcsolás a duplikátum-párokat is széttörné (Komlós:
+  // az egyik példány román neve `Hmeliv`, a másiké nincs).
   const nevre = new Map(); // kulcs -> az ilyen nevű sorok
   for (const h of helyek) {
-    const kulcs = `${h.megye}|${h.ro.toLowerCase()}`;
+    const kulcs = `${h.megye}|${h.hu.toLowerCase()}`;
     if (!nevre.has(kulcs)) nevre.set(kulcs, []);
     nevre.get(kulcs).push(h);
   }
@@ -550,12 +675,27 @@ async function main() {
       a.hu.localeCompare(b.hu, "hu"),
   );
 
+  // A kereső statikus marad: a böngésző nem geokódol, hanem a letöltéskor
+  // kapott koordinátát és pontos Wikipedia-sitelinket olvassa a JSON-ból.
+  // A külön Action API gyorsítótára miatt ez a lépés csak az új Q-számokat
+  // kéri le, és nem terheli tovább a fenti SPARQL-végpontot.
+  await gazdagitTerkepAdattal(helyek);
+
+  // A `ZK` kódon hét bejegyzés osztozik (oblaszty + 6 járás): a kijelzésben
+  // egy megye, ezért kóddal szűrve adjuk ki (első előfordulás nyer).
+  // A `fajta` a sorvégi felirat szava: a megye "megye", a bánsági körzet
+  // "körzet", Kárpátalja puszta név (az régió, nem megye). Ami nincs
+  // megadva, az "megye" — a romániai sorok szövege így nem változik.
+  const FAJTA = { ZK: null, EBN: "körzet", KBN: "körzet", DBN: "körzet" };
+  const megyekKi = [...new Map(MEGYEK.map((m) => [m.kod, m])).values()].map((m) => (
+    m.kod in FAJTA ? { ...m, fajta: FAJTA[m.kod] } : m
+  ));
   const kimenet = {
     verzio: VERZIO,
     generatas: new Date().toISOString(),
     forras: "Wikidata (CC0) + javitasok.json + javitasokHu.json + nincsMagyarNev.json",
     telepulesOsztaly: [...telepulesOsztaly].sort(),
-    megyek: MEGYEK,
+    megyek: megyekKi,
     helyek,
   };
   await writeFile(KIMENET, JSON.stringify(kimenet, null, 1));
@@ -578,9 +718,17 @@ async function main() {
     );
     for (const x of bentHamisNemet) console.log(`    ${x.q} ${x.hu} / ${x.ro} / ${x.de}`);
   }
-  // Ugyanaz a perjeles "német" nevekre ("Avram Iancu / Keményfok"): a
-  // Wikidata a román és a magyar nevet írta a német mezőbe. Egyik rész sem
-  // német, tehát nincs mit megmenteni belőle.
+  // Ugyanaz az ukrán/szerb átírásokra ("Strymba" az ukrán "Стримба"
+  // helyett): egyik rész sem német, tehát nincs mit megmenteni belőle.
+  const bentAltNemet = [...altNemet.values()].filter((x) =>
+    helyek.some((h) => h.q === x.q),
+  );
+  if (bentAltNemet.length) {
+    console.log(
+      `  ${bentAltNemet.length} német nevet hagytunk ki, mert az ukrán/szerb név átírása:`,
+    );
+    for (const x of bentAltNemet) console.log(`    ${x.q} ${x.hu} / ${x.ro} / ${x.de}`);
+  }
   const bentPerjelNemet = [...perjelNemet.values()].filter((x) =>
     helyek.some((h) => h.q === x.q),
   );
@@ -592,8 +740,10 @@ async function main() {
   }
 
   console.log(`\nKész: ${helyek.length} helység, ${helyek.filter((h) => h.de).length} német nevet kapott. (verzió ${VERZIO})`);
-  for (const m of MEGYEK) {
-    console.log(`  ${m.kod} ${m.hu}: ${helyek.filter((h) => h.megye === m.kod).length}`);
+  for (const m of megyekKi) {
+    const db = helyek.filter((h) => h.megye === m.kod);
+    const orszag = [...new Set(db.map((h) => h.orszag))].join(",");
+    console.log(`  ${m.kod} ${m.hu} (${orszag}): ${db.length}`);
   }
   console.log(`Ide írtam: ${KIMENET.pathname}`);
 }
@@ -606,6 +756,11 @@ async function main() {
  *  4. a "német" név, amiben román ékezet van (ă â î ș ț), szintén nem német.
  *  5. ami két nevet fűz össze perjellel ("Avram Iancu / Keményfok"), az sem:
  *     a Wikidata a román és a magyar nevet írta a német mezőbe.
+ *  6. ami a tartaléknyelv (ukrán/szerb) átírásával betűre egyezik, az sem:
+ *     az ukrán/szerb név latin másolata ("Strymba" == ukrán "Стримба") —
+ *     ugyanaz a család, mint a román másolatok, csak cirillből. És ami
+ *     cirill betűt tartalmaz, az biztosan nem német (mint a 4. szabály,
+ *     csak másik ábécé).
  *
  * A 3. pont trükkös: a Wikidata gyakran a román névből csinál "német" nevet,
  * csak a végződésen ront egy kicsit ("Hodaie" -> "Hodaei"). Ezért nem
@@ -618,15 +773,16 @@ async function main() {
  * már nem ugyanazok a betűk. A német ábécében viszont nincs ă/â/î/ș/ț,
  * tehát ez a jel biztos: öt helységnél a román nevet mutatta "de" jelöléssel.
  */
-function nemetNev(deWikidata, ro, javitasok, { ekezet = true, perjel = true } = {}) {
-  if (!deWikidata && !(ro in javitasok)) return null;
+function nemetNev(deWikidata, ro, javitasok, { ekezet = true, perjel = true } = {}, alt = null) {
+  if (!deWikidata && !(ro && ro in javitasok)) return null;
   const tisztitott = deWikidata
     ? deWikidata.replace(/\s*\([^)]*\)\s*$/u, "").trim()
     : null;
   // A kézi javítás elsőbbséget élvez, de az se lehet, ami a román nevét
-  // ismétli: az nem német név.
-  const jelolt = ro in javitasok ? javitasok[ro] : tisztitott;
-  if (ugyanazSzo(jelolt, ro)) return null;
+  // ismétli: az nem német név. Román név nélkül (határon túl gyakori) a
+  // 3. szabály nem fut — nincs mihez hasonlítani.
+  const jelolt = ro && ro in javitasok ? javitasok[ro] : tisztitott;
+  if (ro && ugyanazSzo(jelolt, ro)) return null;
   // A német ábécében nincs ă, â, î, ș vagy ț. Ha ezek egyike szerepel a
   // "német" névben, akkor az biztosan nem német: a Wikidata a román nevet
   // másolta oda, esetleg két nevet fűzve össze ("Cornești / Sövényfalva").
@@ -645,6 +801,13 @@ function nemetNev(deWikidata, ro, javitasok, { ekezet = true, perjel = true } = 
   // benne román ékezet — a 9 megyés adatban épp ezért maradt láthatatlan,
   // csak a Partium+Bánság hozta elő.
   if (perjel && /[/()]/.test(jelolt)) return null;
+  // Az ukrán/szerb név latin másolata a német mezőben ("Strymba" az ukrán
+  // "Стримба" helyett): betűrendi hasonlítás az átírt alakon. A valódi
+  // cipszer német nevek (`Schenborn`, `Solotwyno`) nem betűazonosak az
+  // ukrán alakkal, tehát megmaradnak. A cirill betűs "német" név pedig
+  // eleve nem német — a német ábécében cirill betű sincs.
+  if (alt && ugyanazSzo(jelolt, cirillAtir(alt))) return null;
+  if (jelolt && /[Ѐ-џ]/.test(jelolt)) return null;
   return jelolt;
 }
 

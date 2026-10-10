@@ -1,15 +1,33 @@
 // A kereső. Betölti a helyek.json-t, és mindhárom néven keres rá.
 
+// Országnevek a sorvégi jelöléshez. Csak határon túl látszik: Románia az
+// alapértelmezett, és a romániai sorokon nincs ország. (A `letolt.mjs`
+// `ORSZAG_NEV`-jének a tükre — szándékosan nincs importálva, mert ez
+// statikus oldal, nincs építési lépés.)
+const ORSZAG_NEV = { HU: "Magyarország", UA: "Ukrajna", RS: "Szerbia" };
+
 const mezo = document.getElementById("mezo");
 const valaszt = document.getElementById("megye");
 const talalat = document.getElementById("talalat");
 const szures = document.getElementById("szures");
 const datum = document.getElementById("datum");
 const verzio = document.getElementById("verzio");
+const terkepPanel = document.getElementById("terkep-panel");
+const terkepElem = document.getElementById("terkep");
+const terkepUzenet = document.getElementById("terkep-uzenet");
+const keresDoboz = document.querySelector(".keres-wrap");
+
+// Elég hosszú ahhoz, hogy gépelés közben ne rajzoljuk újra folyton a listát,
+// de rövid marad, hogy a kereső ne érződjön lomha válaszúnak.
+const KERESES_KESLELTETES = 160;
 
 let helyek = [];
 let megyek = new Map();
 let nevek = new Map(); // q -> keresésre szánt szöveg
+let terkep = null;
+let jeloloReteg = null;
+let jelolok = new Map(); // q -> Leaflet circleMarker
+let kivalasztottQ = null;
 
 /**
  * Levesszük az ékezeteket, hogy "Targu Mures" megtalálja a "Târgu Mureș"-t.
@@ -21,12 +39,22 @@ let nevek = new Map(); // q -> keresésre szánt szöveg
  * találati hely csak így tudja megmondani, hol kell aláhúzni az eredeti
  * szövegben.
  */
+/**
+ * Cirill átírás latinra — a közös `szabalyok.mjs`-ből. A pótolt nevű sorok
+ * (`huPotolt`) ukrán/szerb nevet mutatnak (cirill írással) — átírás nélkül
+ * a keresőindex üres lenne, és a falu megtalálhatatlan.
+ */
+import { cirillAtir } from "./szabalyok.mjs";
+
 function normaliz(s) {
   let ki = "";
   const poz = []; // poz[i] = a ki szöveg i. karaktere az s hányadik helye
   for (let i = 0; i < s.length; i++) {
     // NFD-vel szétbontjuk, és eldobjuk a kombináló ékezeteket.
     let c = s[i].normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+    // A cirill betűket előbb átírjuk, mert a latin szűrő különben
+    // mindet eldobná (lásd `cirillAtir` a `szabalyok.mjs`-ben).
+    c = cirillAtir(c);
     // A román ékezetek egy része nem bomlik el, ezért kézzel is.
     c = c.replace(/[ăâ]/g, "a").replace(/î/g, "i").replace(/[șş]/g, "s").replace(/[țţ]/g, "t");
     c = c.replace(/[^a-z0-9]+/g, " ");
@@ -96,6 +124,44 @@ function wikidataLink(h) {
   return `https://www.wikidata.org/wiki/${q}`;
 }
 
+/** Csak a letöltő által előállítható hu/ro Wikipedia-linket engedjük ki. */
+function wikipediaLink(h) {
+  if (typeof h.wikipedia !== "string") return null;
+  try {
+    const url = new URL(h.wikipedia);
+    if (!/^https:$/.test(url.protocol)) return null;
+    if (!["hu.wikipedia.org", "ro.wikipedia.org"].includes(url.hostname)) return null;
+    if (!url.pathname.startsWith("/wiki/")) return null;
+    return url.href;
+  } catch {
+    return null;
+  }
+}
+
+function vanKoordinata(h) {
+  return (
+    Number.isFinite(h.lat) &&
+    Number.isFinite(h.lon) &&
+    h.lat >= -90 && h.lat <= 90 &&
+    h.lon >= -180 && h.lon <= 180
+  );
+}
+
+function metaElvalaszto(meta) {
+  if (meta.childNodes.length) meta.append(document.createTextNode(" · "));
+}
+
+function metaLink(meta, szoveg, href, title) {
+  metaElvalaszto(meta);
+  const a = document.createElement("a");
+  a.href = href;
+  a.target = "_blank";
+  a.rel = "noopener";
+  a.textContent = szoveg;
+  if (title) a.title = title;
+  meta.append(a);
+}
+
 /**
  * A sorban megjelenő név, megkülönböztető toldalékkal együtt.
  *
@@ -110,13 +176,174 @@ function megjelenitettNev(h) {
   return h.utalo ? `${h.hu} (${h.utalo})` : h.hu;
 }
 
+function popupTartalom(h) {
+  const doboz = document.createElement("div");
+  const nev = document.createElement("strong");
+  nev.textContent = megjelenitettNev(h);
+  doboz.append(nev);
+
+  const tobbiNev = [
+    h.ro && h.ro !== h.hu ? `ro ${h.ro}` : null,
+    h.de ? `de ${h.de}` : null,
+  ].filter(Boolean);
+  if (tobbiNev.length) {
+    const nevek = document.createElement("div");
+    nevek.className = "popup-nevek";
+    nevek.textContent = tobbiNev.join(" · ");
+    doboz.append(nevek);
+  }
+
+  const linkek = document.createElement("div");
+  linkek.className = "popup-linkek";
+  const wiki = wikipediaLink(h);
+  if (wiki) metaLink(linkek, "Wikipedia", wiki);
+  const wikidata = wikidataLink(h);
+  if (wikidata) metaLink(linkek, "Wikidata", wikidata);
+  if (linkek.childNodes.length) doboz.append(linkek);
+  return doboz;
+}
+
+function jeloloStilus(kivalasztva, egyetlen = false) {
+  return {
+    radius: kivalasztva ? 9 : egyetlen ? 8 : 6,
+    color: kivalasztva ? "#5f2121" : "#fffdf6",
+    weight: kivalasztva ? 3 : 2,
+    fillColor: kivalasztva ? "#d09a22" : "#7c2d2d",
+    fillOpacity: 0.92,
+  };
+}
+
+function terkepIndit() {
+  if (terkep) return true;
+  if (!window.L?.map) return false;
+  terkep = window.L.map(terkepElem, {
+    scrollWheelZoom: false,
+    zoomControl: true,
+  }).setView([46.5, 24.5], 6);
+  window.L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(terkep);
+  jeloloReteg = window.L.featureGroup().addTo(terkep);
+  return true;
+}
+
+function kijelolesTorol() {
+  if (kivalasztottQ && jelolok.has(kivalasztottQ)) {
+    jelolok.get(kivalasztottQ).setStyle(jeloloStilus(false, jelolok.size === 1));
+  }
+  document.querySelectorAll(".sor.kivalasztva").forEach((sor) => {
+    sor.classList.remove("kivalasztva");
+  });
+  kivalasztottQ = null;
+}
+
+function mutatTerkepen(h, { kozepre = true, popup = true, gorget = false } = {}) {
+  const jelolo = jelolok.get(h.q);
+  if (!terkep || !jelolo) return;
+  kijelolesTorol();
+  kivalasztottQ = h.q;
+  jelolo.setStyle(jeloloStilus(true, jelolok.size === 1));
+  jelolo.bringToFront();
+  const sor = talalat.querySelector(`.sor[data-q="${h.q}"]`);
+  if (sor) {
+    sor.classList.add("kivalasztva");
+    if (gorget) sor.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+  if (kozepre) terkep.flyTo(jelolo.getLatLng(), Math.max(terkep.getZoom(), 12));
+  if (popup) jelolo.openPopup();
+}
+
+function terkepElrejt() {
+  terkepPanel.hidden = true;
+  jelolok.clear();
+  kivalasztottQ = null;
+  if (jeloloReteg) jeloloReteg.clearLayers();
+}
+
+function terkepKirajzol(lista, keresett) {
+  const koordinatas = lista.filter(vanKoordinata);
+  if (!koordinatas.length) {
+    terkepElrejt();
+    return;
+  }
+
+  terkepPanel.hidden = false;
+  // Ha a CDN egy korábbi próbánál még nem ért ide, a hibaüzenetet az első
+  // sikeres inicializálás előtt takarítjuk el. Egy már élő Leaflet-térkép
+  // belső DOM-jához viszont nem nyúlunk.
+  if (!terkep && window.L?.map) {
+    terkepElem.classList.remove("nem-elerheto");
+    terkepElem.textContent = "";
+  }
+  if (!terkepIndit()) {
+    terkepElem.classList.add("nem-elerheto");
+    terkepElem.textContent = "A térkép most nem tölthető be; a találatok és a forráslinkek továbbra is használhatók.";
+    terkepUzenet.textContent = `${koordinatas.length} térképezhető találat`;
+    return;
+  }
+
+  terkepElem.classList.remove("nem-elerheto");
+  jeloloReteg.clearLayers();
+  jelolok.clear();
+  kijelolesTorol();
+
+  const egyetlen = koordinatas.length === 1;
+  for (const h of koordinatas) {
+    const jelolo = window.L.circleMarker([h.lat, h.lon], jeloloStilus(false, egyetlen));
+    // Hover közben ne tolja arrébb a térképet a popup: különben a jelölő
+    // kicsúszhatna az egér alól, amitől a popup rögtön be is záródna.
+    jelolo.bindPopup(popupTartalom(h), { autoPan: false });
+    jelolo.on("mouseover", () => jelolo.openPopup());
+    jelolo.on("mouseout", () => {
+      // A kattintással kiválasztott hely popupja maradjon nyitva. Ha egy
+      // másik jelölő fölé vittük az egeret, utána ezt is visszaállítjuk.
+      if (kivalasztottQ === h.q) return;
+      jelolo.closePopup();
+      if (kivalasztottQ && jelolok.has(kivalasztottQ)) {
+        jelolok.get(kivalasztottQ).openPopup();
+      }
+    });
+    jelolo.on("click", () => mutatTerkepen(h, { kozepre: false, gorget: true }));
+    jelolo.addTo(jeloloReteg);
+    jelolok.set(h.q, jelolo);
+  }
+
+  const hianyzo = lista.length - koordinatas.length;
+  terkepUzenet.textContent = hianyzo
+    ? `${koordinatas.length} találat a térképen · ${hianyzo} koordináta nélkül`
+    : `${koordinatas.length} találat a térképen`;
+
+  requestAnimationFrame(() => {
+    terkep.invalidateSize();
+    const pontos = keresett
+      ? koordinatas.filter((h) => pont(h, keresett) === 0)
+      : [];
+    if (egyetlen || pontos.length === 1) {
+      mutatTerkepen(egyetlen ? koordinatas[0] : pontos[0], { kozepre: false });
+      terkep.setView([pontos[0]?.lat ?? koordinatas[0].lat, pontos[0]?.lon ?? koordinatas[0].lon], 12);
+    } else {
+      terkep.fitBounds(jeloloReteg.getBounds(), { padding: [24, 24], maxZoom: 11 });
+    }
+  });
+}
+
 function kirajzol(lista, keresett) {
   talalat.innerHTML = "";
   talalat.style.display = lista.length ? "grid" : "none";
 
   for (const h of lista) {
-    const sor = document.createElement("div");
+    const sor = document.createElement("article");
     sor.className = "sor";
+    sor.dataset.q = h.q;
+    if (vanKoordinata(h)) {
+      sor.classList.add("terkepes");
+      sor.title = "Kattints a hely térképi kijelöléséhez";
+      sor.addEventListener("click", (event) => {
+        if (event.target.closest("a, button")) return;
+        mutatTerkepen(h);
+      });
+    }
 
     const hu = document.createElement("span");
     hu.className = "nev";
@@ -138,10 +365,15 @@ function kirajzol(lista, keresett) {
       sor.append(jelzes);
     }
 
-    const ro = document.createElement("span");
-    ro.className = "masik";
-    ro.innerHTML = '<span class="cimke">ro</span>' + kiemeles(h.ro, keresett);
-    sor.append(ro);
+    // A román sor csak akkor van, ha van román név: határon túl (HU,
+    // részben UA/RS) sok helynek nincs román címkéje a Wikidata-n, és az
+    // üres sor csak zaj lenne. Keresni persze így is lehet magyarul.
+    if (h.ro) {
+      const ro = document.createElement("span");
+      ro.className = "masik";
+      ro.innerHTML = '<span class="cimke">ro</span>' + kiemeles(h.ro, keresett);
+      sor.append(ro);
+    }
 
     if (h.de) {
       const de = document.createElement("span");
@@ -150,7 +382,7 @@ function kirajzol(lista, keresett) {
       sor.append(de);
     }
 
-    // Község, megye, meg a forrás linkje.
+    // Község, megye, ország, meg a forrás linkje.
     const meta = document.createElement("span");
     meta.className = "kozseg";
     const resz = [];
@@ -165,27 +397,64 @@ function kirajzol(lista, keresett) {
     // A megyeszékhely neve ugyanaz, mint a megyé: akkor sem írjuk ki, ha
     // önmagában áll a sorban ("Kolozsvár · Kolozsvár megye"), mert nem
     // mond semmit.
-    if (m && m.hu !== h.hu) resz.push(`${m.hu} megye`);
+    //
+    // A terület fajtája a megyeadatból jön: ami nincs megadva, az "megye"
+    // (a romániai sorok szövege így nem változik); Kárpátalja puszta név,
+    // a bánsági körzet "körzet". Az ország csak határon túl látszik —
+    // Románia az alapértelmezett.
+    if (m && m.hu !== h.hu) {
+      const fajta = m.fajta === undefined ? "megye" : m.fajta;
+      resz.push(fajta ? `${m.hu} ${fajta}` : m.hu);
+    }
+    if (h.orszag && ORSZAG_NEV[h.orszag]) resz.push(ORSZAG_NEV[h.orszag]);
     // A forrás linkje, és hogyan javíthatja, aki észrevessze a hibát.
+    if (resz.length) meta.append(document.createTextNode(resz.join(" · ")));
+    const wikipedia = wikipediaLink(h);
+    if (wikipedia) metaLink(meta, "Wikipedia", wikipedia);
     const forras = wikidataLink(h);
     if (forras) {
-      // `action=edit` a szerkesztő űrlapját nyitja, magyar felülettel. A
-      // hu=1 megmondja a Wikidata-nak, hogy a magyar címkét akarjuk.
-      meta.innerHTML =
-        escapeHtml(resz.join(" · ")) +
-        ` · <a href="${forras}" target="_blank" rel="noopener">Wikidata</a>` +
-        ` · <a href="${forras}?action=edit&amp;uselang=hu" target="_blank" ` +
-        `rel="noopener" title="Javítsd a magyar nevet a Wikidata-n">javítása</a>`;
+      metaLink(meta, "Wikidata", forras);
+      metaLink(
+        meta,
+        "javítása",
+        `${forras}?action=edit&uselang=hu`,
+        "Javítsd a magyar nevet a Wikidata-n",
+      );
     } else {
       // Ez nem fordulhat elő, de ha igen, inkább link nélkül, mint rossz
       // linkkel: a hiba a `console`-ba megy, nem a sorba.
-      meta.innerHTML = escapeHtml(resz.join(" · "));
       console.error("Nincs érvényes Wikidata-azonosító:", h);
+    }
+    if (vanKoordinata(h)) {
+      metaElvalaszto(meta);
+      const gomb = document.createElement("button");
+      gomb.type = "button";
+      gomb.className = "terkepre";
+      gomb.textContent = "térképen";
+      gomb.setAttribute("aria-label", `${megjelenitettNev(h)} megmutatása a térképen`);
+      gomb.addEventListener("click", () => mutatTerkepen(h));
+      meta.append(gomb);
     }
     sor.append(meta);
 
     talalat.append(sor);
   }
+}
+
+/**
+ * A keresés megosztható URL-t kap. A lekérdezéses változatok kanonikus
+ * címe továbbra is a főoldal, ezért nem hozunk létre több ezer, azonos
+ * tartalmú indexelhető oldalt; a statikus megyejegyzékek adják a keresőknek
+ * a helységneveket.
+ */
+function urlAllapotFrissit() {
+  const url = new URL(window.location.href);
+  const nyers = mezo.value.trim();
+  if (nyers) url.searchParams.set("q", nyers);
+  else url.searchParams.delete("q");
+  if (valaszt.value) url.searchParams.set("megye", valaszt.value);
+  else url.searchParams.delete("megye");
+  window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
 }
 
 /**
@@ -223,6 +492,10 @@ function rendez(lista, keresett) {
 }
 
 function keres() {
+  keresDoboz.classList.remove("kereses-folyamatban");
+  keresDoboz.setAttribute("aria-busy", "false");
+  talalat.classList.remove("kereses-folyamatban");
+
   const nyers = mezo.value.trim();
   const { ki: keresett } = normaliz(nyers);
   const megye = valaszt.value;
@@ -235,6 +508,7 @@ function keres() {
     szures.textContent = helyek.length
       ? `${helyek.length} helység, ${megyek.size} megyéből. Írj egy nevet, vagy válassz megyét.`
       : "";
+    terkepElrejt();
     return;
   }
 
@@ -248,7 +522,9 @@ function keres() {
     return szavak.every((s) => szo.some((x) => x.startsWith(s)));
   });
 
-  kirajzol(rendez(talalatok, keresett).slice(0, 300), keresett);
+  const megjeleno = rendez(talalatok, keresett).slice(0, 300);
+  kirajzol(megjeleno, keresett);
+  terkepKirajzol(megjeleno, keresett);
   szures.textContent =
     talalatok.length > 300
       ? `${talalatok.length} találat, az első 300 látszik.`
@@ -258,7 +534,14 @@ function keres() {
 let idozito;
 mezo.addEventListener("input", () => {
   clearTimeout(idozito);
-  idozito = setTimeout(keres, 80);
+  keresDoboz.classList.add("kereses-folyamatban");
+  keresDoboz.setAttribute("aria-busy", "true");
+  if (talalat.childElementCount) talalat.classList.add("kereses-folyamatban");
+  idozito = setTimeout(() => {
+    idozito = null;
+    keres();
+    urlAllapotFrissit();
+  }, KERESES_KESLELTETES);
 });
 
 async function betolt() {
@@ -293,7 +576,20 @@ async function betolt() {
     opcio.textContent = m.hu;
     valaszt.append(opcio);
   }
-  valaszt.addEventListener("change", keres);
+
+  // A főoldali példák, a statikus megyeoldalak és a megosztott linkek
+  // ugyanazt a keresőt nyitják meg, előre kitöltve.
+  const kezdoParameterek = new URLSearchParams(window.location.search);
+  mezo.value = (kezdoParameterek.get("q") ?? "").slice(0, 200);
+  const kezdoMegye = kezdoParameterek.get("megye");
+  if (kezdoMegye && megyek.has(kezdoMegye)) valaszt.value = kezdoMegye;
+
+  valaszt.addEventListener("change", () => {
+    clearTimeout(idozito);
+    idozito = null;
+    keres();
+    urlAllapotFrissit();
+  });
 
   datum.textContent = adat.generatas.slice(0, 10);
   // A verzió a footerben. Azért kell, mert a helyek.json és az oldal nem

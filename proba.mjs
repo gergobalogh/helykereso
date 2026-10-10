@@ -259,7 +259,14 @@ const linkek = await oldal
   .evaluateAll((as) => as.map((a) => ({ szoveg: a.textContent, href: a.href })));
 console.log(`    ${linkek.map((l) => l.szoveg).join(" | ")}`);
 for (const l of linkek) {
-  if (!l.href.startsWith("https://www.wikidata.org/wiki/Q")) {
+  if (l.szoveg === "Wikipedia") {
+    if (!/^https:\/\/(hu|ro)\.wikipedia\.org\/wiki\//.test(l.href)) {
+      bukott++;
+      console.log(`  ✗ a Wikipedia-link nem hu/ro cikkre mutat: ${l.href}`);
+    } else {
+      console.log(`  ✓ "Wikipedia" → ${l.href}`);
+    }
+  } else if (!l.href.startsWith("https://www.wikidata.org/wiki/Q")) {
     bukott++;
     console.log(`  ✗ a(z) "${l.szoveg}" link nem a Wikidata-ra mutat: ${l.href}`);
   } else if (l.href.includes("%")) {
@@ -287,7 +294,7 @@ const eltert = await oldal.evaluate(() => {
   const hibak = [];
   for (const sor of document.querySelectorAll(".sor")) {
     const nev = sor.querySelector(".nev")?.textContent ?? "";
-    const a = sor.querySelector(".kozseg a");
+    const a = [...sor.querySelectorAll(".kozseg a")].find((x) => x.textContent === "Wikidata");
     const href = a?.getAttribute("href") ?? "";
     // A .nev belső HTML-t tartalmaz (kiemelés), ezért az attributumot nézzük.
     if (!/^https:\/\/www\.wikidata\.org\/wiki\/Q\d+$/.test(href)) hibak.push(nev + " → " + href);
@@ -301,6 +308,106 @@ if (eltert.length) {
 } else {
   console.log("  ✓ minden sorban szabályos, kódolatlan Wikidata link van");
 }
+
+// A pontos találat térképe automatikusan megjelenik, kijelöli az egyetlen
+// pontot, és ugyanazokra a forrásokra mutat, mint a találati sor.
+console.log("\n--- Interaktív térkép és Wikipedia:");
+await mezo.fill("Kolozsvár");
+await oldal.waitForTimeout(350);
+const terkepPanel = oldal.locator("#terkep-panel");
+const terkepLatszik = await terkepPanel.isVisible();
+const jelolok = await oldal.locator("#terkep .leaflet-interactive").count();
+const terkepInfo = await oldal.locator("#terkep-uzenet").innerText();
+const popup = oldal.locator("#terkep .leaflet-popup-content");
+const popupSzoveg = await popup.innerText().catch(() => "");
+if (terkepLatszik && jelolok === 1 && popupSzoveg.includes("Kolozsvár")) {
+  console.log(`  ✓ a pontos találat térképe megjelent (${terkepInfo}), a névkártya nyitva`);
+} else {
+  bukott++;
+  console.log(`  ✗ pontos találat térképe: látszik=${terkepLatszik}, pont=${jelolok}, popup="${popupSzoveg}"`);
+}
+const huWiki = await oldal.locator(".sor").first().locator('a', { hasText: "Wikipedia" }).getAttribute("href");
+if (huWiki?.startsWith("https://hu.wikipedia.org/wiki/")) {
+  console.log(`  ✓ a magyar Wikipedia az elsődleges: ${huWiki}`);
+} else {
+  bukott++;
+  console.log(`  ✗ Kolozsvár nem a magyar Wikipédiára mutat: ${huWiki}`);
+}
+
+// Több találat egyszerre legyen a térképen, és a találati sor térképgombja
+// ugyanazt a sort jelölje ki.
+await mezo.fill("Butești");
+await oldal.waitForTimeout(350);
+const tobbPont = await oldal.locator("#terkep .leaflet-interactive").count();
+await oldal.locator("#terkep .leaflet-interactive").first().hover();
+const hoverPopup = await popup.innerText().catch(() => "");
+if (hoverPopup.includes("Butești")) {
+  console.log("  ✓ a térképjelölő fölé húzva megjelenik a névkártya");
+} else {
+  bukott++;
+  console.log(`  ✗ hoverre nem jelent meg a térképi névkártya: "${hoverPopup}"`);
+}
+await oldal.locator(".sor .terkepre").first().click();
+await oldal.waitForTimeout(150);
+const kijelolt = await oldal.locator(".sor.kivalasztva").count();
+if (tobbPont >= 2 && kijelolt === 1) {
+  console.log(`  ✓ ${tobbPont} találat együtt látszik, a listából egy kijelölhető`);
+} else {
+  bukott++;
+  console.log(`  ✗ többtalálatos térkép: pont=${tobbPont}, kijelölt sor=${kijelolt}`);
+}
+
+// A magyar cikk hiányában a román Wikipedia a következő, nem egy névből
+// megtippelt URL. Ez a sitelink a Wikidata-entitásból jön.
+await mezo.fill("Mărcușa");
+await oldal.waitForTimeout(250);
+const roWiki = await oldal.locator(".sor").first().locator('a', { hasText: "Wikipedia" }).getAttribute("href");
+if (roWiki?.startsWith("https://ro.wikipedia.org/wiki/")) {
+  console.log(`  ✓ magyar cikk nélkül román fallback: ${roWiki}`);
+} else {
+  bukott++;
+  console.log(`  ✗ a román Wikipedia-fallback hiányzik: ${roWiki}`);
+}
+
+// Koordináta nélkül a sor és a Wikipedia-link maradjon használható, de ne
+// maradjon az előző keresés térképe a képernyőn.
+await mezo.fill("Iklódszentivány");
+await oldal.waitForTimeout(250);
+const nincsTerkep = !(await terkepPanel.isVisible());
+const vanSor = (await sorok.count()) > 0;
+if (nincsTerkep && vanSor) {
+  console.log("  ✓ koordináta nélkül nincs üres/régi térkép, a találati sor megmarad");
+} else {
+  bukott++;
+  console.log(`  ✗ koordináta nélküli fallback: térkép rejtve=${nincsTerkep}, sor=${vanSor}`);
+}
+
+// Keskeny képernyőn se lógjon ki a térkép, és maradjon használható
+// magassága. Külön oldalon nézzük, hogy a desktop teszt állapota ne hasson rá.
+const mobil = await browser.newPage({ viewport: { width: 390, height: 844 } });
+mobil.on("console", (m) => {
+  if (m.type() === "error") hibak.push("mobil: " + m.text());
+});
+mobil.on("pageerror", (e) => hibak.push("mobil pageerror: " + e.message));
+await mobil.goto(base, { waitUntil: "networkidle" });
+await mobil.locator("#mezo").fill("Kolozsvár");
+await mobil.waitForTimeout(350);
+const mobilMeret = await mobil.locator("#terkep").evaluate((e) => {
+  const r = e.getBoundingClientRect();
+  return { left: r.left, right: r.right, width: r.width, height: r.height, viewport: innerWidth };
+});
+if (
+  mobilMeret.left >= 0 &&
+  mobilMeret.right <= mobilMeret.viewport &&
+  mobilMeret.width > 300 &&
+  mobilMeret.height >= 250
+) {
+  console.log(`  ✓ mobilon is elfér (${Math.round(mobilMeret.width)}×${Math.round(mobilMeret.height)} px)`);
+} else {
+  bukott++;
+  console.log(`  ✗ mobil térképméret: ${JSON.stringify(mobilMeret)}`);
+}
+await mobil.close();
 
 // Német névként nem jelenik meg román szó. A `de` jelölés azt ígéri, hogy
 // német nyelvű nevet látunk, tehát román ékezet (ă â î ș ț) lehetetlen
@@ -448,6 +555,45 @@ if (!poienita.includes("Poienița")) {
   console.log(`  ✗ a jelölés felvette a hely nevét: ${poienita.replace(/\n/g, " | ")}`);
 } else {
   console.log('  ✓ a jelölés mellett is a román név látszik, tehát kereshető maradt');
+}
+
+// A keresési állapot URL-ben is megosztható, és a keresőrobotoknak szánt
+// statikus jegyzék valódi, JavaScript nélküli HTML-t ad vissza.
+console.log("\n--- Megosztható URL és statikus SEO-jegyzék:");
+await oldal.goto(`${base}?q=Brass%C3%B3&megye=BV`, { waitUntil: "networkidle" });
+const urlKeresesJo =
+  (await oldal.locator("#mezo").inputValue()) === "Brassó" &&
+  (await oldal.locator("#megye").inputValue()) === "BV" &&
+  (await oldal.locator(".sor").first().innerText()).includes("Kronstadt");
+if (!urlKeresesJo) {
+  bukott++;
+  console.log("  ✗ az URL-ből nem állt vissza a keresés");
+} else {
+  console.log("  ✓ az URL-ből visszaállt a keresés és a megye");
+}
+await oldal.locator("#mezo").fill("Nagyszeben");
+await oldal.waitForTimeout(220);
+const frissitettUrl = new URL(oldal.url());
+if (frissitettUrl.searchParams.get("q") !== "Nagyszeben" || frissitettUrl.searchParams.get("megye") !== "BV") {
+  bukott++;
+  console.log(`  ✗ a gépelés nem frissítette az URL-t: ${frissitettUrl.href}`);
+} else {
+  console.log("  ✓ a gépelés megosztható URL-t frissít");
+}
+
+await oldal.goto("http://localhost:8123/megyek/cj.html", { waitUntil: "domcontentloaded" });
+const statikusSorok = await oldal.locator("li.hely").count();
+const statikusCim = await oldal.locator("h1").innerText();
+const statikusCanonical = await oldal.locator('link[rel="canonical"]').getAttribute("href");
+if (
+  statikusSorok !== 440 ||
+  !statikusCim.includes("Kolozsvár megye") ||
+  !(statikusCanonical === "./cj.html" || statikusCanonical?.endsWith("/megyek/cj.html"))
+) {
+  bukott++;
+  console.log(`  ✗ hibás statikus oldal: ${statikusSorok} sor, "${statikusCim}", ${statikusCanonical}`);
+} else {
+  console.log("  ✓ a Kolozsvár megyei oldal 440 nevet ad vissza tiszta HTML-ben");
 }
 
 console.log(

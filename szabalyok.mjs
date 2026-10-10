@@ -313,7 +313,28 @@ export function deRomanEkezet(de) {
  * footerben mutatja, az `ellenoriz.mjs` pedig egyezést szól kő, ha hiányzik
  * vagy nem egyezik a `szabalyok.mjs`-belivel.
  */
-export const VERZIO = "2.0.0";
+export const VERZIO = "3.0.0";
+
+/**
+ * Cirill átírás latinra (ukrán + szerb cirill). Közös helyen kell, mert
+ * két fogyasztója van: a `keres.js` ezzel indexeli a pótolt nevű sorokat
+ * (különben a cirill név kereshetetlen lenne), és a `letolt.mjs` 6.
+ * németnév-szabálya ezzel fogja meg az ukrán/szerb név latin másolatát
+ * (`Strymba` == ukrán `Стримба`).
+ */
+const CIRILL_TERKEP = {
+  а: "a", б: "b", в: "v", г: "h", ґ: "g", д: "d", е: "e", є: "je",
+  ж: "zh", з: "z", и: "y", і: "i", ї: "ji", й: "j", к: "k", л: "l",
+  м: "m", н: "n", о: "o", п: "p", р: "r", с: "s", т: "t", у: "u",
+  ф: "f", х: "kh", ц: "ts", ч: "ch", ш: "sh", щ: "shch", ь: "",
+  ю: "ju", я: "ja", ђ: "d", ј: "j", љ: "lj", њ: "nj", ћ: "c",
+  џ: "dz", ы: "y", э: "e", ё: "jo", ъ: "",
+};
+
+export function cirillAtir(s) {
+  // Kisbetűsítve: a térkép csupa kisbetűs, a bemenet vegyes is lehet.
+  return s.toLowerCase().replace(/[Ѐ-џ]/g, (b) => CIRILL_TERKEP[b] ?? "");
+}
 
 /**
  * Ugyanaz a név, csak más betűkkel: "Vále" / "Vale",

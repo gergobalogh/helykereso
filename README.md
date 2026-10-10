@@ -1,26 +1,34 @@
 # Helynévkereső
 
-Nézd meg, hogy hívják Kolozsvárt románul és németül. Keress bármely erdélyi
-helységet, és lásd mindhárom nevét egymás mellett, a megyével együtt.
+Nézd meg, hogy hívják Kolozsvárt románul és németül. Keress bármely
+erdélyi, partiumi, bánsági, kárpátaljai vagy határ menti helységet, és lásd
+a neveit egymás mellett, a megyével együtt.
 
 Egy [mivelkezdjem.hu](https://mivelkezdjem.hu) kísérlet. Remixeld, és írd át
 magodra.
 
 ## Mi ez pontosan
 
-Erdély, a Partium és a Bánság tizenhat megyéjének (5314) helysége magyar és román névvel, és ahol van,
-német nevet is. Magyarul, románul és németül is kereshetsz rá, ékezetek nélkül
+Erdély, a Partium és a Bánság tizenhat romániai megyéje, plusz Kárpátalja
+(Ukrajna), négy magyar határmegye és a vajdasági Bánság három körzete —
+magyar és (ahol van) román névvel, és ahol van, német nevet is. Magyarul,
+románul és németül is kereshetsz rá, ékezetek nélkül
 is (`Targu Mures` → Târgu Mureș). Van egy megyeválasztó is, ha az egész
-megyét akarod böngészni.
+megyét akarod böngészni. A határon túli sorokon ott az ország is
+(`Békés megye · Magyarország`), a romániaiakon nincs — az az alap.
 
 ## Fájlok
 
 | Fájl | Mit csinál |
 |---|---|
 | `letolt.mjs` | Letölti a Wikidata-ról a helyeket, és megírja a `helyek.json`-t. |
+| `terkepadat.mjs` | Koordinátával és pontos magyar/román Wikipedia-linkkel gazdagítja a kész listát; a `letolt.mjs` automatikusan meghívja. |
 | `szabalyok.mjs` és `VERZIO` | Az adat verziója egy helyen (`szabalyok.mjs` → `VERZIO`), a története a [`CHANGELOG.md`](CHANGELOG.md)-ben. |
 | `index.html` | Az oldal. |
 | `keres.js` | A keresés és a találatok kirajzolása. |
+| `seo.mjs` | Legenerálja a JavaScript nélkül is olvasható megyeoldalakat, és éles webcímmel a sitemapet. |
+| `seo-check.mjs` | Ellenőrzi a metaadatokat, a strukturált adatot, a kanonikus címeket és a generált megyeoldalakat. |
+| `megyek/` | A 24 statikus, indexelhető területi jegyzék; a `seo.mjs` kimenete. |
 | `javitasok.json` | Kézzel javított **német** nevek. Olvassa a `letolt.mjs`. |
 | `javitasokHu.json` | Kézzel javított **magyar** nevek, ugyanerre a célra. |
 | `nincsMagyarNev.json` | Azok a Q-számok, amelyeknek nincs magyar nevük, de a Wikidata-on van. A kereső megjelöli őket. |
@@ -38,28 +46,67 @@ A `helyek.json` egy helységének a mezői:
 
 | mező | mi |
 |---|---|
-| `q`, `hu`, `ro`, `de` | a Wikidata-azonosító és a magyar, román, német név (`de` lehet `null`) |
-| `megye` | a román megyekód (`AB`, `CJ`, …) |
+| `q`, `hu`, `ro`, `de` | a Wikidata-azonosító és a magyar, román, német név (`ro` és `de` lehet `null`) |
+| `megye` | a megye/körzet kódja (`AB`, `CJ`, `ZK`, `SZB`, …) |
+| `orszag` | az ország kódja (`RO`, `UA`, `HU`, `RS`) |
+| `huPotolt` | igaz, ha nincs magyar címke a Wikidata-n, és a sor ukrán/szerb/román tartaléknevet mutat (mindig jelölve is van) |
 | `kozseg`, `kozsegNev` | a szülő község azonosítója és neve (`null`, ha nincs ilyen) |
 | `wikidata` | az elem oldala |
+| `lat`, `lon` | a Wikidata `P625` koordinátája (ha van) |
+| `wikipedia` | a magyar Wikipedia-cikk, ennek hiányában a román cikk pontos URL-je (ha van) |
 | `utalo` | megkülönböztető toldalék, ha ugyanabban a megyében másik helynek is ugyanaz a magyar neve van (`null` egyébként) — lásd alább |
 | `huNincsNeve` | igaz, ha a magyar név helyén a román áll (nincs magyar neve) — lásd alább |
 
-Nincs építési lépés és nincs függőség: a `letolt.mjs` Node.js-t használ
-(szabányos `fetch`), minden más statikus fájl. A `proba.mjs`-hez kell a
-Playwright, de csak a próbához, nem az oldalhoz.
+Nincs építési lépés: a `letolt.mjs` Node.js-t használ (szabványos `fetch`),
+az oldal statikus fájlokból áll. A térképet a böngésző a Leaflet 1.9.4
+könyvtárral rajzolja, az OpenStreetMap csempéivel; egyikhez sem kell
+API-kulcs. A `proba.mjs`-hez kell a Playwright, de csak a próbához, nem az
+oldalhoz.
 
 ## Használat
 
 ```sh
 node letolt.mjs          # lassú szándékosan, lásd alább
+node terkepadat.mjs      # csak ha egy már kész helyek.json-t gazdagítanál
 node ellenoriz.mjs       # ellenőrizd az adatot
+node seo.mjs             # frissítsd a statikus, indexelhető megyeoldalakat
+node seo-check.mjs       # ellenőrizd az SEO-metaadatokat és a statikus oldalakat
 python3 -m http.server 8000
 # majd: http://localhost:8000
 ```
 
 Az oldalnak kiszolgáló kell, mert adatot olvas be (`fetch`); a
 `file:///hely/` útvonalon nem fog működni.
+
+### SEO és élesítés
+
+A kereső interaktív találatai JavaScriptből készülnek, de a helységnevek
+nem függnek a keresőrobotok JavaScript-támogatásától: a `megyek/` alatt
+24 statikus területi oldal sorolja fel mind a 6622 nevet. Adatfrissítés
+után mindig futtasd újra a `node seo.mjs` parancsot.
+
+A sitemap URL-je abszolút kell legyen, ezért csak az éles domain ismeretében
+generálható. A `helykereso.gergobalogh.me` kiadáshoz futtasd:
+
+```sh
+node seo.mjs --site-url https://helykereso.gergobalogh.me/
+node seo-check.mjs
+node site-build.mjs
+```
+
+Ez elkészíti a `sitemap.xml`-t, és beírja az abszolút címét a
+`robots.txt`-be. A `--site-url` a gyökérre telepített oldalnál is perjellel
+végződjön. Élesítés után a sitemapet a Google Search Console-ban is add
+meg; a publikált URL-t az URL-ellenőrzéssel érdemes tesztelni.
+
+Cloudflare Pages-beállítások:
+
+- **Build command:** `node seo.mjs --site-url https://helykereso.gergobalogh.me/ && node seo-check.mjs && node site-build.mjs`
+- **Build output directory:** `dist`
+- **Root directory:** hagyd üresen (a repository gyökere)
+
+A build nem telepít csomagokat: kizárólag a Node.js beépített moduljait
+használja.
 
 ## Miért három lépésben kérdezzük
 
@@ -331,6 +378,16 @@ Ha ilyen helynek találsz magyar nevet, két lépés kell: a
 `nincsMagyarNev.json`-ból. Az ellenőrző nézi mindkettőt, és szól, ha
 ellentmond egymásnak.
 
+### A pótolt nevű sorok (határon túl)
+
+Ahol nincs magyar címke a Wikidata-n — Kárpátalja falvainak zöme ilyen —,
+a sor nem tűnik el, hanem a tartaléknyelven (`uk`/`sr`) vagy románul
+látszik, ugyanazzal a jelöléssel (`huPotolt`). Ez nem kézi mérés, hanem
+bizonyos tudás, és a „javítása" linkkel pótolható: aki beírja a magyar
+nevet a Wikidata-n, a következő letöltéstől az látszik, jelölés nélkül.
+A cirill neveket a kereső átírva indexeli (`Рахів` → `rakhiv`), tehát
+latin betűkkel is megtalálod.
+
 ### Honnan tudjuk, hogy két forrás kell
 
 Mert a KIA magyar-név-mezőébe nem mindig magyar név kerül. A mérés
@@ -404,10 +461,12 @@ oldal mégis régebbi adatot mutat.
 
 ## A beállítás, amit írd át
 
-A `MEGYEK` tömb a `letolt.mjs` tetején. Tizenhat megye: a kilenc erdélyi
-(CJ, AB, BV, CV, HR, HD, MS, SB, BN) plusz a partiumi és bánsági
-(BH, SJ, SM, MM, AR, TM, CS); mindegyiknél a román megyekód (`CJ`) és a
-Wikidata-azonosító (`Q182624`). Ha más környéket akarsz,
+A `MEGYEK` tömb a `letolt.mjs` tetején. Harminc egység négy országból:
+a tizenhat romániai megye, Kárpátalja oblasztya + 6 járása (mind `ZK` kódon,
+mert az ukrán lánc háromszintes: járás → kistérség → falu), négy magyar
+megye (`SZB`, `HJB`, `BEK`, `CSC`) és három vajdasági bánsági körzet
+(`EBN`, `KBN`, `DBN`); mindegyiknél az `orszag` (`RO`/`UA`/`HU`/`RS`) adja
+a `P17` szűrőt és a sorvégi országjelölést. Ha más környéket akarsz,
 írd át ezt a tömböt. A megyekód az oldalon csoportosításra és rendezésre
 szolgál, a Wikidata-azonosító kell a lekérdezéshez.
 

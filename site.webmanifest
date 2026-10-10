@@ -1,0 +1,18 @@
+{
+  "name": "Helynévkereső",
+  "short_name": "Helynévkereső",
+  "description": "Erdélyi, partiumi, bánsági és kárpátaljai helységnevek magyarul, románul és németül.",
+  "lang": "hu",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f2eb",
+  "theme_color": "#813b3b",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
