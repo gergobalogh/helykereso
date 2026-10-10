@@ -72,6 +72,7 @@ function oldalFej({ cim, leiras, kanonikus, jsonLd }) {
     <meta property="og:site_name" content="Helynévkereső" />
     <meta property="og:title" content="${html(cim.replace(" | Helynévkereső", ""))}" />
     <meta property="og:description" content="${html(leiras)}" />${abszolutMeta}
+    <script defer src="https://umami.gergobalogh.me/stats.js" data-website-id="1c1e686f-f926-434d-9e6e-a2a5e3971df6"></script>
     <script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, "\\u003c")}</script>
     <style>
       :root{--papir:#f5f2eb;--lap:#fffefb;--tinta:#292522;--halvany:#716a62;--vonal:#e4ded3;--bordo:#813b3b}

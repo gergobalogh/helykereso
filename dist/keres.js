@@ -20,6 +20,9 @@ const keresDoboz = document.querySelector(".keres-wrap");
 // Elég hosszú ahhoz, hogy gépelés közben ne rajzoljuk újra folyton a listát,
 // de rövid marad, hogy a kereső ne érződjön lomha válaszúnak.
 const KERESES_KESLELTETES = 160;
+// Az analitikához hosszabb csendet várunk, hogy egy begépelt név egyetlen
+// esemény legyen, ne külön esemény minden rövid gépelési szünet után.
+const MERES_KESLELTETES = 800;
 
 let helyek = [];
 let megyek = new Map();
@@ -28,6 +31,64 @@ let terkep = null;
 let jeloloReteg = null;
 let jelolok = new Map(); // q -> Leaflet circleMarker
 let kivalasztottQ = null;
+let meresiIdozito = null;
+let utolsoKeresesMeres = null;
+
+/** Az analitika hibája vagy blokkolása soha ne akadályozza a keresőt. */
+function umamiEsemeny(nev, adat) {
+  try {
+    const kuldes = window.umami?.track?.(nev, adat);
+    if (kuldes && typeof kuldes.catch === "function") kuldes.catch(() => {});
+  } catch {
+    // A kereső reklám-/követésblokkoló mellett is teljes értékű marad.
+  }
+}
+
+function talalatSav(darab) {
+  if (darab === 0) return "0";
+  if (darab === 1) return "1";
+  if (darab <= 10) return "2-10";
+  if (darab <= 50) return "11-50";
+  if (darab <= 300) return "51-300";
+  return "300+";
+}
+
+/**
+ * Egy befejezett keresést mérünk. A beírt szöveget szándékosan nem küldjük
+ * el: a hossza, a szavak száma és az eredményessége elég a használati mód
+ * megértéséhez anélkül, hogy szabad szöveget gyűjtenénk.
+ */
+function keresestMer(osszegzes, indito) {
+  clearTimeout(meresiIdozito);
+  meresiIdozito = null;
+  if (!osszegzes) {
+    utolsoKeresesMeres = null;
+    return;
+  }
+
+  const adat = { ...osszegzes, trigger: indito };
+  const alairas = JSON.stringify(adat);
+  if (alairas === utolsoKeresesMeres) return;
+  utolsoKeresesMeres = alairas;
+  umamiEsemeny("Search", adat);
+}
+
+function keresestMerKesobb(osszegzes) {
+  clearTimeout(meresiIdozito);
+  if (!osszegzes) {
+    meresiIdozito = null;
+    utolsoKeresesMeres = null;
+    return;
+  }
+  meresiIdozito = setTimeout(() => keresestMer(osszegzes, "text"), MERES_KESLELTETES);
+}
+
+function talalatMuveletetMer(muvelet, q) {
+  const rang = [...talalat.children].findIndex((sor) => sor.dataset.q === q) + 1;
+  const adat = { action: muvelet };
+  if (rang > 0) adat.rank = rang;
+  umamiEsemeny("Search result", adat);
+}
 
 /**
  * Levesszük az ékezeteket, hogy "Targu Mures" megtalálja a "Târgu Mureș"-t.
@@ -304,7 +365,10 @@ function terkepKirajzol(lista, keresett) {
         jelolok.get(kivalasztottQ).openPopup();
       }
     });
-    jelolo.on("click", () => mutatTerkepen(h, { kozepre: false, gorget: true }));
+    jelolo.on("click", () => {
+      talalatMuveletetMer("map-marker", h.q);
+      mutatTerkepen(h, { kozepre: false, gorget: true });
+    });
     jelolo.addTo(jeloloReteg);
     jelolok.set(h.q, jelolo);
   }
@@ -509,7 +573,7 @@ function keres() {
       ? `${helyek.length} helység, ${megyek.size} megyéből. Írj egy nevet, vagy válassz megyét.`
       : "";
     terkepElrejt();
-    return;
+    return null;
   }
 
   // Minden beírt szónak valamelyik néven elő kell fordulnia elölről
@@ -529,19 +593,53 @@ function keres() {
     talalatok.length > 300
       ? `${talalatok.length} találat, az első 300 látszik.`
       : `${talalatok.length} találat.`;
+
+  return {
+    mode: keresett && megye ? "text+county" : keresett ? "text" : "county",
+    county: megye || "all",
+    query_length: keresett.length,
+    word_count: szavak.length,
+    results: talalatok.length,
+    result_range: talalatSav(talalatok.length),
+    exact_match: keresett ? talalatok.some((h) => pont(h, keresett) === 0) : false,
+  };
 }
 
 let idozito;
 mezo.addEventListener("input", () => {
   clearTimeout(idozito);
+  clearTimeout(meresiIdozito);
   keresDoboz.classList.add("kereses-folyamatban");
   keresDoboz.setAttribute("aria-busy", "true");
   if (talalat.childElementCount) talalat.classList.add("kereses-folyamatban");
   idozito = setTimeout(() => {
     idozito = null;
-    keres();
+    const osszegzes = keres();
     urlAllapotFrissit();
+    keresestMerKesobb(osszegzes);
   }, KERESES_KESLELTETES);
+});
+
+talalat.addEventListener("click", (event) => {
+  const cel = event.target instanceof Element ? event.target : null;
+  const sor = cel?.closest(".sor");
+  if (!sor || !talalat.contains(sor)) return;
+
+  let muvelet = null;
+  const link = cel.closest("a");
+  if (link) {
+    const url = new URL(link.href);
+    if (url.hostname.endsWith("wikipedia.org")) muvelet = "wikipedia";
+    else if (url.hostname === "www.wikidata.org" && url.searchParams.get("action") === "edit") {
+      muvelet = "wikidata-edit";
+    } else if (url.hostname === "www.wikidata.org") muvelet = "wikidata";
+  } else if (cel.closest(".terkepre")) {
+    muvelet = "map-button";
+  } else if (sor.classList.contains("terkepes")) {
+    muvelet = "map-row";
+  }
+
+  if (muvelet) talalatMuveletetMer(muvelet, sor.dataset.q);
 });
 
 async function betolt() {
@@ -587,8 +685,9 @@ async function betolt() {
   valaszt.addEventListener("change", () => {
     clearTimeout(idozito);
     idozito = null;
-    keres();
+    const osszegzes = keres();
     urlAllapotFrissit();
+    keresestMer(osszegzes, "county");
   });
 
   datum.textContent = adat.generatas.slice(0, 10);

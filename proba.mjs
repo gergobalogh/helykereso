@@ -36,6 +36,15 @@ const base = "http://localhost:8123/index.html";
 const browser = await chromium.launch(Bongeszo);
 const oldal = await browser.newPage();
 
+// A böngészős próba ne küldjön valódi analitikai adatot. A helyi helyettesítő
+// ugyanakkor eltárolja az eseményeket, így az Umami-integrációt is ellenőrizzük.
+await oldal.route("https://umami.gergobalogh.me/stats.js", (route) =>
+  route.fulfill({
+    contentType: "application/javascript",
+    body: "window.__umamiEvents = []; window.umami = { track: (...args) => window.__umamiEvents.push(args) };",
+  }),
+);
+
 const hibak = [];
 oldal.on("console", (m) => {
   if (m.type() === "error") hibak.push(m.text());
@@ -385,6 +394,9 @@ if (nincsTerkep && vanSor) {
 // Keskeny képernyőn se lógjon ki a térkép, és maradjon használható
 // magassága. Külön oldalon nézzük, hogy a desktop teszt állapota ne hasson rá.
 const mobil = await browser.newPage({ viewport: { width: 390, height: 844 } });
+await mobil.route("https://umami.gergobalogh.me/stats.js", (route) =>
+  route.fulfill({ contentType: "application/javascript", body: "window.umami = { track: () => {} };" }),
+);
 mobil.on("console", (m) => {
   if (m.type() === "error") hibak.push("mobil: " + m.text());
 });
@@ -560,6 +572,40 @@ if (!poienita.includes("Poienița")) {
 // A keresési állapot URL-ben is megosztható, és a keresőrobotoknak szánt
 // statikus jegyzék valódi, JavaScript nélküli HTML-t ad vissza.
 console.log("\n--- Megosztható URL és statikus SEO-jegyzék:");
+
+// Egy befejezett gépelésből pontosan használható, de szabad szöveget nem
+// tartalmazó Umami-esemény készül. A találati művelet külön esemény, ebből
+// látszik, hogy a keresés után használják-e a térképet vagy a forráslinkeket.
+await oldal.goto(base, { waitUntil: "networkidle" });
+await oldal.locator("#mezo").fill("Kolozsvár");
+await oldal.waitForTimeout(1100);
+const umamiKereses = await oldal.evaluate(() =>
+  window.__umamiEvents.find(([nev]) => nev === "Search"),
+);
+const umamiAdat = umamiKereses?.[1];
+if (
+  !umamiAdat ||
+  umamiAdat.mode !== "text" ||
+  umamiAdat.results < 1 ||
+  umamiAdat.exact_match !== true ||
+  Object.hasOwn(umamiAdat, "query")
+) {
+  bukott++;
+  console.log(`  ✗ hibás vagy túl részletes keresési esemény: ${JSON.stringify(umamiKereses)}`);
+} else {
+  console.log("  ✓ az Umami méri a keresés módját és eredményét, a beírt szöveg nélkül");
+}
+await oldal.locator(".terkepre").first().click();
+const umamiTalalat = await oldal.evaluate(() =>
+  window.__umamiEvents.find(([nev]) => nev === "Search result"),
+);
+if (umamiTalalat?.[1]?.action !== "map-button" || umamiTalalat?.[1]?.rank !== 1) {
+  bukott++;
+  console.log(`  ✗ hibás találati esemény: ${JSON.stringify(umamiTalalat)}`);
+} else {
+  console.log("  ✓ az Umami méri a találati műveletet és annak listabeli helyét");
+}
+
 await oldal.goto(`${base}?q=Brass%C3%B3&megye=BV`, { waitUntil: "networkidle" });
 const urlKeresesJo =
   (await oldal.locator("#mezo").inputValue()) === "Brassó" &&
