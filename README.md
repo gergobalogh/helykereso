@@ -8,7 +8,7 @@ magodra.
 
 ## Mi ez pontosan
 
-Erdély kilenc megyéjének (3075) helysége magyar és román névvel, és ahol van,
+Erdély, a Partium és a Bánság tizenhat megyéjének (5314) helysége magyar és román névvel, és ahol van,
 német nevet is. Magyarul, románul és németül is kereshetsz rá, ékezetek nélkül
 is (`Targu Mures` → Târgu Mureș). Van egy megyeválasztó is, ha az egész
 megyét akarod böngészni.
@@ -98,6 +98,14 @@ a "human settlement" alá köti, hanem közigazgatási területnek tekinti. Így
 B. lépés nem találta meg őket, és kimaradt 544 község meg 33 város — a
 falvak szülője is. Ezért van a `TELEPULESC_IS_KOZIGAZGATAS` lista.
 
+**A nagyvárosok kimaradtak — fordítva.** A „bármelyik nem-önálló osztály
+kizár" szabály Aradot, Temesvárt és Resicabányát is kitörölte: mindháromnak
+van ilyen mellékosztálya a Wikidata-n (urbánus terület, egyetemváros).
+A döntés most fordított: ha *bármelyik* osztálya lakott helyet jelent, az
+helység. Kivéve hármat, ami sosem önálló: a városnegyed, a negyed és az
+óváros (`VETO_OSZTALY`) — azok városrészek akkor is, ha melléjük
+falu-osztály is van írva (`Galac`, `Ótorda`, `Brassópojána`).
+
 **Téves megye.** Az első változat a lekérdezés *darabjá*ból számolta a
 megyét, nem a sorból. Mivel egy kérés 5 megyét is lekérdezett, mindenki az
 első megyébe került: 2176 "Kolozsvár megye" és 1157 "Hunyad megye". A helyes
@@ -130,7 +138,13 @@ betűk, tehát átcsúszik, és a kereső `de` jelöléssel román nevet mutat:
 Ezért van a `nemetNev()` **negyedik szabálya**: ami román ékezetet tartalmaz
 (`ă â î ș ț`), az nem német név. A német ábécében ilyen betű nincs, tehát a
 jel biztos — és nem téveszt szót a magyar `ő`/`ű`, mert az közös ékezet.
-Öt helységen így 135 helyett **130** valódi német név maradt.
+
+És van **ötödik is**: ami két nevet fűz össze perjellel (`Avram Iancu /
+Keményfok`, `Dumbrava / Körösdombró`), az sem német — a Wikidata a román
+és a magyar nevet írta a német mezőbe. A 3. és 4. szabály ezt nem fogja
+meg, mert nincs benne román ékezet: a 9 megyés adatban épp ezért maradt
+láthatatlan, csak a partiumi–bánsági bővítés hozta elő (9 hely).
+A hiányzó név itt is tisztább, mint a hamis.
 
 A hiányzó név tisztább, mint a hamis: ezt a `javitasok.json` szabálya is
 mondja, és ugyanez érvényes a szűrésre.
@@ -274,6 +288,13 @@ Két dolog, amit a toldalék nem csinál, és szándékosan:
   amit a `README` eleve elkerült: a "kolozsvár" keresés 426 találatot adna,
   és a listán nem derülne ki, miért illik oda valami.
 
+Ha a csoporton belül még a község is közös — két külön falu ugyanabban a
+községben, ugyanazzal a magyar névvel (`Báródbeznye` kétszer Barátka
+községben; a KIA a Delurenire is a Báródbeznyét adja) —, akkor a községnév
+nem választana szét semmit. Ilyenkor a **román név** kerül mellé:
+`Báródbeznye (Beznea)` és `Báródbeznye (Delureni)`. Ugyanaz a szabály,
+ugyanaz az ellenőrzés, csak a tartalék más.
+
 ### Amit ez a toldalék NEM tud, és ezért ellenőrzi is
 
 Az `ellenoriz.mjs` három dolgot néz a kész adaton, mert ezek csendben
@@ -383,8 +404,10 @@ oldal mégis régebbi adatot mutat.
 
 ## A beállítás, amit írd át
 
-A `MEGYEK` tömb a `letolt.mjs` tetején. Kilenc megye; mindegyiknél a román
-megyekód (`CJ`) és a Wikidata-azonosító (`Q182624`). Ha más környéket akarsz,
+A `MEGYEK` tömb a `letolt.mjs` tetején. Tizenhat megye: a kilenc erdélyi
+(CJ, AB, BV, CV, HR, HD, MS, SB, BN) plusz a partiumi és bánsági
+(BH, SJ, SM, MM, AR, TM, CS); mindegyiknél a román megyekód (`CJ`) és a
+Wikidata-azonosító (`Q182624`). Ha más környéket akarsz,
 írd át ezt a tömböt. A megyekód az oldalon csoportosításra és rendezésre
 szolgál, a Wikidata-azonosító kell a lekérdezéshez.
 
@@ -443,7 +466,7 @@ Ezért itt nem javítunk semmit, és ezt szándékosan így értjük:
 A reális út a **javítása** link: aki ismeri a magyar nevet, a Wikidata-n írja
 be. A részletes mérés a [`kutatas.md` „A 77 magyar név"](kutatas.md) fejezetében.
 
-424 helységen a magyar név megegyezik a románnal (nincs magyar exonim) — ez
+569 helységen a magyar név megegyezik a románnal (nincs magyar exonim) — ez
 nem hiba, csak így jött, és a számláló kileli, ha érdekel.
 
 Két helység tudatosan hiányzik, mert a Wikidata-n nincs magyar nevük:

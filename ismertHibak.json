@@ -25,7 +25,7 @@
  ],
  "huRomanSzo": {
   "_nev": "A magyar mezőbe másolt román helynév",
-  "_darab": 77,
+  "_darab": 85,
   "_pelda": [
    {
     "q": "Q1822117",
@@ -134,11 +134,19 @@
   "Q12143177": "Poieni",
   "Q12087579": "Valea Poienii",
   "Q12087665": "Valea Șesii",
-  "Q1401149": "Valea Sânpetrului"
+  "Q1401149": "Valea Sânpetrului",
+  "Q874827": "Valea Ciurenilor",
+  "Q902955": "Dealu Corbului",
+  "Q620296": "Izvor",
+  "Q619208": "Lunca Florii",
+  "Q619200": "Lunca Zaicii",
+  "Q619152": "Poiana Lungă",
+  "Q519735": "Valea Orevița",
+  "Q552933": "Valea Sicheviței"
  },
  "huZarojeles": {
   "_nev": "A magyar mező zárójeles megkülönböztetést tartalmaz",
-  "_darab": 10,
+  "_darab": 12,
   "_pelda": [
    {
     "q": "Q714800",
@@ -169,7 +177,9 @@
   "Q1215233": "Nagyvölgy (Románia)",
   "Q1286601": "Sebespatak (Románia)",
   "Q1009955": "Gertia (Gersa II)",
-  "Q12162721": "Trifești (Nagylupsa község)"
+  "Q12162721": "Trifești (Nagylupsa község)",
+  "Q505404": "Adorján (Románia)",
+  "Q1112356": "Kistécső (Románia)"
  },
  "huMondat": {
   "_nev": "A magyar mező magyarázó mondat, nem név",

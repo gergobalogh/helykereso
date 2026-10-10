@@ -55,8 +55,7 @@ const TELEPULESC_IS_KOZIGAZGATAS = [
 // köt, de nem önálló lakhelyek. Ezek kimaradnak: a "Kézdivásárhely
 // történelmi központja", a kolozsvári negyedek, a római castrumok és a
 // kolostorok nem külön kereshető helységek.
-const NEM_ONALLO_LAKHELY = [
-  "Q1187811", // college town
+const NEM_ONALLO_LAKHELY = [  "Q1187811", // college town
   "Q123705", // neighborhood
   "Q140456098", // rural ensemble
   "Q15661340", // ancient city
@@ -73,6 +72,17 @@ const NEM_ONALLO_LAKHELY = [
   "Q702492", // urban area
   "Q88205", // castrum
   "Q89477", // castellum
+];
+
+// A fenti listából az a három, ami MELLETTE szóló lakott-hely osztály
+// esetén is kizár: a városnegyed, a negyed és az óváros sosem önálló
+// helység. A többi (egyetemváros, urbánus terület, kolostor, castrum…)
+// csak akkor dönt, ha nincs mellette lakott-hely osztály — különben
+// Arad, Temesvár és Resicabánya is kiesne, pedig azok megyeszékhelyek.
+const VETO_OSZTALY = [
+  "Q123705", // neighborhood
+  "Q2983893", // quarter
+  "Q676050", // old town
 ];
 
 // Az agglomerációk ("Kolozsvár metropolisztérség") NEM helységek, de
@@ -95,6 +105,13 @@ export const MEGYEK = [
   { q: "Q190711", kod: "MS", hu: "Maros", ro: "Mureș", de: "Marosburg" },
   { q: "Q184797", kod: "SB", hu: "Szeben", ro: "Sibiu", de: "Hermannstadt" },
   { q: "Q181513", kod: "BN", hu: "Beszterce-Nászád", ro: "Bistrița-Năsăud", de: "Bistritz" },
+  { q: "Q179588", kod: "BH", hu: "Bihar", ro: "Bihor", de: null },
+  { q: "Q190690", kod: "SJ", hu: "Szilágy", ro: "Sălaj", de: null },
+  { q: "Q165459", kod: "SM", hu: "Szatmár", ro: "Satu Mare", de: null },
+  { q: "Q188813", kod: "MM", hu: "Máramaros", ro: "Maramureș", de: null },
+  { q: "Q179559", kod: "AR", hu: "Arad", ro: "Arad", de: null },
+  { q: "Q185586", kod: "TM", hu: "Temes", ro: "Timiș", de: null },
+  { q: "Q187925", kod: "CS", hu: "Krassó-Szörény", ro: "Caraș-Severin", de: null },
 ];
 
 // Egy-egy kérés ennyi helységet vehet fel. Nagyobb érték gyorsabb, de a
@@ -302,14 +319,26 @@ async function main() {
   // kiszűrése UTÁN szűrjük, hogy csak azok maradjanak benne, akiknek a
   // sora tényleg az adatfájlba került.
   const hamisNemet = new Map();
+  const perjelNemet = new Map();
 
   for (const [q, adat] of [...kozsegek, ...falvak]) {
-    // Ha a helynek BÁRMELYIK osztálya a nem-önálló-lakhelyek közül van,
-    // eldobjuk. Így van, aki több osztályú is (a "Kolozsvár metropolisztérség"
-    // egyszerre metropolisztérség és metropolis, és a második osztály
-    // különben átcsúszott volna).
-    const nemOnallo = [...adat.osztalyok].some((o) => NEM_ONALLO_LAKHELY.includes(o));
-    const lakottHely = !nemOnallo && [...adat.osztalyok].some(telepules);
+    // Egy helységnek sok osztálya lehet: Temesvár egyszerre "nagyváros",
+    // "egyetemváros" (Q1187811) és "urbánus terület" (Q702492) is a
+    // Wikidata-n — és a régi szabály ("bármelyik nem-önálló osztály kizár")
+    // emiatt Aradot, Temesvárt és Resicabányát is kitörölte. A döntés most
+    // fordított: ha BÁRMELYIK osztálya lakott helyet jelent, az helység —
+    // KIVÉVE a három sosem-önálló osztályt. A városnegyed (Q123705), a
+    // negyed (Q2983893) és az óváros (Q676050) ugyanis sosem önálló
+    // helység, még ha a Wikidata mellé falu-osztályt is ír ("Galac",
+    // "Ótorda", "Várdotfalva", "Brassópojána"): azok városrészek, nem
+    // bejárható falvak. A többi mellékcímke (egyetemváros, urbánus
+    // terület, kolostor, castrum) csak akkor dönt, ha nincs mellette
+    // lakott-hely osztály — a `telepules()` azokra eleve hamisat ad.
+    // Az agglomerációkat ("Kolozsvár metropolisztérség") ez átengedi, de
+    // azokat a NÉV alapján szűrjük (`nemHelyseg`), és az ellenőrző is
+    // ugyanazt nézi a kész adaton.
+    const veto = [...adat.osztalyok].some((o) => VETO_OSZTALY.includes(o));
+    const lakottHely = !veto && [...adat.osztalyok].some(telepules);
     // Mindhárom névet nézzük, nem csak a magyart: a Wikidata ugyanazt az
     // agglomerációt magyarul "Metropoliszövezet"-nek, románul "Zona
     // metropolitană"-nak hívja, és csak egyik nyelven lehet eltalálni.
@@ -351,15 +380,22 @@ async function main() {
     // levágás után 556 duplikált sor keletkezett.
     const de = nemetNev(s.de, ro, javitasok);
     // Pontosan azokat számoljuk, amit KIZÁRÓLAG a 4. (ékezet-) szabály vett
-    // ki: lefuttatjuk a függvényt a szabály nélkül is, és ha akkor jött volna
-    // név, akkor a 4. pont döntött.
-    //
-    // E nélkül a szám 562 lenne, és félrevezető: a legtöbb ilyen helyet a 3.
-    // (betűrendi) szabály is kiszűr, tehát az ékezet-szabály csak ötöt adott
-    // hozzá. A "melyik szabály miért" a kimenet legfontosabb információja
-    // itt, mert ezek csendes szűrések.
+    // ki: a szabály nélkül megmaradnának. (A nyers alakra nézni nem elég:
+    // a 3. szabály áldozatainak felében is van román ékezet, hiszen a
+    // román nevet másolták — az 655 sor lenne, nem 4.)
     if (s.de && !de && nemetNev(s.de, ro, javitasok, { ekezet: false })) {
       hamisNemet.set(q, { q, hu, ro, de: s.de });
+    }
+    //
+    // Ugyanígy az 5. (perjel-) szabály áldozatait: a nyers név perjelt
+    // vagy zárójelet hordoz, és a két új szabály nélkül megmaradna (a 3.
+    // betűrendi áldozatait nem soroljuk ide — azokat nem a perjel
+    // miatt hagytuk ki).
+    if (
+      s.de && !de && /[/()]/.test(s.de) &&
+      nemetNev(s.de, ro, javitasok, { ekezet: false, perjel: false })
+    ) {
+      perjelNemet.set(q, { q, hu, ro, de: s.de });
     }
 
     helyek.push({
@@ -542,6 +578,18 @@ async function main() {
     );
     for (const x of bentHamisNemet) console.log(`    ${x.q} ${x.hu} / ${x.ro} / ${x.de}`);
   }
+  // Ugyanaz a perjeles "német" nevekre ("Avram Iancu / Keményfok"): a
+  // Wikidata a román és a magyar nevet írta a német mezőbe. Egyik rész sem
+  // német, tehát nincs mit megmenteni belőle.
+  const bentPerjelNemet = [...perjelNemet.values()].filter((x) =>
+    helyek.some((h) => h.q === x.q),
+  );
+  if (bentPerjelNemet.length) {
+    console.log(
+      `  ${bentPerjelNemet.length} német nevet hagytunk ki, mert két nevet fűz össze:`,
+    );
+    for (const x of bentPerjelNemet) console.log(`    ${x.q} ${x.hu} / ${x.ro} / ${x.de}`);
+  }
 
   console.log(`\nKész: ${helyek.length} helység, ${helyek.filter((h) => h.de).length} német nevet kapott. (verzió ${VERZIO})`);
   for (const m of MEGYEK) {
@@ -551,11 +599,13 @@ async function main() {
 }
 
 /**
- * A német név, négy szabály szerint:
+ * A német név, öt szabály szerint:
  *  1. ha szerepel a javitasok.json-ban, az az igazi (kézzel ellenőrzött),
  *  2. zárójeles magyarázatot ("Luna (Cluj)") levágjuk, mert az nem név,
  *  3. ha a Wikidata oda szinte a román nevet másolta, nincs német nevünk,
  *  4. a "német" név, amiben román ékezet van (ă â î ș ț), szintén nem német.
+ *  5. ami két nevet fűz össze perjellel ("Avram Iancu / Keményfok"), az sem:
+ *     a Wikidata a román és a magyar nevet írta a német mezőbe.
  *
  * A 3. pont trükkös: a Wikidata gyakran a román névből csinál "német" nevet,
  * csak a végződésen ront egy kicsit ("Hodaie" -> "Hodaei"). Ezért nem
@@ -568,7 +618,7 @@ async function main() {
  * már nem ugyanazok a betűk. A német ábécében viszont nincs ă/â/î/ș/ț,
  * tehát ez a jel biztos: öt helységnél a román nevet mutatta "de" jelöléssel.
  */
-function nemetNev(deWikidata, ro, javitasok, { ekezet = true } = {}) {
+function nemetNev(deWikidata, ro, javitasok, { ekezet = true, perjel = true } = {}) {
   if (!deWikidata && !(ro in javitasok)) return null;
   const tisztitott = deWikidata
     ? deWikidata.replace(/\s*\([^)]*\)\s*$/u, "").trim()
@@ -588,6 +638,13 @@ function nemetNev(deWikidata, ro, javitasok, { ekezet = true } = {}) {
   // Fontos: a hiányzó német név tisztább, mint egy hamis. A README ezt
   // írja a javitasok.json-ról is: "ha kétséges, ne írj be semmit".
   if (ekezet && deRomanEkezet(jelolt)) return null;
+  // Két név perjellel összefűzve ("Avram Iancu / Keményfok",
+  // "Dumbrava / Körösdombró") vagy zárójeles maradék a végin túl: a
+  // Wikidata a román és a magyar nevet írta a német mezőbe. A 3.
+  // (betűrendi) és a 4. (ékezet-) szabály ezt nem fogja meg, mert nincs
+  // benne román ékezet — a 9 megyés adatban épp ezért maradt láthatatlan,
+  // csak a Partium+Bánság hozta elő.
+  if (perjel && /[/()]/.test(jelolt)) return null;
   return jelolt;
 }
 

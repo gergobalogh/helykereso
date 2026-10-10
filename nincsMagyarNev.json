@@ -15,6 +15,14 @@
   "adatfájlban 89 maradt, meg a visszanyert 93 hely közül 44, aminek a magyar",
   "neve a románnal egyezik. A két halmaz 12 helyen átfed.",
   "",
+  "2026-10-10 (2.0.0, Partium+Bánság): +7 hely az új megyékből (SJ/MM/CS):",
+  "a KIA-bejegyzésük üres magyar mezőjű ÉS a magyar Wikipedia infoboxuk is",
+  "üres — kettős negatív bizonyíték. A nyolcadik jelölt (Dealu Corbului,",
+  "Q902955) NEM került be: az infobox a román nevet adja magyar névként,",
+  "tehát azt használják (mint az Angofát) — ez nem a jelölés esete. (A",
+  "Q620296 huwiki-hivatkozása gyanús: az Ohabaizvorvölgy cikkre mutat, ami",
+  "másik falu — a jelölés a KIA-ür + üres infobox miatt áll.)",
+  "",
   "FONTOS: a hu==ro önmagában NEM hiba — 468 helynél ez a helyzet, és csak",
   "121-nél nincs magyar nevük. A többinél (\"Ponor\", \"Angofa\") a magyar",
   "Wikipedia infoboza is ugyanazt a nevet adja, tehát az a nevük. Ezért a",
@@ -143,5 +151,12 @@
  "Q9196575": null,
  "Q9196627": null,
  "Q9196688": null,
- "Q9196772": null
+ "Q9196772": null,
+ "Q874827": null,
+ "Q620296": null,
+ "Q619208": null,
+ "Q619200": null,
+ "Q619152": null,
+ "Q519735": null,
+ "Q552933": null
 }

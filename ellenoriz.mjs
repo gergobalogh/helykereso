@@ -57,7 +57,10 @@ const FOK = [
   ["Dicsőszentmárton", "MS"], // Târnăveni, ugyanígy
   ["Tekeújfalu", "MS"],       // Lunca, ugyanígy
   ["Magyarigen", "AB"],       // Ighiu, falu, "village" — a másik ág
-  ["Kézdiszentvincent", "CV"], ["Borosjenő", "HD"],
+  ["Nagyvárad", "BH"], ["Zilah", "SJ"], ["Szatmárnémeti", "SM"],
+  ["Nagybánya", "MM"], ["Arad", "AR"], ["Temesvár", "TM"],
+  ["Resicabánya", "CS"], ["Borosjenő", "AR"],
+  ["Kézdiszentvincent", "CV"],
 ];
 for (const [n, megyeKod] of FOK) {
   const h = hu.get(n);
@@ -186,7 +189,7 @@ const utaloAzos = utaloUtkozes(helyek);
 if (utaloAzos.length) {
   hiba(
     `${utaloAzos.length} néven ugyanabban a megyében két hely van, amelyeket ` +
-      `a toldalék sem választ szét (azonos vagy hiányzó szülő község)`,
+      `a toldalék sem választ szét (azonos toldalék, vagy nincs mit mellé írni)`,
   );
   for (const [k, v] of utaloAzos.slice(0, 6)) {
     console.log(`    ${k}: ${v.map((h) => `${h.q} (${h.kozsegNev ?? "nincs községe"})`).join(" , ")}`);
@@ -535,16 +538,18 @@ console.log(
   `  a ${hasznos.length} "felesleges" közül lehet, hogy csak azért látszik így, mert a Wikidata a román nevet adta (ilyenkor a javítás kell)`,
 );
 
-// A "Kézdiszentvincent" és a "Borosjenő" tudottan hiányzik (a Wikidata-n sincs
-// magyar nevük), és ez a két hiba minden futáskor megjelenik. A számot mégsem
+// A "Kézdiszentvincent" tudottan hiányzik (a Wikidata-n sincs magyar
+// nevük), és ez a hiba minden futáskor megjelenik. (Borosjenő 2026-10-10
+// óta bent van: a bővítéskor kiderült, hogy Arad megyében van, nem
+// Hunyadban — a régi FOK-sor rossz megyét mondott.) A számot mégsem
 // írjuk be mereven: ha egy új hiba jelenik meg, a sor ennyivel lesz hosszabb,
-// és a "2 hiba" állítás már nem mond igazat.
-const TUDOTTAN_HIBAS = 2;
+// és a "1 hiba" állítás már nem mond igazat.
+const TUDOTTAN_HIBAS = 1;
 const ujHibak = Math.max(0, hibak - TUDOTTAN_HIBAS);
 console.log(
   hibak
     ? `\n${hibak} hiba, ebből ${TUDOTTAN_HIBAS} tudottan hiányzó hely ` +
-        `("Kézdiszentvincent", "Borosjenő"). ÚJ hiba: ${ujHibak}` +
+        `("Kézdiszentvincent"). ÚJ hiba: ${ujHibak}` +
         (ujHibak ? " — nézd meg a fenti ✗ sorokat." : "")
     : "\nNincs hiba a fő ellenőrzéseken.",
 );

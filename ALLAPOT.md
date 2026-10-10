@@ -6,7 +6,7 @@ megerősített hibákkal és a mérési számokkal); a **hogyan** a
 [`README.md`](README.md)-ben (a kód használata); itt csak a folytatáshoz
 szükséges tények állnak.
 
-**Utolsó frissítés: 2026-10-09 (3. munkamenet). Adatverzió: 1.1.0.**
+**Utolsó frissítés: 2026-10-10 (4. munkamenet). Adatverzió: 2.0.0.**
 
 ## Ahol tartunk
 
@@ -117,40 +117,44 @@ ezt meg akarod fordítani, a `keres.js`-ben egy `if (h.huNincsNeve)`
 
 ## A jelenlegi adat — ellenőrizve
 
-`helyek.json`: **3167 helység, 9 megye**, 130 valódi német név,
-verzió **1.1.0**.
+`helyek.json`: **5314 helység, 16 megye**, 261 valódi német név,
+verzió **2.0.0**.
 
 | megye | kód | helység |
 |---|---|---|
-| Nagy-Albás | AB | 719 |
-| Hunyad | HD | 488 |
+| Nagy-Albás | AB | 720 |
 | Maros | MS | 518 |
+| Hunyad | HD | 488 |
+| Bihar | BH | 453 |
 | Kolozsvár | CJ | 436 |
+| Temes | TM | 326 |
+| Krassó-Szörény | CS | 308 |
+| Szilágy | SJ | 289 |
+| Arad | AR | 286 |
 | Hargita | HR | 266 |
 | Beszterce-Nászád | BN | 252 |
+| Máramaros | MM | 247 |
+| Szatmár | SM | 237 |
 | Szeben | SB | 188 |
 | Brassó | BV | 170 |
 | Kovászna | CV | 130 |
 
-- 468 helységen a magyar név megegyezik a románnal (nincs magyar exonim — nem
-  hiba); **121-nél** ebből nincs is magyar nevük, ezeket jelöli a
+- 569 helységen a magyar név megegyezik a románnal (nincs magyar exonim — nem
+  hiba); **128-nál** ebből nincs is magyar nevük, ezeket jelöli a
   `huNincsNeve`
-- 2 kézzel javított magyar név (`Monostor`, `Dumest`) — a `javitasokHu.json`
-- 130 német név, mind ellenőrzötten német (nincs román ékezet, nincs perjel)
-- **36** néven oszlik meg két vagy több hely ugyanabban a megyében, összesen
-  **76** helységgel (ez a szándék; a sorok a községnevükön különböznek).
-  Ebből 33 néven pontosan kettő, 2-nél három, 1-nél négy (`Florești`) van,
-  és 27-nél a román név is egyforma — vagyis a felhasználó **76 sort lát
-  megkülönböztető toldalék nélkül** (ez 2026-09-09-ig így volt, ma mind
-  megvan).
-  A maradás maga a `README` tervezése: a magyar nevek eltérése önmagában nem
-  zárja ki, hogy két megyében ugyanaz a falu-név létezik.
+- 6 kézzel javított magyar név (`Monostor`, `Dumest`, `Rohány`, `Bojnica`,
+  `Liborásdia`, `Stájerlak`) — a `javitasokHu.json` (mind kétforrásos)
+- 261 német név, mind ellenőrzötten német (nincs román ékezet, nincs perjel)
+- **39** néven oszlik meg két vagy több hely ugyanabban a megyében, összesen
+  **82** helységgel (ez a szándék; a sorok a községnevükön különböznek,
+  egy kivétellel: `Báródbeznye` kétszer Barátka községben, ott a román név
+  a toldalék).
 
 ### Ellenőrzés: minden zöld
 
 ```
-node letolt.mjs     → 3167 helység, 121 hely jelölve "nincs magyar neve", 2/2 kézi magyar név érvényesült
-node ellenoriz.mjs   → 2 hiba, mindkettő tudottan hiányzó (Kézdiszentvincent, Borosjenő), 0 új
+node letolt.mjs     → 5314 helység, 128 hely jelölve "nincs magyar neve", 6/6 kézi magyar név érvényesült
+node ellenoriz.mjs   → 1 hiba, tudottan hiányzó (Kézdiszentvincent), 0 új
 node proba.mjs      → Minden próba sikerült (a http.server 8123-en fut)
 ```
 
@@ -207,6 +211,25 @@ jelenik meg magyar névként. A lehetőségek:
 
 Ez termékdöntés, adatpolitika, nem technikai. Nem nyúltam hozzá.
 
+## Amit a 4. munkamenetben csináltam (Partium + Bánság, 2.0.0)
+
+- `MEGYEK` 9 → 16 (BH, SJ, SM, MM, AR, TM, CS; Q-számok a Wikidata-n
+  ellenőrizve), `VERZIO` 1.1.0 → 2.0.0. A régi 9 megyés cache és adat a
+  `.cache/backup-9megye/`-ben van; a megye/község-cache törölve, mert az
+  index-alapú gyorsítótár új célhalmazzal csendben keverne.
+- Három javítás, amit a bővítés hozott elő (részletek a `CHANGELOG.md`
+  2.0.0-bejegyzésében): a település-szabály megfordítása + `VETO_OSZTALY`
+  (Arad, Temesvár, Resicabánya visszahozva; Kolozsvár kanonikus Q100188-ra
+  cserélődött; Borosjenő Arad megyében van, nem Hunyadban); az 5.
+  németnév-szabály (perjel, 9 hely); a román-neves tartalék-toldalék
+  (`Báródbeznye (Beznea)` / `(Delureni)`); a `huMondat` vessző-finomítása.
+- `ismertHibak.json`: `huRomanSzo` 77 → 85, `huZarojeles` 10 → 12.
+  `TUDOTTAN_HIBAS` 2 → 1 (csak Kézdiszentvincent).
+- Kétszer futtatott `letolt.mjs` bitre azonos (5314). Megfigyelés: egy
+  köztes futás egyszer 5322-t írt ki (nem reprodukálható, mechanizmus
+  nélkül) — az egyetlen nem-gyorsítótárazott élő függőség a B-lépés
+  osztály-lekérdezése, tehát ha determinizmus-ingadozást keresnél, ott.
+
 ## Amit érdemes lehet folytatni
 
 1. ~~**A 22 néven, ahol két megmaradt helynek a magyar neve is azonos**~~
@@ -220,6 +243,9 @@ Ez termékdöntés, adatpolitika, nem technikai. Nem nyúltam hozzá.
    2026-10-09-én** (`c6ff588`): a `kia.mjs` mér, a `kiaMagyarNev.json`
    minősít, az ellenőrző pedig szól, ha feldolgozatlan (`merve`) bejegyzés
    marad. Eredmény: **17 KIA-jelölt, 2 elfogadva, 15 elutasítva.**
+   **2026-10-10 (2.0.0):** a halmaz 569 helyre nőtt, **17 új jelölt kész:
+   4 elfogadva** (Rohány, Bojnica, Liborásdia, Stájerlak), **13 elutasítva**;
+   a mérő `/tmp/opencode/merve-huwiki.mjs` (a `.cache/spot.mjs` mintájára).
 5. **A KIA PDF beépítése a `letolt.mjs`-be** — a mérés most a KIA-t, de a
    letöltő továbbra is csak a Wikidata-ot olvassa, tehát a magyar név
    javítása kézi. Ha a KIA-bejegyzés a letölés része lenne, a
@@ -229,6 +255,12 @@ Ez termékdöntés, adatpolitika, nem technikai. Nem nyúltam hozzá.
    bizonyíték** kell (nincs KIA-név ÉS nincs Wikipedia-infoboxid), és a
    negatív bizonyíték a KIA-nál gyenge (a KIA ritkán írja ki az azonos
    nevet). Ha ez a lista kézi, ez a leggyengébb láncszem a projektben.
+   **2026-10-10 (2.0.0):** a 8 új partiumi–bánsági `huRomanSzo` közül
+   7 kettős negatív (üres KIA + üres infobox) → a lista 121 → **128**;
+   a nyolcadik (Dealu Corbului, Q902955) kimaradt, mert az infobox a román
+   nevet adja. Kész.
+7. ~~**`proba.mjs` újrafuttatása a 2.0.0-adaton**~~ — **kész 2026-10-10-én**:
+   minden próba zöld 5314 helységen.
 
 ## Egyéb tudnivaló
 

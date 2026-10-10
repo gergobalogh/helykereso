@@ -22,6 +22,53 @@ romántól ("Vále"/"Vale", "Dealu Ștefăniței"/"Dealul Ștefăniței"), ezér
 `szabalyok.mjs` `ugyanazANev()` függvénye ezt elfogadja. Ez csak az
 ellenőrzésen fut, keresésre nem.
 
+## 2.0.0 — 2026-10-10
+
+Partium + Bánság: a katalógus 9-ről **16 megyére** bővült (BH, SJ, SM, MM,
+AR, TM, CS), **3167-ről 5314 helységre**. A `MEGYEK` átírása önmagában
+kevés volt — a bővítés három csendes hibát hozott elő, mindhármat javítva,
+mindhárom ellenőrzéssel:
+
+- **Három megyeszékhely kimaradt** (Arad, Temesvár, Resicabánya). A
+  „bármelyik nem-önálló osztály kizár" szabály törölte őket, mert van ilyen
+  mellékosztályuk (urbánus terület, egyetemváros). A döntés fordított: ha
+  *bármelyik* osztály lakott hely, az helység — kivéve a `VETO_OSZTALY`
+  három sosem-önálló osztályát (városnegyed, negyed, óváros), mert azok
+  városrészek akkor is, ha falu-osztály is van mellettük (`Galac`,
+  `Ótorda`, `Brassópojána`). Mellékhaszon: Kolozsvár a kanonikus
+  `Q100188`-cal szerepel (eddig a duplikált `Q16898189` nyert), és
+  bekerült Szászavinc (Geamăna) is.
+- **Három perjeles „német" név átcsúszott** (`Avram Iancu / Keményfok`):
+  a 3. és 4. szabály nem fogja meg őket, mert nincs bennük román ékezet.
+  Az 5. szabály (`/`, `(` a német névben) 9 helyről veszi ki a hamis
+  `de`-t; a letöltő külön listázza őket.
+- **Két azonos sor ugyanabban a községben** (`Báródbeznye` kétszer Barátka
+  községben: Beznea és Delureni — a KIA mindkettőre a Báródbeznyét adja).
+  Ilyenkor a toldalék a román név, nem a község: `Báródbeznye (Beznea)`.
+
+A bővítés hozadéka egy régi tévedés javítása is: **Borosjenő nem Hunyad,
+hanem Arad megyében van** (Ineu) — most már az adatban, a `FOK` is oda
+nézi. Tudottan hiányzó: már csak **Kézdiszentvincent** (1, nem 2).
+
+Ismert Wikidata-hibák: `huRomanSzo` 77 → 85, `huZarojeles` 10 → 12
+(mind az új megyékből, mind dokumentálva). A `huMondat` vessző-szabálya
+finomodott: a „Fonóháza, Fonókismező" két név, nem mondat.
+
+**Miért 2.0.0:** új helységek, új mezőértékek, három új szabály — a
+felhasználó más találatokat lát, mint 1.1.0 alatt.
+
+Mérés, ami mögötte van: a `kia.mjs` 17 új jelöltet adott a kibővült
+`hu == ro` halmazra (569 hely): **4 elfogadva** (Rohány, Bojnica, Liborásdia,
+Stájerlak — KIA + magyar Wikipedia infobox egyezik), **13 elutasítva**
+(többségnél az infobox a román nevet adja, tehát az a használatban lévő
+név; kettőnél a KIA „neve" zárda-leírás). A `nincsMagyarNev.json` 121 →
+**128**: a 8 új `huRomanSzo` közül 7 kettős negatív (üres KIA-mező + üres
+infobox), a nyolcadik (Dealu Corbului) kimaradt, mert az infobox a román
+nevet adja — mint az Angofánál.
+Determinizmus: két egymás utáni `letolt.mjs` bitre azonos `helyek.json`-t ad
+(5314); az egyetlen nem-gyorsítótárazott élő függőség a B-lépés
+osztály-lekérdezése.
+
 ## 1.1.0 — 2026-10-09
 
 A „nincs magyar neve" jelölés, plusz két új kézi forrásfájl.

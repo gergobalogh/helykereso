@@ -96,16 +96,25 @@ export function ugyanazAHely(a, b) {
 /**
  * Az a toldalék, ami tényleg megkülönbözteti a sort — vagy `null`, ha nincs.
  *
- * Egy sor kétféleképpen lehet megkülönböztethetetlen: ha nincs szülő
- * községe, amiből toldalékot írhatnánk, vagy ha a magyar nevében már ott a
- * zárójel ("Trifești (Nagylupsa község)", a `huZarojeles` osztályba tartozó
- * Wikidata-hiba) — utóbbinál a sor eleje már elválasztja a testvérétől, és
- * egy második zárójel csak "Trifești (Nagylupsa község) (Nagylupsa
- * község)"-t adna.
+ * Alapesetben a szülő község neve: ha a csoporton belül senki más nem
+ * osztozik rajta, az elég. Ha viszont két helynek ugyanaz a szülő községe
+ * (vagy nincs is községük), a községnév nem választaná szét őket — ilyenkor
+ * a román név kerül mellé: "Báródbeznye (Beznea)" és "Báródbeznye
+ * (Delureni)", két külön falu Barátka községben, ugyanazzal a magyar
+ * névvel (a KIA a Delurenire is a Báródbeznyét adja).
+ *
+ * Két dolog egyik ágra sem ad toldalékot: akinek nincs szülő községe ÉS a
+ * román neve sem különbözik (vagy nincs), illetve akinek a magyar nevében
+ * már ott a zárójel ("Trifești (Nagylupsa község)", a `huZarojeles`
+ * osztályba tartozó Wikidata-hiba) — utóbbinál a sor eleje már elválasztja
+ * a testvérétől, és egy második zárójel csak "Trifești (Nagylupsa község)
+ * (Nagylupsa község)"-t adna.
  */
-function toldalek(h) {
-  if (!h.kozsegNev) return null;
-  return h.hu.endsWith(`(${h.kozsegNev})`) ? null : h.kozsegNev;
+function toldalek(h, osztozik) {
+  if (h.hu.endsWith(`(${h.kozsegNev})`)) return null;
+  if (h.kozsegNev && !osztozik) return h.kozsegNev;
+  if (!h.ro || h.hu.endsWith(`(${h.ro})`)) return null;
+  return h.ro;
 }
 
 /** A csoportosítás kulcsa: a megye és a magyar név együtt. */
@@ -121,9 +130,12 @@ function utaloKulcs(h) {
  * ott a sor végén álló megyefelirat már elválasztja őket. Ugyanabban a
  * megyében viszont a megye nem segít, mert mindkettő ugyanott van.
  *
- * A toldalék a hely szülő községének neve — ezt a sor amúgy is megmutatja,
- * tehát nem új adatot vezetünk be, csak oda tesszük, ahol a felhasználó
- * nézi: a neve mellé ("Butești (Mogos község)"). Ennek két feltétele van,
+ * A toldalék általában a hely szülő községének neve — ezt a sor amúgy is
+ * megmutatja, tehát nem új adatot vezetünk be, csak oda tesszük, ahol a
+ * felhasználó nézi: a neve mellé ("Butești (Mogos község)"). Ha a csoporton
+ * belül a község is közös ("Báródbeznye" kétszer Barátka községben), akkor
+ * a román név a toldalék ("Báródbeznye (Beznea)"), mert a községnév ott
+ * nem választana szét semmit. Ennek két feltétele van,
  * és mindkettőt az `ellenoriz.mjs` nézi a kész adaton:
  *   - minden ilyen helynek van szülő községe, különben nincs mit írni mellé,
  *   - az azonos nevű csoporton belül a községek különböznek, különben a
@@ -142,11 +154,18 @@ export function utalok(helyek) {
   const ki = new Map();
   for (const sorok of csoport.values()) {
     if (sorok.length < 2) continue;
+    // Hányan osztoznak egy szülő községen a csoporton belül? Aki egyedül
+    // van vele, annak a községnév elég; aki osztozik, annak a román neve
+    // kell — különben a toldalék után is két egyforma sor maradna.
+    const kozsegDb = new Map();
+    for (const h of sorok) {
+      kozsegDb.set(h.kozsegNev ?? null, (kozsegDb.get(h.kozsegNev ?? null) ?? 0) + 1);
+    }
     for (const h of sorok) {
       // Ha nincs mit írni mellé, nem találunk ki helyette semmit: az
       // `ellenoriz.mjs` szól, ha ez egyáltalán előfordul, mert akkor két
       // sor marad megkülönböztetés nélkül.
-      const t = toldalek(h);
+      const t = toldalek(h, (kozsegDb.get(h.kozsegNev ?? null) ?? 0) > 1);
       if (t) ki.set(h.q, t);
     }
   }
@@ -162,6 +181,7 @@ export function utalok(helyek) {
  * csendben tenné — ezért ez a visszatérési érték az ellenőrzőé.
  */
 export function utaloUtkozes(helyek) {
+  const toldalekok = utalok(helyek);
   const csoport = new Map();
   for (const h of helyek) {
     const kulcs = utaloKulcs(h);
@@ -173,9 +193,9 @@ export function utaloUtkozes(helyek) {
     // Akinek nincs mit megkülönböztetnie, az biztosan egyforma marad a
     // testvérei mellett; a többinél az elég, ha egyik toldalék sem ugyanaz,
     // mint a másiké.
-    const toldalekok = sorok.map(toldalek);
-    if (toldalekok.includes(null)) return true;
-    return new Set(toldalekok).size < sorok.length;
+    const t = sorok.map((h) => toldalekok.get(h.q) ?? null);
+    if (t.includes(null)) return true;
+    return new Set(t).size < sorok.length;
   });
 }
 
@@ -247,10 +267,15 @@ export function huZarojeles(hu) {
  *
  * A zárójeles "(Románia)" NEM számít ide — az a `huZarojeles` esete, és
  * két helyen számolva ugyanaz a tíz elem kétszer számolódna.
+ *
+ * A vessző önmagában NEM mondat: a "Fonóháza, Fonókismező" (Q755305,
+ * Fânațe, Bihar) két összeolvadt falu neve — a KIA a Fonóházát adja
+ * (Fânațe, Câmpani község, BH). Ami magyaráz, az a "Romániában" és a
+ * "megyében" szó, nem az írásjel.
  */
 export function huMondat(hu) {
   if (!hu) return false;
-  return hu.includes(",") || /\bRomániában\b/.test(hu) || /\bmegyében\b/.test(hu);
+  return /\bRomániában\b/.test(hu) || /\bmegyében\b/.test(hu);
 }
 
 /** A német mező két nevet fűzött össze perjellel. */
@@ -288,7 +313,7 @@ export function deRomanEkezet(de) {
  * footerben mutatja, az `ellenoriz.mjs` pedig egyezést szól kő, ha hiányzik
  * vagy nem egyezik a `szabalyok.mjs`-belivel.
  */
-export const VERZIO = "1.1.0";
+export const VERZIO = "2.0.0";
 
 /**
  * Ugyanaz a név, csak más betűkkel: "Vále" / "Vale",

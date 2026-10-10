@@ -130,5 +130,107 @@
   "allapot": "elutasítva",
   "ok": "a KIA magyar-nev-mezője román átírás (Valea surei); a Wikipedia infoboza üres",
   "huWiki": ""
+ },
+ "Q222578": {
+  "nev": "Védimajor",
+  "allapot": "elutasítva",
+  "ok": "a Wikipedia infoboxa Albist ad, tehát a Védimajor nem áll két forrásból",
+  "huWiki": "Albis"
+ },
+ "Q755050": {
+  "nev": "Havasdombró",
+  "allapot": "elutasítva",
+  "ok": "a Wikipedia infoboxa Codrut ad, tehát a Havasdombró nem áll két forrásból",
+  "huWiki": "Codru"
+ },
+ "Q430984": {
+  "nev": "Rohány",
+  "allapot": "javítva",
+  "ok": "a KIA és a Wikipedia infoboxa is Rohányt ad",
+  "huWiki": "Rohány"
+ },
+ "Q987047": {
+  "nev": "Restyiráta",
+  "allapot": "elutasítva",
+  "ok": "a Wikipedia infoboxa Déznát ad, tehát a Restyiráta nem áll két forrásból",
+  "huWiki": "Dézna"
+ },
+ "Q842024": {
+  "nev": "Bezdini zárda",
+  "allapot": "elutasítva",
+  "ok": "a KIA neve zárda (Bezdini zárda), nem településnév; a Wikipedia Munárt ad",
+  "huWiki": "Munár"
+ },
+ "Q663256": {
+  "nev": "Odvas",
+  "allapot": "elutasítva",
+  "ok": "a KIA Odvas csak átírás (o/ó); a Wikipedia Odvost ad",
+  "huWiki": "Odvos"
+ },
+ "Q751701": {
+  "nev": "Ferend",
+  "allapot": "elutasítva",
+  "ok": "a Wikipedia infoboxa Ferendiát ad, tehát a Ferend nem áll két forrásból",
+  "huWiki": "Ferendia"
+ },
+ "Q854594": {
+  "nev": "Topolyapuszta",
+  "allapot": "elutasítva",
+  "ok": "a Wikipedia infoboxa Partost ad, tehát a Topolyapuszta nem áll két forrásból",
+  "huWiki": "Partos"
+ },
+ "Q478555": {
+  "nev": "Harmad",
+  "allapot": "elutasítva",
+  "ok": "a Wikipedia infoboxa Tápiát ad, tehát a Harmad nem áll két forrásból",
+  "huWiki": "Tápia"
+ },
+ "Q796013": {
+  "nev": "Bojna",
+  "allapot": "elutasítva",
+  "ok": "egyetlen forrás, a Wikipedia infoboxa üres",
+  "huWiki": ""
+ },
+ "Q796019": {
+  "nev": "Bojnica",
+  "allapot": "javítva",
+  "ok": "a KIA és a Wikipedia infoboxa is Bojnicát ad",
+  "huWiki": "Bojnica"
+ },
+ "Q620309": {
+  "nev": "Bedina",
+  "allapot": "elutasítva",
+  "ok": "egyetlen forrás, a Wikipedia infoboxa üres",
+  "huWiki": ""
+ },
+ "Q555984": {
+  "nev": "Liborásdia",
+  "allapot": "javítva",
+  "ok": "a KIA és a Wikipedia infoboxa is Liborásdiát ad (átírás-szerű, de két forrás egyezik)",
+  "huWiki": "Liborásdia"
+ },
+ "Q75509": {
+  "nev": "Vámosmárga",
+  "allapot": "elutasítva",
+  "ok": "a Wikipedia infoboxa Márgát ad, tehát a Vámosmárga nem áll két forrásból",
+  "huWiki": "Márga"
+ },
+ "Q389070": {
+  "nev": "Néraaranyosi zárda",
+  "allapot": "elutasítva",
+  "ok": "a KIA nem nevet ad, hanem zárdát (Néraaranyosi zárda); a Wikipedia infoboxa üres",
+  "huWiki": ""
+ },
+ "Q1084299": {
+  "nev": "Nérahalmos",
+  "allapot": "elutasítva",
+  "ok": "a Wikipedia infoboxa Prigort ad, tehát a Nérahalmos nem áll két forrásból",
+  "huWiki": "Prigor"
+ },
+ "Q616769": {
+  "nev": "Stájerlak",
+  "allapot": "javítva",
+  "ok": "a KIA és a Wikipedia infoboxa is Stájerlakot ad",
+  "huWiki": "Stájerlak"
  }
 }
