@@ -47,6 +47,7 @@ A `helyek.json` egy helységének a mezői:
 | mező | mi |
 |---|---|
 | `q`, `hu`, `ro`, `de` | a Wikidata-azonosító és a magyar, román, német név (`ro` és `de` lehet `null`) |
+| `alt` | az ukrán/szerb címke, ha van (a 6. németnév-szabály és a kereső használja) |
 | `megye` | a megye/körzet kódja (`AB`, `CJ`, `ZK`, `SZB`, …) |
 | `orszag` | az ország kódja (`RO`, `UA`, `HU`, `RS`) |
 | `huPotolt` | igaz, ha nincs magyar címke a Wikidata-n, és a sor ukrán/szerb/román tartaléknevet mutat (mindig jelölve is van) |
@@ -82,7 +83,7 @@ Az oldalnak kiszolgáló kell, mert adatot olvas be (`fetch`); a
 
 A kereső interaktív találatai JavaScriptből készülnek, de a helységnevek
 nem függnek a keresőrobotok JavaScript-támogatásától: a `megyek/` alatt
-24 statikus területi oldal sorolja fel mind a 6622 nevet. Adatfrissítés
+24 statikus területi oldal sorolja fel mind a 6617 nevet. Adatfrissítés
 után mindig futtasd újra a `node seo.mjs` parancsot.
 
 A sitemap URL-je abszolút kell legyen, ezért csak az éles domain ismeretében
@@ -193,6 +194,14 @@ meg, mert nincs benne román ékezet: a 9 megyés adatban épp ezért maradt
 láthatatlan, csak a partiumi–bánsági bővítés hozta elő (9 hely).
 A hiányzó név itt is tisztább, mint a hamis.
 
+És van **hatodik is**: ami az ukrán/szerb név átírásával betűre egyezik,
+az nem német (`Strymba` == ukrán `Стримба`) — ugyanaz a család, mint a
+román másolatok, csak cirillből. A valódi cipszer nevek (`Schenborn`,
+`Solotwyno`) nem betűazonosak az ukrán alakkal, tehát megmaradnak
+(85 hely). A magyarral azonos írású német neveket (`Bethlen`, `Lippa`,
+`Wolfsberg`) megmértük és meghagyjuk: az azonosság önmagában nem
+másolás-jel.
+
 A hiányzó név tisztább, mint a hamis: ezt a `javitasok.json` szabálya is
 mondja, és ugyanez érvényes a szűrésre.
 
@@ -247,11 +256,11 @@ két falu, magyarul mindkettő Doboka. Ezeket szándékosan megtartjuk.
 néma hiba, amit a projektben találtam, és a saját dokumentációnk mondta el
 ellenkezőleg. A README korábban azt írta: *„ha ugyanabban a megyében kétszer
 ugyanaz a magyar **és** román név, az duplikátum"* — de a kód csak a román
-nevet nézte:
-
-```js
-const kulcs = `${h.megye}|${h.ro.toLowerCase()}`;
-```
+nevet nézte. Ma a csoportosítás magyar ÉS román néven unióz (megyén belül),
+mert egyik kulcs önmagában kevés: a román szerinti széttöri a párokat, ha
+az egyik példánynak nincs román neve (Komlós: `Hmeliv` vs. semmi), a magyar
+szerinti pedig széttöri, ha a toldalék miatt tér el (`Ajton` vs.
+`Ajton község` — a román `Aiton` mindkettőé):
 
 Alba megyében viszont több valódi falu neve éppen ütközik: a `Butești` a Mogos
 **és** az Arada község alatt is létezik, a `Lazuri` a Nagylupsa és az

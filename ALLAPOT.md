@@ -6,7 +6,7 @@ megerősített hibákkal és a mérési számokkal); a **hogyan** a
 [`README.md`](README.md)-ben (a kód használata); itt csak a folytatáshoz
 szükséges tények állnak.
 
-**Utolsó frissítés: 2026-10-10 (4. munkamenet). Adatverzió: 2.0.0.**
+**Utolsó frissítés: 2026-10-11 (5. munkamenet). Adatverzió: 3.0.0.**
 
 ## Ahol tartunk
 
@@ -117,43 +117,55 @@ ezt meg akarod fordítani, a `keres.js`-ben egy `if (h.huNincsNeve)`
 
 ## A jelenlegi adat — ellenőrizve
 
-`helyek.json`: **5314 helység, 16 megye**, 261 valódi német név,
-verzió **2.0.0**.
+`helyek.json`: **6617 helység, 24 terület, 4 ország**, 653 valódi német név,
+verzió **3.0.0**.
 
 | megye | kód | helység |
 |---|---|---|
-| Nagy-Albás | AB | 720 |
-| Maros | MS | 518 |
-| Hunyad | HD | 488 |
-| Bihar | BH | 453 |
-| Kolozsvár | CJ | 436 |
-| Temes | TM | 326 |
-| Krassó-Szörény | CS | 308 |
-| Szilágy | SJ | 289 |
-| Arad | AR | 286 |
-| Hargita | HR | 266 |
-| Beszterce-Nászád | BN | 252 |
+| Nagy-Albás | AB | 721 |
+| Maros | MS | 521 |
+| Hunyad | HD | 492 |
+| Bihar | BH | 454 |
+| Kolozsvár | CJ | 440 |
+| Temes | TM | 328 |
+| Krassó-Szörény | CS | 312 |
+| Szilágy | SJ | 290 |
+| Arad | AR | 287 |
+| Hargita | HR | 272 |
+| Beszterce-Nászád | BN | 257 |
 | Máramaros | MM | 247 |
-| Szatmár | SM | 237 |
-| Szeben | SB | 188 |
-| Brassó | BV | 170 |
-| Kovászna | CV | 130 |
+| Szatmár | SM | 238 |
+| Szeben | SB | 189 |
+| Brassó | BV | 172 |
+| Kovászna | CV | 131 |
+| Kárpátalja (UA) | ZK | 597 |
+| Szabolcs-Szatmár-Bereg (HU) | SZB | 230 |
+| Hajdú-Bihar (HU) | HJB | 84 |
+| Békés (HU) | BEK | 76 |
+| Csongrád-Csanád (HU) | CSC | 62 |
+| Észak-Bánság (RS) | EBN | 54 |
+| Közép-Bánság (RS) | KBN | 61 |
+| Dél-Bánság (RS) | DBN | 102 |
 
-- 569 helységen a magyar név megegyezik a románnal (nincs magyar exonim — nem
-  hiba); **128-nál** ebből nincs is magyar nevük, ezeket jelöli a
-  `huNincsNeve`
+- 1022 helységen a magyar név megegyezik a románnal (nincs magyar exonim —
+  nem hiba, a magyar határmegyékben ez a természetes); **128-nál** jelöli
+  a `huNincsNeve`, plusz **35** pótolt nevű (`huPotolt`, náluk a jelölés
+  automatikus, nem kézi mérés)
+- 47 helynek nincs román neve (`ro: null`, pl. Szőreg) — a soron csak a
+  magyar (és ha van, a német) név látszik
 - 6 kézzel javított magyar név (`Monostor`, `Dumest`, `Rohány`, `Bojnica`,
   `Liborásdia`, `Stájerlak`) — a `javitasokHu.json` (mind kétforrásos)
-- 261 német név, mind ellenőrzötten német (nincs román ékezet, nincs perjel)
+- 653 német név, mind ellenőrzötten német (nincs román ékezet, nincs perjel,
+  nincs ukrán/szerb átírás)
 - **39** néven oszlik meg két vagy több hely ugyanabban a megyében, összesen
-  **82** helységgel (ez a szándék; a sorok a községnevükön különböznek,
+  **89** helységgel (ez a szándék; a sorok a községnevükön különböznek,
   egy kivétellel: `Báródbeznye` kétszer Barátka községben, ott a román név
   a toldalék).
 
 ### Ellenőrzés: minden zöld
 
 ```
-node letolt.mjs     → 5314 helység, 128 hely jelölve "nincs magyar neve", 6/6 kézi magyar név érvényesült
+node letolt.mjs     → 6617 helység, 163 hely jelölve (128 kézi + 35 pótolt), 6/6 kézi magyar név érvényesült
 node ellenoriz.mjs   → 1 hiba, tudottan hiányzó (Kézdiszentvincent), 0 új
 node proba.mjs      → Minden próba sikerült (a http.server 8123-en fut)
 ```
@@ -230,6 +242,24 @@ Ez termékdöntés, adatpolitika, nem technikai. Nem nyúltam hozzá.
   nélkül) — az egyetlen nem-gyorsítótárazott élő függőség a B-lépés
   osztály-lekérdezése, tehát ha determinizmus-ingadozást keresnél, ott.
 
+## Amit az 5. munkamenetben csináltam (határon túl, 3.0.0)
+
+- `MEGYEK` 16 → 30 bejegyzés (24 terület): Kárpátalja oblaszty + 6 járás
+  (`ZK` kódon osztozva, mert az ukrán lánc háromszintes), 4 magyar megye,
+  3 vajdasági körzet. Országonként külön kérés + gyorsítótár (`megye-RO`,
+  `kozseg-UA` …), `P17` és tartaléknyelv (`uk`/`sr`) országonként.
+- Négy tanulság, mind méréssel: a `hu` `OPTIONAL` (Szőregnek nincs román
+  címkéje); a `Q21672098` ukrán *falu* (506 A-szinten talált elem
+  kivétel nélkül az — az első, szint-alapú javítás rossz volt);
+  a 6. németnév-szabály (ukrán/szerb átírás, 85 hely); az unió-duplikátum-
+  szűrés (`szurDuplikat`, közös a letöltő és az ellenőrző között).
+- `ro: null` (47), `alt` (813), `huPotolt` (35), `orszag` mezők; a `kia.mjs`
+  null-románra nem omlik; a `keres.js` a cirillt átírva indexeli (közös
+  `cirillAtir()`), a román sort elrejti ha nincs, országot csak határon
+  túl ír. Egy új `merve` (Drenkova — elutasítva). Sorrend adatfrissítéskor:
+  `letolt` (a térképadatot automatikusan hívja) → `ellenoriz` → `seo` →
+  `site-build` → `proba`.
+
 ## Amit érdemes lehet folytatni
 
 1. ~~**A 22 néven, ahol két megmaradt helynek a magyar neve is azonos**~~
@@ -261,6 +291,10 @@ Ez termékdöntés, adatpolitika, nem technikai. Nem nyúltam hozzá.
    nevet adja. Kész.
 7. ~~**`proba.mjs` újrafuttatása a 2.0.0-adaton**~~ — **kész 2026-10-10-én**:
    minden próba zöld 5314 helységen.
+8. ~~**Határon túl + 3.0.0-adat**~~ — **kész 2026-10-11-én**: 6617 helység,
+   `ellenoriz` 1 ismert / 0 új, `proba` zöld (új cirill-keresési próbával:
+   `uzhhorod` → Ungvár). A `megyek/` újragenerálva (`seo.mjs`), `dist/`
+   újracsomagolva (`site-build.mjs`).
 
 ## Egyéb tudnivaló
 

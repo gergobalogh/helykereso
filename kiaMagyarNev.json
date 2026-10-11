@@ -203,6 +203,12 @@
   "ok": "egyetlen forrás, a Wikipedia infoboxa üres",
   "huWiki": ""
  },
+ "Q6273385": {
+  "nev": "Drenkova",
+  "allapot": "elutasítva",
+  "ok": "egyetlen forrás (a KIA Drenkova átírás-szerű); nincs magyar Wikipedia-cikk",
+  "huWiki": null
+ },
  "Q555984": {
   "nev": "Liborásdia",
   "allapot": "javítva",

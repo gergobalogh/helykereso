@@ -83,6 +83,100 @@ export function ugyanazAHely(a, b) {
   return a.kozseg == null && b.kozseg == null;
 }
 
+/** A Wikidata-sorszám számmá: a kisebb a régebbi, kanonikusabb bejegyzés. */
+function qszam(h) {
+  return Number(String(h.q).slice(1));
+}
+
+/**
+ * Duplikátum-csoportok: sorok, amelyekben bármelyik pár osztozhat helyen.
+ *
+ * Két kulcson uniózunk, megyén belül: a magyar néven (az sosem üres) ÉS a
+ * román néven (ha van). Egy kulcs önmagában kevés: a román szerinti
+ * csoportosítás széttöri a párokat, ha az egyik példánynak nincs román
+ * neve (Komlós: `Hmeliv` vs. semmi), a magyar szerinti pedig széttöri,
+ * ha a toldalék miatt tér el ("Ajton" vs. "Ajton község" — a román
+ * `Aiton` mindkettőé). Az unió mindkettőt látja.
+ *
+ * Visszaadja a csoportok listáját (az egyeleműeket is — azok nem
+ * duplikátumok, csak a teljességért vannak bent).
+ */
+export function dedupCsoportok(helyek) {
+  const szulo = new Map(); // q -> gyökér-q
+  const find = (q) => {
+    let gy = q;
+    while (szulo.get(gy) !== gy) gy = szulo.get(gy);
+    let x = q;
+    while (szulo.get(x) !== gy) {
+      const kov = szulo.get(x);
+      szulo.set(x, gy);
+      x = kov;
+    }
+    return gy;
+  };
+  const unio = (a, b) => {
+    const ga = find(a);
+    const gb = find(b);
+    if (ga !== gb) szulo.set(ga, gb);
+  };
+  const latta = new Map(); // kulcs -> [q]
+  for (const h of helyek) {
+    szulo.set(h.q, h.q);
+  }
+  for (const h of helyek) {
+    const kulcsok = [`${h.megye}|${h.hu.toLowerCase()}`];
+    if (h.ro) kulcsok.push(`${h.megye}|${h.ro.toLowerCase()}`);
+    for (const k of kulcsok) {
+      if (!latta.has(k)) latta.set(k, []);
+      latta.get(k).push(h.q);
+    }
+  }
+  for (const qs of latta.values()) {
+    for (let i = 1; i < qs.length; i++) unio(qs[0], qs[i]);
+  }
+  const csoport = new Map(); // gyökér -> [sor]
+  for (const h of helyek) {
+    const gy = find(h.q);
+    if (!csoport.has(gy)) csoport.set(gy, []);
+    csoport.get(gy).push(h);
+  }
+  return [...csoport.values()];
+}
+
+/**
+ * Duplikátum-szűrés: a kisebb Q-szám nyer az AZONOS HELYŰEK között.
+ *
+ * A csoporton belül sorrendben haladunk, és ami egy már BENT lévővel
+ * ugyanaz a hely, az kiesik. A bent lévőhöz mérés a lényeg (nem "van-e
+ * kisebb azonos helyű bárhol"): ha a kisebb példány maga is kiesett,
+ * a nagyobbat nem rántja magával — különben egy község a székhelyfalvával
+ * együtt a vele azonos nevű szomszéd falut is kitörölné. Ez a 93-as hiba
+ * rejtett rokona: néma törlés, név szerint.
+ *
+ * Visszaadja `{ marad, kiesett, tobbValodi }`: a `tobbValodi` azok a
+ * csoportok, ahol több valódi hely maradt — szándékosan, listázva.
+ */
+export function szurDuplikat(helyek) {
+  const marad = [];
+  const kiesett = [];
+  const tobbValodi = [];
+  for (const tagok of dedupCsoportok(helyek)) {
+    if (tagok.length === 1) {
+      marad.push(tagok[0]);
+      continue;
+    }
+    const sor = [...tagok].sort((a, b) => qszam(a) - qszam(b));
+    const bent = [];
+    for (const h of sor) {
+      if (bent.some((o) => ugyanazAHely(h, o))) kiesett.push(h);
+      else bent.push(h);
+    }
+    marad.push(...bent);
+    if (bent.length > 1) tobbValodi.push(bent);
+  }
+  return { marad, kiesett, tobbValodi };
+}
+
 // ───────────────────────────────────────────────────────────────────────────
 // A megkülönböztető toldalék
 //

@@ -22,6 +22,48 @@ romántól ("Vále"/"Vale", "Dealu Ștefăniței"/"Dealul Ștefăniței"), ezér
 `szabalyok.mjs` `ugyanazANev()` függvénye ezt elfogadja. Ez csak az
 ellenőrzésen fut, keresésre nem.
 
+## 3.0.0 — 2026-10-11
+
+Határon túl, egy projektben: Kárpátalja (UA, oblaszty + 6 járás, `ZK`),
+négy magyar határmegye (`SZB`, `HJB`, `BEK`, `CSC`) és három vajdasági
+bánsági körzet (`EBN`, `KBN`, `DBN`) — **5314-ről 6617 helységre**.
+A `MEGYEK` átírása most sem volt elég; a bővítés négy csendes hibát és egy
+hiányos modellt hozott elő:
+
+- **Kárpátalja falvainak zöme ukrán címkés csak** (48 helyett ~600).
+  A `hu` most `OPTIONAL`, tartaléknyelvvel (`uk`/`sr`): ahol nincs magyar
+  címke, a sor a tartaléknevet mutatja, automatikusan jelölve (`huPotolt`,
+  35 hely) — ugyanaz a minta, mint a `Dealu Mare`-döntés. A cirill neveket
+  a kereső átírva indexeli (`Ужгород` → `uzhhorod`), a közös `cirillAtir()`
+  a `szabalyok.mjs`-ben van.
+- **A `Q21672098` ukrán *falu*, nem kistérség.** 506 A-szinten talált
+  elem kivétel nélkül falu (Akli, Beregújfalu, Bilke); az igazi
+  kistérségek `Q104841013`-asok ("Ungvár község") és maguktól kiesnek.
+  Az első javítás (szint-alapú szűrés) rossz volt, a mérés döntötte el.
+- **A 6. németnév-szabály**: ami az ukrán/szerb név átírásával betűre
+  egyezik, az nem német (`Strymba` == ukrán `Стримба`) — 85 hely. A valódi
+  cipszer nevek (`Schenborn`, `Solotwyno`) nem betűazonosak, megmaradnak.
+  A magyarral azonos írású német neveket (`Bethlen`, `Lippa`, `Wolfsberg`)
+  megmértük és meghagyjuk: az azonosság nem másolás-jelet ad.
+- **Unió-duplikátumszűrés** (`szurDuplikat`, közös): magyar ÉS román néven
+  csoportosít, a döntés bent lévőhöz mér. Helyrehozta az Ajton-összevonást
+  (amit az átmeneti magyar-kulcs széttört), összehozta Komlóst, és egy
+  rejtett rokont is megfog (a község a székhelyfalvával a vele azonos nevű
+  szomszéd falut is kitörölte volna).
+- **Árva szülő** (Huszt): a szülő címke nélküli adminisztratív maradvány —
+  a sor önállóként szerepel, számlálva.
+
+Séma: `ro` lehet `null` (47 hely, pl. Szőreg), új mezők `alt` (813),
+`orszag`, `huPotolt`; a sorvégen országjelölés csak határon túl, a
+megye szó helyett `körzet` / puszta `Kárpátalja` ahol kell. A `kia.mjs`
+az új területeken csendben kihagy (nincs KIA-fedés); egy új `merve`
+így is előjött (Drenkova — elutasítva, egyetlen forrás). A
+`nincsMagyarNev.json` változatlan (128): a két új zárójeles jelölt
+pótolt nevű, tehát eleve jelölt.
+
+**Miért 3.0.0:** új mezők, új értelmű sorok (pótolt név, országjelölés),
+új szabályok — a felhasználó más találatokat lát, mint 2.0.0 alatt.
+
 ## 2.0.0 — 2026-10-10
 
 Partium + Bánság: a katalógus 9-ről **16 megyére** bővült (BH, SJ, SM, MM,

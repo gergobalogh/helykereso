@@ -265,7 +265,9 @@ async function main() {
   );
   const javQ = new Set(Object.keys(javHu).filter((k) => !k.startsWith("_")));
   const cel = adat.helyek.filter(
-    (h) => ugyanazANev(h.hu, h.ro) || javQ.has(h.q),
+    // Román név nélkül nincs mit a románhoz mérni (határon túl gyakori) —
+    // az a sor nem a KIA-mérés célhalmaza.
+    (h) => (h.ro && ugyanazANev(h.hu, h.ro)) || javQ.has(h.q),
   );
   console.log(`\nA helyek.json-ban ${cel.length} hely, ahol a magyar név a román (` +
     `ebből néhány csak írásmódban tér el — ez is érdekes).`);

@@ -27,7 +27,7 @@
 
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
-import { nemHelyseg, deRomanEkezet, ugyanazAHely, utalok, cirillAtir, VERZIO } from "./szabalyok.mjs";
+import { nemHelyseg, deRomanEkezet, utalok, cirillAtir, szurDuplikat, VERZIO } from "./szabalyok.mjs";
 import { gazdagitTerkepAdattal } from "./terkepadat.mjs";
 
 const VEGEGPL = "https://query.wikidata.org/sparql";
@@ -400,6 +400,7 @@ async function main() {
   let kiszurt = 0;
   let nincsMegye = 0;
   let nevNelkul = 0;
+  let arvaSzulo = 0;
   let duplikalt = 0;
   let agglomeracio = 0;
   const kihagyottAglomeraciok = [];
@@ -461,7 +462,15 @@ async function main() {
       nincsMegye++;
       continue;
     }
-
+    // Ha a szülőnek semmilyen neve nincs a Wikidata-n (pl. Huszt elavult
+    // "városi tanácsa", Q12168039 — címke nélküli adminisztratív maradvány),
+    // a kapcsot is eldobjuk: névtelen szülőt nem mutatunk, és a hely
+    // önállóként szerepel, mint a megyeszékhelyek. Számláljuk, hogy a
+    // szűkülés látszódjon, ha a Wikidata címkét kap.
+    const szuloQ = kozsegek.has(q) ? null : celQid;
+    const szuloNevek = szuloQ ? nevek.get(szuloQ) : null;
+    const szuloNev = szuloNevek ? (szuloNevek.hu ?? szuloNevek.alt ?? szuloNevek.ro ?? null) : null;
+    if (szuloQ && !szuloNev) arvaSzulo++;
     const s = nevek.get(q);
     // A megjelenő név: magyar, ha van; ha nincs, a tartaléknyelv (`uk`/`sr`)
     // vagy a román. A pótolt nevű sor automatikusan jelölt (`huPotolt`):
@@ -487,10 +496,10 @@ async function main() {
     // levágás után 556 duplikált sor keletkezett.
     const de = nemetNev(s.de, ro, javitasok, undefined, s.alt);
     // Pontosan azokat számoljuk, amit KIZÁRÓLAG a 4. (ékezet-) szabály vett
-    // ki: a szabály nélkül megmaradnának. (A nyers alakra nézni nem elég:
-    // a 3. szabály áldozatainak felében is van román ékezet, hiszen a
-    // román nevet másolták — az 655 sor lenne, nem 4.)
-    if (s.de && !de && nemetNev(s.de, ro, javitasok, { ekezet: false })) {
+    // ki: a szabály nélkül (de a tartaléknyelvvel) megmaradnának. (A nyers
+    // alakra nézni nem elég: a 3. szabály áldozatainak felében is van román
+    // ékezet, hiszen a román nevet másolták — az 655 sor lenne, nem 4.)
+    if (s.de && !de && nemetNev(s.de, ro, javitasok, { ekezet: false }, s.alt)) {
       hamisNemet.set(q, { q, hu, ro, de: s.de });
     }
     //
@@ -500,31 +509,35 @@ async function main() {
     // miatt hagytuk ki).
     if (
       s.de && !de && /[/()]/.test(s.de) &&
-      nemetNev(s.de, ro, javitasok, { ekezet: false, perjel: false })
+      nemetNev(s.de, ro, javitasok, { ekezet: false, perjel: false }, s.alt)
     ) {
       perjelNemet.set(q, { q, hu, ro, de: s.de });
     }
     // Ugyanígy a 6. szabály áldozatait: a német név az ukrán/szerb név
-    // átírása. A próba a másik két szabály nélkül fut, hogy csak az
-    // látszódjék, amit kizárólag a 6. vett ki.
+    // átírása. A próba a másik két új szabály nélkül fut, tartaléknyelv
+    // nélkül és tartaléknyelvvel: csak az számít ide, amit a 6. dönt el
+    // (a másik szabályok áldozatait azok listázzák).
     if (
       s.de && !de && s.alt &&
-      nemetNev(s.de, ro, javitasok, { ekezet: false, perjel: false }, null) === null &&
-      nemetNev(s.de, ro, javitasok, { ekezet: false, perjel: false }, s.alt) !== null
+      nemetNev(s.de, ro, javitasok, { ekezet: false, perjel: false }, null) !== null &&
+      nemetNev(s.de, ro, javitasok, { ekezet: false, perjel: false }, s.alt) === null
     ) {
       altNemet.set(q, { q, hu, ro, de: s.de });
     }
 
     helyek.push({
       q,
-      qSzam: Number(q.slice(1)),
       hu,
       ro,
       de,
+      // Az ukrán/szerb címke, ha van: a 6. németnév-szabály ellenőrzi
+      // ellene a `de`-t, és a kereső is indexeli (ukránul is lehet
+      // keresni). A pótolt nevű sorokban ugyanaz, mint a `hu`.
+      alt: s.alt ?? null,
       megye: megye.kod,
       orszag: megye.orszag,
-      kozseg: kozsegek.has(q) ? null : celQid,
-      kozsegNev: kozsegek.has(q) ? null : nevek.get(celQid)?.hu ?? null,
+      kozseg: szuloNev ? szuloQ : null,
+      kozsegNev: szuloNev,
       // Igaz, ha a fenti magyar név nem létezik, és a román áll helyette.
       // Ekkor a magyar mező TARTALMA nem változik, csak a származása —
       // ezért külön mező, és nem a `hu` lesz üres: a keresőnek a
@@ -585,6 +598,7 @@ async function main() {
   }
   if (nincsMegye) console.warn(`  figyelem: ${nincsMegye} helynél nem sikerült a megyét, kihagyva`);
   if (nevNelkul) console.warn(`  figyelem: ${nevNelkul} helynek semmilyen megjeleníthető neve nincs (se hu, se tartalék, se ro), kihagyva`);
+  if (arvaSzulo) console.log(`  ${arvaSzulo} hely szülőjének nincs neve a Wikidata-n, önállóként szerepel (pl. Huszt)`);
 
   // Ugyanaz a román név kétszer, ugyanabban a megyében. Ez LÉTEBNEK tűnik
   // duplikátumnak, de NEM mind az: két különböző falunak lehet ugyanaz a
@@ -609,24 +623,12 @@ async function main() {
     if (!nevre.has(kulcs)) nevre.set(kulcs, []);
     nevre.get(kulcs).push(h);
   }
-  // A kisebb Q-számú nyer, mert a Wikidata sorszámai korán létrejött
-  // elemekre utalnak — ez a kanonikus bejegyzés.
-  const marad = [];
-  const tobbValodi = [];
-  for (const [kulcs, tagok] of nevre) {
-    if (tagok.length === 1) {
-      marad.push(tagok[0]);
-      continue;
-    }
-    // Egy csoporton belül az nyer, akihez nincs kisebb Q-számú igazi
-    // másolata. Ha két különböző hely marad bent, az nem duplikátum.
-    const bent = tagok.filter(
-      (h) => !tagok.some((o) => o !== h && ugyanazAHely(h, o) && o.qSzam < h.qSzam),
-    );
-    duplikalt += tagok.length - bent.length;
-    marad.push(...bent);
-    if (bent.length > 1) tobbValodi.push({ kulcs, bent });
-  }
+  // A duplikátum-szűrés a közös `szurDuplikat()` — ugyanaz a leképezés,
+  // mint amit az `ellenoriz.mjs` a kész adaton futtat. A csoportosítás
+  // magyar ÉS román néven unióz (lásd a `dedupCsoportok()` kommentjét),
+  // a döntés pedig bent lévőhöz mér, nem "van-e kisebb bárhol".
+  const { marad: megmaradt, kiesett: kihullott, tobbValodi } = szurDuplikat(helyek);
+  duplikalt += kihullott.length;
   if (duplikalt) {
     console.log(`  ${duplikalt} duplikált Wikidata-elemet elhagytunk (ugyanarról a helyről van két elem)`);
   }
@@ -634,13 +636,13 @@ async function main() {
   // NEM érintette, és ha a szabály valaha szűkülne, ez a lista szól.
   if (tobbValodi.length) {
     console.log(`  ${tobbValodi.length} néven több valódi hely van, mind megtartva:`);
-    for (const { kulcs, bent } of tobbValodi) {
+    for (const bent of tobbValodi) {
+      const kulcs = `${bent[0].megye}|${[...new Set(bent.map((h) => h.hu))].join(" + ")}`;
       console.log(`    ${kulcs}: ${bent.map((h) => `${h.q} ${h.hu} (${h.kozseg ? nevek.get(h.kozseg)?.hu : "nincs községe"})`).join("  |  ")}`);
     }
   }
   helyek.length = 0;
-  helyek.push(...marad);
-  for (const h of helyek) delete h.qSzam;
+  helyek.push(...megmaradt);
 
   // A fentebb kilistázott "több valós hely" esetek következménye: a sorban
   // most két egyforma név áll ("Butești" a Mogos és az Arada község alatt
@@ -729,6 +731,9 @@ async function main() {
     );
     for (const x of bentAltNemet) console.log(`    ${x.q} ${x.hu} / ${x.ro} / ${x.de}`);
   }
+  // Ugyanaz a perjeles "német" nevekre ("Avram Iancu / Keményfok"): a
+  // Wikidata a román és a magyar nevet írta a német mezőbe. Egyik rész sem
+  // német, tehát nincs mit megmenteni belőle.
   const bentPerjelNemet = [...perjelNemet.values()].filter((x) =>
     helyek.some((h) => h.q === x.q),
   );

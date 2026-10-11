@@ -533,7 +533,7 @@ function urlAllapotFrissit() {
  * Arada községit — pedig a magyar nevük egyformára szól.
  */
 function pont(h, keresett) {
-  const mezok = [megjelenitettNev(h), h.ro, h.de].filter(Boolean);
+  const mezok = [megjelenitettNev(h), h.ro, h.de, h.alt].filter(Boolean);
   const megye = megyek.get(h.megye);
   let legjobb = 3;
   for (const n of mezok) {
@@ -661,7 +661,7 @@ async function betolt() {
   // is — minden falu községnevét indexelni épp az lenne, amit a megyénévvel
   // éppen elkerültünk.
   for (const h of helyek) {
-    const szoveg = [h.hu, h.ro, h.de ?? "", h.utalo ?? ""].filter(Boolean).join(" ");
+    const szoveg = [h.hu, h.ro, h.de ?? "", h.utalo ?? "", h.alt ?? ""].filter(Boolean).join(" ");
     const { ki } = normaliz(szoveg);
     nevek.set(h.q, { hu: megjelenitettNev(h), szavak: ki.split(" ").filter(Boolean) });
   }

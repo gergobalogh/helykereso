@@ -146,7 +146,7 @@
  },
  "huZarojeles": {
   "_nev": "A magyar mező zárójeles megkülönböztetést tartalmaz",
-  "_darab": 12,
+  "_darab": 17,
   "_pelda": [
    {
     "q": "Q714800",
@@ -179,7 +179,12 @@
   "Q1009955": "Gertia (Gersa II)",
   "Q12162721": "Trifești (Nagylupsa község)",
   "Q505404": "Adorján (Románia)",
-  "Q1112356": "Kistécső (Románia)"
+  "Q1112356": "Kistécső (Románia)",
+  "Q42791691": "Burgus roman (Goldburg)",
+  "Q132776702": "Буковинка (Синевирська Поляна)",
+  "Q996450": "Farkasd (Szerbia)",
+  "Q1031097": "Gálya (település)",
+  "Q806130": "Palánk (Szerbia)"
  },
  "huMondat": {
   "_nev": "A magyar mező magyarázó mondat, nem név",

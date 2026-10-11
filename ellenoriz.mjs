@@ -12,9 +12,10 @@ import {
   huMondat,
   dePerjel,
   deRomanEkezet,
-  ugyanazAHely,
+  cirillAtir,
   utalok,
   utaloUtkozes,
+  szurDuplikat,
   VERZIO,
   ugyanazANev,
 } from "./szabalyok.mjs";
@@ -118,29 +119,16 @@ for (const [n, v] of dupHu.slice(0, 6)) {
 // valódi falu, Erdélyben meg kétszer más, és a régi szűrő emiatt egyik
 // csoportot sem számolta, mert a négy elem három megyébe esik. Vagyis a
 // megye a KULCS része, nem a feltétel.
-const megyenkenti = new Map(); // megye|hu -> az ilyen nevű sorok
-for (const h of helyek) {
-  // Ugyanaz a kulcs, mint a letöltő duplikátum-szűrőjében (`letolt.mjs`):
-  // ha a kettő elcsúszik, a szűrő és az ellenőrzése mást lát — pont így
-  // veszett el 93 falu és így maradt bent a Metropoliszövezet.
-  const kulcs = `${h.megye}|${h.hu.toLowerCase()}`;
-  if (!megyenkenti.has(kulcs)) megyenkenti.set(kulcs, []);
-  megyenkenti.get(kulcs).push(h);
-}
-const dupUgyanMegyeben = [...megyenkenti.values()].filter(
-  (v) =>
-    v.length > 1 &&
-    v.some((a, i) => v.some((b, j) => i !== j && ugyanazAHely(a, b))),
-);
-if (dupUgyanMegyeben.length) {
-  hiba(`${dupUgyanMegyeben.length} azonos nevű, azonos helyű pár van az adatban — ezt a letöltőnek ki kellett volna szűrnie`);
-  // A `values()` a SOROKAT adja, nem a [kulcs, sorok] párt, tehát a
-  // szétdobás a kulcsot is kihagyja — a hibaüzenet a nevét mondja ki, mert
-  // az többet számít a megyénél. (A korábbi `for (const [n, v] of ...)`
-  // ezt elrontotta: `v` egy sor lett, nem egy sorlista, és a kiírás
-  // TypeError-rel állt le — vagyis épp akkor csúszott el, amikor hiba volt.)
-  for (const v of dupUgyanMegyeben.slice(0, 6)) {
-    console.log(`    ${v[0].hu}: ${v.map((h) => `${h.q}(${megyeNev.get(h.megye)})`).join(" , ")}`);
+// A duplikátum-szűrés ugyanaz a `szurDuplikat()`, mint a letöltőben:
+// a kész adaton újrafuttatva semminek sem szabad kiesnie. Ha kiesik,
+// a szűrő nem azt csinálta, amit az ellenőrzője hisz — pont így veszett
+// el 93 falu és így maradt bent a Metropoliszövezet (a szűrő és az
+// ellenőrzése két különböző leképezést nézett).
+const duplikatProba = szurDuplikat(helyek);
+if (duplikatProba.kiesett.length) {
+  hiba(`${duplikatProba.kiesett.length} azonos helyű pár van az adatban — ezt a letöltőnek ki kellett volna szűrnie`);
+  for (const h of duplikatProba.kiesett.slice(0, 6)) {
+    console.log(`    ${h.hu}: ${h.q}(${megyeNev.get(h.megye)})`);
   }
 } else {
   rendben("nincs valódi duplikátum (nincs két azonos nevű hely egy megyében)");
@@ -149,15 +137,10 @@ if (dupUgyanMegyeben.length) {
 // Az utóbbi szabály túl szigorú lett volna: két különböző község alatt
 // lehet ugyanaz a román és magyar név, és az két valódi hely. Kimondjuk,
 // hogy a letöltő ezt megtartotta, hogy ne tűnjön véletlennek.
-const valodiKettos = [...megyenkenti.entries()].filter(
-  ([, v]) =>
-    v.length > 1 &&
-    !v.some((a, i) => v.some((b, j) => i !== j && ugyanazAHely(a, b))),
-);
-if (valodiKettos.length) {
-  console.log(`  ${valodiKettos.length} néven két valódi hely van ugyanabban a megyében (ez a szándék):`);
-  for (const [k, v] of valodiKettos.slice(0, 6)) {
-    console.log(`    ${k}: ${v.map((h) => `${h.q}(${h.kozsegNev ?? "nincs községe"})`).join(" , ")}`);
+if (duplikatProba.tobbValodi.length) {
+  console.log(`  ${duplikatProba.tobbValodi.length} néven két valódi hely van ugyanabban a megyében (ez a szándék):`);
+  for (const v of duplikatProba.tobbValodi.slice(0, 6)) {
+    console.log(`    ${v[0].megye}|${v[0].hu}: ${v.map((h) => `${h.q}(${h.kozsegNev ?? "nincs községe"})`).join(" , ")}`);
   }
 }
 
@@ -226,6 +209,15 @@ if (deEgyezo.length) {
   for (const h of deEgyezo.slice(0, 6)) console.log(`    ${h.hu} / ${h.ro} / ${h.de}`);
 } else {
   rendben("nincs olyan német név, ami csak a román nevét ismételné");
+}
+// A 6. szabály tükre: ami az ukrán/szerb név átírásával betűre egyezik,
+// az nem német, hanem latin másolat — a letöltőnek ki kellett volna vennie.
+const deAlt = deHelyek.filter((h) => h.alt && betuSorrend(h.de).length > 0 && betuSorrend(h.de) === betuSorrend(cirillAtir(h.alt)));
+if (deAlt.length) {
+  hiba(`${deAlt.length} "német" név az ukrán/szerb név átírása`);
+  for (const h of deAlt.slice(0, 6)) console.log(`    ${h.hu} / ${h.ro} / ${h.de}`);
+} else {
+  rendben("nincs olyan német név, ami az ukrán/szerb nevet másolná");
 }
 const deZarojeles = helyek.filter((h) => h.de && h.de.includes("("));
 if (deZarojeles.length) {
@@ -337,7 +329,7 @@ console.log(`  ${roHelyseg.length} "község"/"város" toldalékú magyar név (
 
 // 7. Amit az oldal keresője elhasznál
 console.log("\n--- Amit a kereső használ:");
-const mezok = ["hu", "ro", "de", "megye", "orszag", "huPotolt", "kozsegNev", "utalo", "wikidata", "huNincsNeve"];
+const mezok = ["hu", "ro", "de", "alt", "megye", "orszag", "huPotolt", "kozsegNev", "utalo", "wikidata", "huNincsNeve"];
 for (const m of mezok) {
   const nincs = helyek.filter((h) => h[m] === undefined).length;
   if (nincs) hiba(`${nincs} helységből hiányzik a(z) "${m}" mező`);

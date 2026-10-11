@@ -518,3 +518,29 @@ második bizonyítja a helyességet.
    hiba mind a Wikidata-n van, és a `helyek.json` következő letöltése
    felülírja, ami itt javítanál.
 4. A `place-search` verziózása gitben: a jegyzőkönyv ezt nem védi meg.
+## 2026-10-11: határon túl — amit a mérés döntött el (3.0.0)
+
+A bővítés (Kárpátalja + 4 magyar megye + 3 bánsági körzet, 5314 → 6617)
+három olyan kérdést hozott, ahol az első megérzés rossz volt, és a mérés
+döntött:
+
+**1. A `Q21672098` ukrán falu, nem kistérség.** Az A-szinten talált 506
+ilyen elem kivétel nélkül falunév (Akli, Beregújfalu, Bilke) — az első
+javítás (szint-alapú szűrés: ami A-szinten van, az admin) mindet kitörölte
+volna. Az igazi kistérségek `Q104841013`-asok, és nem a lakhely-ágon vannak.
+A címke (`village of Ukraine`) erősebb jel volt, mint a szint — de csak a
+lista végignézése után.
+
+**2. A német mező ukrán másolatai.** 85 hely `de` mezője az ukrán név latin
+átírása (`Strymba` == `Стримба`) — ugyanaz a család, mint a román másolatok,
+csak cirillből, és egyik régi szabály sem fogja meg (nincs benne román
+ékezet, nincs perjel). A 6. szabály az átírt ukrán/szerb alakhez hasonlít;
+a valódi cipszer nevek nem betűazonosak, tehát megmaradnak. A magyarral
+azonos írásúakat (43: `Bethlen`, `Lippa`, `Wolfsberg`) külön megmértük és
+meghagytuk — az azonosság önmagában nem másolás-jel.
+
+**3. A duplikátum-kulcs egyik nyelven sem elég.** A román kulcs széttöri a
+párokat, ha az egyik példánynak nincs román neve; a magyar kulcs széttöri
+az Ajton-párt (községnév-toldalék). Az unió mindkettőt látja — és a döntés
+most bent lévőhöz mér: a régi "van-e kisebb bárhol" egy községgel a
+székhelyfalvával a vele azonos nevű szomszéd falut is kitörölte volna.

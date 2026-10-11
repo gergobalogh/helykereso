@@ -102,6 +102,20 @@ for (const [bevitel, vart] of TESZTEK) {
   }
 }
 
+// Ukrán néven, latin betűkkel is megtalálja: a pótolt nevű sorok cirill
+// nevét a kereső átírva indexeli (`Ужгород` → `uzhhorod`). Ha ez nincs,
+// a cirill sorok néma, megtalálhatatlan sorok — látszanak, de senki nem
+// jut el hozzájuk.
+await mezo.fill("uzhhorod");
+await oldal.waitForTimeout(220);
+const ukTalalat = await sorok.allInnerTexts();
+if (ukTalalat.some((s) => s.includes("Ungvár"))) {
+  console.log('  ✓ "uzhhorod" → Ungvár (cirill átírás indexelve)');
+} else {
+  bukott++;
+  console.log(`  ✗ "uzhhorod" nem találja Ungvárt (${await szures.innerText()})`);
+}
+
 // A kiemelés ékezetes néven is a helyes karokra esik-e? Ehhez egy olyan
 // helységet keresünk, aminek a neve ékezetes, és a keresett rész is ékezetes,
 // különben a leegyszerűsített és az eredeti pozíció eltérne.
