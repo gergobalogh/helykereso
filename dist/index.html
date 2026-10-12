@@ -77,9 +77,25 @@
             "name": "Helynévkereső helységnévadatai",
             "description": "Több mint 6600 Kárpát-medencei helység magyar, román és német neve, megyéje, koordinátája és forrása.",
             "inLanguage": ["hu", "ro", "de"],
-            "dateModified": "2026-10-10",
+            "dateModified": "2026-10-12",
             "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "isBasedOn": "https://www.wikidata.org/",
+            "isBasedOn": [
+              "https://www.wikidata.org/",
+              {
+                "@type": "Dataset",
+                "name": "Szabó M. Attila: Erdélyi és moldvai helységnévtár",
+                "url": "https://szabo.adatbank.ro/",
+                "creator": {
+                  "@type": "Person",
+                  "name": "Szabó M. Attila"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Erdélyi Magyar Adatbank (Transindex)"
+                },
+                "description": "A német nevek kb. 1600 helységnél innen származnak. Ez a forrás nem CC0-licenc alatt áll, ezért a német nevek nem vehetők CC0-nak: a forrás megjelölése kötelező."
+              }
+            ],
             "distribution": [
               {
                 "@type": "DataDownload",
@@ -631,8 +647,12 @@
       <footer>
         <p>
           Adatok: <a href="https://www.wikidata.org/">Wikidata</a> (CC0), letöltve
-          <span id="datum"></span> · <span id="verzio"></span>. Német nevet akkor
-          lát, ha a helynek van ilyen neve (főleg a szász városoknak). A
+          <span id="datum"></span> · <span id="verzio"></span>. A német nevek
+          kb. 1600 helységnél innen valók:
+          <a href="https://szabo.adatbank.ro/">Szabó M. Attila: Erdélyi és moldvai
+          helységnévtár</a> (Erdélyi Magyar Adatbank, 2021) — ez nem CC0, ezért a
+          forrás megjelölése kötelező. Német nevet akkor lát, ha a helynek van
+          ilyen neve (főleg a szász városoknak); egy helynek több is lehet. A
           „nincs magyar neve" jelölés azt mondja, hogy a magyar név helyén a
           románt látod: ezeknek a falvaknak a magyar lakossága 1910 körül
           olvadt fel, és a forrás nem őrzi a nevüket.

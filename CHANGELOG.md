@@ -22,6 +22,50 @@ romántól ("Vále"/"Vale", "Dealu Ștefăniței"/"Dealul Ștefăniței"), ezér
 `szabalyok.mjs` `ugyanazANev()` függvénye ezt elfogadja. Ez csak az
 ellenőrzésen fut, keresésre nem.
 
+## 4.0.0 — 2026-10-12
+
+**A KIA német nevei bekerülnek: 653-ról 2137 helyre.** Új mező a sorban
+(`deAlt`), ezért a szabály szerint nagyobb ugrás.
+
+A forrás [Szabó M. Attila: *Erdélyi és moldvai helységnévtár*](https://szabo.adatbank.ro/)
+(szabo.adatbank.ro, 2021-10-23) — az *Erdélyi helységnévszótár* 2., bővített
+kiadásának digitális változata. A [`kia/`](kia/) mappából jön, a
+`kinyeres.mjs` gyártja, a `letolt.mjs` olvassa, az `ellenoriz.mjs` ellenőrzi.
+
+- **`deAlt`**: a hely további német nevei. 118 helyen, 218 név. A `de` az
+  elsődleges, a `deAlt` a többi — egy soron több `de` jelölés jelenik meg.
+- **A sorrend nem véletlen.** A KIA útmutatója szerint „mindenik nyelvi
+  sorozat a hivatalosnak tekinthető alakváltozattal kezdődik", tehát a
+  lista első tagja a hivatalos alak: ha nincs `de`-nk, azt írjuk oda.
+- **A `javitasok.json` elsőbbséget élvez.** Azt kézzel néztük meg, a KIA
+  gépi kivonat; `de` csak akkor töltődik ki a KIA-ból, ha üres.
+- **Két szabály kimarad a KIA-nál, szándékosan.** A `nemetNev` 3. szabálya
+  (a román névvel betűrendi egyezés) a Wikidata másolását szűri, nem a
+  szótárat: a KIA `Dade`-et ír a `Deda` helységre és `Gorbau`-t a
+  `Gârbou`-ra, mindkettő valódi német név. Ami valóban ugyanaz a szó
+  (`Arad` = `Arad`), azt eldobjuk — nincs mit hozzátenni, a kereső már
+  megtalálja románul és magyarul.
+- **A `}` jelölés lekerül.** A KIA `saját név } befogadó község` alakban ír
+  39 helyen; a jobb oldal a község neve, nem a helyé, és indexelésre
+  kerülve összekeveredne a község valódi nevével.
+- **A szász nevek (`(s)`, 14 sor) nem kerülnek be.** A KIA szándékosan
+  külön jelöli őket; nincs a `de`/`deAlt` listában.
+- **Ellenőrzés**: a `deAlt` nyelvi szabályai, a `de` megismétlődésének
+  tilalma és az, hogy mind a 1661 KIA-hely bent van-e az adatban. Az
+  anagram-ellenőrzés most kivétel tesz a KIA-nevekre — különben a `Dade`
+  és a `Gorbau` hamis hibának számítana.
+- **A módszer tanulsága**: az első illesztés a KIA magyar nevének `}`
+  mögötti részére is illesztett. Mivel a KIA községnél a hivatalos nevet
+  adja „község" szóval, ez a község központjára vonzott — kb. 120 hamis
+  találatból 1803 látszólagos szám lett. A javítás: a tartalékillesztés a
+  `}` ELŐTTI részt nézi, és csak román névre bukik át.
+
+**Licenc.** A német nevek kb. 1600 helyen nem a Wikidata-ból jönnek, és a
+forrásuk nem CC0. A `helyek.json` új `licenc` mezője, az oldal látható
+forrásjelölése és az `index.html` strukturált adata ezt kimondja. A teljes
+adatminden ezért már nem állítható CC0-nak — lásd a
+[`kia/README.md`](kia/README.md) „Licenc" szakaszát.
+
 ## 3.0.0 — 2026-10-11
 
 Határon túl, egy projektben: Kárpátalja (UA, oblaszty + 6 járás, `ZK`),

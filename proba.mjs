@@ -5,7 +5,7 @@
 // npx által letöltött példányból húzzuk be. Ha ez az út nem létezik,
 // telepítsd: npm i -D playwright && npx playwright install chromium
 import { createRequire } from "node:module";
-import { existsSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 const require = createRequire(import.meta.url);
 let chromium;
 // Az npx gyorsítótara a hash-csúcsokkal együtt változik újratelepítéskor,
@@ -330,6 +330,45 @@ if (eltert.length) {
   for (const e of eltert.slice(0, 3)) console.log(`      ${e}`);
 } else {
   console.log("  ✓ minden sorban szabályos, kódolatlan Wikidata link van");
+}
+
+// A pontos találat térképe automatikusan megjelenik, kijelöli az egyetlen
+// pontot, és ugyanazokra a forrásokra mutat, mint a találati sor.
+// A KIA-ból jött további német nevek (4.0.0). Két dolog kell: a soron
+// látszanak, ÉS kereshetők — a második a fontosabb, mert a megyejegyzék
+// nélkül ezek a nevek máshol nem érhetők el.
+//
+// A Q-számot a `helyek.json`-ból nézzük meg, nem írjuk be kézzel: egy
+// kézzel beírt Q elfárulhat, ha a letöltés megváltoztatja a sort, és a
+// próba néma módon ugyanazt a Q-t ellenőrizné újra és újra.
+console.log("\n--- A KIA további német nevei:");
+const kiaAlap = JSON.parse(
+  readFileSync(new URL("./helyek.json", import.meta.url), "utf8"),
+).helyek.find((h) => (h.deAlt?.length ?? 0) > 0);
+if (!kiaAlap) {
+  bukott++;
+  console.log("  ✗ egyetlen helynek sincs további német neve — a KIA-adat nem ért el az oldalra");
+} else {
+  const masodik = kiaAlap.deAlt[0];
+  await mezo.fill(masodik);
+  await oldal.waitForTimeout(400);
+  const sor = oldal.locator(`.sor[data-q="${kiaAlap.q}"]`);
+  if ((await sor.count()) === 1) {
+    const nevek = await sor.evaluate((e) =>
+      [...e.querySelectorAll(".masik")]
+        .filter((x) => x.querySelector(".cimke")?.textContent === "de")
+        .map((x) => x.textContent.replace(/^de/u, "")),
+    );
+    if (nevek.length > 1) {
+      console.log(`  ✓ a(z) "${masodik}" keresés ide talál, és ${nevek.length} német név látszik: ${nevek.join(", ")}`);
+    } else {
+      bukott++;
+      console.log(`  ✗ a soron csak ${nevek.length} német név látszik: ${JSON.stringify(nevek)}`);
+    }
+  } else {
+    bukott++;
+    console.log(`  ✗ a(z) "${masodik}" keresés nem találta a sort (${kiaAlap.hu})`);
+  }
 }
 
 // A pontos találat térképe automatikusan megjelenik, kijelöli az egyetlen

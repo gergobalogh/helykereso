@@ -446,6 +446,16 @@ function kirajzol(lista, keresett) {
       sor.append(de);
     }
 
+    // A további német nevek. Ugyanúgy néznek ki, mint a `de`, mert azok is
+    // ugyanannak a helynek a nevei — csak nem az elsődleges. Külön jelölést
+    // nem adunk, ne legyen kétféle német név a soron.
+    for (const tovabb of h.deAlt ?? []) {
+      const de = document.createElement("span");
+      de.className = "masik";
+      de.innerHTML = '<span class="cimke">de</span>' + kiemeles(tovabb, keresett);
+      sor.append(de);
+    }
+
     // Község, megye, ország, meg a forrás linkje.
     const meta = document.createElement("span");
     meta.className = "kozseg";
@@ -533,7 +543,7 @@ function urlAllapotFrissit() {
  * Arada községit — pedig a magyar nevük egyformára szól.
  */
 function pont(h, keresett) {
-  const mezok = [megjelenitettNev(h), h.ro, h.de, h.alt].filter(Boolean);
+  const mezok = [megjelenitettNev(h), h.ro, h.de, h.alt, ...(h.deAlt ?? [])].filter(Boolean);
   const megye = megyek.get(h.megye);
   let legjobb = 3;
   for (const n of mezok) {
@@ -661,7 +671,19 @@ async function betolt() {
   // is — minden falu községnevét indexelni épp az lenne, amit a megyénévvel
   // éppen elkerültünk.
   for (const h of helyek) {
-    const szoveg = [h.hu, h.ro, h.de ?? "", h.utalo ?? "", h.alt ?? ""].filter(Boolean).join(" ");
+    const szoveg = [
+      h.hu,
+      h.ro,
+      h.de ?? "",
+      // A további német nevek. Egy helynek több is lehet ("Altenburg" a
+      // Grossschlatten mellett), és ezeket senki más nem őrzi — ha nem
+      // indexeljük őket, a KIA-s adat feleslegesen bent marad.
+      ...(h.deAlt ?? []),
+      h.utalo ?? "",
+      h.alt ?? "",
+    ]
+      .filter(Boolean)
+      .join(" ");
     const { ki } = normaliz(szoveg);
     nevek.set(h.q, { hu: megjelenitettNev(h), szavak: ki.split(" ").filter(Boolean) });
   }

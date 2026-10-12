@@ -27,7 +27,15 @@
 
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
-import { nemHelyseg, deRomanEkezet, utalok, cirillAtir, szurDuplikat, VERZIO } from "./szabalyok.mjs";
+import {
+  nemHelyseg,
+  deRomanEkezet,
+  utalok,
+  cirillAtir,
+  szurDuplikat,
+  hajtasGerman,
+  VERZIO,
+} from "./szabalyok.mjs";
 import { gazdagitTerkepAdattal } from "./terkepadat.mjs";
 
 const VEGEGPL = "https://query.wikidata.org/sparql";
@@ -174,6 +182,7 @@ const KIMENET = new URL("./helyek.json", import.meta.url);
 const KIMENET_LEPEG = new URL("./helyek.min.json", import.meta.url);
 const JAVITASOK = new URL("./javitasok.json", import.meta.url);
 const JAVITASOK_HU = new URL("./javitasokHu.json", import.meta.url);
+const KIA_NEMET = new URL("./kia/nemetJavitasok.json", import.meta.url);
 const NINCS_MAGYAR_NEV = new URL("./nincsMagyarNev.json", import.meta.url);
 
 const varakozas = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -370,6 +379,13 @@ async function main() {
 
   const javitasok = JSON.parse(await readFile(JAVITASOK, "utf8"));
   const javitasokHu = JSON.parse(await readFile(JAVITASOK_HU, "utf8"));
+  // A KIA német nevei, a `kia/kinyeres.mjs` kimenete. Ez a harmadik forrás
+  // a német mezőhöz a Wikidata és a kézzel javított `javitasok.json` mellett,
+  // és a leggyengébb: gépi kivonat egy szótárból. A `javitasok.json` az,
+  // amit kézzel néztünk meg, ezért az elsőbbséget élvez; a KIA csak a
+  // hézagokat tölti be.
+  const kiaNemet = JSON.parse(await readFile(KIA_NEMET, "utf8"));
+  const deJavitok = new Map(Object.entries(kiaNemet.helyek));
   const nincsMagyarNev = new Set(
     Object.keys(JSON.parse(await readFile(NINCS_MAGYAR_NEV, "utf8"))).filter((k) => !k.startsWith("_")),
   );
@@ -494,7 +510,8 @@ async function main() {
     // együtt ("Ajton község"), a faluét meg az egyértelmű "Ajton"-t. Ezt
     // NEM levágjuk: sok községnek pont az egyetlen faluja azonos nevű, és
     // levágás után 556 duplikált sor keletkezett.
-    const de = nemetNev(s.de, ro, javitasok, undefined, s.alt);
+    // `let`, nem `const`: alább a KIA kitöltheti, ha a Wikidata nem adott.
+    let de = nemetNev(s.de, ro, javitasok, undefined, s.alt);
     // Pontosan azokat számoljuk, amit KIZÁRÓLAG a 4. (ékezet-) szabály vett
     // ki: a szabály nélkül (de a tartaléknyelvvel) megmaradnának. (A nyers
     // alakra nézni nem elég: a 3. szabály áldozatainak felében is van román
@@ -525,11 +542,36 @@ async function main() {
       altNemet.set(q, { q, hu, ro, de: s.de });
     }
 
+    // A KIA német nevei. Ez a `de` mezővel külön életet él: a `de` az
+    // "egy hivatalos német név", a `deAlt` a további alakok. A sorrend
+    // dönt: a KIA útmutatója szerint a lista a hivatalos alakval kezdődik,
+    // tehát ha nincs `de`-nk, az első KIA-név lesz a `de`.
+    //
+    // A javitasok.json (kézzel ellenőrzött, román névre kulcsolt) elsőbbséget
+    // élvez a KIA-val szemben: azt kézzel néztük meg, ez gépi kivonat.
+    // Ezért a KIA csak akkor tölti ki a `de`-t, ha az üres, a `deAlt`-ba
+    // pedig akkor kerülnek a nevek, ha tényleg különböznek tőle.
+    const deKia = deJavitok.get(q) ?? [];
+    let deAlt = null;
+    if (deKia.length) {
+      if (!de) {
+        de = deKia[0];
+      } else {
+        const deSajt = hajtasGerman(de);
+        deAlt = deKia.filter((n) => hajtasGerman(n) !== deSajt && hajtasGerman(n) !== "");
+        if (!deAlt.length) deAlt = null;
+      }
+    }
+
     helyek.push({
       q,
       hu,
       ro,
       de,
+      // A további német nevek, ha van. Egy helynek több német neve lehet
+      // ("Kleinblasendorf, Blasendorf", "Altenburg"), és ezeket a KIA őrzi,
+      // a Wikidata nem. A `de` az első, a `deAlt` a többi.
+      deAlt,
       // Az ukrán/szerb címke, ha van: a 6. németnév-szabály ellenőrzi
       // ellene a `de`-t, és a kereső is indexeli (ukránul is lehet
       // keresni). A pótolt nevű sorokban ugyanaz, mint a `hu`.
@@ -695,7 +737,20 @@ async function main() {
   const kimenet = {
     verzio: VERZIO,
     generatas: new Date().toISOString(),
-    forras: "Wikidata (CC0) + javitasok.json + javitasokHu.json + nincsMagyarNev.json",
+    forras:
+      "Wikidata (CC0) + javitasok.json + javitasokHu.json + nincsMagyarNev.json " +
+      "+ kia/nemetJavitasok.json (Szabó M. Attila: Erdélyi és moldvai helységnévtár, " +
+      "szabo.adatbank.ro, 2021-10-23)",
+    // A német nevek egy része (a `de` és a `deAlt` mező, ~1600 hely) nem a
+    // Wikidata-ból jön, hanem egy kiadott szótárból, aminek NINJ CC0
+    // licence. Ezért az adatminden nem állítható egyformán CC0-nak — lásd
+    // a `licenc` mezőt és az `index.html` strukturált adatát.
+    licenc:
+      "A helynevek, a megyék és a koordináták a Wikidata-ból származnak (CC0 1.0). " +
+      "A német nevek egy része a Szabó M. Attila: Erdélyi és moldvai helységnévtárból " +
+      "(Erdélyi Magyar Adatbank / Transindex, szabo.adatbank.ro) való, amely nem " +
+      "CC0-licenc alatt áll; ezeknél a forrás megjelölése kötelező. A kézzel javított " +
+      "nevek (javitasok.json, javitasokHu.json) a projekt szerzőjének munkája.",
     telepulesOsztaly: [...telepulesOsztaly].sort(),
     megyek: megyekKi,
     helyek,

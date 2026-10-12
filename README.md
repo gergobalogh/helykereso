@@ -31,11 +31,13 @@ megyét akarod böngészni. A határon túli sorokon ott az ország is
 | `megyek/` | A 24 statikus, indexelhető területi jegyzék; a `seo.mjs` kimenete. |
 | `javitasok.json` | Kézzel javított **német** nevek. Olvassa a `letolt.mjs`. |
 | `javitasokHu.json` | Kézzel javított **magyar** nevek, ugyanerre a célra. |
+| `kia/nemetJavitasok.json` | A KIA ellenőrzött **német** nevei, Q-számmal. A `letolt.mjs` olvassa; a `javitasok.json` mögé sorolódik. |
 | `nincsMagyarNev.json` | Azok a Q-számok, amelyeknek nincs magyar nevük, de a Wikidata-on van. A kereső megjelöli őket. |
 | `kia.mjs` | A KIA helységnévtár kiértékelése: hol van magyar név, amit a Wikidata nem őriz? Kutatási eszköz, a `letolt.mjs` nem hívja. |
 | `kiaMagyarNev.json` | A KIA-mérés eredménye, Q-számmal és a kézi minősítéssel (`javítva` / `elutasítva`). Írja a `kia.mjs`, a minősítést kézzel kell megadni. |
 | `szabalyok.mjs` | A letöltő és az ellenőrző közös szabályai (egy helyen, hogy ne divergáljanak). |
 | `ismertHibak.json` | A Wikidata ismert adathibái, Q-számmal. Olvassa az `ellenoriz.mjs`. |
+| [`kia/`](kia/) | A [Szabó M. Attila helységnévtár](https://szabo.adatbank.ro/) leképezése a mi sorainkra. **A német nevek innen jönnek** (`nemetJavitasok.json`-t a `letolt.mjs` olvassa); a magyar és román névanyag még nincs bedolgozva. Lásd a [`kia/README.md`](kia/README.md)-t. |
 | `ellenoriz.mjs` | Ellenőrzés az adatfájlon: megvannak-e a fontos helységek, jól vannak-e besorolva. |
 | `proba.mjs` | Böngészős próba: működik-e a kereső a valódi oldalon? |
 | `helyek.json` | A letöltött adat olvashatóan. |
@@ -47,6 +49,7 @@ A `helyek.json` egy helységének a mezői:
 | mező | mi |
 |---|---|
 | `q`, `hu`, `ro`, `de` | a Wikidata-azonosító és a magyar, román, német név (`ro` és `de` lehet `null`) |
+| `deAlt` | a hely további német nevei, ha van (`null`, ha nincs) — a [KIA-ból](kia/), ahol a `de` egyetlen értéket fogad |
 | `alt` | az ukrán/szerb címke, ha van (a 6. németnév-szabály és a kereső használja) |
 | `megye` | a megye/körzet kódja (`AB`, `CJ`, `ZK`, `SZB`, …) |
 | `orszag` | az ország kódja (`RO`, `UA`, `HU`, `RS`) |

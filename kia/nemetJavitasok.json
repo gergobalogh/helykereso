@@ -1,0 +1,6260 @@
+{
+ "_comment": [
+  "A KIA német nevei, ellenőrizve, a letöltő számára.",
+  "GENERÁLVA: a kia/kinyeres.mjs írja, a kia/raw.json-ból.",
+  "Kulcs: a mi helységünk Q-száma. Érték: a német nevek listája,",
+  "  a KIA sorrendjében — az első a hivatalos alak, tehát a `de`",
+  "  mezőbe kerül, a többi a `deAlt`-ba.",
+  "",
+  "FORRÁS: Szabó M. Attila: Erdélyi és moldvai helységnévtár",
+  "(szabo.adatbank.ro, 2021-10-23). Ez a digitális változata az",
+  "Erdélyi helységnévszótár 2., bővített és javított kiadásának,",
+  "és NEM CC0: az Erdélyi Magyar Adatbank (Transindex) szerzői jogú",
+  "műve. A licencet lásd a README.md-ben."
+ ],
+ "forras": "Szabó M. Attila: Erdélyi és moldvai helységnévtár (szabo.adatbank.ro, 2021-10-23)",
+ "eldobva": {
+  "befogado": 39,
+  "ures": 0,
+  "perjel": 2,
+  "romEkezet": 0,
+  "cirill": 0,
+  "ugyanazRo": 24,
+  "ugyanazHu": 23
+ },
+ "osszes_hely": 1661,
+ "osszes_nev": 2908,
+ "tobbnev_hely": 732,
+ "helyek": {
+  "Q331577": [
+   "Grossschlatten",
+   "Altenburg"
+  ],
+  "Q480831": [
+   "Abruden"
+  ],
+  "Q426986": [
+   "Buschendorf",
+   "Buschdorf"
+  ],
+  "Q858504": [
+   "Absdorf",
+   "Abtsdorf",
+   "Abuss"
+  ],
+  "Q1069250": [
+   "Fürstendorf"
+  ],
+  "Q757212": [
+   "Tetscheln",
+   "Telscheln",
+   "Tetschlen"
+  ],
+  "Q556174": [
+   "Meergrub"
+  ],
+  "Q1090695": [
+   "Aschdorf",
+   "Achsdorf",
+   "Achs-Achatiusdorf"
+  ],
+  "Q1031606": [
+   "Hadrian"
+  ],
+  "Q1090172": [
+   "Adamesch",
+   "Adam"
+  ],
+  "Q730354": [
+   "Erlendorf",
+   "Arbegen",
+   "Erbegen"
+  ],
+  "Q284669": [
+   "Erldorf"
+  ],
+  "Q313689": [
+   "Agnetheln",
+   "Agnethlen",
+   "Agnethen"
+  ],
+  "Q713437": [
+   "Erlenwald",
+   "Erlendorf",
+   "Ajreschteln"
+  ],
+  "Q1092889": [
+   "Aitau"
+  ],
+  "Q411080": [
+   "Strassburg am Mieresch",
+   "Grossenyed",
+   "Engeten",
+   "Egydstadt"
+  ],
+  "Q678022": [
+   "Egisdorf",
+   "Egydsdorf"
+  ],
+  "Q174665": [
+   "Weissenburg",
+   "Karlsburg",
+   "Carlsburg"
+  ],
+  "Q997330": [
+   "Weissenkirch"
+  ],
+  "Q754942": [
+   "Weisskirchen",
+   "Weißkirch",
+   "Weisskirch-Bistritz"
+  ],
+  "Q736023": [
+   "Elkendorf"
+  ],
+  "Q851029": [
+   "Ellesch"
+  ],
+  "Q854226": [
+   "Aliosch",
+   "Aljosch",
+   "Aljusch"
+  ],
+  "Q426543": [
+   "Almen",
+   "Almaschken"
+  ],
+  "Q830577": [
+   "Almen"
+  ],
+  "Q857467": [
+   "Almasch"
+  ],
+  "Q547409": [
+   "Seligsdorf"
+  ],
+  "Q820190": [
+   "Mittel"
+  ],
+  "Q914176": [
+   "Gross-Obstdorf"
+  ],
+  "Q824959": [
+   "Obstdorf"
+  ],
+  "Q617993": [
+   "Klein-Almasch",
+   "Klein-Obstdorf"
+  ],
+  "Q746621": [
+   "Trockenfeld"
+  ],
+  "Q256328": [
+   "Aldringen"
+  ],
+  "Q2912267": [
+   "Nussdorf"
+  ],
+  "Q713455": [
+   "Langendorf"
+  ],
+  "Q2938150": [
+   "Traunau",
+   "Tronau",
+   "Haseldorf",
+   "Monja",
+   "Schönhaus"
+  ],
+  "Q714800": [
+   "Mären"
+  ],
+  "Q824536": [
+   "Gauren"
+  ],
+  "Q451137": [
+   "Altzen"
+  ],
+  "Q575255": [
+   "Mildenburg",
+   "Makenberg",
+   "Mecklenberg",
+   "Sachsenhausen"
+  ],
+  "Q834726": [
+   "Hamlesch",
+   "Omlesch"
+  ],
+  "Q519391": [
+   "Ampoifluss"
+  ],
+  "Q714210": [
+   "Andreasdorf",
+   "Andresdorf"
+  ],
+  "Q769678": [
+   "Ungefug",
+   "Umgefug"
+  ],
+  "Q2849946": [
+   "Dombhater-Sauerbrunnen"
+  ],
+  "Q548502": [
+   "Steierdorf",
+   "Steierdorf-Anina"
+  ],
+  "Q325558": [
+   "Toneschdorf"
+  ],
+  "Q479185": [
+   "Odendorf",
+   "Bendorf",
+   "Brenndorf",
+   "Briegendorf"
+  ],
+  "Q755836": [
+   "Abtsdorf"
+  ],
+  "Q1070596": [
+   "Geist"
+  ],
+  "Q618878": [
+   "Trapold",
+   "Trappold",
+   "Trapolden"
+  ],
+  "Q1077533": [
+   "Klein-Pold",
+   "Klein-Apolden"
+  ],
+  "Q588163": [
+   "Gross-Pold",
+   "Grosspolden",
+   "Gross-Apolden",
+   "Oberpold"
+  ],
+  "Q620610": [
+   "Abstdorf",
+   "Appesdorf"
+  ],
+  "Q302194": [
+   "Arendorf",
+   "Arndorf"
+  ],
+  "Q173591": [
+   "Altarad"
+  ],
+  "Q718015": [
+   "Kallesdorf"
+  ],
+  "Q744449": [
+   "Archdorf",
+   "Erzdorf"
+  ],
+  "Q725536": [
+   "Erkeden",
+   "Mahldorf"
+  ],
+  "Q634919": [
+   "Arkeden",
+   "Erkeden"
+  ],
+  "Q713900": [
+   "Arkeden",
+   "Erkeden"
+  ],
+  "Q3891384": [
+   "Garendorf",
+   "Garndorf",
+   "Jordan"
+  ],
+  "Q730629": [
+   "Walddorf",
+   "Waldhof"
+  ],
+  "Q824870": [
+   "Walddorf",
+   "Waldhof"
+  ],
+  "Q275997": [
+   "Erdeed"
+  ],
+  "Q1190826": [
+   "Elrück",
+   "Erlenhang"
+  ],
+  "Q757091": [
+   "Urmenen",
+   "Armenen",
+   "Armener"
+  ],
+  "Q680107": [
+   "Unter-Arpasch",
+   "Birndorf"
+  ],
+  "Q3893156": [
+   "Ober-Arpasch",
+   "Ober-Birndorf"
+  ],
+  "Q775587": [
+   "Goldbrunn"
+  ],
+  "Q550010": [
+   "Golddorf"
+  ],
+  "Q755799": [
+   "Frauenvolk",
+   "Frauenberg"
+  ],
+  "Q1027068": [
+   "Langenthal",
+   "Langthal",
+   "Langendorf"
+  ],
+  "Q937652": [
+   "Agestendorf",
+   "Agestenburg",
+   "Augustenburg",
+   "Augustinsdorf"
+  ],
+  "Q248694": [
+   "Benzenz",
+   "Benzendorf",
+   "Wolkendorfergrund",
+   "Grand"
+  ],
+  "Q791387": [
+   "Freck",
+   "Fryk"
+  ],
+  "Q779030": [
+   "Frauendorf"
+  ],
+  "Q261457": [
+   "Gross-Schwalbendorf"
+  ],
+  "Q1110703": [
+   "Klein-Schwalbendorf"
+  ],
+  "Q794917": [
+   "Hetzeldorf",
+   "Etzel"
+  ],
+  "Q867439": [
+   "Zinzendorf"
+  ],
+  "Q292769": [
+   "Bodsau",
+   "Bozau"
+  ],
+  "Q980510": [
+   "Koliben"
+  ],
+  "Q787767": [
+   "Altdorf"
+  ],
+  "Q744475": [
+   "Hirtendorf"
+  ],
+  "Q222953": [
+   "Batschendorf",
+   "Bazendorf",
+   "Basendorf",
+   "Lurtschendorf"
+  ],
+  "Q789123": [
+   "Bochovar",
+   "Bakowa",
+   "Bakuwa"
+  ],
+  "Q834545": [
+   "Bachnen",
+   "Bachen"
+  ],
+  "Q543387": [
+   "Altenburg"
+  ],
+  "Q185280": [
+   "Frauenbach",
+   "Neustadt"
+  ],
+  "Q803706": [
+   "Mittelstadt"
+  ],
+  "Q713328": [
+   "Balden"
+  ],
+  "Q825413": [
+   "Baldowing"
+  ],
+  "Q804998": [
+   "Balintz",
+   "Balintin"
+  ],
+  "Q290353": [
+   "Balomiren"
+  ],
+  "Q3889510": [
+   "Belendorf",
+   "Ballendorf",
+   "Balmiren"
+  ],
+  "Q789736": [
+   "Baleschen",
+   "Balza"
+  ],
+  "Q530675": [
+   "Ober-Bandorf"
+  ],
+  "Q1096385": [
+   "Bandorf"
+  ],
+  "Q806854": [
+   "Banlok"
+  ],
+  "Q681377": [
+   "Bonbach"
+  ],
+  "Q830343": [
+   "Kreutzdorf"
+  ],
+  "Q279391": [
+   "Barbersdorf"
+  ],
+  "Q82174": [
+   "Altstadt",
+   "Bartolomä",
+   "Kronstadt",
+   "Stalinstadt"
+  ],
+  "Q809628": [
+   "Gross-Elephant"
+  ],
+  "Q6487774": [
+   "Bersing"
+  ],
+  "Q3272199": [
+   "Bassaraben"
+  ],
+  "Q3891431": [
+   "Batzan"
+  ],
+  "Q3895113": [
+   "Battendorf",
+   "Betendorf"
+  ],
+  "Q720823": [
+   "Batiss"
+  ],
+  "Q810885": [
+   "Botsch",
+   "Batesch",
+   "Batosch"
+  ],
+  "Q853833": [
+   "Baziasch"
+  ],
+  "Q812683": [
+   "Baassen",
+   "Bossern",
+   "Brassen",
+   "Brossen",
+   "Oberbassen"
+  ],
+  "Q848563": [
+   "Bazosch"
+  ],
+  "Q383927": [
+   "Thurdorf"
+  ],
+  "Q644095": [
+   "Gross-Sammetdorf"
+  ],
+  "Q744545": [
+   "Klein-Sammetdorf"
+  ],
+  "Q855637": [
+   "Bürgisch",
+   "Bürgesch",
+   "Burgesch",
+   "Schierlingdorf",
+   "Bürkösch"
+  ],
+  "Q793592": [
+   "Berldorf",
+   "Biereldorf"
+  ],
+  "Q738383": [
+   "Bersdorf"
+  ],
+  "Q813520": [
+   "Alt-Beba"
+  ],
+  "Q813656": [
+   "Klein-Betschkerek",
+   "Betschkerek"
+  ],
+  "Q1078916": [
+   "Betlen",
+   "Badlinen",
+   "Betlehem"
+  ],
+  "Q794219": [
+   "Kleinbethlen"
+  ],
+  "Q755378": [
+   "Meeburg",
+   "Mehburg",
+   "Mähdorf"
+  ],
+  "Q663760": [
+   "Ungarisch-Birk",
+   "Ungarisch-Belken"
+  ],
+  "Q686728": [
+   "Wallachisch-Birk",
+   "Walachisch-Belken"
+  ],
+  "Q3630430": [
+   "Bessendorf"
+  ],
+  "Q713636": [
+   "Bela"
+  ],
+  "Q823204": [
+   "Beldendorf"
+  ],
+  "Q1071428": [
+   "Blumendorf",
+   "Boellen"
+  ],
+  "Q792253": [
+   "Belintz"
+  ],
+  "Q854214": [
+   "Bell in Banat"
+  ],
+  "Q1059058": [
+   "Bildegg"
+  ],
+  "Q40043": [
+   "Deutsch-Bentschek",
+   "Bentschek"
+  ],
+  "Q187727": [
+   "Bägendorf",
+   "Bajendorf"
+  ],
+  "Q748502": [
+   "Bendesdorf"
+  ],
+  "Q713662": [
+   "Bentzed"
+  ],
+  "Q723946": [
+   "Waldbach"
+  ],
+  "Q248206": [
+   "Sperberdorf"
+  ],
+  "Q793332": [
+   "Klein-Beregsau"
+  ],
+  "Q1092886": [
+   "Bluthroth"
+  ],
+  "Q793937": [
+   "Lammdorf",
+   "Bärend"
+  ],
+  "Q754505": [
+   "Berwein",
+   "Gross-Berwein",
+   "Gross-Beriwa"
+  ],
+  "Q725601": [
+   "Bernhardsdorf",
+   "Bernhardt"
+  ],
+  "Q793732": [
+   "Bersaska"
+  ],
+  "Q1195116": [
+   "Berschowia"
+  ],
+  "Q725994": [
+   "Bethamen",
+   "Benzendorf"
+  ],
+  "Q794223": [
+   "Bethlenhaas"
+  ],
+  "Q714060": [
+   "Betendorf"
+  ],
+  "Q713512": [
+   "Besendorf"
+  ],
+  "Q794938": [
+   "Farrendorf"
+  ],
+  "Q662157": [
+   "Buchendorf"
+  ],
+  "Q727365": [
+   "Buchendorf"
+  ],
+  "Q753617": [
+   "Bedendorf",
+   "Betendorf",
+   "Bidda"
+  ],
+  "Q793388": [
+   "Birthälm",
+   "Birthalmen"
+  ],
+  "Q794772": [
+   "Schnellersruhe"
+  ],
+  "Q823156": [
+   "Bendendorf",
+   "Bendorf",
+   "Benden",
+   "Bainden",
+   "Bien"
+  ],
+  "Q745258": [
+   "Billed"
+  ],
+  "Q277499": [
+   "Bulgern"
+  ],
+  "Q1066879": [
+   "Birkisch"
+  ],
+  "Q804075": [
+   "Bistrau"
+  ],
+  "Q834887": [
+   "Borgo-Bistritz"
+  ],
+  "Q187205": [
+   "Bistritz",
+   "Nösen"
+  ],
+  "Q732150": [
+   "Böschkirchen"
+  ],
+  "Q624236": [
+   "Blasendorf"
+  ],
+  "Q20481878": [
+   "Kleinblasendorf"
+  ],
+  "Q728818": [
+   "Blasenkirchen"
+  ],
+  "Q1027845": [
+   "Stumpach"
+  ],
+  "Q789927": [
+   "Klein-Blasendorf"
+  ],
+  "Q663408": [
+   "Unter-Blasendorf"
+  ],
+  "Q755750": [
+   "Ober-Blasendorf"
+  ],
+  "Q518223": [
+   "Michelsdorf"
+  ],
+  "Q498347": [
+   "Krautfeld",
+   "Baboln"
+  ],
+  "Q725645": [
+   "Repsdorf",
+   "Repsendorf",
+   "Rupsdorf"
+  ],
+  "Q1078043": [
+   "Deutsch Bogschan",
+   "Werk-Bogschan",
+   "Altwerk",
+   "Neuwerk",
+   "Bogschan",
+   "Bokschan"
+  ],
+  "Q75504": [
+   "Deutsch Bogschan",
+   "Neu-Bokschan",
+   "Neu-Werk",
+   "Werk-Bogschan"
+  ],
+  "Q1094553": [
+   "Brenndorf",
+   "Bringendorf",
+   "Brignendorf"
+  ],
+  "Q754255": [
+   "Budendorf"
+  ],
+  "Q426224": [
+   "Unter-Mariendorf"
+  ],
+  "Q755946": [
+   "Neu-Bodrog"
+  ],
+  "Q896533": [
+   "Alt-Bodrog",
+   "Hodosch"
+  ],
+  "Q663649": [
+   "Reichdorf"
+  ],
+  "Q3891864": [
+   "Bogatbach",
+   "Reichthal"
+  ],
+  "Q3893381": [
+   "Reichhof",
+   "Bogaden"
+  ],
+  "Q890405": [
+   "Neuhof"
+  ],
+  "Q1098854": [
+   "Küche",
+   "Reichhof",
+   "Konhau",
+   "Kuchl"
+  ],
+  "Q736048": [
+   "Hirsenmühl"
+  ],
+  "Q833343": [
+   "Bodendorf"
+  ],
+  "Q238916": [
+   "Bolden",
+   "Bucholz"
+  ],
+  "Q3891174": [
+   "Ochsendorf"
+  ],
+  "Q720670": [
+   "Bolendorf",
+   "Bonnesdorf",
+   "Bonisdorf",
+   "Bunnesdorf",
+   "Boneschdorf",
+   "Unter-Bassen",
+   "Unter-Bossern"
+  ],
+  "Q1082100": [
+   "Baldorf"
+  ],
+  "Q750731": [
+   "Boehren"
+  ],
+  "Q833660": [
+   "Bundorf",
+   "Gross-Freudendorf",
+   "Freudendorf"
+  ],
+  "Q3682671": [
+   "Unter-Ochsendorf"
+  ],
+  "Q3682324": [
+   "Ober-Ochsendorf"
+  ],
+  "Q2110047": [
+   "Botzen",
+   "Ochsendorf",
+   "Boitza"
+  ],
+  "Q12083500": [
+   "Boschen-Tunnel"
+  ],
+  "Q721525": [
+   "Boschen"
+  ],
+  "Q663675": [
+   "Unter Boldad"
+  ],
+  "Q628100": [
+   "Bonisbruck",
+   "Bruck"
+  ],
+  "Q429829": [
+   "Borden",
+   "Borten"
+  ],
+  "Q713356": [
+   "Bordosch"
+  ],
+  "Q9196489": [
+   "Burlescht",
+   "Borlescht"
+  ],
+  "Q1097085": [
+   "Gross-Weindorf"
+  ],
+  "Q425970": [
+   "Klein-Weindorf"
+  ],
+  "Q725464": [
+   "Balteskirch"
+  ],
+  "Q842201": [
+   "Bussd",
+   "Bussendorf",
+   "Bosendorf"
+  ],
+  "Q724671": [
+   "Gross-Böschendorf"
+  ],
+  "Q750813": [
+   "Klein-Böschendorf"
+  ],
+  "Q714342": [
+   "Boschen"
+  ],
+  "Q824955": [
+   "Bosendorf",
+   "Bogesch"
+  ],
+  "Q607545": [
+   "Hollerthal"
+  ],
+  "Q848684": [
+   "Bosowits"
+  ],
+  "Q848248": [
+   "Bosendorf"
+  ],
+  "Q841511": [
+   "Tannendorf"
+  ],
+  "Q541227": [
+   "Gierelsau",
+   "Gieresau",
+   "Gerardsau",
+   "Gereldsau"
+  ],
+  "Q936166": [
+   "Törzburg",
+   "Türzburg",
+   "Dietrichstein"
+  ],
+  "Q791097": [
+   "Pretai",
+   "Bretai",
+   "Breitau",
+   "Pretau"
+  ],
+  "Q1096961": [
+   "Mönchsdorf"
+  ],
+  "Q6486112": [
+   "Gurendorf",
+   "Gruben"
+  ],
+  "Q1327519": [
+   "Bregler"
+  ],
+  "Q1095817": [
+   "Wetsch"
+  ],
+  "Q3891257": [
+   "Bursendorf"
+  ],
+  "Q849578": [
+   "Frauendorf",
+   "Bretzdorf",
+   "Beretzdorf",
+   "Breit",
+   "Ungersdorf"
+  ],
+  "Q259960": [
+   "Ehrendorf"
+  ],
+  "Q732200": [
+   "Bredendorf"
+  ],
+  "Q515559": [
+   "Weidenthal"
+  ],
+  "Q514748": [
+   "Brestowatz"
+  ],
+  "Q3889401": [
+   "Breitau",
+   "Breit in Nösnerland"
+  ],
+  "Q910527": [
+   "Wallachisch-Brettendorf"
+  ],
+  "Q820624": [
+   "Ungarisch-Brettendorf"
+  ],
+  "Q372137": [
+   "Bresendorf",
+   "Bressondorf",
+   "Bresondorf",
+   "Brezendorf"
+  ],
+  "Q1096181": [
+   "Beretzk",
+   "Bretz"
+  ],
+  "Q755885": [
+   "Kradendorf",
+   "Krötendorf",
+   "Kreisdorf"
+  ],
+  "Q12085068": [
+   "Huffladen"
+  ],
+  "Q997245": [
+   "Henndorf",
+   "Hegendorf"
+  ],
+  "Q724059": [
+   "Mühlendorf"
+  ],
+  "Q849028": [
+   "Bernpfaff"
+  ],
+  "Q3889437": [
+   "Klosterdorf"
+  ],
+  "Q631842": [
+   "Bresesden"
+  ],
+  "Q825430": [
+   "Braschen"
+  ],
+  "Q1092561": [
+   "Botschard",
+   "Bothard"
+  ],
+  "Q837227": [
+   "Botschhard"
+  ],
+  "Q1090028": [
+   "Krumpendorf"
+  ],
+  "Q1193905": [
+   "Baumdorf"
+  ],
+  "Q1081327": [
+   "Burgfeld"
+  ],
+  "Q1188965": [
+   "Deutsch-Budak"
+  ],
+  "Q4967462": [
+   "Rumänisch-Budak",
+   "Klein-Budak",
+   "Budesdorf"
+  ],
+  "Q851306": [
+   "Budacken"
+  ],
+  "Q1059438": [
+   "Bodeln",
+   "Budille",
+   "Bodila"
+  ],
+  "Q736480": [
+   "Hagendorf"
+  ],
+  "Q752737": [
+   "Wüstendorf"
+  ],
+  "Q3891901": [
+   "Budesdorf",
+   "Bodesdorf",
+   "Klein-Budak"
+  ],
+  "Q303636": [
+   "Bell",
+   "Boll",
+   "Boel"
+  ],
+  "Q1300285": [
+   "Stregen"
+  ],
+  "Q4968799": [
+   "Buldorf",
+   "Ochsenhirt"
+  ],
+  "Q833543": [
+   "Bogarosch"
+  ],
+  "Q659384": [
+   "Bodendorf",
+   "Budendorf",
+   "Schöndorf"
+  ],
+  "Q251783": [
+   "Baumgarten",
+   "Bangert"
+  ],
+  "Q724640": [
+   "Buttendorf"
+  ],
+  "Q723056": [
+   "Krumpendorf",
+   "Krumendorf"
+  ],
+  "Q1076348": [
+   "Besotten",
+   "Weizendorf",
+   "Busaten",
+   "Busendorf"
+  ],
+  "Q730972": [
+   "Weizenfeld"
+  ],
+  "Q830455": [
+   "Bussd",
+   "Busd"
+  ],
+  "Q655818": [
+   "Busiasch"
+  ],
+  "Q723737": [
+   "Haberndorf",
+   "Habendorf"
+  ],
+  "Q723994": [
+   "Zaubendorf"
+  ],
+  "Q723361": [
+   "Babutz"
+  ],
+  "Q788974": [
+   "Bachendorf",
+   "Backendorf",
+   "Bachnen"
+  ],
+  "Q852600": [
+   "Schäferdorf"
+  ],
+  "Q303105": [
+   "Bocksdorf",
+   "Krugendorf"
+  ],
+  "Q3895127": [
+   "Disteldorf",
+   "Bogeschdorf",
+   "Bogistorf"
+  ],
+  "Q721212": [
+   "Bogun"
+  ],
+  "Q788693": [
+   "Bayeschd"
+  ],
+  "Q754346": [
+   "Borscha"
+  ],
+  "Q525087": [
+   "Felixbad"
+  ],
+  "Q650981": [
+   "Herkulesbad"
+  ],
+  "Q1054771": [
+   "Honterusbad",
+   "Homoroden",
+   "Bad Homorod"
+  ],
+  "Q837968": [
+   "Bad Tuschnad",
+   "Kaiserbad",
+   "Kaiserbad Tusnád"
+  ],
+  "Q250038": [
+   "Kleingrub"
+  ],
+  "Q727404": [
+   "Ger",
+   "Pernseifen"
+  ],
+  "Q789134": [
+   "Bolla",
+   "Balla",
+   "Bälersdorf"
+  ],
+  "Q789811": [
+   "Kupferbergwerk",
+   "Blasenkirchen"
+  ],
+  "Q253915": [
+   "Bulkesch",
+   "Bolkatsch",
+   "Bulgatsch",
+   "Bolgatsch",
+   "Bulgesch"
+  ],
+  "Q789336": [
+   "Bladenmarkt",
+   "Blademarkt",
+   "Bladen"
+  ],
+  "Q853209": [
+   "Heilege Kreuz",
+   "Karlshütte",
+   "Nikolaushütte"
+  ],
+  "Q1189860": [
+   "Unter-Bandorf"
+  ],
+  "Q790046": [
+   "Bansdorf"
+  ],
+  "Q724337": [
+   "Bekokten",
+   "Brekolten"
+  ],
+  "Q736037": [
+   "Weindorf"
+  ],
+  "Q752200": [
+   "Baren"
+  ],
+  "Q790155": [
+   "Baratzhausen",
+   "Berndjas"
+  ],
+  "Q3889861": [
+   "Baress"
+  ],
+  "Q791291": [
+   "Batartsch"
+  ],
+  "Q779615": [
+   "Altendorf"
+  ],
+  "Q788065": [
+   "Batzalar"
+  ],
+  "Q755789": [
+   "Köllendorf",
+   "Köln"
+  ],
+  "Q823181": [
+   "Kaltbrunnen",
+   "Kaltenbrunnen"
+  ],
+  "Q510532": [
+   "Kelling",
+   "Kelnek"
+  ],
+  "Q730776": [
+   "Mercydorf"
+  ],
+  "Q33208": [
+   "Karanschebesch",
+   "Karansebesch"
+  ],
+  "Q1091761": [
+   "Kraschowa"
+  ],
+  "Q754725": [
+   "Gross-Karol",
+   "Karol"
+  ],
+  "Q754189": [
+   "Katherinendorf"
+  ],
+  "Q1018184": [
+   "Kapnik-Oberstadt",
+   "Kapnikgrub"
+  ],
+  "Q238698": [
+   "Kastenholz"
+  ],
+  "Q1070994": [
+   "Katzendorf"
+  ],
+  "Q855187": [
+   "Topesdorf",
+   "Topersdorf"
+  ],
+  "Q655486": [
+   "Langenfeld",
+   "Langenthal"
+  ],
+  "Q458422": [
+   "Gieresch",
+   "Giersch",
+   "Jerichmarkt",
+   "Jelichmarkt"
+  ],
+  "Q277493": [
+   "Felddorf",
+   "Feldorf"
+  ],
+  "Q289331": [
+   "Schönau",
+   "Schönen",
+   "Schona"
+  ],
+  "Q3761025": [
+   "Kümruss"
+  ],
+  "Q827012": [
+   "Thalfeld"
+  ],
+  "Q1065961": [
+   "Kerschdorf"
+  ],
+  "Q3891892": [
+   "Kernescht"
+  ],
+  "Q1093083": [
+   "Kerz"
+  ],
+  "Q1077860": [
+   "Streschen",
+   "Gross-Kerz",
+   "Oberkerz",
+   "Kertschen"
+  ],
+  "Q658156": [
+   "Hagendorf"
+  ],
+  "Q726366": [
+   "Böhmhaus"
+  ],
+  "Q737276": [
+   "Bömischdorf"
+  ],
+  "Q946757": [
+   "Tschanad",
+   "Deutsch-Tschanad",
+   "Raitzisch-Tschanad"
+  ],
+  "Q1195548": [
+   "Scholten"
+  ],
+  "Q269201": [
+   "Tschene"
+  ],
+  "Q875684": [
+   "Tschippendorf",
+   "Tschepan",
+   "Tschippendraf"
+  ],
+  "Q842962": [
+   "Serben"
+  ],
+  "Q726043": [
+   "Schergid"
+  ],
+  "Q726318": [
+   "Klein-Schergid"
+  ],
+  "Q741543": [
+   "Grossschergied",
+   "Schergid"
+  ],
+  "Q718007": [
+   "Kleinschergied"
+  ],
+  "Q738067": [
+   "Eisenhain"
+  ],
+  "Q872231": [
+   "Tschermei"
+  ],
+  "Q872402": [
+   "Zernendorf",
+   "Michelsdorf",
+   "Michelsdorf bei Kronstadt"
+  ],
+  "Q872282": [
+   "Zerndorf"
+  ],
+  "Q663847": [
+   "Tschertesen"
+  ],
+  "Q937980": [
+   "Bocksdorf"
+  ],
+  "Q859805": [
+   "Festung",
+   "Innerstadt"
+  ],
+  "Q935602": [
+   "Kokelburg",
+   "Kukelburg",
+   "Kuchelburg",
+   "Kümelburg"
+  ],
+  "Q750108": [
+   "Hagendorf"
+  ],
+  "Q681638": [
+   "Grubendorf"
+  ],
+  "Q1093049": [
+   "Grubendorf"
+  ],
+  "Q839707": [
+   "Keglewitsch",
+   "Keglewitschhausen"
+  ],
+  "Q221579": [
+   "Kelmak"
+  ],
+  "Q280636": [
+   "Hauffeld"
+  ],
+  "Q268286": [
+   "Grosskend"
+  ],
+  "Q747171": [
+   "Kerölösch",
+   "Kerelusch"
+  ],
+  "Q266234": [
+   "Kesseln",
+   "Keszlen",
+   "Kesselr"
+  ],
+  "Q1087094": [
+   "Gross-Köweresch",
+   "Gross-Keweresch"
+  ],
+  "Q1188939": [
+   "Steinfeld"
+  ],
+  "Q678196": [
+   "Unterkiher",
+   "Nieder-Küher"
+  ],
+  "Q739418": [
+   "Oberkiher",
+   "Ober-Küher"
+  ],
+  "Q714105": [
+   "Kilön"
+  ],
+  "Q304734": [
+   "Schlossberg",
+   "Burgberg"
+  ],
+  "Q431959": [
+   "Schatzberg",
+   "Reichesdorf"
+  ],
+  "Q824230": [
+   "Kinteln",
+   "Kindel",
+   "Kindeln"
+  ],
+  "Q541663": [
+   "Blaudorf"
+  ],
+  "Q714165": [
+   "Kirileis",
+   "Kirieleis",
+   "Kiriales"
+  ],
+  "Q714151": [
+   "Laussen"
+  ],
+  "Q1126535": [
+   "Kirchberg"
+  ],
+  "Q727390": [
+   "Eschendorf"
+  ],
+  "Q1126087": [
+   "Mitteldorf"
+  ],
+  "Q754499": [
+   "Kiseten"
+  ],
+  "Q3359996": [
+   "Geissdorf"
+  ],
+  "Q550415": [
+   "Kischoda",
+   "Alt-Kischoda"
+  ],
+  "Q325736": [
+   "Tschakowa"
+  ],
+  "Q821236": [
+   "Tropfbach"
+  ],
+  "Q872775": [
+   "Gergesdorf"
+  ],
+  "Q872791": [
+   "Michelsdorf"
+  ],
+  "Q718345": [
+   "Deutsch-Tschiklowa"
+  ],
+  "Q872920": [
+   "Cameral Tschiklowa",
+   "Wallachisch-Tschiklowa"
+  ],
+  "Q742020": [
+   "Tschickenbach",
+   "Forellenbach"
+  ],
+  "Q1094268": [
+   "Grossschenk"
+  ],
+  "Q834503": [
+   "Klein-Schenk"
+  ],
+  "Q724373": [
+   "Scholten"
+  ],
+  "Q3179132": [
+   "Schopau"
+  ],
+  "Q837173": [
+   "Heltau",
+   "Heldau"
+  ],
+  "Q649070": [
+   "Michelsberg",
+   "Michaelsberg",
+   "Michelsdorf"
+  ],
+  "Q425691": [
+   "Thalmühl"
+  ],
+  "Q601693": [
+   "Thalmühl"
+  ],
+  "Q16425234": [
+   "Schenkendorf"
+  ],
+  "Q645982": [
+   "Unterfigid",
+   "Fugendorf"
+  ],
+  "Q998847": [
+   "Oberfigid"
+  ],
+  "Q3892812": [
+   "Fügeden",
+   "Fugaden"
+  ],
+  "Q2110052": [
+   "Gross-Schullendorf"
+  ],
+  "Q2110073": [
+   "Klein-Schullendorf"
+  ],
+  "Q720811": [
+   "Poley"
+  ],
+  "Q874054": [
+   "Schamagosch"
+  ],
+  "Q731823": [
+   "Klitz"
+  ],
+  "Q714094": [
+   "Klosdorf"
+  ],
+  "Q256374": [
+   "Glockendorf"
+  ],
+  "Q100188": [
+   "Klausenburg",
+   "Clausenberg"
+  ],
+  "Q3892745": [
+   "Koseln"
+  ],
+  "Q718360": [
+   "Kiwern",
+   "Küwern",
+   "Buchorn"
+  ],
+  "Q3892349": [
+   "Kosch"
+  ],
+  "Q754733": [
+   "Zeiden",
+   "Schwarzberg",
+   "Schwarzhügel"
+  ],
+  "Q267692": [
+   "Salzburg",
+   "Salzgrub",
+   "Klosmarkt"
+  ],
+  "Q714432": [
+   "Goldau"
+  ],
+  "Q339153": [
+   "Zeckesdorf",
+   "Zeckeschdorf"
+  ],
+  "Q12111764": [
+   "Braunkohlengrube",
+   "Kohlenbergwerk",
+   "Wolkendorfer Grube"
+  ],
+  "Q848431": [
+   "Brenndörfer Zuckerfabrik"
+  ],
+  "Q834059": [
+   "Bulgarische Kolonie"
+  ],
+  "Q821269": [
+   "Kleinsiedel"
+  ],
+  "Q12111762": [
+   "Zigeunersiedlung"
+  ],
+  "Q599218": [
+   "Kellen"
+  ],
+  "Q4845481": [
+   "Komondjen"
+  ],
+  "Q430691": [
+   "Kommando",
+   "k. u. k. Grenzkommando"
+  ],
+  "Q829154": [
+   "Lichtenwald"
+  ],
+  "Q628934": [
+   "Komeloden",
+   "Hopfengarten"
+  ],
+  "Q535485": [
+   "Gross-Komlosch",
+   "Komlosch"
+  ],
+  "Q28333": [
+   "Ostern"
+  ],
+  "Q739992": [
+   "Reichesdorf"
+  ],
+  "Q667688": [
+   "Bussendorf"
+  ],
+  "Q713376": [
+   "Kappen"
+  ],
+  "Q830446": [
+   "Gross-Kopisch"
+  ],
+  "Q850962": [
+   "Klein-Kopisch"
+  ],
+  "Q12112768": [
+   "Korben",
+   "Rabendorf"
+  ],
+  "Q372003": [
+   "Kirnik"
+  ],
+  "Q723793": [
+   "Zeunen",
+   "Plankendorf"
+  ],
+  "Q851359": [
+   "Erlenheim",
+   "Harbachsdorf",
+   "Härwesdorf",
+   "Harbach",
+   "Harendorf",
+   "Harrebach",
+   "Haresdorf"
+  ],
+  "Q12113247": [
+   "Kressden"
+  ],
+  "Q1092751": [
+   "Martinsdorf"
+  ],
+  "Q582129": [
+   "Karullen",
+   "Kirchdorf"
+  ],
+  "Q755881": [
+   "Neudorf",
+   "Nieder-Neudorf"
+  ],
+  "Q3205854": [
+   "Widderdorf"
+  ],
+  "Q3891184": [
+   "Kowatsch"
+  ],
+  "Q837157": [
+   "Kovasna"
+  ],
+  "Q721596": [
+   "Käbisch",
+   "Kabisch"
+  ],
+  "Q1109345": [
+   "Darholz",
+   "Darotz"
+  ],
+  "Q755923": [
+   "Baierdorf",
+   "Bayerdorf"
+  ],
+  "Q713981": [
+   "Königsbach"
+  ],
+  "Q833157": [
+   "Krassmarkt"
+  ],
+  "Q1009957": [
+   "Krakau"
+  ],
+  "Q426204": [
+   "Königsberg",
+   "Königsperg"
+  ],
+  "Q12725912": [
+   "Krinz"
+  ],
+  "Q533139": [
+   "Kreuzherr"
+  ],
+  "Q249637": [
+   "Neustadt-Burzenland",
+   "Neustadt",
+   "Grossau",
+   "Au"
+  ],
+  "Q754624": [
+   "Höllenkreutz"
+  ],
+  "Q731524": [
+   "Hohenkreutz"
+  ],
+  "Q757088": [
+   "Kreuz",
+   "Oberkreuz"
+  ],
+  "Q851056": [
+   "Kreuz",
+   "Liebkreuz"
+  ],
+  "Q1960168": [
+   "Kriwaden"
+  ],
+  "Q1070561": [
+   "Krebsbach",
+   "Kriesbach",
+   "Krebsbach in Geister Wald",
+   "Kreischbach",
+   "Kripobach"
+  ],
+  "Q2156570": [
+   "Kreisch"
+  ],
+  "Q751499": [
+   "Kuhdorf"
+  ],
+  "Q726516": [
+   "Kreschenhaid"
+  ],
+  "Q831006": [
+   "Deutsch-Kreuz",
+   "Kreuz",
+   "Kreuzdorf"
+  ],
+  "Q848589": [
+   "Kreuzstätten",
+   "Kreuzstädl"
+  ],
+  "Q713371": [
+   "Krötschendorf",
+   "Kroch"
+  ],
+  "Q664814": [
+   "Christendorf"
+  ],
+  "Q749801": [
+   "Christendorf",
+   "Krotschendorf"
+  ],
+  "Q827367": [
+   "Kragisen",
+   "Kragis"
+  ],
+  "Q833110": [
+   "Fürstendorf",
+   "Königdorf"
+  ],
+  "Q1096223": [
+   "Kokt",
+   "Quellendorf"
+  ],
+  "Q755541": [
+   "Steinbach"
+  ],
+  "Q221214": [
+   "Kuschir"
+  ],
+  "Q713837": [
+   "Reussdorf",
+   "Reisdorf",
+   "Kunden"
+  ],
+  "Q756214": [
+   "Zeckesdorf",
+   "Zekeschdorf",
+   "Zäkeschdorf",
+   "Zeikeschdorf"
+  ],
+  "Q839420": [
+   "Kirtsch"
+  ],
+  "Q3893102": [
+   "Gutschendorf"
+  ],
+  "Q850982": [
+   "Kurtitsch"
+  ],
+  "Q1059410": [
+   "Kokt",
+   "Quellendorf",
+   "Brunnendorf",
+   "Kutta"
+  ],
+  "Q723987": [
+   "Wildenthal"
+  ],
+  "Q755810": [
+   "Kuwin"
+  ],
+  "Q824580": [
+   "Kuschma",
+   "Kusen",
+   "Auen"
+  ],
+  "Q729629": [
+   "Kothendorf"
+  ],
+  "Q725603": [
+   "Kukuksdorf"
+  ],
+  "Q2898976": [
+   "Kainsdorf"
+  ],
+  "Q2888675": [
+   "Kalian"
+  ],
+  "Q755333": [
+   "Kalatscha"
+  ],
+  "Q518992": [
+   "Klandorf",
+   "Kalan"
+  ],
+  "Q752054": [
+   "Klein-Klandorf",
+   "Löffeldorf"
+  ],
+  "Q687479": [
+   "Neu-Winga",
+   "Winga an der Marosch"
+  ],
+  "Q935240": [
+   "Wahldorf"
+  ],
+  "Q1058712": [
+   "Kalmandi",
+   "Kalmanding"
+  ],
+  "Q578327": [
+   "Kanischa"
+  ],
+  "Q3891809": [
+   "Kaunsdorf"
+  ],
+  "Q1166604": [
+   "Kapellendorf",
+   "Kapolna",
+   "Kirchdorf"
+  ],
+  "Q665142": [
+   "Kapellendorf",
+   "Kapellkirch",
+   "Gergesdorf"
+  ],
+  "Q598394": [
+   "Kappeln"
+  ],
+  "Q379146": [
+   "Kaplan",
+   "Kaplon",
+   "Kapellan"
+  ],
+  "Q4967531": [
+   "Kirchenschatz"
+  ],
+  "Q755900": [
+   "Thorenburg"
+  ],
+  "Q740575": [
+   "Feldthor"
+  ],
+  "Q588209": [
+   "Grossthoren",
+   "Thorendorf"
+  ],
+  "Q683443": [
+   "Kleinthoren",
+   "Klein-Thorendorf"
+  ],
+  "Q240938": [
+   "Kohldorf",
+   "Kohlendorf"
+  ],
+  "Q221232": [
+   "Keppelsbach",
+   "Käppelsbach",
+   "Kertzendorf",
+   "Buchendorf",
+   "Gertianosch"
+  ],
+  "Q824662": [
+   "Teichsdorf"
+  ],
+  "Q755732": [
+   "Kastendorf"
+  ],
+  "Q1188202": [
+   "Kawesch"
+  ],
+  "Q837664": [
+   "Stein"
+  ],
+  "Q714305": [
+   "Denghel",
+   "Dengel",
+   "Denndorf",
+   "Dellendorf",
+   "Thalheim",
+   "Dollman"
+  ],
+  "Q1008424": [
+   "Dallendorf",
+   "Luprechttal",
+   "Thal"
+  ],
+  "Q623217": [
+   "Dalsch"
+  ],
+  "Q912315": [
+   "Dayla"
+  ],
+  "Q737182": [
+   "Dunesdorf",
+   "Dansdorf"
+  ],
+  "Q902238": [
+   "Darowa",
+   "Daruwa",
+   "Kranichstätten"
+  ],
+  "Q741500": [
+   "Hügeldorf"
+  ],
+  "Q725662": [
+   "Hügeldorf"
+  ],
+  "Q902160": [
+   "Durles",
+   "Durlasch"
+  ],
+  "Q739842": [
+   "Deck"
+  ],
+  "Q258432": [
+   "Desendorf"
+  ],
+  "Q3891837": [
+   "Dallen",
+   "Dollen",
+   "Dallendorf",
+   "Thal"
+  ],
+  "Q11717190": [
+   "Kalibaschen"
+  ],
+  "Q7475813": [
+   "Schönberg"
+  ],
+  "Q1822117": [
+   "Dalmaren"
+  ],
+  "Q94888": [
+   "Dade",
+   "Dedals",
+   "Deden"
+  ],
+  "Q838453": [
+   "Deutsch-Zepling",
+   "Deutsch-Zapleng",
+   "Zepling"
+  ],
+  "Q852344": [
+   "Deschan"
+  ],
+  "Q850106": [
+   "Danesdorf"
+  ],
+  "Q3893143": [
+   "Reussen",
+   "Eidisch",
+   "Walachisch-Eidisch",
+   "Gross-Neudorf"
+  ],
+  "Q714056": [
+   "Kleinfarken",
+   "Kleinferken",
+   "Schärschken"
+  ],
+  "Q755104": [
+   "Wiesenhaus"
+  ],
+  "Q903830": [
+   "Demsdorf"
+  ],
+  "Q2429093": [
+   "Nussfeld"
+  ],
+  "Q204850": [
+   "Diemrich",
+   "Schlossberg",
+   "Denburg"
+  ],
+  "Q754344": [
+   "Beschened"
+  ],
+  "Q731101": [
+   "Nussdorf"
+  ],
+  "Q220776": [
+   "Dürrbach"
+  ],
+  "Q906482": [
+   "Dittersdorf"
+  ],
+  "Q752204": [
+   "Dobendorf"
+  ],
+  "Q747180": [
+   "Dobring",
+   "Dobreng",
+   "Doberg"
+  ],
+  "Q907153": [
+   "Dobersdorf"
+  ],
+  "Q714066": [
+   "Dobendorf"
+  ],
+  "Q12101458": [
+   "Judendorf"
+  ],
+  "Q11979709": [
+   "Dobrotz"
+  ],
+  "Q907678": [
+   "Dognatschka",
+   "Bergwerk-Dognatschka"
+  ],
+  "Q913074": [
+   "Dolatz"
+  ],
+  "Q734868": [
+   "Bachental"
+  ],
+  "Q658171": [
+   "Daal",
+   "Dahl"
+  ],
+  "Q755786": [
+   "Billak",
+   "Attelsdorf",
+   "Adelsdorf",
+   "Zelt"
+  ],
+  "Q3892702": [
+   "Daken",
+   "Daaken",
+   "Dacken",
+   "Dopich"
+  ],
+  "Q516617": [
+   "Dorgosch"
+  ],
+  "Q741592": [
+   "Klein-Bistritz in"
+  ],
+  "Q730834": [
+   "Draas"
+  ],
+  "Q1019308": [
+   "Thorstadt",
+   "Langenthal",
+   "Langendorf"
+  ],
+  "Q830135": [
+   "Dragschina"
+  ],
+  "Q755812": [
+   "Drauz"
+  ],
+  "Q739488": [
+   "Troschen",
+   "Droschen"
+  ],
+  "Q572611": [
+   "Brunndorf",
+   "Bummdorf"
+  ],
+  "Q3892383": [
+   "Deidrich",
+   "Dreydif",
+   "Tritten"
+  ],
+  "Q900631": [
+   "Drachendorf"
+  ],
+  "Q830462": [
+   "Draas",
+   "Drausz",
+   "Draes",
+   "Dräss"
+  ],
+  "Q949293": [
+   "Neu-Beschenowa"
+  ],
+  "Q768926": [
+   "Alt-Beschenowa"
+  ],
+  "Q674945": [
+   "Felsenthal"
+  ],
+  "Q723168": [
+   "Krebsdorf",
+   "Dorndorf",
+   "Zigeunersiedlung",
+   "Markendorf",
+   "Waldruck"
+  ],
+  "Q521108": [
+   "Ganz",
+   "Elisabethstadt",
+   "Epeschdorf",
+   "Eppeschdorf",
+   "Äpeschdorf"
+  ],
+  "Q648586": [
+   "Scharnberg",
+   "Scharberg",
+   "Scherberg"
+  ],
+  "Q12102863": [
+   "Aasfeld",
+   "Schnackendorf",
+   "Bergdorf",
+   "Neu-Sentesch"
+  ],
+  "Q11717176": [
+   "Dorndorf"
+  ],
+  "Q745650": [
+   "Demetersbach",
+   "Demeschbach",
+   "Mettersdorf",
+   "Mettersdorf bei Bistritz"
+  ],
+  "Q1110621": [
+   "Waltersdorf",
+   "Woldersdorf"
+  ],
+  "Q736532": [
+   "Pressdorf"
+  ],
+  "Q830559": [
+   "Tobsdorf",
+   "Tobesdorf",
+   "Toppesdorf",
+   "Tobiasdorf",
+   "Toblasdorf",
+   "Dupesdorf"
+  ],
+  "Q755483": [
+   "Dursdorf"
+  ],
+  "Q1018474": [
+   "Dobeschdorf"
+  ],
+  "Q745763": [
+   "Debuke"
+  ],
+  "Q3892667": [
+   "Langenthal",
+   "Langenthal bei Reps",
+   "Dahl"
+  ],
+  "Q15931342": [
+   "Danuleschd"
+  ],
+  "Q687968": [
+   "Dalmesch"
+  ],
+  "Q3891298": [
+   "Wölz",
+   "Welz"
+  ],
+  "Q3892306": [
+   "Intsch",
+   "Entsch"
+  ],
+  "Q728789": [
+   "Königsdorf"
+  ],
+  "Q3888345": [
+   "Ehrgang",
+   "Erlgang",
+   "Irrgang"
+  ],
+  "Q1092579": [
+   "Rohrdachen",
+   "Arn"
+  ],
+  "Q3889465": [
+   "Wetzendorf"
+  ],
+  "Q75528": [
+   "Ezeresch"
+  ],
+  "Q7271094": [
+   "Heugraben"
+  ],
+  "Q3892713": [
+   "Kaltbrunnen",
+   "Kaltbrunn"
+  ],
+  "Q12165732": [
+   "Engelsbrunn",
+   "Neuösch",
+   "Eisch",
+   "Erbdorf",
+   "Schweinbach"
+  ],
+  "Q509237": [
+   "Krebsbach"
+  ],
+  "Q755208": [
+   "Käbelbrunn"
+  ],
+  "Q827078": [
+   "Weissendorf"
+  ],
+  "Q251676": [
+   "Füssen",
+   "Füselen",
+   "Fützen"
+  ],
+  "Q725200": [
+   "Feyert",
+   "Feuerd",
+   "Feyrdorf"
+  ],
+  "Q753500": [
+   "Marienburg",
+   "Marenburch",
+   "Erdwall"
+  ],
+  "Q775498": [
+   "Felden",
+   "Felddorf",
+   "Birkenau"
+  ],
+  "Q755796": [
+   "Falk",
+   "Felk",
+   "Fellach"
+  ],
+  "Q713914": [
+   "Altfleigen",
+   "Felken"
+  ],
+  "Q999077": [
+   "Ober-Mariendorf"
+  ],
+  "Q713420": [
+   "Felmern"
+  ],
+  "Q1006225": [
+   "Fenlak"
+  ],
+  "Q752223": [
+   "Wildendorf",
+   "Fönisch"
+  ],
+  "Q734461": [
+   "Gursdorf"
+  ],
+  "Q24328": [
+   "Fibisch"
+  ],
+  "Q1188619": [
+   "Altdorf"
+  ],
+  "Q723962": [
+   "Altdörfel"
+  ],
+  "Q724233": [
+   "Altdorf"
+  ],
+  "Q575840": [
+   "Felldorf",
+   "Fülldorf",
+   "Füllendorf",
+   "Fildorf",
+   "Veldorf"
+  ],
+  "Q279551": [
+   "Grossphlepsdorf",
+   "Ungarischphleps",
+   "Ungarisch-Fleps",
+   "Gruis-Flaps"
+  ],
+  "Q736008": [
+   "Kleinphlepsdorf",
+   "Fläpsdorf"
+  ],
+  "Q722865": [
+   "Neudorf"
+  ],
+  "Q577460": [
+   "Klein-Fenisch"
+  ],
+  "Q265084": [
+   "Fernesch"
+  ],
+  "Q826672": [
+   "Fisesch",
+   "Weidendorf",
+   "Weidenthal",
+   "Wendenthal"
+  ],
+  "Q246877": [
+   "Fised"
+  ],
+  "Q3894304": [
+   "Schweischer",
+   "Schweisser"
+  ],
+  "Q913997": [
+   "Sächsisch-Fenisch",
+   "Fenesch",
+   "Fenisch",
+   "Deutsch-Branndorf",
+   "Felsendorf",
+   "Filsdorf"
+  ],
+  "Q822299": [
+   "Hochfeld"
+  ],
+  "Q942181": [
+   "Fienen",
+   "Fiend",
+   "Fina"
+  ],
+  "Q374127": [
+   "Foldt"
+  ],
+  "Q3394483": [
+   "Fornaden"
+  ],
+  "Q1082237": [
+   "Schöndorf",
+   "Schöndorf in Banat"
+  ],
+  "Q568271": [
+   "Mausdorf",
+   "Trassten",
+   "Tresten"
+  ],
+  "Q996505": [
+   "Furkeschdorf",
+   "Wolfendorf"
+  ],
+  "Q3543154": [
+   "Gabeldorf"
+  ],
+  "Q3887552": [
+   "Birkendorf",
+   "Birkenwald",
+   "Fatschet",
+   "Wallachisch-Fatschet + Deutsch-Fatschet"
+  ],
+  "Q855549": [
+   "Fassellen",
+   "Fatzellen"
+  ],
+  "Q685869": [
+   "Fogarasch",
+   "Fugrasch"
+  ],
+  "Q827338": [
+   "Ober-Wolfsdorf"
+  ],
+  "Q996082": [
+   "Hölzeldorf"
+  ],
+  "Q936137": [
+   "Brenndorf"
+  ],
+  "Q852357": [
+   "Kleingaj"
+  ],
+  "Q3892788": [
+   "Glatz",
+   "Galatz",
+   "Galz"
+  ],
+  "Q1007430": [
+   "Heeresdorf",
+   "Heresdorf"
+  ],
+  "Q664479": [
+   "Unter-Hahnenberg",
+   "Hahnenberg"
+  ],
+  "Q3891265": [
+   "Ober-Hahnenberg"
+  ],
+  "Q281785": [
+   "Gallusdorf",
+   "Galisch",
+   "Grossdorf",
+   "Krebsdorf"
+  ],
+  "Q3888563": [
+   "Hahnendorf"
+  ],
+  "Q724045": [
+   "Galscha"
+  ],
+  "Q1008607": [
+   "Gavoschdia"
+  ],
+  "Q1079547": [
+   "Gilgo"
+  ],
+  "Q753421": [
+   "Schwammenthal"
+  ],
+  "Q741131": [
+   "Buchenthal"
+  ],
+  "Q824883": [
+   "Gonzaga"
+  ],
+  "Q1093193": [
+   "Gorbau"
+  ],
+  "Q949473": [
+   "Urwegen",
+   "Urbegen",
+   "Urbigen"
+  ],
+  "Q678771": [
+   "Unterurbau"
+  ],
+  "Q3888548": [
+   "Orbau",
+   "Oberurbau"
+  ],
+  "Q3888817": [
+   "Kleinurbau"
+  ],
+  "Q753203": [
+   "Ober-Gorbau"
+  ],
+  "Q383618": [
+   "Gertsch"
+  ],
+  "Q663664": [
+   "Görtsch"
+  ],
+  "Q283920": [
+   "Garendorf"
+  ],
+  "Q1087069": [
+   "Weizenried"
+  ],
+  "Q282083": [
+   "Ketfel"
+  ],
+  "Q1017982": [
+   "Gergersdorf",
+   "Gergesdorf",
+   "Unterdorf",
+   "Unter-Gyogy"
+  ],
+  "Q731019": [
+   "Oberdorf"
+  ],
+  "Q838770": [
+   "Gyogyer Warmbad",
+   "Warme Bäder bei Al-Gyogy"
+  ],
+  "Q724041": [
+   "Nussdorf"
+  ],
+  "Q572418": [
+   "Geschendorf"
+  ],
+  "Q1008918": [
+   "Gälänts",
+   "Gelentz"
+  ],
+  "Q754724": [
+   "Niklasmarkt",
+   "Nickelsmarkt"
+  ],
+  "Q590945": [
+   "Gergesdorf"
+  ],
+  "Q288460": [
+   "Gürteln",
+   "Gürtelen",
+   "Gürtlen",
+   "Girteln"
+  ],
+  "Q496557": [
+   "Neuschloss",
+   "Armenierstadt",
+   "Armenerstadt"
+  ],
+  "Q636567": [
+   "Gertenisch"
+  ],
+  "Q338380": [
+   "Gross-Girtze"
+  ],
+  "Q1079496": [
+   "Klein-Girtze"
+  ],
+  "Q498556": [
+   "Untergesäss"
+  ],
+  "Q842205": [
+   "Obergesäss"
+  ],
+  "Q715093": [
+   "Gilvatsch"
+  ],
+  "Q916156": [
+   "Weidenbach",
+   "Weidenbach bei Kronstadt",
+   "Wiedenbach"
+  ],
+  "Q755935": [
+   "Windau",
+   "Wendau"
+  ],
+  "Q713368": [
+   "Gegesch"
+  ],
+  "Q713424": [
+   "Götz",
+   "Götsch"
+  ],
+  "Q1029709": [
+   "Djorok"
+  ],
+  "Q757204": [
+   "Birnbaum",
+   "Birbom"
+  ],
+  "Q1090673": [
+   "Gieresch"
+  ],
+  "Q1030777": [
+   "Alt-Giroda"
+  ],
+  "Q370986": [
+   "Gerold",
+   "Geralt",
+   "Giroth"
+  ],
+  "Q1010907": [
+   "Giseladorf",
+   "Gizela"
+  ],
+  "Q4968906": [
+   "Gogeschdorf",
+   "Jakobsdorf"
+  ],
+  "Q1027863": [
+   "Jahrmarkt"
+  ],
+  "Q754605": [
+   "Überland"
+  ],
+  "Q1019977": [
+   "Gier"
+  ],
+  "Q2924205": [
+   "Julmarkt",
+   "Gelu"
+  ],
+  "Q611578": [
+   "Flammendorf"
+  ],
+  "Q43136": [
+   "Wüst Görgen"
+  ],
+  "Q830960": [
+   "Wallachisch Gladna"
+  ],
+  "Q3888478": [
+   "Hühnerbach",
+   "Honnerbach"
+  ],
+  "Q251049": [
+   "Gladen",
+   "Gladein",
+   "Gladn"
+  ],
+  "Q727608": [
+   "Sankt Marten",
+   "Martinsdorf"
+  ],
+  "Q753417": [
+   "Klod",
+   "Glatt",
+   "Salzfeld"
+  ],
+  "Q714919": [
+   "Scharpendorf",
+   "Kothbach",
+   "Schellenberg"
+  ],
+  "Q2943702": [
+   "Gileschdorf"
+  ],
+  "Q714132": [
+   "Tutendorf",
+   "Tuten"
+  ],
+  "Q1031621": [
+   "Görgényer-Glashütte"
+  ],
+  "Q3394562": [
+   "Godin"
+  ],
+  "Q713318": [
+   "Gugendorf",
+   "Gergendorf",
+   "Gogeschdorf"
+  ],
+  "Q932472": [
+   "Gogeschburg",
+   "Unter der Burg",
+   "Neuburg",
+   "Neuburg an der Bega"
+  ],
+  "Q729545": [
+   "Ungarisch-Zepling",
+   "Ungarisch-Zapleng",
+   "Schöndorf",
+   "Schönbirk"
+  ],
+  "Q1009935": [
+   "Kertzing"
+  ],
+  "Q3360445": [
+   "Sankt Gotthard"
+  ],
+  "Q641890": [
+   "Sensenhammer"
+  ],
+  "Q917779": [
+   "Grabatz"
+  ],
+  "Q716414": [
+   "Muckendorf",
+   "Munkesdorf",
+   "Mückendorf",
+   "Mäckendorf"
+  ],
+  "Q1176515": [
+   "Gerbesch"
+  ],
+  "Q3894343": [
+   "Grit"
+  ],
+  "Q769153": [
+   "Gerind"
+  ],
+  "Q747132": [
+   "Grappendorf"
+  ],
+  "Q280728": [
+   "Gross"
+  ],
+  "Q12098019": [
+   "Groß"
+  ],
+  "Q241297": [
+   "Gross-Kakowa",
+   "Kakowa"
+  ],
+  "Q768305": [
+   "Tschawosch"
+  ],
+  "Q281607": [
+   "Auendorf",
+   "Gurarou",
+   "Gurareu"
+  ],
+  "Q2220713": [
+   "Mauldorf",
+   "Gross-Schwarzdorf"
+  ],
+  "Q1031627": [
+   "Görgen",
+   "St. Emrich"
+  ],
+  "Q713948": [
+   "Grosslau"
+  ],
+  "Q3888902": [
+   "Giesshübel",
+   "Giszibel"
+  ],
+  "Q248910": [
+   "Guttenbrunn"
+  ],
+  "Q639873": [
+   "Hammersdorf"
+  ],
+  "Q4967565": [
+   "Gabuden"
+  ],
+  "Q1096306": [
+   "Gallendorf"
+  ],
+  "Q726035": [
+   "Reizenhof"
+  ],
+  "Q10808804": [
+   "Gallendorf",
+   "Hahnendorf",
+   "Hannendorf"
+  ],
+  "Q325732": [
+   "Gattaja"
+  ],
+  "Q388814": [
+   "Buchendorf"
+  ],
+  "Q833117": [
+   "Hahnenbach",
+   "Hahnbach"
+  ],
+  "Q834495": [
+   "Haschagen",
+   "Hassagh"
+  ],
+  "Q837167": [
+   "Hötzing",
+   "Hatzeg",
+   "Wallenthal"
+  ],
+  "Q258526": [
+   "Henningsdorf",
+   "Rangeld",
+   "Rangeldorf"
+  ],
+  "Q725635": [
+   "Harpien"
+  ],
+  "Q258012": [
+   "Harrendorf"
+  ],
+  "Q839656": [
+   "Mönchsdorf",
+   "Münzdorf"
+  ],
+  "Q776040": [
+   "Goldast"
+  ],
+  "Q713452": [
+   "Marienburg",
+   "Meremberg"
+  ],
+  "Q725296": [
+   "Kaltenbrunn"
+  ],
+  "Q3711759": [
+   "Thierdorf",
+   "Hobitzen"
+  ],
+  "Q2032024": [
+   "Lagerfeld"
+  ],
+  "Q1014893": [
+   "Kriegsdorf"
+  ],
+  "Q221319": [
+   "Hodon"
+  ],
+  "Q636848": [
+   "Hodosch"
+  ],
+  "Q1037563": [
+   "Halwelagen",
+   "Halwelegen",
+   "Halwelägen",
+   "Helvlegen",
+   "Halwlagen"
+  ],
+  "Q1071450": [
+   "Warmwasser",
+   "Warmwasserbrunn",
+   "Warmbach",
+   "Warmbrunn",
+   "Warmbrunn am Alt"
+  ],
+  "Q937040": [
+   "Holbach",
+   "Faulbach"
+  ],
+  "Q1070950": [
+   "Hamruden",
+   "Hameruden",
+   "Hammeroden",
+   "Homoroden",
+   "Homrod",
+   "Homruden"
+  ],
+  "Q664596": [
+   "Hamroth"
+  ],
+  "Q741468": [
+   "Hondolen"
+  ],
+  "Q1008443": [
+   "Meerport"
+  ],
+  "Q714450": [
+   "Neupanat"
+  ],
+  "Q730627": [
+   "Jakesteig",
+   "Jakesdorf"
+  ],
+  "Q749839": [
+   "Holzmengen",
+   "Holzmannthal"
+  ],
+  "Q594776": [
+   "Schaumdorf"
+  ],
+  "Q750220": [
+   "Heynod",
+   "Hunyad"
+  ],
+  "Q215719": [
+   "Eisenmarkt",
+   "Eisenstadt",
+   "Hunyad",
+   "Thurndorf"
+  ],
+  "Q823145": [
+   "Reitzdorf",
+   "Reißdorf",
+   "Huress",
+   "Gulendorf"
+  ],
+  "Q721598": [
+   "Nanten",
+   "Nanta"
+  ],
+  "Q734475": [
+   "Hausenbach",
+   "Neulangendorf"
+  ],
+  "Q2489751": [
+   "Glashütte"
+  ],
+  "Q19025": [
+   "Fürstenburg",
+   "Fürstenberg"
+  ],
+  "Q1094277": [
+   "Heldsdorf",
+   "Heldesdorf",
+   "Heltesdorf"
+  ],
+  "Q520077": [
+   "Halmagen",
+   "Halmegen",
+   "Halmegyen",
+   "Halmajen",
+   "Halwegen"
+  ],
+  "Q3893466": [
+   "Härpen"
+  ],
+  "Q1097253": [
+   "Honigberg"
+  ],
+  "Q742032": [
+   "Glockendorf"
+  ],
+  "Q1034251": [
+   "Haren"
+  ],
+  "Q821259": [
+   "Hausescht"
+  ],
+  "Q752052": [
+   "Hochstatt",
+   "Hochstätten"
+  ],
+  "Q2943811": [
+   "Klein-Hötzing",
+   "Hadzel"
+  ],
+  "Q755697": [
+   "Jokesdorf",
+   "Jakeschdorf",
+   "Jokeschdorf",
+   "Jakobsdorf"
+  ],
+  "Q725426": [
+   "Jedern"
+  ],
+  "Q753213": [
+   "Janowa"
+  ],
+  "Q607787": [
+   "Jaass"
+  ],
+  "Q4968773": [
+   "Jasch",
+   "Jassau",
+   "Jasswen"
+  ],
+  "Q664712": [
+   "Nieder-Eidisch",
+   "Unter-Eidisch"
+  ],
+  "Q725651": [
+   "Ober-Eidisch"
+  ],
+  "Q527369": [
+   "Eidischdorf",
+   "Eidischdorfbach",
+   "Eidischbach"
+  ],
+  "Q738923": [
+   "Bellesdorf",
+   "Belleschdorf",
+   "Bolleschdorf",
+   "Belisdorf",
+   "Billesdorf",
+   "Bollesdorf"
+  ],
+  "Q713508": [
+   "Ederholz",
+   "Ederhulz",
+   "Ederhultz",
+   "Hidrigscholln"
+  ],
+  "Q984235": [
+   "Gross-Jetscha"
+  ],
+  "Q848594": [
+   "Klein-Jetscha"
+  ],
+  "Q899427": [
+   "Radnuten",
+   "Radnau"
+  ],
+  "Q716014": [
+   "Etschdorf",
+   "Echtorf",
+   "Fetschdorf"
+  ],
+  "Q766634": [
+   "Heuerdorf",
+   "Heyerdorf"
+  ],
+  "Q723969": [
+   "Igensbach",
+   "Wahrbach"
+  ],
+  "Q1022813": [
+   "Grabendorf",
+   "Krapundorf",
+   "Krabundorf",
+   "Kuppendorf",
+   "Egendorf"
+  ],
+  "Q845488": [
+   "Sächsisch-Eibesdorf",
+   "Eibesdorf",
+   "Abesdorf"
+  ],
+  "Q3888943": [
+   "Wallachisch-Eibesdorf",
+   "Eibesdorf",
+   "Libesdorf"
+  ],
+  "Q630837": [
+   "Egresch",
+   "Egrisch"
+  ],
+  "Q12074182": [
+   "Elisdorf",
+   "Illeschdorf"
+  ],
+  "Q1096212": [
+   "Elienmarkt",
+   "Hielen",
+   "Illiendorf"
+  ],
+  "Q1096328": [
+   "Eliasdorf",
+   "Ilgendorf"
+  ],
+  "Q753210": [
+   "Eulenbach",
+   "Illenbach",
+   "Dulenbach"
+  ],
+  "Q1188912": [
+   "Grossilwa",
+   "Grossillau"
+  ],
+  "Q682807": [
+   "Klein-Ilwa",
+   "Klein-Ilva"
+  ],
+  "Q753093": [
+   "Lilienfeld"
+  ],
+  "Q852388": [
+   "Johannisfeld"
+  ],
+  "Q724021": [
+   "Josefhausen"
+  ],
+  "Q714028": [
+   "Jonesdorf",
+   "Eisdorf",
+   "Weissdorf"
+  ],
+  "Q607854": [
+   "Josefsdorf"
+  ],
+  "Q18897": [
+   "Iwanda"
+  ],
+  "Q791815": [
+   "Ziffendorf",
+   "Tziffen",
+   "Lintschin"
+  ],
+  "Q738884": [
+   "Stephanskirch"
+  ],
+  "Q739402": [
+   "Salzau",
+   "Salzhau",
+   "Salzbrunnen"
+  ],
+  "Q221991": [
+   "Ungarisch-Sacken"
+  ],
+  "Q221523": [
+   "Walachisch Sacken",
+   "Zschak"
+  ],
+  "Q1020863": [
+   "Freudenthal",
+   "Gross-Scham"
+  ],
+  "Q1076084": [
+   "Schebel"
+  ],
+  "Q720680": [
+   "Schelken",
+   "Schelk"
+  ],
+  "Q223391": [
+   "Senndorf",
+   "Sellendorf"
+  ],
+  "Q1190832": [
+   "Seiburg",
+   "Sibricht"
+  ],
+  "Q660417": [
+   "Siben"
+  ],
+  "Q535465": [
+   "Unterrohrbach"
+  ],
+  "Q3888402": [
+   "Oberrohrbach"
+  ],
+  "Q937616": [
+   "Seiden",
+   "Sögden"
+  ],
+  "Q226000": [
+   "Hatzfeld"
+  ],
+  "Q651529": [
+   "Sommer",
+   "Sommerburg",
+   "Sommerberg"
+  ],
+  "Q936156": [
+   "Sinna",
+   "Schinna"
+  ],
+  "Q728023": [
+   "Susendorf"
+  ],
+  "Q663704": [
+   "Unter-Borgo",
+   "Unterburgau",
+   "Burgau"
+  ],
+  "Q657315": [
+   "Staatshengsdepot"
+  ],
+  "Q753492": [
+   "Labaschinz"
+  ],
+  "Q1029545": [
+   "Gyilkossee"
+  ],
+  "Q835580": [
+   "Langendorf"
+  ],
+  "Q511222": [
+   "Wallachisch-Lasseln",
+   "Laslen"
+  ],
+  "Q177000": [
+   "Sächsisch-Lasseln",
+   "Klein-Lasseln",
+   "Klein Lasslen",
+   "Lasslen"
+  ],
+  "Q12116909": [
+   "Laas"
+  ],
+  "Q13570759": [
+   "Lazarett"
+  ],
+  "Q755606": [
+   "Laas"
+  ],
+  "Q264041": [
+   "Lechnitz"
+  ],
+  "Q730315": [
+   "Tannendorf"
+  ],
+  "Q1128833": [
+   "Lelsdorf"
+  ],
+  "Q19416": [
+   "Lennen"
+  ],
+  "Q870864": [
+   "Tschatad"
+  ],
+  "Q713852": [
+   "Lörinzdorf"
+  ],
+  "Q248549": [
+   "Laurentzi"
+  ],
+  "Q738904": [
+   "Kothstrass",
+   "Kothstraß"
+  ],
+  "Q843118": [
+   "Wachtdorf"
+  ],
+  "Q1129326": [
+   "Lesch"
+  ],
+  "Q12119678": [
+   "Demetersbach",
+   "Pramendorf",
+   "Warthe"
+  ],
+  "Q671987": [
+   "Lissa"
+  ],
+  "Q735682": [
+   "Baumgarten",
+   "Baumgarten in Banat",
+   "Baumgartl"
+  ],
+  "Q714226": [
+   "Wurmloch"
+  ],
+  "Q937028": [
+   "Lasslenkirch",
+   "Jaad",
+   "Zum Jot",
+   "Jooden",
+   "Jadt",
+   "Tolwadia"
+  ],
+  "Q1077212": [
+   "Ladmesch",
+   "Ladendorf"
+  ],
+  "Q3888460": [
+   "Ledermann",
+   "Ludermann"
+  ],
+  "Q719166": [
+   "Ludwigsdorf",
+   "Lutzdorf",
+   "Ludesdorf"
+  ],
+  "Q3888380": [
+   "Lammdorf",
+   "Lamendorf"
+  ],
+  "Q586265": [
+   "Lampreten"
+  ],
+  "Q937029": [
+   "Schaufeldorf"
+  ],
+  "Q929125": [
+   "Lauter"
+  ],
+  "Q747151": [
+   "Leblang",
+   "Löweneck",
+   "Löwlingen"
+  ],
+  "Q671395": [
+   "Lowrin"
+  ],
+  "Q1081303": [
+   "Gross-Losdorf"
+  ],
+  "Q725185": [
+   "Lukaskirchen"
+  ],
+  "Q3179138": [
+   "Unter-Ludesch"
+  ],
+  "Q4967608": [
+   "Spieldorf"
+  ],
+  "Q1077551": [
+   "Gross-Logdes",
+   "Ludesch"
+  ],
+  "Q373707": [
+   "Ludasch"
+  ],
+  "Q258981": [
+   "Lugosch",
+   "Wallachisch-Lugosch",
+   "Deutsch-Lugosch"
+  ],
+  "Q740603": [
+   "Löhra",
+   "Lera",
+   "Lehr"
+  ],
+  "Q775862": [
+   "Lone"
+  ],
+  "Q719158": [
+   "Lone"
+  ],
+  "Q713910": [
+   "Deutschdorf"
+  ],
+  "Q775836": [
+   "Langendorf",
+   "Neusatz",
+   "Freissendorf",
+   "Elendorf",
+   "Trassten",
+   "Neustadt"
+  ],
+  "Q678638": [
+   "Birkendorf"
+  ],
+  "Q1029575": [
+   "Gimesch"
+  ],
+  "Q949873": [
+   "Holten"
+  ],
+  "Q4967548": [
+   "Spin",
+   "Bleschdorf"
+  ],
+  "Q714762": [
+   "Neusatz",
+   "Wiesendorf"
+  ],
+  "Q678325": [
+   "Langenthal"
+  ],
+  "Q3891276": [
+   "Thaldorf",
+   "Langenthal"
+  ],
+  "Q754728": [
+   "Schylwolfsbach"
+  ],
+  "Q731054": [
+   "Wolfsfeld"
+  ],
+  "Q913412": [
+   "Wolfsdorf",
+   "Lupscha"
+  ],
+  "Q813051": [
+   "Thomoren"
+  ],
+  "Q823141": [
+   "Lutza",
+   "Lutzen"
+  ],
+  "Q678246": [
+   "Unter-Lappendorf"
+  ],
+  "Q827661": [
+   "Ober-Lappendorf"
+  ],
+  "Q1079866": [
+   "Laposch"
+  ],
+  "Q592379": [
+   "Haldorf"
+  ],
+  "Q75490": [
+   "Lapuschnik"
+  ],
+  "Q741095": [
+   "Lasslendorf"
+  ],
+  "Q827035": [
+   "Lasseldorf"
+  ],
+  "Q674198": [
+   "Sankt Lörinz"
+  ],
+  "Q1066818": [
+   "Matscha"
+  ],
+  "Q519644": [
+   "Maden",
+   "Medall"
+  ],
+  "Q3888917": [
+   "Schardörfel",
+   "Schardörfl",
+   "Schwarzwasser"
+  ],
+  "Q1021599": [
+   "Maier",
+   "Mayer",
+   "Mayerhof"
+  ],
+  "Q728877": [
+   "Ballenthal"
+  ],
+  "Q750222": [
+   "Margareten"
+  ],
+  "Q1076600": [
+   "Marpodt",
+   "Marpolden",
+   "Maierpod",
+   "Mayerpolden",
+   "Maypold"
+  ],
+  "Q4967589": [
+   "Mattesdorf",
+   "Mathesdorf",
+   "Mateschdorf",
+   "Mathiasdorf"
+  ],
+  "Q4151625": [
+   "Mathesdorf",
+   "Mathiasdorf"
+  ],
+  "Q1084767": [
+   "Blumenthal"
+  ],
+  "Q1067729": [
+   "Kladendorf",
+   "Klagendorf"
+  ],
+  "Q527528": [
+   "Monderlak"
+  ],
+  "Q825023": [
+   "Nussdorf"
+  ],
+  "Q10945639": [
+   "Sanktgeorgkloster"
+  ],
+  "Q374465": [
+   "Mediasch",
+   "Medwisch"
+  ],
+  "Q752745": [
+   "Mädwäsch",
+   "Bärenloch"
+  ],
+  "Q1917205": [
+   "Franzstadt"
+  ],
+  "Q516383": [
+   "Streitforth",
+   "Steritforth"
+  ],
+  "Q1179236": [
+   "Mergeln",
+   "Märgeln",
+   "Merglen",
+   "Mergental",
+   "Marienthal"
+  ],
+  "Q750112": [
+   "Blaudorf"
+  ],
+  "Q658130": [
+   "Apfeldorf"
+  ],
+  "Q303517": [
+   "Birkenfeld",
+   "Birkau"
+  ],
+  "Q755761": [
+   "Allerheiligen"
+  ],
+  "Q573138": [
+   "Birkenhausen"
+  ],
+  "Q858192": [
+   "Meteschdorf"
+  ],
+  "Q744116": [
+   "Martinsdorf",
+   "Mättersdorf",
+   "Metesdorf"
+  ],
+  "Q3889290": [
+   "Weichseldorf"
+  ],
+  "Q751212": [
+   "Meschendorf"
+  ],
+  "Q1176194": [
+   "Meisterhausen"
+  ],
+  "Q757069": [
+   "Michelsdorf"
+  ],
+  "Q753510": [
+   "Kleindörfel",
+   "Dörflein"
+  ],
+  "Q45706": [
+   "Neudorf",
+   "Mikó-Neudorf"
+  ],
+  "Q713819": [
+   "Nickelsburg"
+  ],
+  "Q753176": [
+   "Nickelsdorf"
+  ],
+  "Q1069123": [
+   "Feigendorf",
+   "Fegendorf"
+  ],
+  "Q193420": [
+   "Szeklerburg"
+  ],
+  "Q166829": [
+   "Sereda"
+  ],
+  "Q197687": [
+   "Reussmarkt",
+   "Reußmarkt",
+   "Reissmarkt",
+   "Unterwald"
+  ],
+  "Q666251": [
+   "Engental",
+   "Engeltal",
+   "Ingental"
+  ],
+  "Q267794": [
+   "Zoltendorf",
+   "Zultendorf",
+   "Zottendorf",
+   "Soltendorf"
+  ],
+  "Q731535": [
+   "Michelsdorf"
+  ],
+  "Q1093033": [
+   "Bienendorf"
+  ],
+  "Q239981": [
+   "Michelsdorf"
+  ],
+  "Q431406": [
+   "Sankt Michael",
+   "Michelsdorf"
+  ],
+  "Q876070": [
+   "Schaldorf",
+   "Schalendorf"
+  ],
+  "Q610811": [
+   "Mittel-Borgo"
+  ],
+  "Q1087253": [
+   "Hasendorf",
+   "Großneulaß"
+  ],
+  "Q577929": [
+   "Milowa"
+  ],
+  "Q741205": [
+   "Hasendörfel"
+  ],
+  "Q337949": [
+   "Karlshütte"
+  ],
+  "Q714752": [
+   "Bayersdorf",
+   "Baiersdorf"
+  ],
+  "Q755937": [
+   "Rumänisch-Baierdorf"
+  ],
+  "Q1011653": [
+   "Deutsch-Neudorf",
+   "Deutschendorf"
+  ],
+  "Q753831": [
+   "Birkendorf"
+  ],
+  "Q8274046": [
+   "Kleindörfchen",
+   "Mitit"
+  ],
+  "Q746554": [
+   "Mardisch"
+  ],
+  "Q644742": [
+   "Mocserisch"
+  ],
+  "Q1076044": [
+   "Motsch"
+  ],
+  "Q3891798": [
+   "Mokod",
+   "Malkendorf"
+  ],
+  "Q581101": [
+   "Ober-Mokra"
+  ],
+  "Q714053": [
+   "Grossmaitingen",
+   "Maitingen",
+   "Majding"
+  ],
+  "Q838598": [
+   "Moichen",
+   "Maichen"
+  ],
+  "Q678557": [
+   "Moesch",
+   "Unter Moesch"
+  ],
+  "Q1942995": [
+   "Obermösch"
+  ],
+  "Q664793": [
+   "Mayroth"
+  ],
+  "Q829051": [
+   "Neu-Moldowa",
+   "Bergwerk-Neumoldowa"
+  ],
+  "Q675152": [
+   "Alt-Moldowa"
+  ],
+  "Q261616": [
+   "Burgdorf"
+  ],
+  "Q766252": [
+   "Steuerdorf",
+   "Karlsdorf"
+  ],
+  "Q755933": [
+   "Minarken",
+   "Molnarken",
+   "Malomarken"
+  ],
+  "Q1077876": [
+   "Mindendorf",
+   "Mindorf"
+  ],
+  "Q1079937": [
+   "Morawitz"
+  ],
+  "Q713906": [
+   "Mühlendorf"
+  ],
+  "Q1165570": [
+   "Moritzdorf",
+   "Mauritz"
+  ],
+  "Q549216": [
+   "Märtesdorf",
+   "Mertesdorf",
+   "Mortesdorf"
+  ],
+  "Q858221": [
+   "Hundertbücheln",
+   "Hundertbüchlen"
+  ],
+  "Q1075766": [
+   "Meschen",
+   "Moschen"
+  ],
+  "Q1195057": [
+   "Neu-Moschnitz"
+  ],
+  "Q752831": [
+   "Alt-Moschnitza",
+   "Moschnitza"
+  ],
+  "Q855021": [
+   "Begesen"
+  ],
+  "Q714099": [
+   "Muschendorf",
+   "Meschen"
+  ],
+  "Q3892431": [
+   "Bergel"
+  ],
+  "Q2489737": [
+   "Erzdorf"
+  ],
+  "Q4122298": [
+   "Kakowa-Gebirg"
+  ],
+  "Q600030": [
+   "Gross-Sedresch",
+   "Himbeerdorf"
+  ],
+  "Q734483": [
+   "Klein-Sedresch"
+  ],
+  "Q596493": [
+   "Neuflaigen",
+   "Neureckel",
+   "Sedresch",
+   "Neuzekel"
+  ],
+  "Q269510": [
+   "Siegmundshausen",
+   "Sigmudshausen"
+  ],
+  "Q713827": [
+   "Weichseldorf"
+  ],
+  "Q824605": [
+   "Borgo-Murescheni"
+  ],
+  "Q3889246": [
+   "Russendorf",
+   "Russenhof"
+  ],
+  "Q875852": [
+   "Madras",
+   "Gross-Madratz"
+  ],
+  "Q838838": [
+   "Bruckend"
+  ],
+  "Q1195369": [
+   "Sachsenhausen"
+  ],
+  "Q713942": [
+   "Maniersch",
+   "Mängersch",
+   "Mangerß"
+  ],
+  "Q523300": [
+   "Mussendorf",
+   "Meschen"
+  ],
+  "Q12122135": [
+   "Kohldorf",
+   "Walddorf"
+  ],
+  "Q1161795": [
+   "Mogura"
+  ],
+  "Q824511": [
+   "Maguren"
+  ],
+  "Q3887570": [
+   "Scherling",
+   "Schierling"
+  ],
+  "Q1190819": [
+   "Nussbach"
+  ],
+  "Q657068": [
+   "Malmkrog",
+   "Mallenkrag",
+   "Halbenkragen"
+  ],
+  "Q3889917": [
+   "Mallern"
+  ],
+  "Q747250": [
+   "Mühlenbach"
+  ],
+  "Q756974": [
+   "Donnersmarkt"
+  ],
+  "Q714719": [
+   "Kloster"
+  ],
+  "Q1077544": [
+   "Ungarisch-Klosterdorf"
+  ],
+  "Q841055": [
+   "Manester"
+  ],
+  "Q722833": [
+   "Markesdorf",
+   "Makesdorf",
+   "Mackendorf"
+  ],
+  "Q528259": [
+   "Markesdorf"
+  ],
+  "Q1213445": [
+   "Marschen",
+   "Marginen"
+  ],
+  "Q4969393": [
+   "Nussbach"
+  ],
+  "Q1188958": [
+   "Grossdorf",
+   "Grossendorf"
+  ],
+  "Q725224": [
+   "Martensdorf"
+  ],
+  "Q642273": [
+   "Sankt-Marten"
+  ],
+  "Q1076604": [
+   "Moritzfeld"
+  ],
+  "Q1027859": [
+   "Nadesch",
+   "Nadosch"
+  ],
+  "Q725654": [
+   "Walachisch-Nadesch"
+  ],
+  "Q75494": [
+   "Nadasch"
+  ],
+  "Q741172": [
+   "Weissdorf"
+  ],
+  "Q824614": [
+   "Weisskirchen"
+  ],
+  "Q832647": [
+   "Niemesch",
+   "Nimesch",
+   "Nimisch",
+   "Nimschdorf"
+  ],
+  "Q3892327": [
+   "Werare"
+  ],
+  "Q777829": [
+   "Nero"
+  ],
+  "Q386043": [
+   "Neidhausen",
+   "Neithausen",
+   "Neuthausen",
+   "Agnetenhausen",
+   "Neidhaus"
+  ],
+  "Q3888417": [
+   "Netz"
+  ],
+  "Q569924": [
+   "Seklerburg"
+  ],
+  "Q1006721": [
+   "Nichelsdorf"
+  ],
+  "Q740558": [
+   "Nindor in Siebebürgen"
+  ],
+  "Q3890604": [
+   "Nindorf in Siebenbürgen"
+  ],
+  "Q660611": [
+   "Nieresch",
+   "Birkendörfel"
+  ],
+  "Q939009": [
+   "Nitzkydorf",
+   "Nitykidorf",
+   "Niczkydorf"
+  ],
+  "Q3891975": [
+   "Neudorf"
+  ],
+  "Q3891165": [
+   "Wallachisch-Neudorf",
+   "Rumänischneudorf",
+   "Neudorf",
+   "Goldbach"
+  ],
+  "Q502733": [
+   "Sächsisch-Neudorf",
+   "Deutsch-Neudorf",
+   "Neudorf"
+  ],
+  "Q949496": [
+   "Grosshaus"
+  ],
+  "Q820165": [
+   "Nageldorf"
+  ],
+  "Q3891194": [
+   "Johannisberg",
+   "Johannesberg",
+   "Jannesberg"
+  ],
+  "Q1069542": [
+   "Nusswald"
+  ],
+  "Q773323": [
+   "Grossendorf"
+  ],
+  "Q508313": [
+   "Nadlak"
+  ],
+  "Q1020625": [
+   "Steinacker",
+   "Nadrag-Eisenwerk"
+  ],
+  "Q725705": [
+   "Rohrfeld"
+  ],
+  "Q1220058": [
+   "Rohrfeld"
+  ],
+  "Q678666": [
+   "Unter-Rohrbach"
+  ],
+  "Q629225": [
+   "Ober-Rohrbach"
+  ],
+  "Q598614": [
+   "Schiffenschütz"
+  ],
+  "Q1047309": [
+   "Rübendorf"
+  ],
+  "Q524726": [
+   "Spanndorf"
+  ],
+  "Q651322": [
+   "Nussdorf",
+   "Nussendorf",
+   "Nassendorf"
+  ],
+  "Q713870": [
+   "Orbau",
+   "Urban"
+  ],
+  "Q631859": [
+   "Unter-Wardein"
+  ],
+  "Q724266": [
+   "Augendorf",
+   "Obrescha"
+  ],
+  "Q1084714": [
+   "Eisenstein"
+  ],
+  "Q747230": [
+   "Salzdorf",
+   "Salzgruben"
+  ],
+  "Q837152": [
+   "Miereschhall"
+  ],
+  "Q186719": [
+   "Salzburg"
+  ],
+  "Q3893411": [
+   "Grubendorf",
+   "Kleingrub"
+  ],
+  "Q546953": [
+   "Salzgruben",
+   "Grubendorf"
+  ],
+  "Q623099": [
+   "Odorhallen",
+   "Hofmarkt",
+   "Odorhällen",
+   "Oderhell",
+   "Oderhen"
+  ],
+  "Q740286": [
+   "Hofmarkt"
+  ],
+  "Q3892410": [
+   "Tiergrub"
+  ],
+  "Q663256": [
+   "Odwosch"
+  ],
+  "Q550909": [
+   "Hopsenitz",
+   "Offsenitza"
+  ],
+  "Q1090733": [
+   "Ugern"
+  ],
+  "Q383997": [
+   "Neudorf"
+  ],
+  "Q568345": [
+   "Steindorf"
+  ],
+  "Q752857": [
+   "Butterdorf",
+   "Wajascht",
+   "Weiascht"
+  ],
+  "Q1223473": [
+   "Oituz-Paß",
+   "Ojtoser Contumaz",
+   "Beretzker oder Velence-Paß"
+  ],
+  "Q4967137": [
+   "Freiwald",
+   "Walddorf",
+   "Altzen",
+   "Oltzen"
+  ],
+  "Q4967559": [
+   "Bessenbach",
+   "Leschenbach"
+  ],
+  "Q268686": [
+   "Ungarisch-Opatitz"
+  ],
+  "Q93358": [
+   "Grosswardein"
+  ],
+  "Q383085": [
+   "Deutsch-Orawitz",
+   "Orawitz"
+  ],
+  "Q830597": [
+   "Burghalle",
+   "Burgelau",
+   "Burgberg"
+  ],
+  "Q1093109": [
+   "Winsberg",
+   "Ortenbach"
+  ],
+  "Q374769": [
+   "Armeniendorf"
+  ],
+  "Q752845": [
+   "Ermesch",
+   "Irmesch",
+   "Irmesch bei Boralt",
+   "Urmesch"
+  ],
+  "Q755455": [
+   "Reusswald",
+   "Russenwald"
+  ],
+  "Q741178": [
+   "Russendorf"
+  ],
+  "Q676836": [
+   "Spindeldorf"
+  ],
+  "Q1022876": [
+   "Orzydorf",
+   "Orzidorf",
+   "Orczydorf"
+  ],
+  "Q596664": [
+   "Diesendorf"
+  ],
+  "Q262472": [
+   "Broos",
+   "Brosz"
+  ],
+  "Q679971": [
+   "Burgbach"
+  ],
+  "Q747709": [
+   "Gross-Rodendorf"
+  ],
+  "Q6544318": [
+   "Klein-Rodendorf"
+  ],
+  "Q725149": [
+   "Ötwösch"
+  ],
+  "Q713996": [
+   "Thürendorf"
+  ],
+  "Q1096772": [
+   "Usendorf"
+  ],
+  "Q75537": [
+   "Ferdinandsberg",
+   "Ferdinand Werk",
+   "Ferdinandsthal"
+  ],
+  "Q247690": [
+   "Neupalota"
+  ],
+  "Q744504": [
+   "Königsdorf"
+  ],
+  "Q829900": [
+   "Panjowa"
+  ],
+  "Q1092596": [
+   "Boden"
+  ],
+  "Q854594": [
+   "Salzport"
+  ],
+  "Q1191114": [
+   "Paratz"
+  ],
+  "Q823116": [
+   "Krankendorf"
+  ],
+  "Q836913": [
+   "Teufelsdorf"
+  ],
+  "Q851021": [
+   "Bangeta",
+   "Alt-Pankota"
+  ],
+  "Q276132": [
+   "Alt-Petschka"
+  ],
+  "Q1014818": [
+   "Ulmbach",
+   "Neu-Petsch"
+  ],
+  "Q834524": [
+   "Magarey",
+   "Magaren",
+   "Magerau"
+  ],
+  "Q793538": [
+   "Perkossowa"
+  ],
+  "Q1082245": [
+   "Grosspereg",
+   "Grossperek",
+   "Großperek"
+  ],
+  "Q749762": [
+   "Klein-Pereg"
+  ],
+  "Q1022819": [
+   "Perjamosch"
+  ],
+  "Q384931": [
+   "Birnbaum"
+  ],
+  "Q754642": [
+   "Perschan"
+  ],
+  "Q767199": [
+   "Pesak"
+  ],
+  "Q669297": [
+   "Patsch"
+  ],
+  "Q1087048": [
+   "Birk",
+   "Byrke"
+  ],
+  "Q714291": [
+   "Petersdorf"
+  ],
+  "Q225920": [
+   "Petersdorf",
+   "Petisdorf"
+  ],
+  "Q821349": [
+   "Petersdorf",
+   "Petrifeld",
+   "Petri"
+  ],
+  "Q741151": [
+   "Petersheim"
+  ],
+  "Q734939": [
+   "Petershausen",
+   "Petersdorf"
+  ],
+  "Q547433": [
+   "Petersdorf-Bistritz"
+  ],
+  "Q854245": [
+   "Wetschehaus",
+   "Wetschehausen",
+   "Morgenstern"
+  ],
+  "Q262964": [
+   "Petermann"
+  ],
+  "Q827052": [
+   "Peters"
+  ],
+  "Q746041": [
+   "Petroscheni",
+   "Petroschen"
+  ],
+  "Q1523331": [
+   "Fischbach"
+  ],
+  "Q660908": [
+   "Unter-Peschtendorf"
+  ],
+  "Q822848": [
+   "Magendorf"
+  ],
+  "Q570790": [
+   "Deutsch-Pien",
+   "Deutsch-Pian"
+  ],
+  "Q568352": [
+   "Wallachisch-Pien"
+  ],
+  "Q820710": [
+   "Tschomorden"
+  ],
+  "Q755928": [
+   "Walachisch Pintak"
+  ],
+  "Q725858": [
+   "Pintak",
+   "Pintak am Graben"
+  ],
+  "Q655354": [
+   "Wepeschdorf",
+   "Wegeschdorf"
+  ],
+  "Q510297": [
+   "Steingrund"
+  ],
+  "Q598493": [
+   "Bruckenau"
+  ],
+  "Q1237490": [
+   "Poppeln"
+  ],
+  "Q739456": [
+   "Birnthor"
+  ],
+  "Q714091": [
+   "Brücken",
+   "Bruckend"
+  ],
+  "Q2645015": [
+   "Altbrücke",
+   "Altbrücke bei St.Georgen"
+  ],
+  "Q827348": [
+   "Heidendorf"
+  ],
+  "Q10816092": [
+   "Pohlendorf",
+   "Wiese",
+   "Pojan"
+  ],
+  "Q730875": [
+   "Birkenfeld",
+   "Birkau"
+  ],
+  "Q3892678": [
+   "Pohlendorf"
+  ],
+  "Q728800": [
+   "Glashütte"
+  ],
+  "Q580851": [
+   "Obstwald",
+   "Pojen",
+   "Bleschenbach"
+  ],
+  "Q682687": [
+   "Pojana",
+   "Pojan",
+   "Flussau"
+  ],
+  "Q956278": [
+   "Polendorf",
+   "Pohlendorf"
+  ],
+  "Q1006101": [
+   "Reußenau"
+  ],
+  "Q11421139": [
+   "Agarden",
+   "Konradsdorf",
+   "Hühnerdorf",
+   "Hühnerbach"
+  ],
+  "Q673020": [
+   "Wallachisch-Poscheschena"
+  ],
+  "Q732243": [
+   "Pfaffendorf",
+   "Popendorf"
+  ],
+  "Q250997": [
+   "Gunzendorf"
+  ],
+  "Q738156": [
+   "Pfarrenhaus"
+  ],
+  "Q678912": [
+   "Unter-Bornbach",
+   "Unterforrembach",
+   "Unterporumbach",
+   "Warmbach"
+  ],
+  "Q248233": [
+   "Ober-Bornbach",
+   "Oberforrembach",
+   "Oberporumbach",
+   "Holztaube",
+   "Warmbach"
+  ],
+  "Q731068": [
+   "Portzen"
+  ],
+  "Q755214": [
+   "Passbusch",
+   "Passbesch"
+  ],
+  "Q678871": [
+   "Puschendorf"
+  ],
+  "Q390347": [
+   "Puschendorf"
+  ],
+  "Q1077203": [
+   "Salzberg"
+  ],
+  "Q12143800": [
+   "Predal"
+  ],
+  "Q1021466": [
+   "Tartlau",
+   "Tartlen",
+   "Tortalen"
+  ],
+  "Q1126644": [
+   "Losdorf"
+  ],
+  "Q12143971": [
+   "Pfaffenhaus"
+  ],
+  "Q3891413": [
+   "Kerschdorf",
+   "Unter-Pressendorf"
+  ],
+  "Q714100": [
+   "Ober-Pressendorf"
+  ],
+  "Q639788": [
+   "Perkaß"
+  ],
+  "Q719788": [
+   "Pruden",
+   "Proden"
+  ],
+  "Q834898": [
+   "Burgau",
+   "Groß-Borgo"
+  ],
+  "Q3892336": [
+   "Grossfeld"
+  ],
+  "Q3272191": [
+   "Schanzendorf"
+  ],
+  "Q1022837": [
+   "Hühnendorf"
+  ],
+  "Q740551": [
+   "Purchuressen",
+   "Pürkeressen"
+  ],
+  "Q3894333": [
+   "Purkeretz"
+  ],
+  "Q591203": [
+   "Pustinisch"
+  ],
+  "Q383081": [
+   "Beschendorf",
+   "Scholten",
+   "Waldhüter"
+  ],
+  "Q3892792": [
+   "Zop"
+  ],
+  "Q1110022": [
+   "Bruckendorf"
+  ],
+  "Q714233": [
+   "Pokendorf",
+   "Pockendorf"
+  ],
+  "Q714032": [
+   "Hohe Rinne"
+  ],
+  "Q753615": [
+   "Panagen",
+   "Panaga",
+   "Penagen"
+  ],
+  "Q1070934": [
+   "Berau"
+  ],
+  "Q755513": [
+   "Patasch"
+  ],
+  "Q3889898": [
+   "Peters"
+  ],
+  "Q1188209": [
+   "Törnen",
+   "Pocken",
+   "Pokendorf"
+  ],
+  "Q3891376": [
+   "Puschendorf"
+  ],
+  "Q2031984": [
+   "Patzen"
+  ],
+  "Q742070": [
+   "Poschendorf",
+   "Potschendorf",
+   "Puschendorf"
+  ],
+  "Q3893349": [
+   "Alt-Paulisch"
+  ],
+  "Q1084339": [
+   "Rakovitza"
+  ],
+  "Q1070980": [
+   "Ratsch",
+   "Unter-Krebsdorf"
+  ],
+  "Q829908": [
+   "Ober-Krebsdorf"
+  ],
+  "Q4967971": [
+   "Ragelsdorf",
+   "Radelsdorf"
+  ],
+  "Q1189281": [
+   "Gross-Rapolten",
+   "Gross-Rapolden"
+  ],
+  "Q826683": [
+   "Klein-Rapolten",
+   "Klein-Rapolden"
+  ],
+  "Q1079536": [
+   "Einsiedl"
+  ],
+  "Q679121": [
+   "Unter-Rübendorf",
+   "Nieder-Rependorf"
+  ],
+  "Q2031999": [
+   "Rübendorf"
+  ],
+  "Q3082951": [
+   "Weisswasser"
+  ],
+  "Q834728": [
+   "Schnellbach"
+  ],
+  "Q1021928": [
+   "Mühldorf"
+  ],
+  "Q3893471": [
+   "Wajwoden"
+  ],
+  "Q1077587": [
+   "Kalibaschen"
+  ],
+  "Q4967945": [
+   "Reissen",
+   "Ruißen",
+   "Ruschor",
+   "Uferbach"
+  ],
+  "Q790338": [
+   "Rosenau"
+  ],
+  "Q383156": [
+   "Gross-Rebern",
+   "Rossau"
+  ],
+  "Q1111464": [
+   "Klein-Rebern",
+   "Klein-Rebra"
+  ],
+  "Q325555": [
+   "Rekasch"
+  ],
+  "Q1043874": [
+   "Waywodretschen"
+  ],
+  "Q846243": [
+   "Rätsch",
+   "Retsch"
+  ],
+  "Q731080": [
+   "Rothberg"
+  ],
+  "Q3893356": [
+   "Raden"
+  ],
+  "Q572478": [
+   "Sächsisch-Regen",
+   "Deutsch-Regen",
+   "Reen",
+   "Räen",
+   "Rennmarkt",
+   "Reensmarkt"
+  ],
+  "Q1126860": [
+   "Einsiedeln"
+  ],
+  "Q1195047": [
+   "Gross-Remetea"
+  ],
+  "Q830158": [
+   "Königshof"
+  ],
+  "Q578578": [
+   "Sedendorf",
+   "Seckendorf"
+  ],
+  "Q576889": [
+   "Reckenbeck",
+   "Reckentek",
+   "Reckendorf",
+   "Retteneck"
+  ],
+  "Q75634": [
+   "Reschitz",
+   "Deutsch-Reschitza",
+   "Reschitza"
+  ],
+  "Q754341": [
+   "Kellerchen"
+  ],
+  "Q1189096": [
+   "Kellerdorf"
+  ],
+  "Q843769": [
+   "Reichesdorf",
+   "Reichersdorf"
+  ],
+  "Q935515": [
+   "Eisenmarkt",
+   "Eisenburg"
+  ],
+  "Q1077539": [
+   "Rissdorf",
+   "Reissdorf"
+  ],
+  "Q824970": [
+   "Reissdörfel"
+  ],
+  "Q830545": [
+   "Radlen",
+   "Radeln",
+   "Radenthal"
+  ],
+  "Q841836": [
+   "Rauthal",
+   "Rennenthal",
+   "Rennthal",
+   "Rondeln"
+  ],
+  "Q822093": [
+   "Rodt",
+   "Rode",
+   "Roth"
+  ],
+  "Q541828": [
+   "Rohrbach"
+  ],
+  "Q1027868": [
+   "Alt-Rodna",
+   "Altrodenau",
+   "Rodenau",
+   "Roden",
+   "Rodnen"
+  ],
+  "Q544069": [
+   "Reichdörfel"
+  ],
+  "Q12148649": [
+   "Koliben"
+  ],
+  "Q1188184": [
+   "Rumessdorf",
+   "Rumes",
+   "Rams"
+  ],
+  "Q742002": [
+   "Klein-Rumesch",
+   "Klein-Rumeß",
+   "Kleinrumes",
+   "Klein-Remesch",
+   "Klein-Romos"
+  ],
+  "Q282844": [
+   "Rohnen"
+  ],
+  "Q1413433": [
+   "Rohrau"
+  ],
+  "Q854620": [
+   "Rothbach",
+   "Rothpach"
+  ],
+  "Q368397": [
+   "Rothberg"
+  ],
+  "Q936179": [
+   "Rothkirchen",
+   "Rothkirch"
+  ],
+  "Q857008": [
+   "Goldbach",
+   "Rotseifen"
+  ],
+  "Q15929895": [
+   "Ruckersdorf",
+   "Ruckendorf",
+   "Rukur"
+  ],
+  "Q713878": [
+   "Rugendorf"
+  ],
+  "Q498546": [
+   "Roseln",
+   "Rosslen",
+   "Rosenthal"
+  ],
+  "Q3760386": [
+   "Rückendorf"
+  ],
+  "Q225257": [
+   "Reps",
+   "Rupes",
+   "Kuhalme"
+  ],
+  "Q1392579": [
+   "Russberg"
+  ],
+  "Q1001096": [
+   "Ruschberg",
+   "Russberg",
+   "Ruskberg"
+  ],
+  "Q625224": [
+   "Wolfwiese",
+   "Ruskitza"
+  ],
+  "Q123410": [
+   "Reussdörfchen",
+   "Reussdörfchel",
+   "Reisdorf",
+   "Reußdörflein"
+  ],
+  "Q1472871": [
+   "Neu-Ruschowa"
+  ],
+  "Q744388": [
+   "Alt- Ruschowa"
+  ],
+  "Q221402": [
+   "Reussen",
+   "Borgo-Ruß"
+  ],
+  "Q3849339": [
+   "Rusch",
+   "Reussen",
+   "Reyssen"
+  ],
+  "Q1087806": [
+   "Russ",
+   "Reussen"
+  ],
+  "Q755163": [
+   "Unterschebesch",
+   "Niederschebesch"
+  ],
+  "Q3890266": [
+   "Brunndorf",
+   "Rekitzdorf",
+   "Rekite"
+  ],
+  "Q1084732": [
+   "Weidendorf"
+  ],
+  "Q724331": [
+   "Räthsel"
+  ],
+  "Q3892799": [
+   "Krebsendorf",
+   "Krebsenteich"
+  ],
+  "Q937558": [
+   "Thomaskirch",
+   "Neudorf"
+  ],
+  "Q719154": [
+   "Reichenau",
+   "Reinhau"
+  ],
+  "Q1215035": [
+   "Reitholz",
+   "Binndorf"
+  ],
+  "Q935213": [
+   "Sakas",
+   "Sagas"
+  ],
+  "Q205310": [
+   "Rautendorf",
+   "Aurelheim"
+  ],
+  "Q3891856": [
+   "Rosch",
+   "Rovasch",
+   "Rowas",
+   "Rawasd"
+  ],
+  "Q831423": [
+   "Kaltherberg",
+   "Zekelburg"
+  ],
+  "Q12147423": [
+   "Katzenfeld",
+   "Velfen",
+   "Welken",
+   "Welkersdorf"
+  ],
+  "Q938640": [
+   "Städterdorf",
+   "Städerdorf"
+  ],
+  "Q754517": [
+   "Ungarisch Sakosch",
+   "Gross-Sakosch"
+  ],
+  "Q1095881": [
+   "Türkisch Sakosch"
+  ],
+  "Q1189089": [
+   "Sodenbach",
+   "Zoodt"
+  ],
+  "Q1188269": [
+   "Stanislau"
+  ],
+  "Q1188277": [
+   "Santen"
+  ],
+  "Q645730": [
+   "Scharwaschau"
+  ],
+  "Q373372": [
+   "Sarafol"
+  ],
+  "Q822677": [
+   "Sartesch",
+   "Sartosch"
+  ],
+  "Q1076076": [
+   "Deutsch-Saszka",
+   "Bergwerk-Saszka",
+   "Saska"
+  ],
+  "Q752862": [
+   "Wallachisch-Saszka"
+  ],
+  "Q946954": [
+   "Hünenburg",
+   "Hujnerschburg",
+   "Keisd",
+   "Kaisd",
+   "Keißd",
+   "Kaißd"
+  ],
+  "Q368055": [
+   "Knees",
+   "Knes"
+  ],
+  "Q725218": [
+   "Langendorf"
+  ],
+  "Q1044067": [
+   "Grossdorf",
+   "Nadfal"
+  ],
+  "Q185332": [
+   "Sathmar"
+  ],
+  "Q713873": [
+   "Dörfel"
+  ],
+  "Q722839": [
+   "Schimonidorf",
+   "Schimonydorf",
+   "Oberneudorf",
+   "Nösner-Neudorf",
+   "Neudorf",
+   "Neudorf-Burzenland"
+  ],
+  "Q1191333": [
+   "Schag"
+  ],
+  "Q747680": [
+   "Scheindorf"
+  ],
+  "Q679487": [
+   "Unter-Mühlendorf",
+   "Unter-Sombath"
+  ],
+  "Q1048503": [
+   "Ober-Mühlendorf",
+   "Ober-Sombath"
+  ],
+  "Q1022828": [
+   "Sanktandreas"
+  ],
+  "Q735964": [
+   "Benedikt"
+  ],
+  "Q634408": [
+   "Simtschal"
+  ],
+  "Q844633": [
+   "Königsdorf"
+  ],
+  "Q325054": [
+   "Weichseldorf"
+  ],
+  "Q281591": [
+   "Sankt Görgen",
+   "Gergeschdorf"
+  ],
+  "Q935834": [
+   "Rumänisch-Sankt-Görgen",
+   "Sankt Georgen",
+   "Georgenau"
+  ],
+  "Q730923": [
+   "Klein-Enyed",
+   "Kleinegidsdorf"
+  ],
+  "Q895912": [
+   "Jakobsdorf",
+   "Jakobsdorf bei Bistritz",
+   "Jachesdorf"
+  ],
+  "Q755590": [
+   "Sanlean"
+  ],
+  "Q727952": [
+   "Arad-Sankt-Martin",
+   "Martinsdorf",
+   "Miertesdorf",
+   "Martins-Salz",
+   "Salz"
+  ],
+  "Q769714": [
+   "Ungarisch-St.-Martin"
+  ],
+  "Q383206": [
+   "Serbisch-St.-Martin"
+  ],
+  "Q725615": [
+   "Michelsdorf",
+   "Mechelsdorf"
+  ],
+  "Q1176572": [
+   "Michelsdorf",
+   "Michelsdorf auf der Heide"
+  ],
+  "Q1297099": [
+   "Margarethen",
+   "Grittendorf"
+  ],
+  "Q741191": [
+   "Martelsfeld"
+  ],
+  "Q1294548": [
+   "Nikelsdorf",
+   "Nickelsdorf",
+   "Mikelsdorf"
+  ],
+  "Q752969": [
+   "Klein-Sanktniklas",
+   "Klein Sankt Nikolaus"
+  ],
+  "Q1076069": [
+   "St. Paul",
+   "St. Paul in Banat",
+   "Paulsdorf",
+   "Palesdorf"
+  ],
+  "Q1070967": [
+   "Petersberg",
+   "Petersdorf",
+   "Petersburg"
+  ],
+  "Q649423": [
+   "Petersdorf"
+  ],
+  "Q786287": [
+   "Deutsch-St.-Peter",
+   "Neu-St.-Peter"
+  ],
+  "Q1014865": [
+   "Gross-St.-Peter"
+  ],
+  "Q947014": [
+   "Klein-St.-Peter"
+  ],
+  "Q275910": [
+   "Neu St. Ana"
+  ],
+  "Q949485": [
+   "EmerichsdorfEmrichsdorf",
+   "Sankt Emerich"
+  ],
+  "Q876035": [
+   "Mineralbad"
+  ],
+  "Q755931": [
+   "Johannesdorf",
+   "Johannisdorf",
+   "Johannisdorf am Schogen",
+   "Johannsdorf",
+   "Gehanes"
+  ],
+  "Q714482": [
+   "Esent-Gehonesz"
+  ],
+  "Q741924": [
+   "Sankt-Andreas"
+  ],
+  "Q744401": [
+   "Ackersdorf",
+   "Ackerhügel"
+  ],
+  "Q658536": [
+   "Merjeln"
+  ],
+  "Q387239": [
+   "Mariendorf",
+   "Liebfrauendorf"
+  ],
+  "Q1022831": [
+   "Liebfrauen",
+   "Mariendorf"
+  ],
+  "Q753182": [
+   "Treukirch",
+   "Dreikirchen",
+   "Frauenkirch"
+  ],
+  "Q956752": [
+   "Raissendorf",
+   "Serbendorf",
+   "Raitzen"
+  ],
+  "Q823216": [
+   "Standorf",
+   "Kornberg"
+  ],
+  "Q732376": [
+   "Mühlbach",
+   "Mühlenbach"
+  ],
+  "Q744463": [
+   "Unter-Schewesch",
+   "Unter-Schewisch"
+  ],
+  "Q3888823": [
+   "Ober-Schewesch",
+   "Ober-Schewisch"
+  ],
+  "Q425922": [
+   "Oberschebesch"
+  ],
+  "Q608433": [
+   "Setschan",
+   "Petersheim"
+  ],
+  "Q767518": [
+   "Sekul"
+  ],
+  "Q1066871": [
+   "Sekeschut"
+  ],
+  "Q666373": [
+   "Waroli",
+   "Leuchtenburg"
+  ],
+  "Q589057": [
+   "Klein-Alisch"
+  ],
+  "Q753787": [
+   "Seligstadt",
+   "Gross-Alisch",
+   "Gross-Alesch",
+   "Olesch"
+  ],
+  "Q257958": [
+   "Semlak"
+  ],
+  "Q756217": [
+   "Elsterdorf",
+   "Rodomersdorf"
+  ],
+  "Q568842": [
+   "Dunkeldorf"
+  ],
+  "Q202362": [
+   "Gergendorf",
+   "Sankt Georgen",
+   "Sankt Jorgen",
+   "Gergesmarkt"
+  ],
+  "Q726219": [
+   "Budenbach",
+   "Biddenbach"
+  ],
+  "Q83324": [
+   "Hermannstadt"
+  ],
+  "Q754147": [
+   "Alt-Schebeschel",
+   "Sebeschel"
+  ],
+  "Q1090075": [
+   "Sechen",
+   "Secken",
+   "Sickau",
+   "Markstuhl"
+  ],
+  "Q334874": [
+   "Marmaroschsiget",
+   "Sighet"
+  ],
+  "Q193001": [
+   "Schässburg"
+  ],
+  "Q744483": [
+   "Silasch"
+  ],
+  "Q256807": [
+   "Garten"
+  ],
+  "Q603719": [
+   "Pflaumendorf",
+   "Zwetschgart"
+  ],
+  "Q841438": [
+   "Zwetschgart"
+  ],
+  "Q755693": [
+   "Seimersdorf",
+   "Seimesdorf",
+   "Simonsdorf"
+  ],
+  "Q827459": [
+   "Buchberg"
+  ],
+  "Q75680": [
+   "Slatina"
+  ],
+  "Q1096004": [
+   "Stolzenburg"
+  ],
+  "Q581460": [
+   "Pintacken"
+  ],
+  "Q740304": [
+   "Mikldorf"
+  ],
+  "Q1188171": [
+   "Gross-Sokond",
+   "Gross-Sukunden",
+   "Sukunden"
+  ],
+  "Q720778": [
+   "Kleinsukunden",
+   "Klein-Szokond"
+  ],
+  "Q764699": [
+   "Dürrbach"
+  ],
+  "Q714172": [
+   "Gross-Grosslau"
+  ],
+  "Q1061637": [
+   "Hofdorf"
+  ],
+  "Q656528": [
+   "Neudorf"
+  ],
+  "Q753215": [
+   "Schorsten",
+   "Schoresten",
+   "Schorosten",
+   "Schorstein"
+  ],
+  "Q755792": [
+   "Salzbach"
+  ],
+  "Q755924": [
+   "Sachsenbach"
+  ],
+  "Q679511": [
+   "Deutsch-Stamora",
+   "Windisch-Stamora"
+  ],
+  "Q220771": [
+   "Rumänisch-Stamora"
+  ],
+  "Q570518": [
+   "Ober Boldad"
+  ],
+  "Q12741379": [
+   "Heilklimatische Station"
+  ],
+  "Q739477": [
+   "Liebesdorf"
+  ],
+  "Q1031476": [
+   "Meisterhausen"
+  ],
+  "Q833336": [
+   "Bogenhaus",
+   "Bogeschdorf"
+  ],
+  "Q616769": [
+   "Steuerdorf"
+  ],
+  "Q830432": [
+   "Probstdorf"
+  ],
+  "Q723980": [
+   "Marktdorf"
+  ],
+  "Q724345": [
+   "Esten"
+  ],
+  "Q724392": [
+   "Hohenwarthe",
+   "Wachtendorf",
+   "Gestren"
+  ],
+  "Q921195": [
+   "Zeikdorf"
+  ],
+  "Q906696": [
+   "Nußschloss"
+  ],
+  "Q591460": [
+   "Rothkirchen",
+   "Rothkirch"
+  ],
+  "Q260412": [
+   "Strägendorf",
+   "Strugar"
+  ],
+  "Q3889938": [
+   "Bienengärten"
+  ],
+  "Q12158441": [
+   "Rohrau"
+  ],
+  "Q2157272": [
+   "Stannsdorf"
+  ],
+  "Q289568": [
+   "Burghall",
+   "Burgberg",
+   "Vorstadt"
+  ],
+  "Q725557": [
+   "Unterwald",
+   "Thalenberg"
+  ],
+  "Q747651": [
+   "Sankt Gotthard"
+  ],
+  "Q1087578": [
+   "Schöndorf"
+  ],
+  "Q11980138": [
+   "Pränzdorf",
+   "Brenndorf",
+   "Oberdorf"
+  ],
+  "Q824942": [
+   "Ober-Borgo",
+   "Oberburgau"
+  ],
+  "Q607074": [
+   "Magerau"
+  ],
+  "Q823126": [
+   "Frauendorf",
+   "Andresdorf",
+   "Andreschdorf",
+   "Andersdorf",
+   "Satschallen",
+   "Schwarzwasser"
+  ],
+  "Q376233": [
+   "Zickelhid"
+  ],
+  "Q1188414": [
+   "Zekeldorf"
+  ],
+  "Q753953": [
+   "Sakadat",
+   "Sakadaten",
+   "Sekedaten"
+  ],
+  "Q1014935": [
+   "Sackelhaus",
+   "Sackelhausen"
+  ],
+  "Q714125": [
+   "Gross-Astdorf"
+  ],
+  "Q3082940": [
+   "Unter-Dorfsbach"
+  ],
+  "Q999551": [
+   "Ober-Dorfsbach"
+  ],
+  "Q632669": [
+   "Eichental"
+  ],
+  "Q679479": [
+   "Sundorf"
+  ],
+  "Q3893080": [
+   "Ober-Sundorf"
+  ],
+  "Q265800": [
+   "Blasenbrunn"
+  ],
+  "Q755100": [
+   "Feisked",
+   "Feisket"
+  ],
+  "Q3888472": [
+   "Winddorf"
+  ],
+  "Q3889948": [
+   "Ziegendorf",
+   "Grossdorf",
+   "Langendorf",
+   "Langesdorf"
+  ],
+  "Q663939": [
+   "Tschora"
+  ],
+  "Q6581112": [
+   "Seligsdorf"
+  ],
+  "Q1065969": [
+   "Weidau"
+  ],
+  "Q1303752": [
+   "Salz",
+   "Salzdorf"
+  ],
+  "Q744525": [
+   "Flendorf"
+  ],
+  "Q714421": [
+   "Reussen",
+   "Reussen am Schogen",
+   "Sered"
+  ],
+  "Q753951": [
+   "Weisshorn"
+  ],
+  "Q648947": [
+   "Schweis",
+   "Sassenberg",
+   "Sessenberg"
+  ],
+  "Q1022795": [
+   "Soborschin"
+  ],
+  "Q3888465": [
+   "Sestern",
+   "Waldhaus"
+  ],
+  "Q1190770": [
+   "Gross-Tarna"
+  ],
+  "Q679428": [
+   "Talmesch",
+   "Tolmisch",
+   "Gross Talmatsch"
+  ],
+  "Q386888": [
+   "Laposch"
+  ],
+  "Q186349": [
+   "Neumarkt",
+   "Neumarkt am Mieresch",
+   "Marktstadt"
+  ],
+  "Q338066": [
+   "Szekler-Neumarkt"
+  ],
+  "Q3545447": [
+   "Gross-Probstdorf"
+  ],
+  "Q3272196": [
+   "Tyrnau",
+   "Tirnau",
+   "Tirnava"
+  ],
+  "Q754729": [
+   "Sankt-Martin",
+   "Martinskirch",
+   "Marteskirch",
+   "Märteskirch"
+  ],
+  "Q12356155": [
+   "Kleinprobsdorf"
+  ],
+  "Q604225": [
+   "Klein-Tirnau"
+  ],
+  "Q1189029": [
+   "Teckendorf",
+   "Tekendorf",
+   "Deckendorf"
+  ],
+  "Q825365": [
+   "Deckendorf",
+   "Pressdorf"
+  ],
+  "Q3639945": [
+   "Lindendorf"
+  ],
+  "Q946893": [
+   "Dreikirchen",
+   "Dornen",
+   "Dornstadt"
+  ],
+  "Q1007534": [
+   "Teltsch"
+  ],
+  "Q714155": [
+   "Grundsdorf"
+  ],
+  "Q1059458": [
+   "Kreuzburg",
+   "Thell"
+  ],
+  "Q679675": [
+   "Untertelek",
+   "Eisenhammer"
+  ],
+  "Q749809": [
+   "Obertelek"
+  ],
+  "Q1120881": [
+   "Terebesch"
+  ],
+  "Q608184": [
+   "Teregowa"
+  ],
+  "Q1014888": [
+   "Marienfeld",
+   "Grossteremin"
+  ],
+  "Q221628": [
+   "Albrechtsflor",
+   "Klein-Teremin"
+  ],
+  "Q754263": [
+   "Braunkohlebergwerk"
+  ],
+  "Q3892264": [
+   "Tiburg"
+  ],
+  "Q730385": [
+   "Hochbrunn",
+   "Holtzbrunn"
+  ],
+  "Q12163185": [
+   "Konradsdorf"
+  ],
+  "Q3891358": [
+   "Deutsch-Tekesch"
+  ],
+  "Q1077568": [
+   "Tilischen",
+   "Telischen",
+   "Tilischka",
+   "Telischka"
+  ],
+  "Q83404": [
+   "Temeschwar",
+   "Temeswar",
+   "Temeschburg",
+   "Temesburg"
+  ],
+  "Q3894645": [
+   "Untertömösch"
+  ],
+  "Q12814294": [
+   "Obertömösch"
+  ],
+  "Q1314831": [
+   "Kothdorf"
+  ],
+  "Q679772": [
+   "Kürbisdorf"
+  ],
+  "Q752944": [
+   "Ober-Kürbisdorf"
+  ],
+  "Q1176590": [
+   "Wiesenfeld",
+   "Terem"
+  ],
+  "Q509065": [
+   "Gross-Wachsdorf"
+  ],
+  "Q741933": [
+   "Klein-Wachsdorf"
+  ],
+  "Q897673": [
+   "Königsgnad"
+  ],
+  "Q837653": [
+   "Wiesenheid"
+  ],
+  "Q753406": [
+   "Dürrdorf"
+  ],
+  "Q3890622": [
+   "Tarteln",
+   "Tertlen",
+   "Tartlau"
+  ],
+  "Q3889882": [
+   "Theodoren",
+   "Toderitz"
+  ],
+  "Q268804": [
+   "Neu-Tohan",
+   "Törtsdorf",
+   "Neu-Tauchen",
+   "Zeresten"
+  ],
+  "Q755411": [
+   "Teichdorf"
+  ],
+  "Q10863026": [
+   "Thomsdorf"
+  ],
+  "Q10816124": [
+   "Dammdorf"
+  ],
+  "Q754956": [
+   "Triebswetter",
+   "Trübswetter"
+  ],
+  "Q714460": [
+   "Tatsch",
+   "Totsch",
+   "Tesch"
+  ],
+  "Q755893": [
+   "Tschapertsch",
+   "Topertsch",
+   "Schappisdorf"
+  ],
+  "Q75492": [
+   "Töplitz",
+   "Teplitz"
+  ],
+  "Q912235": [
+   "Töplitz"
+  ],
+  "Q656735": [
+   "Toplendorf"
+  ],
+  "Q1084841": [
+   "Gross-Topolowetz"
+  ],
+  "Q18894": [
+   "Klein-Topolovetz"
+  ],
+  "Q719293": [
+   "Toperdorf"
+  ],
+  "Q1195123": [
+   "Rittberg"
+  ],
+  "Q825440": [
+   "Ratzdorf"
+  ],
+  "Q756340": [
+   "Taters",
+   "Tatersdorf"
+  ],
+  "Q733834": [
+   "Klein-Grosslau"
+  ],
+  "Q3517655": [
+   "Rohrbach",
+   "Neudorf"
+  ],
+  "Q1094538": [
+   "Teufelsbrunn",
+   "Teufelsbrunnen"
+  ],
+  "Q209809": [
+   "Thorenburg",
+   "Tohrenburg",
+   "Tooren",
+   "Thoren",
+   "Thorda",
+   "Alt-Thorda"
+  ],
+  "Q3891880": [
+   "Thorendorf",
+   "Torendorf"
+  ],
+  "Q1093353": [
+   "Torian"
+  ],
+  "Q820751": [
+   "Krenndorf"
+  ],
+  "Q934617": [
+   "Schweinsdorf",
+   "Porken",
+   "Porkendorf",
+   "Rothenturm"
+  ],
+  "Q1189075": [
+   "Turterebesch"
+  ],
+  "Q249980": [
+   "Grubenanlage"
+  ],
+  "Q729586": [
+   "Tussenthal"
+  ],
+  "Q726332": [
+   "Tussen"
+  ],
+  "Q3893977": [
+   "Klein-Talmesch"
+  ],
+  "Q247705": [
+   "Erlberg",
+   "Erldorf"
+  ],
+  "Q1076947": [
+   "Tatrang",
+   "Tatrangen"
+  ],
+  "Q541504": [
+   "Treppen",
+   "Törpen"
+  ],
+  "Q753166": [
+   "Taterloch",
+   "Tatarloch",
+   "Taterlau",
+   "Tatarlau"
+  ],
+  "Q2348429": [
+   "Tatarsdorf"
+  ],
+  "Q518923": [
+   "Weiersdorf",
+   "Weihersdorf",
+   "Waidorf Wasserdorf"
+  ],
+  "Q3888579": [
+   "Prenzendorf",
+   "Brenzendorf",
+   "Brenzen"
+  ],
+  "Q724363": [
+   "Ratzenhaus",
+   "Raizendorf"
+  ],
+  "Q668701": [
+   "Trestenburg",
+   "Tressenberg",
+   "Tressenburg",
+   "Trestendorf",
+   "Taschnad"
+  ],
+  "Q679787": [
+   "Unter-Utscha",
+   "Unter-Spreudorf",
+   "Gassendorff"
+  ],
+  "Q3889990": [
+   "Ober-Utscha",
+   "Ober-Spreudorf"
+  ],
+  "Q738105": [
+   "Sungen"
+  ],
+  "Q726055": [
+   "Oberdorf",
+   "Neuburg"
+  ],
+  "Q606560": [
+   "Haardorf",
+   "Hahrdorf"
+  ],
+  "Q521133": [
+   "Unzendorf"
+  ],
+  "Q167121": [
+   "Nyaradfluss"
+  ],
+  "Q1097260": [
+   "Galt"
+  ],
+  "Q368122": [
+   "Schlosswall"
+  ],
+  "Q752840": [
+   "Gergeschdorf",
+   "Gergesdorf"
+  ],
+  "Q754611": [
+   "Ungersdorf"
+  ],
+  "Q651125": [
+   "Neudorf"
+  ],
+  "Q1024232": [
+   "Oberwinz",
+   "Ober-Weinsdorf",
+   "Winzendorf",
+   "Wallendorf",
+   "Walldorf",
+   "Oberwallend",
+   "Unter-Wolfsdorf"
+  ],
+  "Q3711336": [
+   "Gross-Thierdorf",
+   "Hobitzen"
+  ],
+  "Q999729": [
+   "Er",
+   "Ur"
+  ],
+  "Q685760": [
+   "Ur",
+   "Felsendorf"
+  ],
+  "Q1093127": [
+   "Armenisch"
+  ],
+  "Q727578": [
+   "Goldendorf"
+  ],
+  "Q827813": [
+   "Ungarisch-Medwisch"
+  ],
+  "Q870624": [
+   "Schinal",
+   "Schöntal"
+  ],
+  "Q28338": [
+   "Utwin"
+  ],
+  "Q737750": [
+   "Waadt",
+   "Waden"
+  ],
+  "Q3178675": [
+   "Schiffenschütz"
+  ],
+  "Q741181": [
+   "Kaltenbrunnen",
+   "Wajdenbrunn"
+  ],
+  "Q683187": [
+   "Weidendorf",
+   "Waywoden"
+  ],
+  "Q741124": [
+   "Neudorf"
+  ],
+  "Q843137": [
+   "Waldhütten"
+  ],
+  "Q1093240": [
+   "Gorisdorf"
+  ],
+  "Q723376": [
+   "Grabendorf",
+   "Slavenhausen",
+   "Garuendorf"
+  ],
+  "Q12087411": [
+   "Sauerbrunn"
+  ],
+  "Q824886": [
+   "Tannental"
+  ],
+  "Q1096174": [
+   "Eschendorf",
+   "Kreischgrund",
+   "Kreischer Bach"
+  ],
+  "Q3888867": [
+   "Dilsental"
+  ],
+  "Q283809": [
+   "Bessen"
+  ],
+  "Q827410": [
+   "Wolfsbach",
+   "Glockelthal"
+  ],
+  "Q1441817": [
+   "Minischtal"
+  ],
+  "Q7485804": [
+   "Mühleck"
+  ],
+  "Q225868": [
+   "Weissenthal"
+  ],
+  "Q12087580": [
+   "Burauke"
+  ],
+  "Q741556": [
+   "Sumpfdorf"
+  ],
+  "Q1036184": [
+   "Kaltbach"
+  ],
+  "Q744518": [
+   "Gergesthal"
+  ],
+  "Q714206": [
+   "Trockenbach"
+  ],
+  "Q2489745": [
+   "Neudorf"
+  ],
+  "Q1011619": [
+   "Wurmloch"
+  ],
+  "Q262055": [
+   "Borbereker-Sauerbrunnen"
+  ],
+  "Q714971": [
+   "Zalanyer Glashütte",
+   "Málnáscher Glashütte"
+  ],
+  "Q1071767": [
+   "Bodzau",
+   "Bozauer-Pass",
+   "Bozer Pass"
+  ],
+  "Q727955": [
+   "Waar",
+   "Wachtfeld"
+  ],
+  "Q1018953": [
+   "Warjasch"
+  ],
+  "Q939372": [
+   "Buchgrub",
+   "Wasseid",
+   "Sauerbrunnen",
+   "Höllenhaus"
+  ],
+  "Q3892668": [
+   "Diewaldsdorf",
+   "Teufelsdorf",
+   "Truffelsdorf"
+  ],
+  "Q3891964": [
+   "Busshardt"
+  ],
+  "Q833020": [
+   "Budendorf"
+  ],
+  "Q852135": [
+   "Wölz",
+   "Wälzen",
+   "Thalheim"
+  ],
+  "Q1414373": [
+   "Wench",
+   "Weng"
+  ],
+  "Q3890000": [
+   "Unter-Wenitze",
+   "Unter-Venedig"
+  ],
+  "Q4968725": [
+   "Ober-Wenitze",
+   "Ober-Venedig"
+  ],
+  "Q1188233": [
+   "Rothberg"
+  ],
+  "Q755891": [
+   "Wermesch",
+   "Warmisch",
+   "Wermösch"
+  ],
+  "Q725272": [
+   "Blutigel",
+   "Blutthal"
+  ],
+  "Q3892397": [
+   "Ziedt",
+   "Wessid",
+   "Wassid",
+   "Wasseid",
+   "Zindt"
+  ],
+  "Q843112": [
+   "Michelsdorf",
+   "Mechelsdorf"
+  ],
+  "Q3889873": [
+   "Westen",
+   "Westendorf"
+  ],
+  "Q1092574": [
+   "Vitzka"
+  ],
+  "Q1021932": [
+   "Witzel"
+  ],
+  "Q755539": [
+   "Witzeldorf"
+  ],
+  "Q850969": [
+   "Viktoriastadt"
+  ],
+  "Q736569": [
+   "Kaltenbrunnen",
+   "Kaltenbrunn"
+  ],
+  "Q1190759": [
+   "Weinberg Sathmar"
+  ],
+  "Q753214": [
+   "Grosseidau",
+   "Eyda"
+  ],
+  "Q1314236": [
+   "Kulturberg"
+  ],
+  "Q375903": [
+   "Heidendorf",
+   "Erlenmarkt",
+   "Erlberg",
+   "Erlendorf",
+   "Hohndorf",
+   "Hohendorf",
+   "Hahnendorf"
+  ],
+  "Q725847": [
+   "Wilmen"
+  ],
+  "Q753415": [
+   "Ober-Brodsdorf"
+  ],
+  "Q1066840": [
+   "Winga",
+   "Theresiopel"
+  ],
+  "Q840745": [
+   "Weingarten",
+   "Weingartskirchen",
+   "Weingardskirchen"
+  ],
+  "Q684638": [
+   "Unter-Wintz",
+   "Winzendorf",
+   "Weinsdorf"
+  ],
+  "Q3888849": [
+   "Wiesendorf"
+  ],
+  "Q935538": [
+   "Deutsch-Weißkirch",
+   "Weisskirch"
+  ],
+  "Q536832": [
+   "Neuwasser in Siebenbürgen"
+  ],
+  "Q827482": [
+   "Wiseschdia"
+  ],
+  "Q596609": [
+   "Oberwischau"
+  ],
+  "Q550442": [
+   "Böhmhausen"
+  ],
+  "Q679883": [
+   "Unter-Wischt",
+   "Unter-Wittendorf"
+  ],
+  "Q3891246": [
+   "Ober-Wischt",
+   "Ober-Wittendorf"
+  ],
+  "Q746595": [
+   "Witzen",
+   "Witzau"
+  ],
+  "Q1011092": [
+   "Glogowatz",
+   "Glogowitz"
+  ],
+  "Q583661": [
+   "Wladein"
+  ],
+  "Q935846": [
+   "Wlachendorf"
+  ],
+  "Q608864": [
+   "Wolldorf",
+   "Woila"
+  ],
+  "Q1022869": [
+   "Wojtek",
+   "Wojteg"
+  ],
+  "Q12090199": [
+   "Gross-Waiwoden",
+   "Johannisdorf",
+   "Johannesdorf"
+  ],
+  "Q1092567": [
+   "Wartsdorf",
+   "Vortza"
+  ],
+  "Q12092769": [
+   "Wolkendorf"
+  ],
+  "Q837964": [
+   "Wolkersdorf",
+   "Wulkan"
+  ],
+  "Q239519": [
+   "Neudorf"
+  ],
+  "Q743662": [
+   "Burgberg",
+   "Weinberg",
+   "Walbersdorf"
+  ],
+  "Q682567": [
+   "Klein-Debrezin"
+  ],
+  "Q8113067": [
+   "Grabendorf",
+   "Grubendorf",
+   "Woldorf",
+   "Wallendorf",
+   "Walken",
+   "Gorisdorf",
+   "Huruben"
+  ],
+  "Q738173": [
+   "Gassen"
+  ],
+  "Q268472": [
+   "Kornbach"
+  ],
+  "Q920517": [
+   "Franzdorf"
+  ],
+  "Q724411": [
+   "Agendorf",
+   "Schweinsdorf",
+   "Schweinwald",
+   "Nussdorf",
+   "Nussbach"
+  ],
+  "Q986521": [
+   "Werdt"
+  ],
+  "Q825384": [
+   "Wormagen"
+  ],
+  "Q1092976": [
+   "Waradia"
+  ],
+  "Q999449": [
+   "Oberrübendorf"
+  ],
+  "Q140478": [
+   "Roden",
+   "Roth",
+   "Rode"
+  ],
+  "Q145292": [
+   "Waltenberg",
+   "Zillenmarkt"
+  ],
+  "Q145296": [
+   "Sameschdorf"
+  ],
+  "Q8274402": [
+   "Rapsdorf",
+   "Rabendorf"
+  ],
+  "Q714625": [
+   "Eisendorf"
+  ],
+  "Q1082229": [
+   "Neu-Zimand"
+  ],
+  "Q740224": [
+   "Zaisendorf",
+   "Zeisen",
+   "Zaisen",
+   "Zeizendorf"
+  ],
+  "Q207102": [
+   "Schlatt",
+   "Klein-Schlatten",
+   "Schlattendorf",
+   "Goldmarkt"
+  ],
+  "Q839580": [
+   "Goldmark"
+  ],
+  "Q207196": [
+   "Klein-Schlatten",
+   "Goldmarkt"
+  ],
+  "Q3890023": [
+   "Lampert",
+   "Lompart"
+  ],
+  "Q1070545": [
+   "Gebissdorf",
+   "Zabalon"
+  ],
+  "Q1413423": [
+   "Zagoner Glashütte"
+  ],
+  "Q1190586": [
+   "Zaderlach",
+   "Saderlach",
+   "Zaderlak"
+  ],
+  "Q1092997": [
+   "Sarand"
+  ],
+  "Q248959": [
+   "Zernescht",
+   "Zernesten",
+   "Zernen"
+  ],
+  "Q396843": [
+   "Schaas",
+   "Schees"
+  ],
+  "Q396871": [
+   "Dreispitz",
+   "Saagh",
+   "Segenthau"
+  ],
+  "Q3892730": [
+   "Schalko",
+   "Schalkenberg"
+  ],
+  "Q836917": [
+   "Alexanderhausen",
+   "Schandern",
+   "Schandra"
+  ],
+  "Q1087614": [
+   "Neu-Rodna",
+   "Neurodenau"
+  ],
+  "Q730608": [
+   "Scharpendorf",
+   "Schorpendorf",
+   "Kothdorf",
+   "Kothbach"
+  ],
+  "Q396884": [
+   "Kothmarkt"
+  ],
+  "Q396877": [
+   "Scharosch",
+   "Gross-Scharss",
+   "Scharesch"
+  ],
+  "Q390132": [
+   "Kothmarkt"
+  ],
+  "Q396909": [
+   "Marktschelken",
+   "Grossschelken"
+  ],
+  "Q396918": [
+   "Kleinschelken"
+  ],
+  "Q3404145": [
+   "Schellenberg"
+  ],
+  "Q4967538": [
+   "Gross-Schemlak",
+   "Gross-Schemlok"
+  ],
+  "Q396931": [
+   "Klein-Schemlak",
+   "Klein-Schemlok"
+  ],
+  "Q540026": [
+   "Besendorf",
+   "Besendorf in Banat"
+  ],
+  "Q1096976": [
+   "Schirkanyen",
+   "Schirkengen",
+   "Scharken"
+  ],
+  "Q725702": [
+   "Klein-Schirkengen",
+   "Klein-Scharkan",
+   "Scharkendorf"
+  ],
+  "Q820178": [
+   "Kaltbrunn",
+   "Eulendorf"
+  ],
+  "Q585088": [
+   "Scherl"
+  ],
+  "Q741195": [
+   "Salvey"
+  ],
+  "Q396988": [
+   "Unter-Brodsdorf"
+  ],
+  "Q1092990": [
+   "Gross-Schogen",
+   "Gross-Schagen"
+  ],
+  "Q1096399": [
+   "Ungersdorf",
+   "Ungers",
+   "Magyarosch",
+   "Nussdorf"
+  ],
+  "Q1093101": [
+   "Dienesdorf"
+  ],
+  "Q756226": [
+   "Leresdorf"
+  ],
+  "Q383006": [
+   "Kleinschangen",
+   "Klein-Schogen",
+   "Klein-Schagen"
+  ],
+  "Q755827": [
+   "Bruckbad"
+  ],
+  "Q959510": [
+   "Edlspachersimánd",
+   "Unter-Schimand"
+  ],
+  "Q3846983": [
+   "Schomlenmarkt",
+   "Schomelmarkt",
+   "Schemlenmarkt",
+   "Schomlyo"
+  ],
+  "Q1059445": [
+   "Neu-Schinka",
+   "Neu-Schenk"
+  ],
+  "Q899700": [
+   "Alt-Schinka",
+   "Alt-Schenk"
+  ],
+  "Q1096409": [
+   "Simkragen",
+   "Siebenkragen"
+  ],
+  "Q827503": [
+   "Schipet"
+  ],
+  "Q715296": [
+   "Hellburg",
+   "Schiria"
+  ],
+  "Q756209": [
+   "Schart"
+  ],
+  "Q397017": [
+   "Schirnen"
+  ],
+  "Q1082224": [
+   "Schischtarowetz"
+  ],
+  "Q4968843": [
+   "Schmiegen"
+  ],
+  "Q821341": [
+   "Schaal",
+   "Schael",
+   "Schalendorf",
+   "Shaalendorf"
+  ],
+  "Q740262": [
+   "Schard"
+  ],
+  "Q222009": [
+   "Scharesch",
+   "Scharosch"
+  ],
+  "Q397035": [
+   "Schojmosch"
+  ],
+  "Q740295": [
+   "Falkenstadt",
+   "Almesch",
+   "Falkendorf",
+   "Scholmosch",
+   "Schalmen",
+   "Salmen"
+  ],
+  "Q714548": [
+   "Martinsberg",
+   "Märtelsberg"
+  ],
+  "Q741908": [
+   "Futak",
+   "Somosdorf"
+  ],
+  "Q713861": [
+   "Schopot"
+  ],
+  "Q755318": [
+   "Siebendorf",
+   "Septern"
+  ],
+  "Q648321": [
+   "Waldau"
+  ],
+  "Q397068": [
+   "Gespreng"
+  ],
+  "Q260845": [
+   "Buchhof"
+  ],
+  "Q2369368": [
+   "Stipid"
+  ],
+  "Q3892773": [
+   "Wallachisch-Stein",
+   "Stein",
+   "Stehnen"
+  ],
+  "Q864502": [
+   "Mariaschnee",
+   "Stempeldorf"
+  ],
+  "Q423374": [
+   "Ebendorf"
+  ],
+  "Q587657": [
+   "Schugag"
+  ],
+  "Q423387": [
+   "Gross-Scheuern"
+  ],
+  "Q423391": [
+   "Klein-Scheuern"
+  ],
+  "Q3893093": [
+   "Salzbach"
+  ],
+  "Q859240": [
+   "Zegen"
+  ],
+  "Q820765": [
+   "Gross-Zegendorf"
+  ],
+  "Q423396": [
+   "Abstdorf",
+   "Appesdorf",
+   "Apesdorf"
+  ],
+  "Q3892384": [
+   "Wossling"
+  ],
+  "Q3892256": [
+   "Keller"
+  ],
+  "Q822147": [
+   "Ziegenthal",
+   "Zickenthal"
+  ],
+  "Q423405": [
+   "Zuckmantel",
+   "Zikmantel",
+   "Zeckmantel"
+  ],
+  "Q726339": [
+   "Zegendorf",
+   "Zagendorf",
+   "Ziegendorf"
+  ],
+  "Q753799": [
+   "Zipar"
+  ],
+  "Q279467": [
+   "Zipar"
+  ],
+  "Q383861": [
+   "Klein-Freudendorf",
+   "Oberfreudendorf"
+  ],
+  "Q820734": [
+   "Klein-Zegendorf"
+  ],
+  "Q1230423": [
+   "Repsen"
+  ],
+  "Q290959": [
+   "Wachsdorf"
+  ]
+ }
+}

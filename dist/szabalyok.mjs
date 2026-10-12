@@ -387,6 +387,44 @@ export function deRomanEkezet(de) {
 }
 
 /**
+ * Két német (vagy általában latin) nevet hajtunk össze az írásmód
+ * különbségei nélkül: `Großschlatten` = `Grossschlatten`, `Vallee` =
+ * `Vallee`. A KIA `ß`-t és `ss`-t is ír, a Wikidata meg `ß`-t, tehát
+ * ezek nélkül ugyanaz a név kétszer kerülne egy listába.
+ *
+ * Ez NEM a `nemetNev` 3. szabályának (betűrendi egyezés) újraírása: az a
+ * másodrend, itt sorrend nem számít. Csak azt mondjuk meg, hogy két
+ * felírás ugyanaz a szó-e.
+ */
+export function hajtasGerman(s) {
+  return (s ?? "")
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .replace(/ß/gu, "ss")
+    .toLowerCase()
+    .replace(/[^a-z0-9]/gu, "");
+}
+
+/**
+ * Igaz, ha a német név használható: nincs benne román ékezet, perjel,
+ * zárójel vagy cirill betű. Ez a `nemetNev` 4., 5. és 6. szabálya
+ * névre szűrve.
+ *
+ * A 3. szabály (a román névvel betűrendi egyezés) SZÁNDÉKOLTAN KIMARAD:
+ * az a Wikidata másolását szűri, a KIA viszont szótár — a `Breitau`
+ * (román `Brateiu`) valódi német név, és nem szabad eldobni. Amit ez a
+ * szűrő eldob, az a `kinyeres.mjs`-ben már le van szűrve; itt azért
+ * van, hogy az ellenőrző is ugyanezt lássa.
+ */
+export function deHasznalhato(de) {
+  if (!de) return false;
+  if (/[ăâîșşțţĂÂÎ]/u.test(de)) return false;
+  if (/[/()]/.test(de)) return false;
+  if (/[Ѐ-џ]/u.test(de)) return false;
+  return true;
+}
+
+/**
  * Az adat és a felület verziója.
  *
  * Miért kell: a `helyek.json` a `letolt.mjs`-ben készül, az oldal ezt
@@ -407,7 +445,7 @@ export function deRomanEkezet(de) {
  * footerben mutatja, az `ellenoriz.mjs` pedig egyezést szól kő, ha hiányzik
  * vagy nem egyezik a `szabalyok.mjs`-belivel.
  */
-export const VERZIO = "3.0.0";
+export const VERZIO = "4.0.0";
 
 /**
  * Cirill átírás latinra (ukrán + szerb cirill). Közös helyen kell, mert

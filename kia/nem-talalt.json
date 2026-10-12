@@ -1,0 +1,5808 @@
+{
+ "_comment": [
+  "KIA sorok, amiket nem sikerült a mi egyik helyünkhöz kötni. Nagyrészt településbe olvasztott falak (Turda Nouă), városrészek és szász fürdőhelyek — olyan nevek, amiket mi a 'human settlement' osztály miatt nem is tartunk.",
+  "",
+  "GENERÁLVA: 2026-10-12, a kia/raw.json-ból (6024 sor).",
+  "A `kia/kinyeres.mjs` írja ide. A letöltési lánc NEM olvassa — külön döntés kell.",
+  "",
+  "q: a mi helységünk Wikidata-azonosítója (a helyek.json kulcsa)."
+ ],
+ "osszes": 730,
+ "sorok": [
+  {
+   "ro": "Abrud-Sat-Cristea",
+   "megye": "Alba",
+   "hu": "Krisztea } Abrudbánya",
+   "de": [],
+   "vari": [
+    "Cristea"
+   ]
+  },
+  {
+   "ro": "Adămeşti",
+   "megye": "Cluj",
+   "hu": "Ádámvölgy } Palackos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Alba Iulia Cetate",
+   "megye": "Alba",
+   "hu": "Vár } Gyulafehérvár",
+   "de": [
+    "Burg } Weissenburg",
+    "Festung } Weissenburg"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Almaş-Iratoş",
+   "megye": "Arad",
+   "hu": "Almásiratos } Kürtös",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Alverna",
+   "megye": "Cluj",
+   "hu": "Alverna } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ambru",
+   "megye": "Alba",
+   "hu": "Ambrustanya } Aranyosbánya",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Andrei Mureşan",
+   "megye": "Cluj",
+   "hu": "Tisztviselőtelep } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Andrica",
+   "megye": "Timiş",
+   "hu": "Andrásvölgy } Szatncsafalva",
+   "de": [],
+   "vari": [
+    "Andreica"
+   ]
+  },
+  {
+   "ro": "Aradu Nou",
+   "megye": "Arad",
+   "hu": "Újarad } Arad",
+   "de": [
+    "Neu-Arad } Arad"
+   ],
+   "vari": [
+    "Aradul-Nou"
+   ]
+  },
+  {
+   "ro": "Arcio",
+   "megye": "Harghita",
+   "hu": "Árcsótelep, Árcsó } Korond",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Armag } Bazos",
+   "megye": "Timiş",
+   "hu": "Ármágpuszta } Bázos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Armădia",
+   "megye": "Caraş-Severin",
+   "hu": "Harmad, Harmadia } Tápia",
+   "de": [],
+   "vari": [
+    "Hărmădia",
+    "Harmadia",
+    "Armadia"
+   ]
+  },
+  {
+   "ro": "Asău",
+   "megye": "Harghita",
+   "hu": "Feketeaszó } Korond",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ateiu",
+   "megye": "Satu Mare",
+   "hu": "Etepuszta, Ete } Szilágypér",
+   "de": [],
+   "vari": [
+    "Eteiu"
+   ]
+  },
+  {
+   "ro": "Aţel Gară",
+   "megye": "Sibiu",
+   "hu": "Eceli vasúti telep",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Aţelhaza",
+   "megye": "Arad",
+   "hu": "Acélháza } Sikula",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Între Ape",
+   "megye": "Mureş",
+   "hu": "Vízköze } Szováta",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Între două ape",
+   "megye": "Cluj",
+   "hu": "Kétvízköz } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Întrelacuri",
+   "megye": "Cluj",
+   "hu": "Tóköz, Várostója } Kolozsvár",
+   "de": [],
+   "vari": [
+    "Aurel Vlaicu"
+   ]
+  },
+  {
+   "ro": "Întreşugag",
+   "megye": "Alba",
+   "hu": "Intresugágtelep } Sugág",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bagzoş",
+   "megye": "Harghita",
+   "hu": "Bagzos } Székelyvarság",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Baia Craiului",
+   "megye": "Hunedoara",
+   "hu": "Királybánya } Csolnakoscserna",
+   "de": [
+    "Unterhammer",
+    "Königsgruben",
+    "Königsgrub"
+   ],
+   "vari": [
+    "Baia lui Craiu",
+    "Crai Baia"
+   ]
+  },
+  {
+   "ro": "Baia Veche",
+   "megye": "Bihor",
+   "hu": "Bíró-bánya } Nagyszalonta",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Balinţul Nou",
+   "megye": "Timiş",
+   "hu": "Újbálinc } Nagybodófalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Balta Sărată",
+   "megye": "Caraş-Severin",
+   "hu": "Sóstó } Karánsebes",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Banţa",
+   "megye": "Alba",
+   "hu": "Telekibánca } Mikószilvás",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Barantău",
+   "megye": "Bihor",
+   "hu": "Barantóhegy, Barantó } Érsemjén",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Barcaş",
+   "megye": "Timiş",
+   "hu": "Barkás } Sztancsafalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Barcia",
+   "megye": "Harghita",
+   "hu": "Barcsa } Kőrispatak",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Barcolţa",
+   "megye": "Satu Mare",
+   "hu": "Barkóca } Sárköz",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Barmod",
+   "megye": "Bihor",
+   "hu": "Barmódpuszta, Barmód } Nagyszalonta",
+   "de": [],
+   "vari": [
+    "Moșia Barmod"
+   ]
+  },
+  {
+   "ro": "Bartoştana",
+   "megye": "Harghita",
+   "hu": "Bartostanya } Siklód",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Baru Mic",
+   "megye": "Hunedoara",
+   "hu": "Kisbár",
+   "de": [
+    "Klein-Elephant"
+   ],
+   "vari": [
+    "Bărişor"
+   ]
+  },
+  {
+   "ro": "Bazna-Băi",
+   "megye": "Sibiu",
+   "hu": "Báznai gyógyfürdő",
+   "de": [
+    "Baaßner Bad",
+    "Baaßner Jodbad"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Beba Mică",
+   "megye": "Timiş",
+   "hu": "Kisbéb } Óbéb",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Beca",
+   "megye": "Alba",
+   "hu": "Békamajor, Békás-puszta, Béka } Gáldtő",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bedina",
+   "megye": "Caraş-Severin",
+   "hu": "Bedina } Bogoltény",
+   "de": [],
+   "vari": [
+    "Badina"
+   ]
+  },
+  {
+   "ro": "Belioara",
+   "megye": "Alba",
+   "hu": "Bélavár } Felsőpodsága",
+   "de": [],
+   "vari": [
+    "Beliora"
+   ]
+  },
+  {
+   "ro": "Bencea",
+   "megye": "Sălaj",
+   "hu": "Benája } Nyerce",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bendorf",
+   "megye": "Mureş",
+   "hu": "",
+   "de": [
+    "Bagendorf } Schässburg",
+    "Bägendorf } Schässburg"
+   ],
+   "vari": [
+    "Bagendorf"
+   ]
+  },
+  {
+   "ro": "Berc",
+   "megye": "Sălaj",
+   "hu": "Hollósvölgy } Somlyógyőrtelek",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Berceni",
+   "megye": "Hunedoara",
+   "hu": "Bercsény } Petrila",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bereoni",
+   "megye": "Hunedoara",
+   "hu": "Bireony rész } Petrilla",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Berivoii Mici",
+   "megye": "Braşov",
+   "hu": "Kisberivoj } Nagyberivoj",
+   "de": [
+    "Kleinberwein } Berwein",
+    "Klein-Beriwa } Berwein"
+   ],
+   "vari": [
+    "Berivoiul Mic"
+   ]
+  },
+  {
+   "ro": "Bezdin",
+   "megye": "Arad",
+   "hu": "Bezdini zárda } Munár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Beşenic",
+   "megye": "Timiş",
+   "hu": "Bessenyőtelep, Bessenyei-telep, Besenyeipuszta } Temesvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bicaş",
+   "megye": "Cluj",
+   "hu": "Békás } Palackos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Biscaria",
+   "megye": "Hunedoara",
+   "hu": "Dédács, Dédácsfalva } Piski",
+   "de": [
+    "Dedendorf",
+    "Dodelndorf",
+    "Dollendorf"
+   ],
+   "vari": [
+    "Pescărie"
+   ]
+  },
+  {
+   "ro": "Bistra Păltinei",
+   "megye": "Sibiu",
+   "hu": "Bisztratelep, Paltinei telep } Zsinna",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bixad Băi",
+   "megye": "Satu Mare",
+   "hu": "Bikszádfürdő } Terep",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Blumena",
+   "megye": "Braşov",
+   "hu": "Bolonya; } Brassó",
+   "de": [
+    "Blumenau } Kronstadt"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Bobocea",
+   "megye": "Covasna",
+   "hu": "Babócsa } Szitabodza",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bocsigul Nou",
+   "megye": "Arad",
+   "hu": "Újbokszeg } Bokszeg",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bocşa Nouă",
+   "megye": "Caraş-Severin",
+   "hu": "Újboksán",
+   "de": [
+    "Neuwerk"
+   ],
+   "vari": [
+    "Neuwerk"
+   ]
+  },
+  {
+   "ro": "Bocşa Română",
+   "megye": "Caraş-Severin",
+   "hu": "Várboksán, Óboksán, Oláhboksán",
+   "de": [
+    "Wallachisch-Bogschan",
+    "Rumänisch-Bokschan"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Bocşa Vasiovei",
+   "megye": "Caraş-Severin",
+   "hu": "Vassafalva",
+   "de": [],
+   "vari": [
+    "Bocşa Vaşioviei",
+    "Vasiova",
+    "Văsiova",
+    "Văşîova"
+   ]
+  },
+  {
+   "ro": "Bodiu",
+   "megye": "Bihor",
+   "hu": "Bogy } Ökrös",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bogomirea",
+   "megye": "Cluj",
+   "hu": "Bagoly } Virágosvölgy",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Boianu Crasnei",
+   "megye": "Sălaj",
+   "hu": "Boján } Csizér",
+   "de": [
+    "Bojem"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Boianu Mic",
+   "megye": "Bihor",
+   "hu": "Kisbajompuszta } Tasnádbajom",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Boiuţ",
+   "megye": "Maramureş",
+   "hu": "Kisbúny",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Borhanci",
+   "megye": "Cluj",
+   "hu": "Borháncs } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Boroslo",
+   "megye": "Harghita",
+   "hu": "Boroszló } Csíkszentlélek",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Borsec Băi",
+   "megye": "Harghita",
+   "hu": "Borszékfürdő, Felső-Borszék } Borszék",
+   "de": [
+    "Bad Borseck"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Borzaş",
+   "megye": "Cluj",
+   "hu": "Borzás } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Borzond",
+   "megye": "Mureş",
+   "hu": "Borzondtanya } Hármasfalu",
+   "de": [],
+   "vari": [
+    "Borzont"
+   ]
+  },
+  {
+   "ro": "Borşa-Gârlă",
+   "megye": "Maramureş",
+   "hu": "Girlea } Borsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Borşa-Poeni",
+   "megye": "Maramureş",
+   "hu": "Mezőség } Borsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Borşa-Repedea",
+   "megye": "Maramureş",
+   "hu": "Sebespatak } Borsa",
+   "de": [],
+   "vari": [
+    "Repedea",
+    "Repedeu"
+   ]
+  },
+  {
+   "ro": "Borşa-Rotundă",
+   "megye": "Maramureş",
+   "hu": "Retund, Rotund } Borsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bothavaş",
+   "megye": "Harghita",
+   "hu": "Bothavaspataka } Gyimesfelsőlok",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Botorca-Blăjel",
+   "megye": "Sibiu",
+   "hu": "Botorkatanya } Balázstelke",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Botoş",
+   "megye": "Cluj",
+   "hu": "Botos, Botostelep } Kolozs",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Boziaş",
+   "megye": "Mureş",
+   "hu": "Borzás } Dicsőszentmárton",
+   "de": [
+    "Hollerthal } Sankt-Martin"
+   ],
+   "vari": [
+    "Bozieş"
+   ]
+  },
+  {
+   "ro": "Bozita",
+   "megye": "Harghita",
+   "hu": "Bozita } Ivó",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bozolnic",
+   "megye": "Sălaj",
+   "hu": "Kisbozolnok, Bozolnokpataka, Bozolnoktelke, Bozolnokteleke } Középlak",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Boşneag",
+   "megye": "Caraş-Severin",
+   "hu": "Bosnyák } Újmoldova",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Brazilia",
+   "megye": "Sălaj",
+   "hu": "Brazilia } Szilágynagyfalu",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Breb-Băi",
+   "megye": "Maramureş",
+   "hu": "Brébfürdő } Aknasugatag",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Brusturesc",
+   "megye": "Arad",
+   "hu": "Borosztok, Brusztureszk } Zombrád",
+   "de": [],
+   "vari": [
+    "Brustureşti"
+   ]
+  },
+  {
+   "ro": "Brădeţul",
+   "megye": "Braşov",
+   "hu": "Ósánc, Ősi három sánc, Németsánc } Négyfalu",
+   "de": [
+    "Altschanz",
+    "Pfaffenschanze",
+    "Festung"
+   ],
+   "vari": [
+    "Şanţu",
+    "Şanţuri",
+    "Şanţu-vechiu",
+    "Brădet",
+    "Brădetul"
+   ]
+  },
+  {
+   "ro": "Bucegi",
+   "megye": "Sibiu",
+   "hu": "Bucsecstelep } Vesztény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bucerdea Vinoasă Românească",
+   "megye": "Alba",
+   "hu": "Oláhborosbocsárd, Bocsárd } Borosbocsárd",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bucerdea Vinoasă Ungurească",
+   "megye": "Alba",
+   "hu": "Magyarborosbocsárd } Borosbocsárd",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bucium Runc",
+   "megye": "Maramureş",
+   "hu": "Szilvástelep } Törökfalu",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bucuroaia",
+   "megye": "Bihor",
+   "hu": "Bokorvány, Bukorvány",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Budoi-Colonie",
+   "megye": "Bihor",
+   "hu": "Bodonosi kőszénbánya } Bodonos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Budurleni-Case",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Barátfalvitó } Budurló",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Buituri",
+   "megye": "Hunedoara",
+   "hu": "Bujtur, Bojtor } Vajdahunyad",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bujac",
+   "megye": "Arad",
+   "hu": "Buzsák, Nagybuzsák } Arad",
+   "de": [],
+   "vari": [
+    "Bujacul Mare"
+   ]
+  },
+  {
+   "ro": "Bulgaria",
+   "megye": "Cluj",
+   "hu": "Bulgáriatelep } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bulzi",
+   "megye": "Alba",
+   "hu": "Bulz, Bulztelep",
+   "de": [],
+   "vari": [
+    "Bulz"
+   ]
+  },
+  {
+   "ro": "Bungur",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Bungárddűlő } Sajómagyarós",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bursuc",
+   "megye": "Cluj",
+   "hu": "Burzuk; } Szentmargita",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Burtuca",
+   "megye": "Hunedoara",
+   "hu": "Burtuka községrész",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Buza Turcului",
+   "megye": "Caraş-Severin",
+   "hu": "Óboksán, Óhámor } Boksánbánya",
+   "de": [
+    "Altwerk } Bogschan"
+   ],
+   "vari": [
+    "Uzinele Vechi",
+    "Alverc",
+    "Altverc"
+   ]
+  },
+  {
+   "ro": "Buzdular",
+   "megye": "Hunedoara",
+   "hu": "Buzdulár; } Pojenicavojni",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băboasa",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Babos, Bábos } Vicea",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băi de Nămol",
+   "megye": "Satu Mare",
+   "hu": "Büdössárfürdő } Vámfalu",
+   "de": [],
+   "vari": [
+    "Băile Puturoasa",
+    "Puturoasa"
+   ]
+  },
+  {
+   "ro": "Băile Balvanyoş",
+   "megye": "Covasna",
+   "hu": "Bálványosfüred, Bálványosfürdő, Büdösfürdő, Bálványos } Torja",
+   "de": [],
+   "vari": [
+    "Balvanyoş"
+   ]
+  },
+  {
+   "ro": "Băile Beltiug",
+   "megye": "Satu Mare",
+   "hu": "Bélteki-fürdő } Krasznabéltek",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Bogat",
+   "megye": "Harghita",
+   "hu": "Csíkrákosi Bogát-fürdő } Csíkrákos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Borsec",
+   "megye": "Harghita",
+   "hu": "Borszékfürdő } Borszék",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Bradu",
+   "megye": "Mureş",
+   "hu": "Bánffyfürdő, Fenyőfürdő } Maroshévíz",
+   "de": [],
+   "vari": [
+    "Băile Banfi"
+   ]
+  },
+  {
+   "ro": "Băile Caşin",
+   "megye": "Harghita",
+   "hu": "Kászonfürdő; } Kászonjakabfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Cisar",
+   "megye": "Covasna",
+   "hu": "Csiszárfürdő } Torja",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Ciucsângeorgiu",
+   "megye": "Harghita",
+   "hu": "Csíkszentgyörgyi fürdő; } Csíkszentgyörgy",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Codlea",
+   "megye": "Braşov",
+   "hu": "Feketehalmi fürdő } Feketehalom",
+   "de": [
+    "Zeidner Waldbad",
+    "Zeiden"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Băile Cojocna",
+   "megye": "Cluj",
+   "hu": "Kolozsfürdő, Kolozs-sósfürdő, Dörgő sóstó } Kolozs",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Călan",
+   "megye": "Hunedoara",
+   "hu": "Kalánfürdő } Kiskalán",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Dungo",
+   "megye": "Harghita",
+   "hu": "Dungó fürdő; } Oklánd",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Lipova",
+   "megye": "Arad",
+   "hu": "Savanyúkútfürdő, Lippafüred } Lippa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Madicsa",
+   "megye": "Harghita",
+   "hu": "Csíkkarcfalvi Madicsa fürdő; } Csíkkarcfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Mai",
+   "megye": "Bihor",
+   "hu": "Püspökfürdő; } Hájó",
+   "de": [
+    "Bischofsbad"
+   ],
+   "vari": [
+    "Baia Episcopiei",
+    "Băile Episcopeşti",
+    "Băile Episcopiei",
+    "Băile Episcopale",
+    "Baie"
+   ]
+  },
+  {
+   "ro": "Băile Miercurea Ciuc",
+   "megye": "Harghita",
+   "hu": "Szeredai-fürdő, Katalin-fürdő, Helwig-fürdő } Csíkszereda",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Mureş",
+   "megye": "Harghita",
+   "hu": "Gyergyóremetei Maros gyógyfürdő; } Gyergyóremete",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Someşeni",
+   "megye": "Cluj",
+   "hu": "Szamosfalvafürdő; } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Termale Boghiş",
+   "megye": "Sălaj",
+   "hu": "Bagosi gyógyfürdő } Szilágybagos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Tinca",
+   "megye": "Bihor",
+   "hu": "Tenkefürdő; } Tenke",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băile Vlăhiţa",
+   "megye": "Harghita",
+   "hu": "Majzos fürdő, Szentegyházi fürdő, Vlahica gyöngye } Szentegyháza",
+   "de": [],
+   "vari": [
+    "Perla Vlăhiţei"
+   ]
+  },
+  {
+   "ro": "Băjeni Bejeni",
+   "megye": "Harghita",
+   "hu": "Bözsefalva + Erzsébet-kút } Székelykeresztúr",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bălana",
+   "megye": "Hunedoara",
+   "hu": "Balántelep, Balána; } Lindzsina",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Băltele",
+   "megye": "Arad",
+   "hu": "Báltfalva, Báltyele, Baltyele; } Honctő",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Bărbătenii de Sus",
+   "megye": "Hunedoara",
+   "hu": "Felsőbarbatyen } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cadea Mică",
+   "megye": "Bihor",
+   "hu": "Kiskágya } Nagykágya",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Calea Lată",
+   "megye": "Cluj",
+   "hu": "Szélesút } Csucsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Calvasăr",
+   "megye": "Sibiu",
+   "hu": "Hidegvíz } Nagyselyk",
+   "de": [
+    "Kaltwasser } Marktschelken",
+    "Kaltbach } Marktschelken"
+   ],
+   "vari": [
+    "Călvăsăr",
+    "Călvasăr",
+    "Calvaser"
+   ]
+  },
+  {
+   "ro": "Canta",
+   "megye": "Covasna",
+   "hu": "Kanta, Alsóvolál } Kézdivásárhely",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Caransebeşul Nou",
+   "megye": "Caraş-Severin",
+   "hu": "Újkaránsebes } Karánsebes",
+   "de": [
+    "Schwabendorf",
+    "Neu-Karansebesch"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Carasebeş-Ţiglărie",
+   "megye": "Caraş-Severin",
+   "hu": "Téglagyártelep } Karánsebes",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Arcuş",
+   "megye": "Covasna",
+   "hu": "Árkos ltp. } Sepsiszentgyörgy",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Astra",
+   "megye": "Braşov",
+   "hu": "Gyárváros } Brassó",
+   "de": [],
+   "vari": [
+    "Cartierul Steagu Roşu"
+   ]
+  },
+  {
+   "ro": "Cartierul Înfrăţirii",
+   "megye": "Harghita",
+   "hu": "Testvériség ltp. } Csíkszereda",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Beclean",
+   "megye": "Harghita",
+   "hu": "Bethlenfalvi ltp. } Székelyudvarhely",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Brădet",
+   "megye": "Sălaj",
+   "hu": "Fenyves (Meszesalja) ltp. } Zilah",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Brădeşti",
+   "megye": "Harghita",
+   "hu": "Kockaföld lakótelep } Fenyéd",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Bucin",
+   "megye": "Harghita",
+   "hu": "Bucsin ltp. } Gyergyószentmiklós",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Ciucului",
+   "megye": "Covasna",
+   "hu": "Csíki ltp., Szing-Szing } Sepsiszentgyörgy",
+   "de": [],
+   "vari": [
+    "Zona Ciucului"
+   ]
+  },
+  {
+   "ro": "Cartierul Cornişa",
+   "megye": "Mureş",
+   "hu": "Párkány lakótelep } Marosvásárhely",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Donat",
+   "megye": "Cluj",
+   "hu": "Donát úti ltp. } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Dumbrava Nord",
+   "megye": "Sălaj",
+   "hu": "Zilah-Liget ltp. } Zilah",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Eminescu",
+   "megye": "Mureş",
+   "hu": "Eminescu ltp. (Majoros kert) } Szováta",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Florilor",
+   "megye": "Harghita",
+   "hu": "Virág ltp. } Gyergyószentmiklós",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Florilor",
+   "megye": "Mureş",
+   "hu": "Virág ltp. } Szováta",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Furst",
+   "megye": "Mureş",
+   "hu": "Fürszt telep } Marosvásárhely (elődje Gordásfalva)",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Gheorghieni",
+   "megye": "Cluj",
+   "hu": "Györgyfalvi úti ltp. } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Greweln",
+   "megye": "Sibiu",
+   "hu": "Grével ltp. } Medgyes",
+   "de": [
+    "Greweln"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Gruia Cetăţuia",
+   "megye": "Cluj",
+   "hu": "Fellegvár } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Grădişte",
+   "megye": "Arad",
+   "hu": "Mosóczy-telep, Mosóczy + Pacsirta-telep, Postarét } Arad",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Gării",
+   "megye": "Covasna",
+   "hu": "Állomás ltp. } Sepsiszentgyörgy",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Kossuth",
+   "megye": "Harghita",
+   "hu": "Kossuth ltp. } Székelykeresztúr",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Kuvar",
+   "megye": "Harghita",
+   "hu": "Kuvar ltp. } Székelyudvarhely",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Lazaret",
+   "megye": "Sibiu",
+   "hu": "Lazarett } Nagyszeben",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Liceului",
+   "megye": "Covasna",
+   "hu": "Liceum ltp. } Sepsiszentgyörgy",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Lunca Mare",
+   "megye": "Harghita",
+   "hu": "Nagyrét ltp. } Csíkszereda",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Moșnei",
+   "megye": "Sibiu",
+   "hu": "Muzsnai úti lakótelep } Medgyes",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Mureşeni",
+   "megye": "Mureş",
+   "hu": "Meggyesfalvi ltp. } Marosvásárhely",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Mănăştur",
+   "megye": "Cluj",
+   "hu": "Monostori ltp (Külmonostor, Belmonostor) } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Mărăşti",
+   "megye": "Cluj",
+   "hu": "Hóstáti-negyed } Kolozsvár",
+   "de": [
+    "Hochstadt"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Nuferilor",
+   "megye": "Bihor",
+   "hu": "Tavirózsa ltp. (Váradszőllős területén) } Nagyvárad",
+   "de": [],
+   "vari": [
+    "Seleuş"
+   ]
+  },
+  {
+   "ro": "Cartierul Oraşul de Sus Cartierul 7 Noiembrie",
+   "megye": "Mureş",
+   "hu": "Felsőváros } Marosvásárhely",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Patinoarului",
+   "megye": "Harghita",
+   "hu": "Jégpálya ltp. } Csíkszereda",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Petőfi (Griviţa)",
+   "megye": "Mureş",
+   "hu": "Petőfi Sándor ltp. } Szováta",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Plopilor",
+   "megye": "Cluj",
+   "hu": "Nyárfasor ltp. } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Porolissum",
+   "megye": "Sălaj",
+   "hu": "Porolissum ltp. } Zilah",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Păcii",
+   "megye": "Sălaj",
+   "hu": "Béke ltp. } Zilah",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Rogerius",
+   "megye": "Bihor",
+   "hu": "Rogerius ltp. } Nagyvárad",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Răsăritului",
+   "megye": "Mureş",
+   "hu": "Napfelkelte ltp. } Marosvásárhely",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Seuca",
+   "megye": "Mureş",
+   "hu": "Szőkefalvi úti lakótelep } Dicsőszentmárton",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Simion Bărnuţiu",
+   "megye": "Sălaj",
+   "hu": "Kövicsesdombi ltp. } Zilah",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Someş",
+   "megye": "Satu Mare",
+   "hu": "Szamos ltp. } Szatmárnémeti",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Someşeni",
+   "megye": "Cluj",
+   "hu": "Szamosfalvi ltp. } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Spicul",
+   "megye": "Harghita",
+   "hu": "Kalász ltp. } Csíkszereda",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Spitalului",
+   "megye": "Harghita",
+   "hu": "Kórház ltp. } Székelyudvarhely",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Stadion",
+   "megye": "Sălaj",
+   "hu": "Stadion ltp. } Zilah",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Săsar",
+   "megye": "Maramureş",
+   "hu": "Zazar ltp. } Nagybánya",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Taberei",
+   "megye": "Harghita",
+   "hu": "Tábor ltp. } Székelyudvarhely",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Terezian",
+   "megye": "Sibiu",
+   "hu": "Terézváros } Nagyszeben",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Traian",
+   "megye": "Sălaj",
+   "hu": "Kövicsesdombi ltp. } Zilah",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Tudor",
+   "megye": "Mureş",
+   "hu": "Sásvári ltp. } Marosvásárhely",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Valea Cetăţii",
+   "megye": "Braşov",
+   "hu": "Rakodó, Rakodó ltp. } Brassó",
+   "de": [],
+   "vari": [
+    "Răcădău"
+   ]
+  },
+  {
+   "ro": "Cartierul Vitro-Metan",
+   "megye": "Sibiu",
+   "hu": "Üveggyári ltp. } Medgyes",
+   "de": [],
+   "vari": [
+    "Vitro"
+   ]
+  },
+  {
+   "ro": "Cartierul Zorilor",
+   "megye": "Cluj",
+   "hu": "Hajnal ltp. } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cartierul Zorilor",
+   "megye": "Satu Mare",
+   "hu": "Hajnal ltp. } Tasnád",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Casele Bicălat",
+   "megye": "Cluj",
+   "hu": "Bikalattelep",
+   "de": [],
+   "vari": [
+    "Casele Bicălata",
+    "Bicălat"
+   ]
+  },
+  {
+   "ro": "Cavnic-Hăndal",
+   "megye": "Maramureş",
+   "hu": "Handál } Kapnikbánya",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cavnicu de Jos",
+   "megye": "Maramureş",
+   "hu": "Alsókapnik } Kapnikbánya",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Câmpanii de Jos",
+   "megye": "Bihor",
+   "hu": "Alsómezős, Alsókimpány, Fonókismezős } Felsőmezős",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Câmpu Lat",
+   "megye": "Timiş",
+   "hu": "Szélesmező } Sztancsafalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Câmpul Negru",
+   "megye": "Maramureş",
+   "hu": "Feketemező } Máramarossziget",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cândrălău",
+   "megye": "Arad",
+   "hu": "Kontrató, Kendertó ; } Bokszeg",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cânepeşti",
+   "megye": "Cluj",
+   "hu": "Kenderes } Torda",
+   "de": [],
+   "vari": [
+    "Cânepişti. Cănepeşti"
+   ]
+  },
+  {
+   "ro": "Cânepii",
+   "megye": "Mureş",
+   "hu": "",
+   "de": [
+    "Haufau } Schässburg"
+   ],
+   "vari": [
+    "Hanfau"
+   ]
+  },
+  {
+   "ro": "Cenadul Vechi",
+   "megye": "Timiş",
+   "hu": "Őscsanád, Németcsanád, Csanádvár, Marosvár",
+   "de": [
+    "Alt-Tschanad",
+    "Deutsch-Tschanad"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Cerhat",
+   "megye": "Satu Mare",
+   "hu": "Cserhát } Oláhgyűrűs",
+   "de": [],
+   "vari": [
+    "Gorun"
+   ]
+  },
+  {
+   "ro": "Cernahora",
+   "megye": "Bihor",
+   "hu": "Csernahóra, Csernahora-telep, Feketehegy } Almaszeghuta",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cernatul de Sus",
+   "megye": "Covasna",
+   "hu": "Felsőcsernáton, Felcsernáton } Alsócsernáton",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cesariu",
+   "megye": "Cluj",
+   "hu": "Császári",
+   "de": [
+    "Kaisersdorf"
+   ],
+   "vari": [
+    "Cezariu",
+    "Cesari",
+    "Cesare"
+   ]
+  },
+  {
+   "ro": "Cetatea Fetii",
+   "megye": "Cluj",
+   "hu": "Leányvár {Szászfenes",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Checea Română",
+   "megye": "Timiş",
+   "hu": "Nagykőcse } Kőcse",
+   "de": [
+    "Rumänisch-Ketscha"
+   ],
+   "vari": [
+    "Checia-română"
+   ]
+  },
+  {
+   "ro": "Chendu Mic",
+   "megye": "Mureş",
+   "hu": "Kiskend, Kendhida } Nagykend",
+   "de": [
+    "Kleinkend } Grosskend"
+   ],
+   "vari": [
+    "Chindul Mic"
+   ]
+  },
+  {
+   "ro": "Chijic",
+   "megye": "Bihor",
+   "hu": "Kegyek, Kigyik",
+   "de": [],
+   "vari": [
+    "Chigic"
+   ]
+  },
+  {
+   "ro": "Chiruş",
+   "megye": "Mureş",
+   "hu": "Köhér } Szováta",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Chişir",
+   "megye": "Arad",
+   "hu": "Kisérpuszta } Köröscsente",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ciala",
+   "megye": "Arad",
+   "hu": "Csálatelep, Csálaerdő, Csálapuszta } Arad",
+   "de": [],
+   "vari": [
+    "Pădurea Ciala",
+    "Ciala-Arad",
+    "Arad-Ciala",
+    "Ferma Ciala"
+   ]
+  },
+  {
+   "ro": "Ciangăi",
+   "megye": "Harghita",
+   "hu": "Lesődtanya } Csíkbánkfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ciarda Iapa",
+   "megye": "Maramureş",
+   "hu": "Kabolacsárda } Kabolapatak",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ciasi",
+   "megye": "Satu Mare",
+   "hu": "Császitanya } Mikola",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cica",
+   "megye": "Harghita",
+   "hu": "Cika } Székelypálfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cicoşu",
+   "megye": "Cluj",
+   "hu": "Csíkos } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cihanoş",
+   "megye": "Harghita",
+   "hu": "Csihányos } Kőrispatak",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cinciş",
+   "megye": "Hunedoara",
+   "hu": "Csolnakos } Csolnakoscserna",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cioboteni",
+   "megye": "Harghita",
+   "hu": "Csobotfalva, Csíkcsobotfalva } Csíkszereda",
+   "de": [],
+   "vari": [
+    "Ciobotfalău",
+    "Ciobatfalău"
+   ]
+  },
+  {
+   "ro": "Ciprian Porumbescu",
+   "megye": "Cluj",
+   "hu": "Hodvilágújtelep } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cireşenii",
+   "megye": "Mureş",
+   "hu": "Tyúkólos } Makfalva",
+   "de": [],
+   "vari": [
+    "Tiucoloş"
+   ]
+  },
+  {
+   "ro": "Cisla",
+   "megye": "Maramureş",
+   "hu": "Csizla } Borsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ciugheş",
+   "megye": "Harghita",
+   "hu": "Csügés } Szépvíz",
+   "de": [],
+   "vari": [
+    "Cighiş"
+   ]
+  },
+  {
+   "ro": "Ciumernic",
+   "megye": "Covasna",
+   "hu": "Csemernek } Szitabodza",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ciutac",
+   "megye": "Harghita",
+   "hu": "Csutakfalva } Gyergyóremete",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Civarga",
+   "megye": "Mureş",
+   "hu": "Csivarga } Marosludas",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Clara",
+   "megye": "Satu Mare",
+   "hu": "Kláramajor, Kláratag } Nagykároly",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cluj-Mănăştur",
+   "megye": "Cluj",
+   "hu": "Kolozsmonostor } Kolozsvár",
+   "de": [
+    "Appesdorf } Klausenburg",
+    "Kloster } Klausenburg"
+   ],
+   "vari": [
+    "Mănăştur"
+   ]
+  },
+  {
+   "ro": "Cojba",
+   "megye": "Mureş",
+   "hu": "Kozsba } Mezőbánd",
+   "de": [],
+   "vari": [
+    "Coşba"
+   ]
+  },
+  {
+   "ro": "Coldău Vale",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Szőllőpataka } Bethlen",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colina",
+   "megye": "Braşov",
+   "hu": "Gács-domb } Brassó",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Coliu",
+   "megye": "Bihor",
+   "hu": "Kóly } Nagykágya",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Anhauer",
+   "megye": "Timiş",
+   "hu": "Anhauertelep } Temesvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Banschi",
+   "megye": "Timiş",
+   "hu": "Bánszkitelep } Temesvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Blascovici",
+   "megye": "Timiş",
+   "hu": "Blaskovitstelep } Temesvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Carolina de Jos",
+   "megye": "Hunedoara",
+   "hu": "Alsó Karolinatelep } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Carolina de Sus",
+   "megye": "Hunedoara",
+   "hu": "Felső Karolinatelep } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Centrală",
+   "megye": "Hunedoara",
+   "hu": "Központi telep } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Copşa",
+   "megye": "Sibiu",
+   "hu": "Kiskapusi gyártelep } Kiskapus",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Crişan",
+   "megye": "Timiş",
+   "hu": "Krizsántelep, Újgiroda } Temesvár",
+   "de": [],
+   "vari": [
+    "Ghiroda Nouă"
+   ]
+  },
+  {
+   "ro": "Colonia Căpeni",
+   "megye": "Covasna",
+   "hu": "Köpecbánya, Köpeci bányatelep } Köpec",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia țiganilor",
+   "megye": "Harghita",
+   "hu": "Vadgalambfalva, Cigánytelep",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Gyöngyösi",
+   "megye": "Hunedoara",
+   "hu": "Gyöngyösitelep } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Ilona",
+   "megye": "Hunedoara",
+   "hu": "Ilonatelep } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Jiu",
+   "megye": "Hunedoara",
+   "hu": "Zsilytelep } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Kende",
+   "megye": "Timiş",
+   "hu": "Kendetelep } Temesvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Kunz",
+   "megye": "Timiş",
+   "hu": "Kunztelep } Temesvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Lobstein",
+   "megye": "Hunedoara",
+   "hu": "Lobsteintelep } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Luduş",
+   "megye": "Mureş",
+   "hu": "Ludastelep } Marosludas",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Muncitorească",
+   "megye": "Timiş",
+   "hu": "Munkástelep } Temesvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Nouă",
+   "megye": "Arad",
+   "hu": "Csermői Újtelep",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Nouă",
+   "megye": "Arad",
+   "hu": "Újpuszta",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Nouă",
+   "megye": "Caraş-Severin",
+   "hu": "Néraranyosi Újtelep",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Nouă",
+   "megye": "Satu Mare",
+   "hu": "Kisbábonyi-újtelep",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Paniova",
+   "megye": "Timiş",
+   "hu": "Kunsztpuszta } Panyó",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Rogifer",
+   "megye": "Braşov",
+   "hu": "Rogifertelep",
+   "de": [],
+   "vari": [
+    "Colonia 6 Martie"
+   ]
+  },
+  {
+   "ro": "Colonia Răsăriteană",
+   "megye": "Hunedoara",
+   "hu": "Keleti telep } Lupény",
+   "de": [],
+   "vari": [
+    "Colonia Keleti"
+   ]
+  },
+  {
+   "ro": "Colonia Schnapp",
+   "megye": "Timiş",
+   "hu": "Schnapptelep, Schnappföldek",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Sechereşa",
+   "megye": "Satu Mare",
+   "hu": "Magyartelep",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Victoria",
+   "megye": "Hunedoara",
+   "hu": "Viktóriatelep } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Weinberger",
+   "megye": "Timiş",
+   "hu": "Weinbergertelep } Temesvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Weiss",
+   "megye": "Timiş",
+   "hu": "Weisztelep } Temesvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colonia Ştefan",
+   "megye": "Hunedoara",
+   "hu": "Istvántelep } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Colţan",
+   "megye": "Caraş-Severin",
+   "hu": "Kolcán",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Comlăuş",
+   "megye": "Arad",
+   "hu": "Ószentanna, Komlós",
+   "de": [
+    "Alt Sankt Ana",
+    "Komlosch",
+    "Komlusch"
+   ],
+   "vari": [
+    "Sântana Veche"
+   ]
+  },
+  {
+   "ro": "Comolău",
+   "megye": "Covasna",
+   "hu": "Komolló } Réty",
+   "de": [],
+   "vari": [
+    "Comălău",
+    "Comlău"
+   ]
+  },
+  {
+   "ro": "Complexul Studenţesc Haşdeu",
+   "megye": "Cluj",
+   "hu": "Mikókert } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Corhani",
+   "megye": "Arad",
+   "hu": "Korhány",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Corlata",
+   "megye": "Covasna",
+   "hu": "Korlátpatak } Hídvég",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Corlate",
+   "megye": "Sălaj",
+   "hu": "Korláttanya } Szilágynagyfalu",
+   "de": [],
+   "vari": [
+    "Cătun Corlate"
+   ]
+  },
+  {
+   "ro": "Cormoş",
+   "megye": "Harghita",
+   "hu": "Kormos, Kormositanya",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Corparât",
+   "megye": "Satu Mare",
+   "hu": "Korparét } Nagykároly",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Costeasca",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Koszteaszatanya } Felsőilosva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cozberţaia",
+   "megye": "Harghita",
+   "hu": "Közbércalja } Siklód",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Coşteiu Mic",
+   "megye": "Timiş",
+   "hu": "Kiskastély, Kiskostély, Kiskostilj } Nagykastély",
+   "de": [
+    "Klein-Kostilj"
+   ],
+   "vari": [
+    "Costeiu Mic"
+   ]
+  },
+  {
+   "ro": "Crasna Păţăluşa",
+   "megye": "Bihor",
+   "hu": "Krasznaháza, Krasznapacalusa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Crivaia",
+   "megye": "Caraş-Severin",
+   "hu": "Krivája, Krivaj telep } Ferencfalva",
+   "de": [],
+   "vari": [
+    "Crivei"
+   ]
+  },
+  {
+   "ro": "Crişana",
+   "megye": "Arad",
+   "hu": "Ősipuszta } Nagyzerénd",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Cugiru Nou",
+   "megye": "Hunedoara",
+   "hu": "Újkudzsir } Kudzsir",
+   "de": [
+    "Eisenhammer } Kudsir"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Cădişeni",
+   "megye": "Harghita",
+   "hu": "Kadicsfalva [a Havasalja része] } Székelyudvarhely",
+   "de": [],
+   "vari": [
+    "Cadicifalău"
+   ]
+  },
+  {
+   "ro": "Călămăreşti",
+   "megye": "Hunedoara",
+   "hu": "Kelemenes } Brád",
+   "de": [],
+   "vari": [
+    "Călimăreşti-Colindeşti",
+    "Calamaneşti"
+   ]
+  },
+  {
+   "ro": "Cămara Sighet",
+   "megye": "Maramureş",
+   "hu": "Szigetkamara } Máramarossziget",
+   "de": [],
+   "vari": [
+    "Cămara la Sighet"
+   ]
+  },
+  {
+   "ro": "Darova Nouă",
+   "megye": "Timiş",
+   "hu": "Újdaruvár",
+   "de": [],
+   "vari": [
+    "Daruvarul Nou"
+   ]
+  },
+  {
+   "ro": "Dâmbu Morii",
+   "megye": "Braşov",
+   "hu": "Malomdomb } Négyfalu",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Dâmbul Pietros",
+   "megye": "Mureş",
+   "hu": "Kövesdomb } Marosvásárhely",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Dâmbul Rotund",
+   "megye": "Cluj",
+   "hu": "Kerekdomb } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Dârste",
+   "megye": "Braşov",
+   "hu": "Derestye, Dirszte",
+   "de": [
+    "Walkmühlen } Kronstadt",
+    "Dirste } Kronstadt"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Dealu Alămorului",
+   "megye": "Sibiu",
+   "hu": "Lászlótanya } Alamor",
+   "de": [],
+   "vari": [
+    "Deal"
+   ]
+  },
+  {
+   "ro": "Dealu între Râuri",
+   "megye": "Maramureş",
+   "hu": "Gyál } Borsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Dealul Ciungii",
+   "megye": "Alba",
+   "hu": "Boratanya } Marosújvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Dealul Florilor",
+   "megye": "Cluj",
+   "hu": "Rózsahegy } Dés",
+   "de": [],
+   "vari": [
+    "Dealul Roselor"
+   ]
+  },
+  {
+   "ro": "Dealul Gorboului",
+   "megye": "Cluj",
+   "hu": "Gorbódomb } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Dealul Sfântu Gheorghe",
+   "megye": "Cluj",
+   "hu": "Szentgyörgyhegy } Kolozsvár",
+   "de": [],
+   "vari": [
+    "Sângeorgiu"
+   ]
+  },
+  {
+   "ro": "Dealul Tirului",
+   "megye": "Cluj",
+   "hu": "Bélahegy } Dés",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Dealul Şterp",
+   "megye": "Cluj",
+   "hu": "Kopárhegy } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Deasupra Hajongardului",
+   "megye": "Cluj",
+   "hu": "Felsőházsongárd } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Dej [Deju] mun.",
+   "megye": "Cluj",
+   "hu": "Dés, Deés",
+   "de": [
+    "Desch",
+    "Burglos",
+    "Burgschloss"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Demetertana",
+   "megye": "Harghita",
+   "hu": "Demetertanya } Siklód",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Desag Cătun",
+   "megye": "Harghita",
+   "hu": "Templombükk } Deság",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Diafalva",
+   "megye": "Harghita",
+   "hu": "Diafalva, Diafala, Alsóoroszhegy } Oroszhegy",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Dileu",
+   "megye": "Cluj",
+   "hu": "Dellő } Dés",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Dineş",
+   "megye": "Bihor",
+   "hu": "Dienestanya } Érmihályfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Doba Mică",
+   "megye": "Sălaj",
+   "hu": "Kisdoba, Kisdobaalszeg, Kisdobafelszeg } Nagydoba",
+   "de": [
+    "Klein-Felseck } Dobendorf"
+   ],
+   "vari": [
+    "Feldoba Mică"
+   ]
+  },
+  {
+   "ro": "Doboiu",
+   "megye": "Harghita",
+   "hu": "Doboly } Kászonimpér",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Dobăeş",
+   "megye": "Maramureş",
+   "hu": "Dobonyos } Máramarossziget",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Domald",
+   "megye": "Mureş",
+   "hu": "Domáld } Csatófalva",
+   "de": [
+    "Maldorf } Hohndorf"
+   ],
+   "vari": [
+    "Domaldu",
+    "Dumald"
+   ]
+  },
+  {
+   "ro": "Doştina",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Dosztálytanya } Teke",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Doţ",
+   "megye": "Mureş",
+   "hu": "Dóc } Marosludas",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Dragalina",
+   "megye": "Cluj",
+   "hu": "Sáncalja } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Drăculeşti",
+   "megye": "Cluj",
+   "hu": "Ördöngös } Palackos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Dumbrava-Vale",
+   "megye": "Mureş",
+   "hu": "Kövesdpataka } Marosliget",
+   "de": [],
+   "vari": [
+    "Valea Pietrişului"
+   ]
+  },
+  {
+   "ro": "După Râu",
+   "megye": "Maramureş",
+   "hu": "Túlavizen, Leordinai hídtelep } Leordina",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "După Vale",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Patakmögött } Magyarborzás",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Dărăneşti",
+   "megye": "Hunedoara",
+   "hu": "Derenyesd } Petrozsény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Episcopia Bihorului",
+   "megye": "Bihor",
+   "hu": "Biharpüspöki, Váradpüspöki, Püspökfalu } Nagyvárad",
+   "de": [],
+   "vari": [
+    "Piscopia",
+    "Pişpichiu",
+    "Episcopia-Bihor"
+   ]
+  },
+  {
+   "ro": "Fabric",
+   "megye": "Timiş",
+   "hu": "Gyárváros, Fabrik } Temesvár",
+   "de": [
+    "Fabrik } Temeschwar",
+    "Fabrikstadt } Temeschwar"
+   ],
+   "vari": [
+    "Circumscripţia II."
+   ]
+  },
+  {
+   "ro": "Fabric-Vii",
+   "megye": "Timiş",
+   "hu": "Rezsőföld, Gyárvárosi Szőlők } Temesvár",
+   "de": [
+    "Rudolffeld } Temeschwar"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Fâncelul de Jos",
+   "megye": "Mureş",
+   "hu": "Alsófancsaltelep, Fancsal } Libánfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Fâncelul de Sus",
+   "megye": "Mureş",
+   "hu": "Felsőfancsaltelep, } Libánfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Fântâna Şpanului",
+   "megye": "Mureş",
+   "hu": "Ispánkútja } Segesvár",
+   "de": [
+    "Geschpanbrunnen } Schässburg"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Fântâniţa Crăiesei",
+   "megye": "Braşov",
+   "hu": "Fejedelemasszonykútja } Fogaras",
+   "de": [
+    "Fürstenbrunnen"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Fâscăraiu",
+   "megye": "Cluj",
+   "hu": "Kincstári telep } Mezőcsán",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Feltrineli",
+   "megye": "Sibiu",
+   "hu": "Feltrinelli gyártelep, Magyar-olasz erdőipar Feltrinelli gyártelep",
+   "de": [
+    "Ungarisch-Italienischen Waldindustrie A.G. Fiume"
+   ],
+   "vari": [
+    "Fabrica Tălmaciu"
+   ]
+  },
+  {
+   "ro": "Fenişpatac",
+   "megye": "Mureş",
+   "hu": "Fenyőspatak } Makfalva",
+   "de": [],
+   "vari": [
+    "Fenişpatoc"
+   ]
+  },
+  {
+   "ro": "Ferma Gostat",
+   "megye": "Bihor",
+   "hu": "Kürtöstanya és Rózsavölgyi tanya } Bihar",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ferma IAS",
+   "megye": "Alba",
+   "hu": "Ambrosi-Fischer telep } Nagyenyed",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ferma Izvin",
+   "megye": "Timiş",
+   "hu": "Kopasztanya } Őszény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "FermaŞcolară",
+   "megye": "Sălaj",
+   "hu": "Földmívesiskola } Szilágysomlyó",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ferneziu",
+   "megye": "Maramureş",
+   "hu": "Alsófernezely } Nagybánya",
+   "de": [],
+   "vari": [
+    "Firiza de Jos"
+   ]
+  },
+  {
+   "ro": "Ferăstrău",
+   "megye": "Braşov",
+   "hu": "Fűrészmező } Négyfalu",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Floroaia Mică",
+   "megye": "Covasna",
+   "hu": "Kisvirágospatak } Bodzaforduló",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Fodorhaza",
+   "megye": "Timiş",
+   "hu": "Fodorház } Gád",
+   "de": [
+    "Fodorhausen"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Fraitoc",
+   "megye": "Timiş",
+   "hu": "Örömvölgypuszta } Nagyzsám",
+   "de": [
+    "Freudenthal } Gross-Scham"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Fratelia",
+   "megye": "Timiş",
+   "hu": "Újkissoda, Újtesöld, Fratélia",
+   "de": [
+    "Neu-Kischoda"
+   ],
+   "vari": [
+    "Fratelia Nouă",
+    "Fratelia Veche",
+    "Chişoda Nouă"
+   ]
+  },
+  {
+   "ro": "Freidorf",
+   "megye": "Timiş",
+   "hu": "Szabadfalu, Szabadfalva, Szabajd } Temesvár",
+   "de": [
+    "Freidorf } Temeschwar"
+   ],
+   "vari": [
+    "Fraidorf"
+   ]
+  },
+  {
+   "ro": "Frenţ",
+   "megye": "Mureş",
+   "hu": "Ferenctanya } Nagysármás",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Frăsinei",
+   "megye": "Hunedoara",
+   "hu": "Fraszinejhavas",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Făgădaua",
+   "megye": "Sibiu",
+   "hu": "Fogadók } Balázstelke",
+   "de": [
+    "Wirtshaus } Klein-Blasendorf"
+   ],
+   "vari": [
+    "Fogădaua",
+    "Lele Ana"
+   ]
+  },
+  {
+   "ro": "Făgădău Loţului",
+   "megye": "Mureş",
+   "hu": "Lócifogadó } Bözödújfalu",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Făina",
+   "megye": "Maramureş",
+   "hu": "Fajna, Vasér külsőrésze } Felsővisó",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Fărcaş-Tău",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Farkastó } Drágatanya",
+   "de": [],
+   "vari": [
+    "Fărcaşa-Tău"
+   ]
+  },
+  {
+   "ro": "Gai",
+   "megye": "Arad",
+   "hu": "Gáj, Gája, Alsó-Gáj, Felső-Gáj } Arad",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Gara Coşlariu",
+   "megye": "Alba",
+   "hu": "Koslárdi vasútitelep } Koslárd",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Gârla",
+   "megye": "Maramureş",
+   "hu": "Forráspatak, Girlea } Borsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Gersa III.",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Serada } Kisrebra",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Gheie",
+   "megye": "Covasna",
+   "hu": "Geje } Árkos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ghera",
+   "megye": "Mureş",
+   "hu": "Géra } Szováta",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ghioracu Nou",
+   "megye": "Bihor",
+   "hu": "Csegőd, Horindzsapuszta és Irtáspuszta } Erdőgyarak",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ghiriş-Sâncraiu",
+   "megye": "Cluj",
+   "hu": "Gyéresszentkirály } Aranyosgyéres",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ghiroda Nouă",
+   "megye": "Timiş",
+   "hu": "Erzsébetháza puszta, Erzsébetpuszta } Temesvár",
+   "de": [
+    "Neu-Giroda } Temeschwar"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Glaviţa",
+   "megye": "Timiş",
+   "hu": "Glania } Nőrincse",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Goizeşti",
+   "megye": "Timiş",
+   "hu": "Gojcsfalva, Gojzest } Tamásd",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Gorova",
+   "megye": "Bihor",
+   "hu": "Gorovehomoktanya } Érmihályfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Govăndari",
+   "megye": "Caraş-Severin",
+   "hu": "Govondár; } Resicabánya",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Goza Oarului",
+   "megye": "Satu Mare",
+   "hu": "Óvárigaz } Óvári",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Grebla",
+   "megye": "Maramureş",
+   "hu": "Gereblye } Tőkés",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Grosăraua",
+   "megye": "Sibiu",
+   "hu": "",
+   "de": [
+    "Grosserau } Gross-Scheuern"
+   ],
+   "vari": [
+    "Grosărău"
+   ]
+  },
+  {
+   "ro": "Gruelaci",
+   "megye": "Hunedoara",
+   "hu": "Grujelács } Gyálumáre",
+   "de": [],
+   "vari": [
+    "Gruielaci",
+    "Gruelaciu"
+   ]
+  },
+  {
+   "ro": "Gruia",
+   "megye": "Cluj",
+   "hu": "Kővári telep } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Grădina Poştei",
+   "megye": "Arad",
+   "hu": "Postakert } Arad",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Grădini Mănăştur",
+   "megye": "Cluj",
+   "hu": "Kertmonostor } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Grădiniţa",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Kertecske } Nagyilva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Gudea",
+   "megye": "Mureş",
+   "hu": "Göde } Gödemesterháza",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Gunar",
+   "megye": "Bihor",
+   "hu": "Gúnárkert } Bihardiószeg",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Gura Câmpului",
+   "megye": "Sibiu",
+   "hu": "Varjúmező } Medgyes",
+   "de": [
+    "Krähnenwiese"
+   ],
+   "vari": [
+    "Cartierul Gura Câmpului"
+   ]
+  },
+  {
+   "ro": "Gura Dobrii",
+   "megye": "Hunedoara",
+   "hu": "Guradobra } Dobra",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Gălcer",
+   "megye": "Cluj",
+   "hu": "Gálcserealja, Gálcser } Kolozsvár",
+   "de": [],
+   "vari": [
+    "Galişăr"
+   ]
+  },
+  {
+   "ro": "Găldişoara",
+   "megye": "Alba",
+   "hu": "Gáldifogadók",
+   "de": [],
+   "vari": [
+    "Făgădaele-Gălzii"
+   ]
+  },
+  {
+   "ro": "Hajongard",
+   "megye": "Cluj",
+   "hu": "Házsongárd } Kolozsvár",
+   "de": [
+    "Hausengart } Klausenburg"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Harghita-Mădăraş",
+   "megye": "Harghita",
+   "hu": "Madarasi-Hargita üdülőtelep",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Hazanéző",
+   "megye": "Harghita",
+   "hu": "Hazanéző } Korond",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Hârla",
+   "megye": "Sibiu",
+   "hu": "Hirlau",
+   "de": [
+    "Hirlau } Altzen"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Herecleanul Mic",
+   "megye": "Sălaj",
+   "hu": "Kisharaklány } Haraklány",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Heveder",
+   "megye": "Harghita",
+   "hu": "Heveder } Vasláb",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Hilibul Mic",
+   "megye": "Covasna",
+   "hu": "Kishilib } Hilib",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Hodăi-Lupu",
+   "megye": "Alba",
+   "hu": "Erdőmegett } Farkastelke",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Hoia",
+   "megye": "Cluj",
+   "hu": "Hója, Hójai tanya, Hója tanya, Hójahegy telep",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Honterus",
+   "megye": "Braşov",
+   "hu": "Honterus } Brassó",
+   "de": [
+    "Honterus } Kronstadt"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Horo",
+   "megye": "Bihor",
+   "hu": "Horómajor } Székelyhid",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Hotar Mărăcineni",
+   "megye": "Cluj",
+   "hu": "Cserepad } Torda",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Hotar Sfântu Ioan",
+   "megye": "Cluj",
+   "hu": "Szent János tanya } Torda",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Hoteşti",
+   "megye": "Mureş",
+   "hu": "Atosfalva",
+   "de": [],
+   "vari": [
+    "Atoşfalău"
+   ]
+  },
+  {
+   "ro": "Hrihoheret de Sus",
+   "megye": "Maramureş",
+   "hu": "Hrihorectelep } Petrovakraszna",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Hrihoret de Jos",
+   "megye": "Maramureş",
+   "hu": "Hrihorectelep } Petrovakraszna",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Hădău",
+   "megye": "Harghita",
+   "hu": "Higi tető } Csobotány",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ianco",
+   "megye": "Harghita",
+   "hu": "Jánkó } Gyergyószentmiklós",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ictar",
+   "megye": "Timiş",
+   "hu": "Iktár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ictar-Budinţ",
+   "megye": "Timiş",
+   "hu": "Budinc",
+   "de": [],
+   "vari": [
+    "Budinţ"
+   ]
+  },
+  {
+   "ro": "Idicel-Băi",
+   "megye": "Mureş",
+   "hu": "Idecsfürdő; } Alsóidecs",
+   "de": [],
+   "vari": [
+    "Idicel-Baia"
+   ]
+  },
+  {
+   "ro": "Ieducapu",
+   "megye": "Mureş",
+   "hu": "Gyepűkapu, Jeddükapu } Makfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ierbuş",
+   "megye": "Mureş",
+   "hu": "Herbusfűrész, Herbus } Szászrégen",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ierusalim",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Jeruzsálem } Bethlen",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ilbat",
+   "megye": "Sălaj",
+   "hu": "Ilbát; } Szilágysámson",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ilie",
+   "megye": "Timiş",
+   "hu": "Újlajoskisfalu telep } Lugoskisfalu",
+   "de": [],
+   "vari": [
+    "Colonia"
+   ]
+  },
+  {
+   "ro": "Iodu de Jos",
+   "megye": "Mureş",
+   "hu": "Alsójód } Jódtelep",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Iodu de Sus",
+   "megye": "Mureş",
+   "hu": "Felsőjód } Jódtelep",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Iojib-Vii",
+   "megye": "Satu Mare",
+   "hu": "Józsefházi szőllőhegy } Aranyosmeggyes",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Iosefin",
+   "megye": "Timiş",
+   "hu": "Józsefváros } Temesvár",
+   "de": [
+    "Josefstadt } Temeschwar"
+   ],
+   "vari": [
+    "Circumscripţia IV",
+    "1 Mai"
+   ]
+  },
+  {
+   "ro": "Iosăşel",
+   "megye": "Arad",
+   "hu": "Jószáshely, Kisjószás } Honctő",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ioşia",
+   "megye": "Bihor",
+   "hu": "Biharőssi, Őssipuszta } Biharszentandrás",
+   "de": [],
+   "vari": [
+    "Oşi"
+   ]
+  },
+  {
+   "ro": "Irigvese",
+   "megye": "Harghita",
+   "hu": "Irigyvésze } Zetelaka",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Iris",
+   "megye": "Cluj",
+   "hu": "Irisztelep } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Isticeu",
+   "megye": "Mureş",
+   "hu": "Iszticsótelep, Iszticsó",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Isuica",
+   "megye": "Mureş",
+   "hu": "Iszulyka } Szováta",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Izvoare Cătun",
+   "megye": "Harghita",
+   "hu": "Ivómezeje } Ivó",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Izvoraş",
+   "megye": "Harghita",
+   "hu": "Forrásköz } Székelyvarság",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Izvoru Pietrii",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Izvomtanya",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Jereapăn",
+   "megye": "Maramureş",
+   "hu": "Tótosbánya, Zsarápabánya } Budfalva",
+   "de": [],
+   "vari": [
+    "Jarapa-Baia"
+   ]
+  },
+  {
+   "ro": "Jidoviţa",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Entrádám } Naszód",
+   "de": [
+    "Unter dem Damm } Nussdorf"
+   ],
+   "vari": [
+    "Tradam",
+    "Tradamu",
+    "Entradam",
+    "Treadam",
+    "Intreadam"
+   ]
+  },
+  {
+   "ro": "Jigodin",
+   "megye": "Harghita",
+   "hu": "Zsögöd, Csíkzsögöd } Csíkszereda",
+   "de": [],
+   "vari": [
+    "Jeghed",
+    "Jigodinu",
+    "Şuged"
+   ]
+  },
+  {
+   "ro": "Jimbor Fânaţe",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Szászzsombori fogadók } Szászzsombor",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Jirca",
+   "megye": "Mureş",
+   "hu": "Zsirkatelep, Zsiskatelep } Palotailva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Jiu-Coroieşti",
+   "megye": "Hunedoara",
+   "hu": "Zsilykorojesd",
+   "de": [],
+   "vari": [
+    "Coroieşdeni",
+    "Coroieşteni"
+   ]
+  },
+  {
+   "ro": "Jupânesc",
+   "megye": "Hunedoara",
+   "hu": "Zsupinyászuvölgy; } Petrozsény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "La Cocoş",
+   "megye": "Alba",
+   "hu": "Kakasomb; } Nagyenyed",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "La Hodăi",
+   "megye": "Alba",
+   "hu": "Tövisvölgytanya } Buzásbocsárd",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "La Maşină",
+   "megye": "Maramureş",
+   "hu": "Fűrészgyártelep } Batiza",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "La Rituţa",
+   "megye": "Cluj",
+   "hu": "Rétutca } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Lacul de acumulare Zetea",
+   "megye": "Harghita",
+   "hu": "Gátmegett, Zeteváralji víztároló } Zeteváralja",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Lapoş",
+   "megye": "Bihor",
+   "hu": "Lapos } Nagyvárad",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Lapoş",
+   "megye": "Bihor",
+   "hu": "Gyűrűs-Lapos } Érmihályfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Lemnia de Jos",
+   "megye": "Covasna",
+   "hu": "Alsólemhény, Alszeg } Lemhény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Lemnia de Sus",
+   "megye": "Covasna",
+   "hu": "Felsőlemhény vagy Venece } Lemhény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Lespedea",
+   "megye": "Maramureş",
+   "hu": "Laposkő } Oroszkő",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ligatu",
+   "megye": "Harghita",
+   "hu": "Ligat, Ligat-telep } Csíkszereda",
+   "de": [],
+   "vari": [
+    "Ligat"
+   ]
+  },
+  {
+   "ro": "Lighet",
+   "megye": "Timiş",
+   "hu": "Liget } Sztancsafalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Limpert",
+   "megye": "Hunedoara",
+   "hu": "Limpert, Ólimpert, Felsőlimpert, Alsólimpert",
+   "de": [
+    "Ober Limpert",
+    "Unter Limpert"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Livada Ferma",
+   "megye": "Satu Mare",
+   "hu": "Felsőliget } Sárköz",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Livada Gordedszeg",
+   "megye": "Satu Mare",
+   "hu": "Görbedszeg } Sárköz",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Livada Poştei",
+   "megye": "Braşov",
+   "hu": "Postarét } Brassó",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Livada Vii",
+   "megye": "Satu Mare",
+   "hu": "Sárközihegy } Sárközújlak",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Livadia de Coastă",
+   "megye": "Hunedoara",
+   "hu": "Hegyaljalivádia, Kislivádia",
+   "de": [],
+   "vari": [
+    "Livadia de Coaste",
+    "Livadea de Sub Munte",
+    "Livadia Mică"
+   ]
+  },
+  {
+   "ro": "Locuri",
+   "megye": "Satu Mare",
+   "hu": "Boros, Jakó és Böszörményi tanyák",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Logata",
+   "megye": "Satu Mare",
+   "hu": "Zsuzsánnamajor } Szaniszló",
+   "de": [],
+   "vari": [
+    "Logota"
+   ]
+  },
+  {
+   "ro": "Lonea",
+   "megye": "Hunedoara",
+   "hu": "Lónyaytelep, Lónya } Petrilla",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Lopata",
+   "megye": "Covasna",
+   "hu": "Lapát } Szitabodza",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Lovaş",
+   "megye": "Bihor",
+   "hu": "Lovass-tanya } Érsemjén",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Lovaş",
+   "megye": "Bihor",
+   "hu": "Lovass tag } Érmihályfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Lozna Pleşi",
+   "megye": "Caraş-Severin",
+   "hu": "Loznaples",
+   "de": [
+    "Lozna-Plesch"
+   ],
+   "vari": [
+    "Lozna-Pleş"
+   ]
+  },
+  {
+   "ro": "Luca",
+   "megye": "Timiş",
+   "hu": "Németremeteipuszta } Németremete",
+   "de": [
+    "Greifental"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Luhei",
+   "megye": "Maramureş",
+   "hu": "Luhi, Felsőluhi } Havasmező",
+   "de": [],
+   "vari": [
+    "Luhi"
+   ]
+  },
+  {
+   "ro": "Lunca Insulei",
+   "megye": "Satu Mare",
+   "hu": "Szigetlonka, Szamossziget } Szatmárnémeti",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Lunca Negri",
+   "megye": "Hunedoara",
+   "hu": "Lunka negri } Malomviz",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Lunca Potăului",
+   "megye": "Satu Mare",
+   "hu": "Patóházi lanka, Lanka } Patóháza",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Lunceni",
+   "megye": "Sălaj",
+   "hu": "Luncsenypuszta, Kislózna } Kőlózna",
+   "de": [],
+   "vari": [
+    "Lozna Mică"
+   ]
+  },
+  {
+   "ro": "Lăzurele",
+   "megye": "Harghita",
+   "hu": "Varságtisztása, Tisztás } Székelyvarság",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Maleia",
+   "megye": "Hunedoara",
+   "hu": "Malea } Petrozsény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Mecea",
+   "megye": "Alba",
+   "hu": "Mecia } Abrudfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Mercurea-Băi",
+   "megye": "Sibiu",
+   "hu": "Sósfürdő, Szerdahelyi-sósfürdő } Szerdahely",
+   "de": [
+    "Bad-Reussmarkt } Reussmarkt"
+   ],
+   "vari": [
+    "Miercurea-Băi",
+    "Albele-Băi"
+   ]
+  },
+  {
+   "ro": "Mestecănişul",
+   "megye": "Mureş",
+   "hu": "Barbosza, Barbaszatanya } Kozmatelke",
+   "de": [],
+   "vari": [
+    "Băloasa",
+    "Bărboasa"
+   ]
+  },
+  {
+   "ro": "Micleşti",
+   "megye": "Alba",
+   "hu": "Mogosmiklesty } Mogos",
+   "de": [],
+   "vari": [
+    "Mogoş Micleşti"
+   ]
+  },
+  {
+   "ro": "Mina Aranca",
+   "megye": "Hunedoara",
+   "hu": "Arankabánya } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Mina Chepeţ",
+   "megye": "Covasna",
+   "hu": "Köpecbánya } Köpec",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Mina Clara",
+   "megye": "Hunedoara",
+   "hu": "Klárabánya } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Mina Deac",
+   "megye": "Hunedoara",
+   "hu": "Deákbányatelep } Petrilla",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Mina Sud",
+   "megye": "Hunedoara",
+   "hu": "Délibánya } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Mina Şărmăşag",
+   "megye": "Sălaj",
+   "hu": "Sarmasági-bányatelep } Sarmaság",
+   "de": [],
+   "vari": [
+    "Colonia Mina Şărmăşag"
+   ]
+  },
+  {
+   "ro": "Minereni",
+   "megye": "Harghita",
+   "hu": "Pósfalu, Bányatelep } Lövéte",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Mischieni",
+   "megye": "Cluj",
+   "hu": "Mészkőtanya } Mezőbő",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Misica",
+   "megye": "Maramureş",
+   "hu": "Miszika } Havasmező",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Moara de Apă",
+   "megye": "Mureş",
+   "hu": "Vízimalom } Mezőbánd",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Mociar",
+   "megye": "Mureş",
+   "hu": "Mocsár, Alsómocsár, Felsőmocsár } Görgényoroszfalu",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Mocirla",
+   "megye": "Sibiu",
+   "hu": "Mocirletelep",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Momârlani",
+   "megye": "Hunedoara",
+   "hu": "Maradvány; } Zsilvajdejvulkán",
+   "de": [],
+   "vari": [
+    "Morodvani"
+   ]
+  },
+  {
+   "ro": "Moştercut",
+   "megye": "Cluj",
+   "hu": "Mesterkút } Mocs",
+   "de": [],
+   "vari": [
+    "Meştercut"
+   ]
+  },
+  {
+   "ro": "Mujdeni",
+   "megye": "Satu Mare",
+   "hu": "Muzsdaj, Muzsdai kerülőház, Miklósmajor } Sárköz",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Muntele Agrişului",
+   "megye": "Cluj",
+   "hu": "Ruhaegres havasa, Ruhaegres havas } Járabánya",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Mureş-Sat",
+   "megye": "Harghita",
+   "hu": "Marosfalva, Marostízes } Gyergyóújfalu",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Musari",
+   "megye": "Hunedoara",
+   "hu": "Muszári } Ruda",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Muşa",
+   "megye": "Covasna",
+   "hu": "Musatelep } Kommandó",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Măguran",
+   "megye": "Bihor",
+   "hu": "Magurics } Nagybáród",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Mălăieşte",
+   "megye": "Mureş",
+   "hu": "Éhmező } Marosbogát",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Mănăstirea Hodoş-Bodrog",
+   "megye": "Arad",
+   "hu": "Hódosbodrogi zárda } Óbodrog",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Mănăstirea Moiseiului",
+   "megye": "Maramureş",
+   "hu": "Majszinklastrom, Mojszénklastrom } Majszin",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Neuwerk",
+   "megye": "Caraş-Severin",
+   "hu": "Újboksán } Boksánbánya",
+   "de": [
+    "Neuwerk } Bogschan"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Nima-Cătun",
+   "megye": "Cluj",
+   "hu": "Némai fogadó } Széplak",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Noghirez",
+   "megye": "Harghita",
+   "hu": "Nagyrez } Gyergyótölgyes",
+   "de": [],
+   "vari": [
+    "Naghirez",
+    "Rezu Mare"
+   ]
+  },
+  {
+   "ro": "Noua",
+   "megye": "Braşov",
+   "hu": "Noa, Villa-telep } Brassó",
+   "de": [],
+   "vari": [
+    "Noa"
+   ]
+  },
+  {
+   "ro": "Novăceni",
+   "megye": "Satu Mare",
+   "hu": "Újmajor } Erdőd",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Nuceştii",
+   "megye": "Bihor",
+   "hu": "Védimajor } Érbogyoszló",
+   "de": [],
+   "vari": [
+    "Ferma Veid"
+   ]
+  },
+  {
+   "ro": "Nădrap",
+   "megye": "Timiş",
+   "hu": "Nadráp, Nadráp puszta } Govasdia",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Oaia",
+   "megye": "Sălaj",
+   "hu": "Vaja, Cigányvaja } Cigányi",
+   "de": [],
+   "vari": [
+    "Vaia"
+   ]
+  },
+  {
+   "ro": "Oarda de Sus",
+   "megye": "Alba",
+   "hu": "Felsőváradja, Marosfelsőváradja } Alsóváradja",
+   "de": [
+    "Ober-Wardein } Unter-Wardein"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Obianda",
+   "megye": "Timiş",
+   "hu": "Zsigmondpuszta, Obianda, Obiandapuszta } Daruvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ocna Praid",
+   "megye": "Harghita",
+   "hu": "Sóbányatelep } Parajd",
+   "de": [
+    "Salzbergwerk"
+   ],
+   "vari": [
+    "Salina Praid"
+   ]
+  },
+  {
+   "ro": "Ocna Turzii",
+   "megye": "Cluj",
+   "hu": "Tordai-sósfürdő, Feredő } Torda",
+   "de": [],
+   "vari": [
+    "Băile Sărate"
+   ]
+  },
+  {
+   "ro": "Ofelia",
+   "megye": "Bihor",
+   "hu": "Oféliatanya } Érszőllős",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ofelia",
+   "megye": "Timiş",
+   "hu": "Oféliatelep } Temesszékás",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Oprea-Cârţişoara",
+   "megye": "Sibiu",
+   "hu": "Oprakercisora } Kercisóra",
+   "de": [
+    "Klein-Kerz } Streschen",
+    "Kertschen } Streschen"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Oprişani",
+   "megye": "Cluj",
+   "hu": "Keresztes } Torda",
+   "de": [
+    "Kreuzerfeld } Thorenburg"
+   ],
+   "vari": [
+    "Cristiş"
+   ]
+  },
+  {
+   "ro": "Optzecicăşi",
+   "megye": "Hunedoara",
+   "hu": "Nyolcvanháztelep } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Oraviţa Română",
+   "megye": "Caraş-Severin",
+   "hu": "Oravicafalu, Oláhoravica } Oravicabánya",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Oraş Grădină",
+   "megye": "Satu Mare",
+   "hu": "Kertváros } Nagykároly",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Oraşul de Jos",
+   "megye": "Sibiu",
+   "hu": "Alsóváros } Nagyszeben",
+   "de": [
+    "Unterstadt } Hermannstadt"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Oraşul de Jos",
+   "megye": "Alba",
+   "hu": "Alsóváros } Gyulafehérvár",
+   "de": [
+    "Unterstadt } Weissenburg"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Oraşul de Jos",
+   "megye": "Mureş",
+   "hu": "Alsóváros } Segesvár",
+   "de": [
+    "Unterstadt } Schässburg"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Oraşul de Sus",
+   "megye": "Mureş",
+   "hu": "Felsőváros } Segesvár",
+   "de": [
+    "Oberstadt } Schässburg"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Oraşul de Sus",
+   "megye": "Sibiu",
+   "hu": "Felsőváros } Nagyszeben",
+   "de": [
+    "Oberstadt } Hermannstadt"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Oraşul Vechi",
+   "megye": "Cluj",
+   "hu": "Óvár } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Oroiu de Câmpie",
+   "megye": "Mureş",
+   "hu": "Mezőuraly, Uraly, Uraj } Székelyuraly",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ortelec",
+   "megye": "Sălaj",
+   "hu": "Vártelek } Zilah",
+   "de": [],
+   "vari": [
+    "Vartelec"
+   ]
+  },
+  {
+   "ro": "Osui",
+   "megye": "Mureş",
+   "hu": "Oszojtelep } Kásva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Oşvarău",
+   "megye": "Satu Mare",
+   "hu": "Batizvasvári, Vasvári",
+   "de": [],
+   "vari": [
+    "Oşvari"
+   ]
+  },
+  {
+   "ro": "Palota Veche",
+   "megye": "Bihor",
+   "hu": "Ópalota } Újpalota",
+   "de": [
+    "Altpalota } Neupalota"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Patarât",
+   "megye": "Cluj",
+   "hu": "Patarét } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Pava",
+   "megye": "Covasna",
+   "hu": "Páva, Pávafalva } Zabola",
+   "de": [
+    "Pfaunendorf } Zabalon",
+    "Pfauendorf } Zabalon"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Pâncota Nouă",
+   "megye": "Arad",
+   "hu": "Újpankota } Pankota",
+   "de": [
+    "Neu-Pankota } Pankota"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Pârâiaşul",
+   "megye": "Covasna",
+   "hu": "Ökröspatak",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Pârâu Satu Mare",
+   "megye": "Harghita",
+   "hu": "Máréfalvi-patak }Máréfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Pârâul Asodului",
+   "megye": "Harghita",
+   "hu": "Aszódpatak } Gyergyótölgyes",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Pârâul Şumleu",
+   "megye": "Harghita",
+   "hu": "Somlyópataka } Szászfalu",
+   "de": [],
+   "vari": [
+    "Pîrîul Şumeleu"
+   ]
+  },
+  {
+   "ro": "Pârăul Iovului",
+   "megye": "Alba",
+   "hu": "Joruárka } Borbánd",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Pepiniera Ciala",
+   "megye": "Arad",
+   "hu": "Csálai csemetekert } Arad",
+   "de": [],
+   "vari": [
+    "Pepiniera Ceala"
+   ]
+  },
+  {
+   "ro": "Periac",
+   "megye": "Maramureş",
+   "hu": "Kupacsicsaszéntelep",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Perişcani",
+   "megye": "Arad",
+   "hu": "Baracka } Lippa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Peste Ape",
+   "megye": "Mureş",
+   "hu": "Túlaviz } Marosbogát",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Petenia",
+   "megye": "Sălaj",
+   "hu": "Petenye, Horvátpetenye, Petenyefalva, Szentkeresztfalva, Szentgyörgy",
+   "de": [],
+   "vari": [
+    "Petenie"
+   ]
+  },
+  {
+   "ro": "Petişul de Jos",
+   "megye": "Sibiu",
+   "hu": "Alsókispéterfalva } Bólya",
+   "de": [],
+   "vari": [
+    "Mălai-Petiş"
+   ]
+  },
+  {
+   "ro": "Petroasa",
+   "megye": "Hunedoara",
+   "hu": "Petrosza kőszénbánya, Petrósza } Déva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Petroasa",
+   "megye": "Maramureş",
+   "hu": "Kövesvölgy } Borsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Peţ",
+   "megye": "Sălaj",
+   "hu": "Pecpuszta } Nagyrajtolc",
+   "de": [
+    "Petz } Reitholz"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Piatra Craiului",
+   "megye": "Bihor",
+   "hu": "Királyhágótető } Nagyfeketepatak",
+   "de": [
+    "Königssteig"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Piatra Harcană",
+   "megye": "Cluj",
+   "hu": "Harkányikő } Torda",
+   "de": [],
+   "vari": [
+    "Piatra Hărcanii"
+   ]
+  },
+  {
+   "ro": "Piatra Şoimului",
+   "megye": "Harghita",
+   "hu": "Solyomkőhegy } Székelyvarság",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Pipa Poeni",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Pipa } Apanagyfalu",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Plaic",
+   "megye": "Maramureş",
+   "hu": "Plajik, Plaik } Oroszkő",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ploscabaia",
+   "megye": "Hunedoara",
+   "hu": "Ploszkabánya } Felsőtelek",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ploscoşu Mic",
+   "megye": "Cluj",
+   "hu": "Kispalackos } Torda",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Podgoria",
+   "megye": "Bihor",
+   "hu": "Hegyalja, Hegy városrész } Nagyvárad",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Podul Bărbat",
+   "megye": "Covasna",
+   "hu": "Borbát } Saramás",
+   "de": [],
+   "vari": [
+    "Borbat"
+   ]
+  },
+  {
+   "ro": "Poiana Braşovului",
+   "megye": "Braşov",
+   "hu": "Schuler-rét; Brassópolyána } Brassó",
+   "de": [
+    "Schullerau } Kronstadt"
+   ],
+   "vari": [
+    "Poiana Stalin"
+   ]
+  },
+  {
+   "ro": "Poiana Fâşca",
+   "megye": "Bihor",
+   "hu": "Pojánatanya } Várfancsika",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Poiana Mereni",
+   "megye": "Covasna",
+   "hu": "Almásrétje } Kézdialmás",
+   "de": [],
+   "vari": [
+    "Poiana Almaş"
+   ]
+  },
+  {
+   "ro": "Poiana Nouă",
+   "megye": "Harghita",
+   "hu": "Újpojána, Újmező } Gyergyótölgyes",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Poiana Tăşad",
+   "megye": "Bihor",
+   "hu": "Kopácsmező",
+   "de": [],
+   "vari": [
+    "Poiana Copăcel",
+    "Poiana Moţilor"
+   ]
+  },
+  {
+   "ro": "Poic",
+   "megye": "Sălaj",
+   "hu": "Pojk } Bagolyfalu",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Poienile Boinii",
+   "megye": "Caraş-Severin",
+   "hu": "Pojenile Bojni",
+   "de": [],
+   "vari": [
+    "Poienile Boinei",
+    "Poenile Boinei"
+   ]
+  },
+  {
+   "ro": "Pojejena de Sus",
+   "megye": "Caraş-Severin",
+   "hu": "Felsőpozsgás, Rácpozsezsena, Szerbpozsezsena",
+   "de": [
+    "Serbisch-Poscheschena"
+   ],
+   "vari": [
+    "Pojejena Sârbească"
+   ]
+  },
+  {
+   "ro": "Poltura",
+   "megye": "Arad",
+   "hu": "Kakasváros, Poltura } Arad",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Poniţa",
+   "megye": "Sălaj",
+   "hu": "Boronamező } Bagolyfalu",
+   "de": [],
+   "vari": [
+    "Hurez-Poniţa",
+    "Poieniţa"
+   ]
+  },
+  {
+   "ro": "Prodeni",
+   "megye": "Hunedoara",
+   "hu": "Prodény } Petrilla",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Pădurea Hoia",
+   "megye": "Cluj",
+   "hu": "Hója, Hójaerdő } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Pădurea Verde",
+   "megye": "Timiş",
+   "hu": "Vadászerdő } Temesvár",
+   "de": [
+    "Jagdwald } Temeschwar"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Pădurenii Mici",
+   "megye": "Timiş",
+   "hu": "Jenőháza } Széphely",
+   "de": [],
+   "vari": [
+    "Pădureniu Mic",
+    "Păduricea"
+   ]
+  },
+  {
+   "ro": "Păduroi",
+   "megye": "Maramureş",
+   "hu": "Rójahida, Rójahidja",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Părţ",
+   "megye": "Mureş",
+   "hu": "Perjéstanya } Nagysármás",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Pătru-Paul",
+   "megye": "Mureş",
+   "hu": "Péter-Pál tanya } Kozmatelke",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Păulişu Nou",
+   "megye": "Arad",
+   "hu": "Újpálos, Újpaulis",
+   "de": [
+    "Neu-Paulisch"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Păţalul Mic",
+   "megye": "Bihor",
+   "hu": "Érkisszőllős, Kispacal, Újkispacal",
+   "de": [],
+   "vari": [
+    "Păţăluşu"
+   ]
+  },
+  {
+   "ro": "Ramificaţia Chirui",
+   "megye": "Harghita",
+   "hu": "Kalibáskő } Lövéte",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Râmeţ-Sat",
+   "megye": "Alba",
+   "hu": "Remetepilis, Pilisremete, Remetefalu } Remete",
+   "de": [],
+   "vari": [
+    "Pleaşa",
+    "Râmeţ-Pleaşa"
+   ]
+  },
+  {
+   "ro": "Râturi",
+   "megye": "Maramureş",
+   "hu": "Mezőség } Borsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Recea Nouă",
+   "megye": "Braşov",
+   "hu": "Telekirécse } Vajdarécse",
+   "de": [
+    "Unter-Retsch } Waywodretschen"
+   ],
+   "vari": [
+    "Telechi-Recea",
+    "Telechi-Reci",
+    "Recea Telechiană"
+   ]
+  },
+  {
+   "ro": "Reghinul Unguresc",
+   "megye": "Mureş",
+   "hu": "Magyarrégen } Szászrégen",
+   "de": [
+    "Ungarisch-Reen } Sächsisch-Regen"
+   ],
+   "vari": [
+    "Reghin Sat"
+   ]
+  },
+  {
+   "ro": "Reşiţa Română",
+   "megye": "Caraş-Severin",
+   "hu": "Oláhresica, Románresica } Resicabánya",
+   "de": [
+    "Wallachisch-Reschitza } Reschitz"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Reştirata",
+   "megye": "Arad",
+   "hu": "Restyiráta, Restyiráta hámortelep } Dézna",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ribicioara de Sus",
+   "megye": "Hunedoara",
+   "hu": "Felsőribice } Ribicsora",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Româneştii Noi",
+   "megye": "Satu Mare",
+   "hu": "Románfalva } Aranyosmeggyes",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Rona-Plai",
+   "megye": "Maramureş",
+   "hu": "Rónatája } Visóvölgy",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ronaţ",
+   "megye": "Timiş",
+   "hu": "Rónáctelep } Temesvár",
+   "de": [
+    "Ronaz } Temeschwar"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Rora Cincului",
+   "megye": "Braşov",
+   "hu": "Rohrau",
+   "de": [
+    "Rohrau } Grossschenk"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Rovinari Cartierul Rovinari",
+   "megye": "Mureş",
+   "hu": "Ady lakótelep } Marosvásárhely",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Rovine",
+   "megye": "Arad",
+   "hu": "Magyarpécska } Ópécska",
+   "de": [
+    "Neupetschka } Alt-Petschka"
+   ],
+   "vari": [
+    "Pecica ungurească"
+   ]
+  },
+  {
+   "ro": "Rugeşti",
+   "megye": "Cluj",
+   "hu": "Csipkéstér } Torda",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Rupea Gară",
+   "megye": "Braşov",
+   "hu": "Kőhalmi vasútitelep } Kőhalom",
+   "de": [],
+   "vari": [
+    "Gara Rupea",
+    "Colonia Rupea"
+   ]
+  },
+  {
+   "ro": "Rusu",
+   "megye": "Mureş",
+   "hu": "Ruszuj } Segesvár",
+   "de": [
+    "Klossel } Schässburg"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Sarca",
+   "megye": "Maramureş",
+   "hu": "Szirka } Borsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Satu Mare-Ferestrău } Satu Mare",
+   "megye": "Satu Mare",
+   "hu": "Szatmárnémeti gőzfűrész } Szatmárnémeti",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Satul Olt",
+   "megye": "Harghita",
+   "hu": "Oltfalu }Csíkcsicsó",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Sâlha",
+   "megye": "Timiş",
+   "hu": "Szilha",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Sâmbăta de Sus Apusenă",
+   "megye": "Braşov",
+   "hu": "Nyugotifelsőszombatfalva, Nyugatifelsőszombatfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Sâncrăieni Băi",
+   "megye": "Harghita",
+   "hu": "Csíkszentkirályi borv�zf�rdő, Bors�ros } Csíkszentkirály",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Sânmihaiu de Sus",
+   "megye": "Cluj",
+   "hu": "Felsőszentmihály, Szentmihály Felsőszentmihályfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Sânnicolaul German",
+   "megye": "Timiş",
+   "hu": "Németszentmiklós, Németnagyszentmiklós } Nagyszentmiklós",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Sântana Nirajului",
+   "megye": "Mureş",
+   "hu": "Nyárádszentanna, Szeredaszentanna, Szentanna",
+   "de": [],
+   "vari": [
+    "Sântana Niraj"
+   ]
+  },
+  {
+   "ro": "Sântămaş",
+   "megye": "Arad",
+   "hu": "Pécskaszenttamás, Szenttamás } Pécska",
+   "de": [],
+   "vari": [
+    "Sântomaş"
+   ]
+  },
+  {
+   "ro": "Scheii Braşovului",
+   "megye": "Braşov",
+   "hu": "Bolgárszeg, Alsbolgárszeg, Felsőbolgárszeg",
+   "de": [],
+   "vari": [
+    "Şchei",
+    "Bolgarsec",
+    "Bolgarseghi",
+    "Bolgarsăchiu",
+    "Bolgarsechi"
+   ]
+  },
+  {
+   "ro": "Scrind",
+   "megye": "Cluj",
+   "hu": "Sóstó, Szalica, Szulica } Kőrizstető",
+   "de": [],
+   "vari": [
+    "Suliţa"
+   ]
+  },
+  {
+   "ro": "Seceni",
+   "megye": "Harghita",
+   "hu": "Szécseny, Szécseny városrész } Csíkszereda",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Seiche",
+   "megye": "Harghita",
+   "hu": "Szejkefürdő, Attila forrás",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Selters",
+   "megye": "Harghita",
+   "hu": "Szerepreze + Délő + Nádasszék + Székmező = Székelyszeltersz, Szeltersz } Lövéte",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Sibişelu Nou",
+   "megye": "Hunedoara",
+   "hu": "Újsebeshely, Újsebeshely Vashámor",
+   "de": [
+    "Neu-Schebeschel",
+    "Eisenhammer"
+   ],
+   "vari": [
+    "Sibişelul Nou",
+    "Şebişul Nou",
+    "Baia de Fier"
+   ]
+  },
+  {
+   "ro": "Sibişeni",
+   "megye": "Alba",
+   "hu": "Sibisán, Sebesány, Sibisány } Alvinc",
+   "de": [
+    "Sebeschdorf } Unter-Wintz",
+    "Sebesdorf } Unter-Wintz",
+    "Sebenhan } Unter-Wintz"
+   ],
+   "vari": [
+    "Sibişani",
+    "Şebişan"
+   ]
+  },
+  {
+   "ro": "Sirinia",
+   "megye": "Caraş-Severin",
+   "hu": "Szirinyatelep } Berszászka",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Slovacii",
+   "megye": "Sălaj",
+   "hu": "Tóttelep } Selymesilosva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Sohodol-Vale",
+   "megye": "Alba",
+   "hu": "Valea Verde tanya } Aranyosszohodol",
+   "de": [],
+   "vari": [
+    "Valea Verde"
+   ]
+  },
+  {
+   "ro": "Soloţia",
+   "megye": "Maramureş",
+   "hu": "Szolotyán } Havasmező",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Solter",
+   "megye": "Satu Mare",
+   "hu": "Szőlcér } Tasnádbalázsháza",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Someşu-Uzina",
+   "megye": "Cluj",
+   "hu": "Hidegszamosi villanytelep } Hidegszamos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Soruşa",
+   "megye": "Sălaj",
+   "hu": "Szoros",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Sovata Băi",
+   "megye": "Mureş",
+   "hu": "Szovátafürdő } Szováta",
+   "de": [
+    "Bad Sovata } Sovata"
+   ],
+   "vari": [
+    "Băile Sovata"
+   ]
+  },
+  {
+   "ro": "Soşba",
+   "megye": "Cluj",
+   "hu": "Sósba } Mocs",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Staţiunea Climaterică Borşa",
+   "megye": "Maramureş",
+   "hu": "Borsafüred, Forrásvölgy } Borsa",
+   "de": [],
+   "vari": [
+    "Borşa-Fântâni",
+    "Borşa Complex"
+   ]
+  },
+  {
+   "ro": "Staţiunea Semenic",
+   "megye": "Caraş-Severin",
+   "hu": "Szemenik üdülőtelep } Szörényordas",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Stâna de Vale",
+   "megye": "Bihor",
+   "hu": "Biharfüred } Bondoraszó",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Stâna de Vale",
+   "megye": "Mureş",
+   "hu": "Patakmajor } Szováta",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Strâmbulici",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Sztrimbavölgy } Úrivölgy",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Stupinii Hărmanului",
+   "megye": "Braşov",
+   "hu": "Méhkertek Szászhermányi-méhkertek",
+   "de": [
+    "Bienengärten"
+   ],
+   "vari": [
+    "Stupini-Subobrej"
+   ]
+  },
+  {
+   "ro": "Suatul de Jos",
+   "megye": "Cluj",
+   "hu": "Alsószovát } Magyarszovát",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Suatul de Sus",
+   "megye": "Cluj",
+   "hu": "Felsőszovát } Magyarszovát",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Sub Cetate Cătune",
+   "megye": "Harghita",
+   "hu": "Borosszénája } Zetelaka, Deságárnyék, } Zetelaka, Deságpatak,} Zetelaka, Fenyőaszó } Zetelaka, Kerekfenyő } Zetelaka, Kövesdo",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Sub Dealul Sfântu Gheorghe",
+   "megye": "Cluj",
+   "hu": "Szentgyörgyhegyalja } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Sub vii",
+   "megye": "Mureş",
+   "hu": "Szőllőalja } Marosbogát",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Suhorca",
+   "megye": "Maramureş",
+   "hu": "Bérctelep, Bircvölgy } Borsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Sulţa",
+   "megye": "Harghita",
+   "hu": "Sulcavölgy } Szépvíz",
+   "de": [],
+   "vari": [
+    "Valea Sulţa"
+   ]
+  },
+  {
+   "ro": "Surda",
+   "megye": "Mureş",
+   "hu": "Süketfalva } Demeterfalva",
+   "de": [],
+   "vari": [
+    "Şiuchetfalău"
+   ]
+  },
+  {
+   "ro": "Săpâia",
+   "megye": "Maramureş",
+   "hu": "Szappanpataka } Pusztafentős",
+   "de": [
+    "Seifenbach"
+   ],
+   "vari": [
+    "Săpuia"
+   ]
+  },
+  {
+   "ro": "Sărand",
+   "megye": "Bihor",
+   "hu": "Szaránd",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Săseşti",
+   "megye": "Harghita",
+   "hu": "Szászfalu } Gyergyócsomafalva",
+   "de": [],
+   "vari": [
+    "Sasfalu"
+   ]
+  },
+  {
+   "ro": "Sătmărel",
+   "megye": "Satu Mare",
+   "hu": "Szatmárzsadány",
+   "de": [],
+   "vari": [
+    "Ghidani",
+    "Gidani",
+    "Jădani",
+    "Jedani",
+    "Jidani"
+   ]
+  },
+  {
+   "ro": "Taia",
+   "megye": "Hunedoara",
+   "hu": "Tája rész } Petrilla",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Tepliţe",
+   "megye": "Maramureş",
+   "hu": "Csejtedomb } Máramarossziget",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Termezeu",
+   "megye": "Bihor",
+   "hu": "Térmező } Felsőlugos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Teuş",
+   "megye": "Caraş-Severin",
+   "hu": "Teus, Theus } Karánsebes",
+   "de": [
+    "Teusch } Karanschebesch"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Tihuţa",
+   "megye": "Bistriţa-Năsăud",
+   "hu": "Tihuca } Borgóprund",
+   "de": [
+    "Tihutza"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Tilalmoş",
+   "megye": "Harghita",
+   "hu": "Tilalmas } Ditró",
+   "de": [],
+   "vari": [
+    "Tilalmas",
+    "Tilamoş"
+   ]
+  },
+  {
+   "ro": "Timoni",
+   "megye": "Harghita",
+   "hu": "Tikmony } Marosfő",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Tincani",
+   "megye": "Harghita",
+   "hu": "Tinkatelep, Tinkák és Ölyves, Ölves } Marosfő",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Toancheş",
+   "megye": "Braşov",
+   "hu": "Toanchespuszta } Zernyest",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Tohanu Vechi",
+   "megye": "Braşov",
+   "hu": "Ótohán, Tohán",
+   "de": [
+    "Alt-Tauchen",
+    "Alt-Tohan"
+   ],
+   "vari": [
+    "Tohanul-Vechiu"
+   ]
+  },
+  {
+   "ro": "Topliţa-Ciuc",
+   "megye": "Harghita",
+   "hu": "Csíktaploca, Taploca, Tapolca } Csíkszereda",
+   "de": [],
+   "vari": [
+    "Topliţa",
+    "Toploţa"
+   ]
+  },
+  {
+   "ro": "Topolia",
+   "megye": "Timiş",
+   "hu": "Topolyapuszta } Pártos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Torocpatac",
+   "megye": "Harghita",
+   "hu": "Torokpatak } Ditró",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Totia Mică",
+   "megye": "Hunedoara",
+   "hu": "Kistóti } Nagytóti",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Trei Fântâni",
+   "megye": "Harghita",
+   "hu": "Háromkút } Gyimesközéplok",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Trei Hanuri",
+   "megye": "Cluj",
+   "hu": "Túrhármas, Hármasfogadó } Tordatúr",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Trăinei",
+   "megye": "Sibiu",
+   "hu": "Traineitelep } Resinár",
+   "de": [],
+   "vari": [
+    "Trainei"
+   ]
+  },
+  {
+   "ro": "Tulca-Cătun",
+   "megye": "Bihor",
+   "hu": "Patapuszta } Tulka",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Turcheş",
+   "megye": "Braşov",
+   "hu": "Türkös, a Hétfalu vagy Négyfalu része",
+   "de": [
+    "Türkeschdorf",
+    "Türkesdorf"
+   ],
+   "vari": [
+    "Turcu",
+    "Turchiş"
+   ]
+  },
+  {
+   "ro": "Turda Nouă",
+   "megye": "Cluj",
+   "hu": "Újtorda } Torda",
+   "de": [
+    "Neu-Thorda } Thorenburg"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Turda-Băi",
+   "megye": "Cluj",
+   "hu": "Tordafürdő, Feredő } Torda",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Turnişor",
+   "megye": "Sibiu",
+   "hu": "Kistorony } Nagyszeben",
+   "de": [
+    "Neppendorf } Hemannstadt",
+    "Steppendorf } Hemannstadt",
+    "Nebendorf } Hemannstadt"
+   ],
+   "vari": [
+    "Cartierul Turnişor"
+   ]
+  },
+  {
+   "ro": "Turzun",
+   "megye": "Braşov",
+   "hu": "Turzonpuszta, Tuzslonpuszta } Olthévíz",
+   "de": [
+    "Freithum } Warmwasser",
+    "Stuhlfreitum Turzon } Warmwasser"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Tuzocmal",
+   "megye": "Cluj",
+   "hu": "Túzokmál, Túzokmálszőllőhegy } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Tăietura Turcului } Cluj-Napoca",
+   "megye": "Cluj",
+   "hu": "Törökvágás, Törökmelléke } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Tăuţii de Jos",
+   "megye": "Maramureş",
+   "hu": "Misztótfalu, Kistótfalu, Tótfalu } Miszmogyorós",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Tăşnadu Nou",
+   "megye": "Satu Mare",
+   "hu": "Újtasnád",
+   "de": [
+    "Neu Taschnad",
+    "Neutrestenburg"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Uifalău",
+   "megye": "Harghita",
+   "hu": "Újfalu } Lövéte",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ulieşu Mic",
+   "megye": "Mureş",
+   "hu": "Kisölyves } Mezőszentmárton",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ulmenii",
+   "megye": "Sibiu",
+   "hu": "Csoratanya } Bója",
+   "de": [],
+   "vari": [
+    "Dealul Cioara"
+   ]
+  },
+  {
+   "ro": "Ungheţ",
+   "megye": "Arad",
+   "hu": "Ungyecpuszta } Repszeg",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Urtica",
+   "megye": "Sibiu",
+   "hu": "Ursicatelep } Zsinna",
+   "de": [],
+   "vari": [
+    "Urşiţa"
+   ]
+  },
+  {
+   "ro": "Utashazu",
+   "megye": "Mureş",
+   "hu": "Utászház, Útkaparóház, Relé (az 1977-es népszámláláskor és később is lakatlan) } Nyárádmagyarós",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Uzinele Noi",
+   "megye": "Caraş-Severin",
+   "hu": "Boksánhuta",
+   "de": [
+    "Neuwerk"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Vada",
+   "megye": "Satu Mare",
+   "hu": "Vada } Mezőfény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Întunecată",
+   "megye": "Cluj",
+   "hu": "Sötétvölgy } Palackos",
+   "de": [],
+   "vari": [
+    "Valea Intunecoasă"
+   ]
+  },
+  {
+   "ro": "Valea Baico",
+   "megye": "Harghita",
+   "hu": "Bajkópataka } Maroshévíz",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Bandului",
+   "megye": "Harghita",
+   "hu": "Bándpataka } Gyimesközéplok",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Banului",
+   "megye": "Harghita",
+   "hu": "Bánpataka } Gyimesfelsőlok",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Chinteni",
+   "megye": "Cluj",
+   "hu": "Kalyántóvölgye } Kalyántó",
+   "de": [],
+   "vari": [
+    "Valea Chintăului"
+   ]
+  },
+  {
+   "ro": "Valea Cichi",
+   "megye": "Harghita",
+   "hu": "Csíkiekpataka } Gyimesközéplok",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Codorului",
+   "megye": "Cluj",
+   "hu": "Kodorivölgy } Dés",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Covaş",
+   "megye": "Harghita",
+   "hu": "Kováspatak, Kovácspatak } Gyimesközéplok",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Fetiţei",
+   "megye": "Sălaj",
+   "hu": "Fecicivölgy } Nagykeresztes",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Francisc",
+   "megye": "Maramureş",
+   "hu": "Ferencvölgye } Kövesláz",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Frumoasă",
+   "megye": "Harghita",
+   "hu": "Túlsóvíz } Gyergyótölgyes",
+   "de": [],
+   "vari": [
+    "Sângeroasa"
+   ]
+  },
+  {
+   "ro": "Valea Gabor",
+   "megye": "Harghita",
+   "hu": "Gáborokpataka } Gyimesfelsőlok",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Gorboului",
+   "megye": "Cluj",
+   "hu": "Gorbóvölgy } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Gălzii",
+   "megye": "Alba",
+   "hu": "Gáldpataka } Havasgáld",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Hăitaşului",
+   "megye": "Cluj",
+   "hu": "Hajtásvölgy } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Iadului",
+   "megye": "Bihor",
+   "hu": "Jádvölgy } Köröslóró",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Iavardi",
+   "megye": "Harghita",
+   "hu": "Jávárdipataka } Gyimesközéplok",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Ierţii",
+   "megye": "Cluj",
+   "hu": "Ércpatak, Ércpatak bányatelep",
+   "de": [],
+   "vari": [
+    "Erţpatac",
+    "Ierţa"
+   ]
+  },
+  {
+   "ro": "Valea Ilei",
+   "megye": "Maramureş",
+   "hu": "Előspatak } Borsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Jichişului",
+   "megye": "Cluj",
+   "hu": "Gyékényesi völgy } Dés",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Lungă Maghiară",
+   "megye": "Timiş",
+   "hu": "Hosszúvölgy } Nőrincse",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Lungă Mare",
+   "megye": "Cluj",
+   "hu": "Hosszúvölgy } Palackos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Lungă Mică",
+   "megye": "Cluj",
+   "hu": "Kishosszúvölgy } Palackos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Mijlocie",
+   "megye": "Sălaj",
+   "hu": "Mizoloescivölgy } Nagykeresztes",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Miţei",
+   "megye": "Sălaj",
+   "hu": "Micevölgye } Zilah",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Măriei",
+   "megye": "Satu Mare",
+   "hu": "Máriavölgyfürdő } Vámfalu",
+   "de": [],
+   "vari": [
+    "Scaldele-Vămii"
+   ]
+  },
+  {
+   "ro": "Valea Oprişeni",
+   "megye": "Cluj",
+   "hu": "Keresztesvölgy } Palackos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Petrii",
+   "megye": "Hunedoara",
+   "hu": "Péterárok } Lupény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Peştelui",
+   "megye": "Maramureş",
+   "hu": "Halaspatak } Feslővisó",
+   "de": [],
+   "vari": [
+    "Valea Peştilor"
+   ]
+  },
+  {
+   "ro": "Valea Pietrişului",
+   "megye": "Mureş",
+   "hu": "Kövesdpatak } Marosliget",
+   "de": [],
+   "vari": [
+    "Valea Petrişului"
+   ]
+  },
+  {
+   "ro": "Valea Raico",
+   "megye": "Harghita",
+   "hu": "Rajkópataka, Farkaspataka } Gyimesfelsőlok",
+   "de": [],
+   "vari": [
+    "Valea Rajkó"
+   ]
+  },
+  {
+   "ro": "Valea Raţei",
+   "megye": "Harghita",
+   "hu": "Récepataka, Timárokpataka } Gyimesfelsőlok",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Suciu",
+   "megye": "Harghita",
+   "hu": "Szőcsökpataka } Gyimesfelsőlok",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Surduc",
+   "megye": "Cluj",
+   "hu": "Keresztesvölgy } Buza",
+   "de": [],
+   "vari": [
+    "Cristiş"
+   ]
+  },
+  {
+   "ro": "Valea Tisei",
+   "megye": "Maramureş",
+   "hu": "Tiszavölgy } Borsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Vântului",
+   "megye": "Cluj",
+   "hu": "Szelektelek } Palackos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Voineşti",
+   "megye": "Covasna",
+   "hu": "Vajnafalva } Kovászna",
+   "de": [],
+   "vari": [
+    "Vainafalău",
+    "Voineşti"
+   ]
+  },
+  {
+   "ro": "Valea Zânelor",
+   "megye": "Covasna",
+   "hu": "Tündérvölgy } Kovászna",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Valea Şulţă",
+   "megye": "Harghita",
+   "hu": "Sulcavölgy } Szépviz",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Vancicu",
+   "megye": "Maramureş",
+   "hu": "Vancsikó } Havasmező",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Vaoturi",
+   "megye": "Maramureş",
+   "hu": "Visonc } Borsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Vapa",
+   "megye": "Harghita",
+   "hu": "Tekenyősvápa } Korond",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Vardotfalău",
+   "megye": "Harghita",
+   "hu": "Várdotfalva, Várdodfalva } Csíkszereda",
+   "de": [],
+   "vari": [
+    "Straja"
+   ]
+  },
+  {
+   "ro": "Varţa",
+   "megye": "Satu Mare",
+   "hu": "Apácatanya } Hadad",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Vasca",
+   "megye": "Harghita",
+   "hu": "Vaska } Székelypálfalva",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Vasăr",
+   "megye": "Maramureş",
+   "hu": "Vasér",
+   "de": [
+    "Wasser"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Vecier",
+   "megye": "Bihor",
+   "hu": "Nagyvecser } Székelyhíd",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Velenţa",
+   "megye": "Bihor",
+   "hu": "Váradvelence, Velence, Katonaváros } Nagyvárad",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Veneţia",
+   "megye": "Covasna",
+   "hu": "Venece vagy Felsőlemhény } Lemhény",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Vever",
+   "megye": "Sibiu",
+   "hu": "Véver } Medgyes",
+   "de": [
+    "Weberln } Mediasch"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Viile Dealul Budiului",
+   "megye": "Mureş",
+   "hu": "Bodonhegy-szőlő",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Viile Dealului Mic",
+   "megye": "Mureş",
+   "hu": "Kishegy szőlő } Marosvásárhely",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Viile Dejului",
+   "megye": "Cluj",
+   "hu": "Cichegy, Déscichegy } Dés",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Viile Iojibului",
+   "megye": "Satu Mare",
+   "hu": "Józsefházi szőllőhegy, Józsefházaiszőllőhegy } Józsefháza",
+   "de": [],
+   "vari": [
+    "Iojib-Vii"
+   ]
+  },
+  {
+   "ro": "Viile Nădăşelului",
+   "megye": "Cluj",
+   "hu": "Nádasterealja, Nádastéri szőllők, Nádasterevölgy } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Vineşti",
+   "megye": "Arad",
+   "hu": "Vám, Vinyest } Soborsin",
+   "de": [],
+   "vari": [
+    "Vieneşti"
+   ]
+  },
+  {
+   "ro": "Vinţu Nou",
+   "megye": "Alba",
+   "hu": "Újvinc, Újvinctelep } Alvinc",
+   "de": [
+    "Neu-Winz } Unter-Wintz"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Voivodenii Mici",
+   "megye": "Braşov",
+   "hu": "Kisvajdafalva, Kisvojvodeny } Nagyvajdafalva",
+   "de": [
+    "Klein-Waiwoden } Gross-Waiwoden",
+    "Klein-Woiwoden } Gross-Waiwoden",
+    "Woiwoden } Gross-Waiwoden"
+   ],
+   "vari": [
+    "Vaidafalăul Mic"
+   ]
+  },
+  {
+   "ro": "Volal",
+   "megye": "Covasna",
+   "hu": "Karatnavolál, Karatna, Alsóvolál, Felsővolál, Feltorja",
+   "de": [
+    "Kraten",
+    "Ober-Woldorf",
+    "Unter-Woldorf"
+   ],
+   "vari": [
+    "Crocna",
+    "Caratna-Volal",
+    "Volalul de Sus",
+    "Volalul de Jos",
+    "Volal"
+   ]
+  },
+  {
+   "ro": "Voşdoci",
+   "megye": "Arad",
+   "hu": "Vosdócs } Hosszúsor",
+   "de": [],
+   "vari": [
+    "Vâşdoci",
+    "Vozdociu"
+   ]
+  },
+  {
+   "ro": "Vulcez",
+   "megye": "Hunedoara",
+   "hu": "Vulcsesd",
+   "de": [],
+   "vari": [
+    "Vulceşti"
+   ]
+  },
+  {
+   "ro": "Vălenii de Arieş",
+   "megye": "Cluj",
+   "hu": "Aranyosrákos } Várfalva",
+   "de": [
+    "Krebsbach"
+   ],
+   "vari": [
+    "Văleni",
+    "Rachişul de Arieş",
+    "Rachiş",
+    "Ratiş"
+   ]
+  },
+  {
+   "ro": "Văratec",
+   "megye": "Hunedoara",
+   "hu": "Varatyikótelep } Lindzsina",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Vărşag-Centru",
+   "megye": "Harghita",
+   "hu": "Székelyvarság-Központ } Székelyvarság",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Vărşag-Cătune",
+   "megye": "Harghita",
+   "hu": "Forrásköze (Forrásköz, Oroszhegyi tanyák), Sólyomkő (Sólyomkőhegye, Sólyomkőpataka), Nagykút (Nagykút telep), Küküllő (Küküllőtelep, Küküllő Szektor), Bolygó (Bolygóbükke), Tisztás és Bagzos } Székelyvarság",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Zborişte",
+   "megye": "Bihor",
+   "hu": "Zboristye } Nagybáród",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Zemerd",
+   "megye": "Arad",
+   "hu": "Zemerd, Zemerdi puszta } Diécs",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Zugău",
+   "megye": "Arad",
+   "hu": "Zúgótelep, Zúgó } Dézna",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Zăpode",
+   "megye": "Cluj",
+   "hu": "Zepogy } Guga",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Zăpodie",
+   "megye": "Alba",
+   "hu": "Zepodiatanya, Zepodia } Obrázsa",
+   "de": [],
+   "vari": [
+    "Zăpodia"
+   ]
+  },
+  {
+   "ro": "Şapca Verde",
+   "megye": "Cluj",
+   "hu": "Zöldsapka } Kolozsvár",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Şcoala de Agricultură",
+   "megye": "Timiş",
+   "hu": "Földmívesiskola } Csák",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Şega",
+   "megye": "Arad",
+   "hu": "Séga, Ség, Kisség, Nagység, Papokségy } Arad",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Şerpeşti",
+   "megye": "Cluj",
+   "hu": "Kigyós } Palackos",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Şesu",
+   "megye": "Maramureş",
+   "hu": "Sikvölgy } Borsa",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Şiclod-Coastă",
+   "megye": "Harghita",
+   "hu": "Siklódioldal } Sóvárad",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Şimandul de Sus",
+   "megye": "Arad",
+   "hu": "Felsősimánd, Csernovicssimánd, Csernovits-Simánd } Alsósimánd",
+   "de": [
+    "Ober-Schimand } Unter-Schimand"
+   ],
+   "vari": []
+  },
+  {
+   "ro": "Şimian-Barantău",
+   "megye": "Bihor",
+   "hu": "Barantó, Barantóhegy, Nagytanya, Kistanya } Érsemjén",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Şoşcut",
+   "megye": "Mureş",
+   "hu": "Sóskút } Sóvárad",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Şoşdea Nouă",
+   "megye": "Caraş-Severin",
+   "hu": "Hunyaditelep, Kossuthtelep és Rákóczitelep } Sósd",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ştefăneşti",
+   "megye": "Mureş",
+   "hu": "Székelyszentistván, Szentistván",
+   "de": [],
+   "vari": [
+    "Sîn-Iştvan"
+   ]
+  },
+  {
+   "ro": "Ştefăneşti",
+   "megye": "Timiş",
+   "hu": "Istvánfalva, Istvánhegy } Daruvár",
+   "de": [],
+   "vari": [
+    "Istvanfalva",
+    "Stefănel"
+   ]
+  },
+  {
+   "ro": "Şugag-Tău",
+   "megye": "Alba",
+   "hu": "Teutelep } Sugág",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Şugag-Vârtoape",
+   "megye": "Alba",
+   "hu": "Vartopetelep } Sugág",
+   "de": [],
+   "vari": [
+    "Vârtoape"
+   ]
+  },
+  {
+   "ro": "Şugaş",
+   "megye": "Covasna",
+   "hu": "Sugásfürdő, Sugásnyaraló } Sepsiszentgyörgy",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Şuligul",
+   "megye": "Maramureş",
+   "hu": "Suliguli } Felsővisó",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Şumud",
+   "megye": "Alba",
+   "hu": "Somogyi } Marosnagylak",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Şumuleu",
+   "megye": "Harghita",
+   "hu": "Csíksomlyó",
+   "de": [],
+   "vari": [
+    "Şumuleu-Ciuc"
+   ]
+  },
+  {
+   "ro": "Şălămaş",
+   "megye": "Harghita",
+   "hu": "Salamáspatak, Szalomás, Szalamás, Szalamáspatak } Gyimesközéplok",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ţigănia",
+   "megye": "Harghita",
+   "hu": "Cigánydomb } Szentegyháza",
+   "de": [],
+   "vari": []
+  },
+  {
+   "ro": "Ţimbau",
+   "megye": "Sibiu",
+   "hu": "",
+   "de": [
+    "Zimbau } Hahnenbach"
+   ],
+   "vari": []
+  }
+ ]
+}

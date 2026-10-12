@@ -171,6 +171,12 @@ for (const megye of megyek) {
       const masNevek = [];
       if (hely.ro && hely.ro !== hely.hu) masNevek.push(`románul: ${hely.ro}`);
       if (hely.de && hely.de !== hely.hu) masNevek.push(`németül: ${hely.de}`);
+      // A további német nevek (4.0.0, a KIA-ból). Egy soron nem férnek
+      // el, és a megyejegyzék a keresőrobotoknak szól — ott a
+      // kereshetetlenség számít, nem a tördelés.
+      for (const tovabb of hely.deAlt ?? []) {
+        if (tovabb !== hely.hu) masNevek.push(`németül: ${tovabb}`);
+      }
       const hianyJelzes = hely.huNincsNeve || hely.huPotolt ? " · magyar név nem ismert" : "";
       const forras = /^Q\d+$/.test(hely.q)
         ? ` <a class="forras" href="https://www.wikidata.org/wiki/${hely.q}" rel="nofollow">forrás</a>`

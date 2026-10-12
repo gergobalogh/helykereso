@@ -12,6 +12,8 @@ import {
   huMondat,
   dePerjel,
   deRomanEkezet,
+  deHasznalhato,
+  hajtasGerman,
   cirillAtir,
   utalok,
   utaloUtkozes,
@@ -203,7 +205,21 @@ const betuSorrend = (s) =>
     .split("")
     .sort()
     .join("");
-const deEgyezo = deHelyek.filter((h) => h.ro && betuSorrend(h.de) === betuSorrend(h.ro));
+// A KIA-ból érkező német nevek. Ezeket a másik két szabály alól ki kell
+// venni a "másolás" felismeréséből: a `nemetNev` 3. szabálya (a román
+// névvel betűrendi egyezés) a WIKIDATA zaját szűri, nem a szótárat.
+// A KIA `Dade`-et ír a `Deda` helységre (valódi német név), és `Gorbau`-t
+// a `Gârbou`-ra (szintén). Két ilyen van; mindkettő jó.
+const kiaNemet = JSON.parse(
+  await readFile(new URL("./kia/nemetJavitasok.json", import.meta.url), "utf8"),
+).helyek;
+const kiaDeNev = new Map();
+for (const [q, nevek] of Object.entries(kiaNemet)) kiaDeNev.set(q, new Set(nevek));
+const kiaBol = (h) => kiaDeNev.get(h.q)?.has(h.de) ?? false;
+
+const deEgyezo = deHelyek.filter(
+  (h) => h.ro && !kiaBol(h) && betuSorrend(h.de) === betuSorrend(h.ro),
+);
 if (deEgyezo.length) {
   hiba(`${deEgyezo.length} esetben a "német" név valójában a román név`);
   for (const h of deEgyezo.slice(0, 6)) console.log(`    ${h.hu} / ${h.ro} / ${h.de}`);
@@ -223,6 +239,58 @@ const deZarojeles = helyek.filter((h) => h.de && h.de.includes("("));
 if (deZarojeles.length) {
   console.log(`  ${deZarojeles.length} zárójeles (el nem vágott) német név:`);
   for (const h of deZarojeles.slice(0, 5)) console.log(`    ${h.hu} / ${h.de}`);
+}
+
+// 4a. A `deAlt`: a hely további német nevei. Ezt a KIA adja (4.0.0), és
+// nincs a Wikidata-n, tehát nincs mihez hasonlítani — de a nyelvi szabályok
+// itt is érvényesek, és a duplikátum néma hiba lenne.
+const deAltHelyek = helyek.filter((h) => h.deAlt);
+const deAltNevek = deAltHelyek.flatMap((h) => h.deAlt.map((n) => ({ h, n })));
+console.log(`  ${deAltHelyek.length} helységnek van további német neve (${deAltNevek.length} db)`);
+
+const deAltDupla = deAltNevek.filter(({ h, n }) =>
+  // ugyanaz a név kétszer egy soron belül
+  h.deAlt.filter((x) => x === n).length > 1,
+);
+if (deAltDupla.length) {
+  // Egy ismétlődő név kétszer számít (mindkét előfordulására igaz), ezért
+  // a különböző neveket számoljuk, nem a talalatokat.
+  hiba(
+    `${new Set(deAltDupla.map(({ n }) => n)).size} német név kétszer szerepel a deAlt-ban: ` +
+      [...new Set(deAltDupla.map(({ n }) => n))].slice(0, 5).join(", "),
+  );
+} else {
+  rendben("nincs duplikált név a deAlt-ban");
+}
+
+const deAltEgyezo = deAltNevek.filter(({ h, n }) =>
+  h.de && hajtasGerman(n) === hajtasGerman(h.de),
+);
+if (deAltEgyezo.length) {
+  hiba(`${deAltEgyezo.length} további német név megegyezik a de-vel (${deAltEgyezo.slice(0, 4).map(({ h, n }) => `${h.hu}: ${n}`).join(", ")})`);
+} else {
+  rendben("egyik további német név sem ismétli a de-t");
+}
+
+const deAltRossz = deAltNevek.filter(({ n }) => !deHasznalhato(n));
+if (deAltRossz.length) {
+  hiba(
+    `${deAltRossz.length} további német név nem német (román ékezet, perjel, zárójel vagy cirill): ` +
+      deAltRossz.slice(0, 5).map(({ n }) => n).join(", "),
+  );
+} else {
+  rendben("mindegyik további német név átmegy a nyelvi ellenőrzésen");
+}
+
+// A KIA-sorok mind be kellett kerüljenek, különben a `kinyeres.mjs` és a
+// `letolt.mjs` eltér (némelyik névből a de vagy a deAlt lett, más nem).
+const kiaQOsszes = Object.keys(kiaNemet);
+const adatQ = new Set(helyek.map((h) => h.q));
+const kiaKimaradt = kiaQOsszes.filter((q) => !adatQ.has(q));
+if (kiaKimaradt.length) {
+  hiba(`${kiaKimaradt.length} KIA-sor nincs az adatban (a kinyerés és a letöltő elcsúszott): ${kiaKimaradt.slice(0, 5).join(", ")}`);
+} else {
+  rendben(`mind a ${kiaQOsszes.length} KIA-hely bent van az adatban`);
 }
 for (const h of deHelyek.slice(0, 12)) console.log(`    ${h.hu} / ${h.ro} / ${h.de}`);
 

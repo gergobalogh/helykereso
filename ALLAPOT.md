@@ -6,11 +6,15 @@ megerősített hibákkal és a mérési számokkal); a **hogyan** a
 [`README.md`](README.md)-ben (a kód használata); itt csak a folytatáshoz
 szükséges tények állnak.
 
-**Utolsó frissítés: 2026-10-11 (5. munkamenet). Adatverzió: 3.0.0.**
+**Utolsó frissítés: 2026-10-12 (6. munkamenet). Adatverzió: 4.0.0.**
 
 ## Ahol tartunk
 
-`master` ágon, **nincs remote** — tehát semmi nincs feltöltve sehová.
+`main` ágon, `origin` → `https://github.com/gergobalogh/helykereso.git`.
+*(Ez 2026-10-12-ig fordult meg: korábban a „nincs remote" állt itt, és emiatt
+több munkamenet csak lokálisan dolgozott. A git-identitás azóta be van
+állítva, `jack / baloghgergo@gmail.com`, szóval a `-c user.name=…` kapcsoló
+már nem kell.)*
 
 | commit | tartalom |
 |---|---|
@@ -295,13 +299,44 @@ Ez termékdöntés, adatpolitika, nem technikai. Nem nyúltam hozzá.
    `ellenoriz` 1 ismert / 0 új, `proba` zöld (új cirill-keresési próbával:
    `uzhhorod` → Ungvár). A `megyek/` újragenerálva (`seo.mjs`), `dist/`
    újracsomagolva (`site-build.mjs`).
+9. ~~**A [`kia/`](kia/) anyag eldöntése**~~ — **részben kész 2026-10-12-én
+   (4.0.0)**: a **német nevek bedolgozva**, a magyar és román névanyag még
+   kutatási anyag.
+   - A német nevek a `kia/nemetJavitasok.json`-on át a `letolt.mjs`-be
+     kerülnek: **653 → 2137 hely**, plusz 118 helyen további nevek (`deAlt`).
+     A sorrend értelem: a KIA lista első tagja a hivatalos alak.
+   - **Két szabály kimarad a KIA-nál szándékosan** (a `Dade`/`Gorbau` eset),
+     és az `ellenoriz.mjs` anagram-ellenőrzése kivételt tesz rájuk. A
+     `kia/README.md` megmondja, miért.
+   - **Licenc: a teljes adatminden már nem CC0.** A KIA kiadott szótár, nem
+     szabadon felhasználható adat; a `helyek.json` `licenc` mezője, az oldal
+     látható forrásjelölése és az `index.html` `isBasedOn` ezt kimondja.
+     **Ez a te döntésed:** ha nincs engedélyed, a német nevek kikerülnek a
+     publikált adatból, és a `kia/` megmarad kutatási anyagnak.
+   - **Két Wikidata-hiba kiderült:** `Q1021466` Prázsmár község `de` mezője
+     `Preßburg`, ami Brassó német neve (a KIA szerint Prázsmár = Tartlau) —
+     `ismertHibak.json`-be kerülhet; és a `Kudzsir`/`Kuschir`,
+     `Dorgos`/`Dorgosch` névpár, ahol a KIA és a Wikidata eltér.
+   - **Ami még hátra**: 2738 helynek van magyar neve(nk), ami nincs nálunk
+     (a legnagyobb hiány), és 2795 hely régi román neve. A `hu` mező egyetlen
+     értéket fogad, a történeti nevek behozatala a sor értelmezését is
+     változtatja — ezért külön döntés maradt.
 
 ## Egyéb tudnivaló
 
-- A KIA PDF és a kiértékelő segédszközok `/tmp/opencode/`-ban vannak
+- A KIA PDF és a hozzá tartozó segédszközok `/tmp/opencode/`-ban vannak
   (`kia.pdf`, `kia.txt`, `kia_entries.json`, `kia-final.mjs`, `kia-77.mjs`).
   Ezek **nem** verziózottak, `/tmp` ugyanis elvész. Ha kellene a későbbiekben,
   a mérés a `kutatas.md`-ben le van írva, de a nyers adat nem.
+- A KIA **helységnévtárának** adatai a repoban vannak, a [`kia/`](kia/)
+  mappában: a `lekapar.mjs` újrakapja a nyers `raw.json`-t (6024 sor), a
+  `kinyeres.mjs` pedig Q-szám szerint kinyeri belőle a német neveket, a
+  történeti magyar neveket és a román név-változatokat. **A német nevek
+  4.0.0-tól a letöltési láncban vannak** (`nemetJavitasok.json`); a magyar
+  és román névanyag még csak kutatási anyag, senki nem olvassa.
+  - A KIA PDF és a hozzá tartozó segédszközok továbbra is `/tmp/opencode/`-ban
+    vannak és nem verziózottak — ezek a KIA-mérés (a `kia.mjs`-hez) fájljai,
+    nem a helységnévtáré.
 - A `.cache/` (2.5 MB) nincs verziózva, de megvan: a `node letolt.mjs`
   hálózat nélkül újragenerálja a `helyek.json`-t belőle.
 - A `helyek.json` kézi javítása **értéktelen**, a következő `letolt.mjs`
@@ -309,6 +344,7 @@ Ez termékdöntés, adatpolitika, nem technikai. Nem nyúltam hozzá.
   (kézi német nevek) / `ismertHibak.json`-ban (tudott hibák).
 - A git commit-okhoz `-c user.name=... -c user.email=...` kell, nincs
   beállított git-identitás.
+  *(2026-10-12: a git-identitás már be van állítva, erre nincs szükség.)*
 - Az első `proba.mjs` regressziós tesztjeim közül az egyik csak 1 esetet
   fogott meg 3-ból, mert sorszámot hasonlított konkrét falu helyett. A
   javított változat községnévre néz — ezt emlékeztetőnek írom le, mert
