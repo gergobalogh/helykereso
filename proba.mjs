@@ -289,6 +289,14 @@ for (const l of linkek) {
     } else {
       console.log(`  ✓ "Wikipedia" → ${l.href}`);
     }
+  } else if (l.szoveg === "minden neve") {
+    // A hely saját oldala (seo.mjs, helyut.mjs).
+    if (!/\/hely\/[a-z]+\/[a-z0-9-]+$/.test(l.href)) {
+      bukott++;
+      console.log(`  ✗ a "minden neve" link nem a hely oldalára mutat: ${l.href}`);
+    } else {
+      console.log(`  ✓ "minden neve" → ${l.href}`);
+    }
   } else if (!l.href.startsWith("https://www.wikidata.org/wiki/Q")) {
     bukott++;
     console.log(`  ✗ a(z) "${l.szoveg}" link nem a Wikidata-ra mutat: ${l.href}`);
@@ -686,13 +694,13 @@ const statikusCim = await oldal.locator("h1").innerText();
 const statikusCanonical = await oldal.locator('link[rel="canonical"]').getAttribute("href");
 if (
   statikusSorok !== 440 ||
-  !statikusCim.includes("Kolozsvár megye") ||
-  !(statikusCanonical === "./cj.html" || statikusCanonical?.endsWith("/megyek/cj.html"))
+  !statikusCim.includes("Kolozs megye") ||
+  !(statikusCanonical === "./cj" || statikusCanonical?.endsWith("/megyek/cj"))
 ) {
   bukott++;
   console.log(`  ✗ hibás statikus oldal: ${statikusSorok} sor, "${statikusCim}", ${statikusCanonical}`);
 } else {
-  console.log("  ✓ a Kolozsvár megyei oldal 440 nevet ad vissza tiszta HTML-ben");
+  console.log("  ✓ a Kolozs megyei oldal 440 nevet ad vissza tiszta HTML-ben");
 }
 
 console.log(

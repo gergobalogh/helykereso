@@ -16,3 +16,7 @@ node_modules/
 # ha valaki javít a Wikidata-n és az kiesik innen, az ellenőrző szól. Ezért
 # a listát verziózzuk, mert a "melyik Q-számot nézzük már meg" döntés
 # része a történetnek, és ezt érdemes visszakövni a változáshoz.
+
+# A helyoldalak a gyökérben (`hely/`) verziózva vannak, mert a Cloudflare a
+# repó gyökerét szolgálja ki build nélkül; a `dist/` másolatuk felesleges.
+/dist/hely/

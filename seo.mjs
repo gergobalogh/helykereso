@@ -5,7 +5,8 @@
 // Élesítéskor az abszolút sitemaphez:
 //   node seo.mjs --site-url https://pelda.hu/helynevkereso/
 
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { helyUtak } from "./helyut.mjs";
 
 const adat = JSON.parse(await readFile(new URL("./helyek.min.json", import.meta.url), "utf8"));
 const kimenet = new URL("./megyek/", import.meta.url);
@@ -44,16 +45,17 @@ function slug(megye) {
   return megye.kod.toLocaleLowerCase("hu-HU");
 }
 
-function oldalFej({ cim, leiras, kanonikus, jsonLd }) {
-  const abszolutMeta = /^https?:\/\//.test(kanonikus)
+function oldalFej({ cim, leiras, kanonikus, jsonLd, gyoker = "../" }) {
+  const kepUrl = alap ? new URL("og-image.png", alap).href : "";
+  const abszolutMeta = alap && /^https?:\/\//.test(kanonikus)
     ? `
     <meta property="og:url" content="${html(kanonikus)}" />
-    <meta property="og:image" content="${html(new URL("../og-image.png", kanonikus).href)}" />
+    <meta property="og:image" content="${html(kepUrl)}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Helynévkereső – erdélyi helységnevek egy helyen" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="${html(new URL("../og-image.png", kanonikus).href)}" />`
+    <meta name="twitter:image" content="${html(kepUrl)}" />`
     : `
     <meta name="twitter:card" content="summary" />`;
   return `<!doctype html>
@@ -66,7 +68,7 @@ function oldalFej({ cim, leiras, kanonikus, jsonLd }) {
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#f5f2eb" />
     <link rel="canonical" href="${html(kanonikus)}" />
-    <link rel="icon" href="../favicon.svg" type="image/svg+xml" sizes="any" />
+    <link rel="icon" href="${gyoker}favicon.svg" type="image/svg+xml" sizes="any" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="hu_HU" />
     <meta property="og:site_name" content="Helynévkereső" />
@@ -85,17 +87,23 @@ function oldalFej({ cim, leiras, kanonikus, jsonLd }) {
       .kartya strong,.hely strong{font-size:1.08rem}.szam,.nevek{display:block;color:var(--halvany);font-size:.86rem}
       .helyek{display:grid;gap:8px;margin:28px 0 0;padding:0;list-style:none}.hely{padding:12px 15px}.hely>a{text-decoration:none}.hely>a:hover{text-decoration:underline}.forras{margin-left:7px;font-size:.78rem}
       footer{margin-top:42px;padding-top:18px;border-top:1px solid #cfc5b6;color:var(--halvany);font-size:.86rem}
-      @media(min-width:720px){.helyek{grid-template-columns:1fr 1fr}}
+      .morzsa{margin-bottom:24px;font-size:.9rem;color:var(--halvany)}
+      .nevlista{display:grid;grid-template-columns:max-content 1fr;gap:6px 18px;margin:24px 0 0;padding:18px 20px;border:1px solid var(--vonal);border-radius:10px;background:var(--lap)}
+      .nevlista dt{color:var(--halvany)}.nevlista dd{margin:0;font-size:1.25rem;font-weight:700}
+      .megjegyzes{color:var(--halvany);font-size:.9rem}h2{margin:36px 0 0;font-size:1.3rem}
+      .szomszedok{display:grid;gap:6px;margin:14px 0 0;padding:0;list-style:none}.szomszedok span{color:var(--halvany);font-size:.86rem}
+      .linkek{margin-top:32px}
+      @media(min-width:720px){.helyek,.szomszedok{grid-template-columns:1fr 1fr}}
     </style>
   </head>
   <body>
     <main>`;
 }
 
-function oldalLab() {
+function oldalLab(gyoker = "../") {
   return `
       <footer>
-        <a href="../">Helynévkereső</a> · Adatok: <a href="https://www.wikidata.org/">Wikidata</a> (CC0)
+        <a href="${gyoker}">Helynévkereső</a> · Adatok: <a href="https://www.wikidata.org/">Wikidata</a> (CC0)
       </footer>
     </main>
   </body>
@@ -104,6 +112,7 @@ function oldalLab() {
 }
 
 await mkdir(kimenet, { recursive: true });
+const utak = helyUtak(adat.helyek);
 
 const csoportok = new Map(adat.megyek.map((megye) => [megye.kod, []]));
 for (const hely of adat.helyek) csoportok.get(hely.megye)?.push(hely);
@@ -117,7 +126,7 @@ const megyek = [...adat.megyek].sort((a, b) =>
 const kartyaLista = megyek
   .map((megye) => {
     const darab = csoportok.get(megye.kod).length;
-    return `        <li class="kartya"><a href="./${slug(megye)}.html"><strong>${html(teruletNev(megye))}</strong><span class="szam">${darab.toLocaleString("hu-HU")} helység · ${html(orszagNev[megye.orszag] ?? megye.orszag)}</span></a></li>`;
+    return `        <li class="kartya"><a href="./${slug(megye)}"><strong>${html(teruletNev(megye))}</strong><span class="szam">${darab.toLocaleString("hu-HU")} helység · ${html(orszagNev[megye.orszag] ?? megye.orszag)}</span></a></li>`;
   })
   .join("\n");
 
@@ -167,7 +176,6 @@ for (const megye of megyek) {
   };
   const lista = helyek
     .map((hely) => {
-      const keresesiUrl = new URLSearchParams({ q: hely.hu, megye: megye.kod });
       const masNevek = [];
       if (hely.ro && hely.ro !== hely.hu) masNevek.push(`románul: ${hely.ro}`);
       if (hely.de && hely.de !== hely.hu) masNevek.push(`németül: ${hely.de}`);
@@ -181,17 +189,17 @@ for (const megye of megyek) {
       const forras = /^Q\d+$/.test(hely.q)
         ? ` <a class="forras" href="https://www.wikidata.org/wiki/${hely.q}" rel="nofollow">forrás</a>`
         : "";
-      return `        <li class="hely" id="${html(hely.q)}"><a href="../?${html(keresesiUrl)}"><strong>${html(hely.hu)}</strong></a>${forras}<span class="nevek">${html(masNevek.join(" · ") + hianyJelzes) || "Magyar név"}</span></li>`;
+      return `        <li class="hely" id="${html(hely.q)}"><a href="../${html(utak.get(hely.q))}"><strong>${html(hely.hu)}</strong></a>${forras}<span class="nevek">${html(masNevek.join(" · ") + hianyJelzes) || "Magyar név"}</span></li>`;
     })
     .join("\n");
   await writeFile(
     new URL(`${slug(megye)}.html`, kimenet),
-    `${oldalFej({ cim, leiras, kanonikus: alap ? new URL(`megyek/${slug(megye)}.html`, alap).href : `./${slug(megye)}.html`, jsonLd })}
+    `${oldalFej({ cim, leiras, kanonikus: alap ? new URL(`megyek/${slug(megye)}`, alap).href : `./${slug(megye)}`, jsonLd })}
       <a class="vissza" href="./">← Minden megye és régió</a>
       <header>
         <p class="szemoldok">${html(orszagNev[megye.orszag] ?? megye.orszag)} · helységnévtár</p>
         <h1>${html(nev)} helységnevei</h1>
-        <p>${html(leiras)} Egy helyet kiválasztva a <a href="../?megye=${html(megye.kod)}">térképes kereső</a> nyílik meg.</p>
+        <p>${html(leiras)} Egy helyre kattintva az oldala nyílik meg, vagy <a href="../?megye=${html(megye.kod)}">nézd meg a megyét a térképes keresőben</a>.</p>
       </header>
       <ol class="helyek">
 ${lista}
@@ -199,10 +207,147 @@ ${lista}
   );
 }
 
+// Egy oldal minden helynek: `hely/<megye>/<név>.html`, a Cloudflare
+// kiterjesztés nélkül szolgálja ki (`/hely/ms/szoverd`). Erre keresnek rá
+// az emberek: „Szövérd románul", „Sovata magyar neve".
+const MAS_NYELV = { UA: "Ukránul", RS: "Szerbül" };
+const megyeKod = new Map(adat.megyek.map((megye) => [megye.kod, megye]));
+const koordinatas = adat.helyek.filter((hely) => Number.isFinite(hely.lat) && Number.isFinite(hely.lon));
+const kozsegTagok = new Map();
+for (const hely of adat.helyek) {
+  if (!hely.kozseg) continue;
+  if (!kozsegTagok.has(hely.kozseg)) kozsegTagok.set(hely.kozseg, []);
+  kozsegTagok.get(hely.kozseg).push(hely);
+}
+for (const tagok of kozsegTagok.values()) tagok.sort((a, b) => a.hu.localeCompare(b.hu, "hu-HU"));
+
+function tavolsag(a, b) {
+  const rad = Math.PI / 180;
+  const dLat = (b.lat - a.lat) * rad;
+  const dLon = (b.lon - a.lon) * rad;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(dLon / 2) ** 2;
+  return 12742 * Math.asin(Math.sqrt(h));
+}
+
+function nevSor(hely) {
+  const mas = [];
+  if (hely.alt && MAS_NYELV[hely.orszag] && hely.alt !== hely.hu) mas.push(hely.alt);
+  else if (hely.ro && hely.ro !== hely.hu) mas.push(hely.ro);
+  if (hely.de && hely.de !== hely.hu) mas.push(hely.de);
+  return mas.join(" · ");
+}
+
+function helyLink(hely, gyoker, extra = "") {
+  const nev = hely.utalo ? `${hely.hu} (${hely.utalo})` : hely.hu;
+  const mas = nevSor(hely);
+  return `<li><a href="${gyoker}${html(utak.get(hely.q))}">${html(nev)}</a>${mas || extra ? ` <span>${html([mas, extra].filter(Boolean).join(" · "))}</span>` : ""}</li>`;
+}
+
+await rm(new URL("./hely/", import.meta.url), { recursive: true, force: true });
+for (const hely of adat.helyek) {
+  const ut = utak.get(hely.q);
+  const gyoker = "../../";
+  const megye = megyeKod.get(hely.megye);
+  const terulet = megye ? teruletNev(megye) : hely.megye;
+  const orszag = orszagNev[hely.orszag] ?? hely.orszag;
+  const nev = hely.utalo ? `${hely.hu} (${hely.utalo})` : hely.hu;
+  const ro = hely.ro && hely.ro !== hely.hu ? hely.ro : null;
+  const alt = hely.alt && hely.alt !== hely.hu && hely.alt !== hely.ro ? hely.alt : null;
+  const altCimke = MAS_NYELV[hely.orszag] ?? "Helyi neve";
+  // Határon túl a helyi nyelv (ukrán, szerb) a fő kérdés, Romániában és
+  // Magyarországon a román.
+  const elso = alt && MAS_NYELV[hely.orszag] ? ["alt", alt] : ro ? ["ro", ro] : alt ? ["alt", alt] : null;
+  const de = hely.de && hely.de !== hely.hu ? hely.de : null;
+  const deAlt = (hely.deAlt ?? []).filter((tovabb) => tovabb !== hely.hu && tovabb !== hely.de);
+  const huIsmeretlen = hely.huNincsNeve || hely.huPotolt;
+
+  const sorok = [];
+  if (!huIsmeretlen) sorok.push(["Magyarul", hely.hu]);
+  if (elso?.[0] === "alt") sorok.push([altCimke, alt]);
+  if (ro) sorok.push(["Románul", ro]);
+  if (alt && elso?.[0] !== "alt") sorok.push([altCimke, alt]);
+  if (de) sorok.push(["Németül", de]);
+  if (deAlt.length) sorok.push([deAlt.length > 1 ? "Más német nevei" : "Más német neve", deAlt.join(", ")]);
+
+  let cim;
+  if (elso?.[0] === "ro") cim = `${hely.hu} románul: ${ro}`;
+  else if (elso) cim = `${hely.hu} ${(MAS_NYELV[hely.orszag] ?? "helyi nyelven").toLowerCase()}: ${alt}`;
+  else if (de) cim = `${hely.hu} németül: ${de}`;
+  else cim = `${hely.hu}, ${terulet}`;
+  if (elso && de && `${cim}, németül: ${de} | Helynévkereső`.length <= 70) cim += `, németül: ${de}`;
+  if (hely.utalo && !cim.includes(hely.utalo)) cim = cim.replace(hely.hu, nev);
+  cim += " | Helynévkereső";
+
+  const leirasReszek = [`${nev}, ${terulet}${hely.orszag === "RO" ? "" : ` (${orszag})`}`];
+  if (elso?.[0] === "alt") leirasReszek.push(`${altCimke.toLowerCase()} ${alt}`);
+  if (ro) leirasReszek.push(`románul ${ro}`);
+  if (de) leirasReszek.push(`németül ${de}`);
+  const leiras = `${leirasReszek.join(", ")}.${hely.kozsegNev ? ` ${hely.kozsegNev}.` : ""} A környékbeli helységek nevei is.`;
+
+  const kozsegben = (kozsegTagok.get(hely.kozseg) ?? []).filter((masik) => masik.q !== hely.q);
+  const kozsegQ = new Set(kozsegben.map((masik) => masik.q));
+  let kozel = [];
+  if (Number.isFinite(hely.lat) && Number.isFinite(hely.lon)) {
+    kozel = koordinatas
+      .filter((masik) => masik.q !== hely.q && !kozsegQ.has(masik.q))
+      .map((masik) => [masik, tavolsag(hely, masik)])
+      .sort((a, b) => a[1] - b[1])
+      .slice(0, 8);
+  }
+
+  const kanonikus = alap ? new URL(ut, alap).href : `./${ut.split("/").pop()}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Place",
+    name: nev,
+    alternateName: [ro, alt, de, ...deAlt].filter(Boolean),
+    containedInPlace: { "@type": "AdministrativeArea", name: terulet },
+    inLanguage: "hu",
+    sameAs: [hely.wikidata, hely.wikipedia].filter(Boolean),
+  };
+  if (alap) jsonLd.url = kanonikus;
+  if (Number.isFinite(hely.lat)) jsonLd.geo = { "@type": "GeoCoordinates", latitude: hely.lat, longitude: hely.lon };
+
+  const kereso = new URLSearchParams({ q: hely.hu, megye: hely.megye });
+  const linkek = [`<a href="${gyoker}?${html(kereso)}">Megnézem a térképes keresőben</a>`];
+  if (Number.isFinite(hely.lat)) {
+    linkek.push(`<a href="https://www.openstreetmap.org/?mlat=${hely.lat}&amp;mlon=${hely.lon}#map=14/${hely.lat}/${hely.lon}" rel="nofollow">OpenStreetMap</a>`);
+  }
+  if (hely.wikipedia) linkek.push(`<a href="${html(hely.wikipedia)}">Wikipedia</a>`);
+  if (/^Q\d+$/.test(hely.q)) {
+    linkek.push(`<a href="https://www.wikidata.org/wiki/${hely.q}" rel="nofollow">Wikidata</a>`);
+    linkek.push(`<a href="https://www.wikidata.org/wiki/${hely.q}?action=edit&amp;uselang=hu" rel="nofollow">hibát látok, javítom</a>`);
+  }
+
+  const fajl = new URL(`./${ut}.html`, import.meta.url);
+  await mkdir(new URL("./", fajl), { recursive: true });
+  await writeFile(
+    fajl,
+    `${oldalFej({ cim, leiras, kanonikus, jsonLd, gyoker })}
+      <nav class="morzsa"><a href="${gyoker}">Helynévkereső</a> › <a href="${gyoker}megyek/${slug(megye ?? { kod: hely.megye })}">${html(terulet)}</a></nav>
+      <header>
+        <p class="szemoldok">${html(terulet)} · ${html(orszag)}</p>
+        <h1>${html(nev)}</h1>
+      </header>
+      <dl class="nevlista">
+${sorok.map(([cimke, ertek]) => `        <dt>${html(cimke)}</dt><dd>${html(ertek)}</dd>`).join("\n")}
+      </dl>
+${huIsmeretlen ? `      <p class="megjegyzes">A magyar nevét nem ismerjük, ezért itt a helyi neve áll.</p>\n` : ""}${hely.kozsegNev ? `      <p>${html(hely.kozsegNev)}, ${html(terulet)}.</p>\n` : ""}${kozsegben.length ? `      <h2>Ugyanebben a községben</h2>
+      <ul class="szomszedok">
+${kozsegben.slice(0, 40).map((masik) => `        ${helyLink(masik, gyoker)}`).join("\n")}
+      </ul>
+` : ""}${kozel.length ? `      <h2>A közelben</h2>
+      <ul class="szomszedok">
+${kozel.map(([masik, km]) => `        ${helyLink(masik, gyoker, km < 1 ? "1 km-en belül" : `${Math.round(km)} km`)}`).join("\n")}
+      </ul>
+` : ""}      <p class="linkek">${linkek.join(" · ")}</p>${oldalLab(gyoker)}`,
+  );
+}
+
 if (siteUrlErtek) {
-  const utak = ["", "megyek/", ...adat.megyek.map((megye) => `megyek/${slug(megye)}.html`)];
+  const terkepUtak = ["", "megyek/", ...adat.megyek.map((megye) => `megyek/${slug(megye)}`), ...utak.values()];
   const utolsoModositas = adat.generatas.slice(0, 10);
-  const urlLista = utak
+  const urlLista = terkepUtak
     .map((ut) => `  <url><loc>${html(new URL(ut, alap).href)}</loc><lastmod>${utolsoModositas}</lastmod></url>`)
     .join("\n");
   await writeFile(
@@ -233,5 +378,5 @@ if (siteUrlErtek) {
 }
 
 console.log(
-  `SEO-oldalak: ${adat.megyek.length} terület, ${adat.helyek.length.toLocaleString("hu-HU")} helység${siteUrlErtek ? ", sitemap.xml elkészült" : ", sitemaphez add meg a --site-url címet"}.`,
+  `SEO-oldalak: ${adat.megyek.length} terület, ${adat.helyek.length.toLocaleString("hu-HU")} helység (mind saját oldallal)${siteUrlErtek ? ", sitemap.xml elkészült" : ", sitemaphez add meg a --site-url címet"}.`,
 );

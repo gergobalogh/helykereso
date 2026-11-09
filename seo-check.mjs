@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { access, readFile, readdir } from "node:fs/promises";
+import { helyUtak } from "./helyut.mjs";
 
 const hibak = [];
 const elvart = (feltetel, uzenet) => {
@@ -53,14 +54,41 @@ const megyeIndex = await beolvas("./megyek/index.html");
 for (const megye of adat.megyek) {
   const fajl = `${megye.kod.toLowerCase()}.html`;
   elvart(megyeFajlok.includes(fajl), `Hiányzik a megyeoldal: ${fajl}.`);
-  elvart(megyeIndex.includes(`href="./${fajl}"`), `A megyeindex nem hivatkozik erre: ${fajl}.`);
+  const kod = fajl.replace(/\.html$/, "");
+  elvart(megyeIndex.includes(`href="./${kod}"`), `A megyeindex nem hivatkozik erre: ${kod}.`);
   if (!megyeFajlok.includes(fajl)) continue;
   const oldal = await beolvas(`./megyek/${fajl}`);
   const darab = adat.helyek.filter((hely) => hely.megye === megye.kod).length;
   elvart((oldal.match(/<li class="hely"/g) ?? []).length === darab, `${fajl}: nem ${darab} helység szerepel.`);
   const canonical = oldal.match(/<link rel="canonical" href="([^"]+)" \/>/)?.[1] ?? "";
-  elvart(canonical === `./${fajl}` || canonical.endsWith(`/megyek/${fajl}`), `${fajl}: hibás canonical.`);
+  // A Cloudflare a .html-es címet a kiterjesztés nélkülire irányítja át,
+  // ezért a canonical és a sitemap a kiterjesztés nélkülit adja meg.
+  elvart(canonical === `./${kod}` || canonical.endsWith(`/megyek/${kod}`), `${fajl}: hibás canonical.`);
+  elvart(!oldal.includes('href="../?q='), `${fajl}: a helyek még a keresőre linkelnek, nem a saját oldalukra.`);
   elvart((oldal.match(/<h1\b/g) ?? []).length === 1, `${fajl}: nem pontosan egy h1 van.`);
+}
+
+// Helyoldalak: mindegyik helynek egy, egyedi címmel.
+const utak = helyUtak(adat.helyek);
+elvart(new Set(utak.values()).size === adat.helyek.length, "Két helynek ugyanaz a címe.");
+const sitemap = await beolvas("./sitemap.xml");
+const abszolut = sitemap.includes("<loc>http");
+let helyDb = 0;
+for (const hely of adat.helyek) {
+  const ut = utak.get(hely.q);
+  let oldal;
+  try {
+    oldal = await beolvas(`./${ut}.html`);
+  } catch {
+    hibak.push(`Hiányzik a helyoldal: ${ut}.html`);
+    continue;
+  }
+  helyDb++;
+  const canonical = oldal.match(/<link rel="canonical" href="([^"]+)" \/>/)?.[1] ?? "";
+  elvart(canonical === `./${ut.split("/").pop()}` || canonical.endsWith(`/${ut}`), `${ut}: hibás canonical.`);
+  elvart((oldal.match(/<h1\b/g) ?? []).length === 1, `${ut}: nem pontosan egy h1 van.`);
+  elvart(/<title>[^<]{10,}<\/title>/.test(oldal), `${ut}: hiányzik a title.`);
+  if (abszolut) elvart(sitemap.includes(`/${ut}</loc>`), `${ut}: nincs a sitemapben.`);
 }
 
 if (hibak.length) {
@@ -68,4 +96,4 @@ if (hibak.length) {
   for (const hiba of hibak) console.error(`  ✗ ${hiba}`);
   process.exit(1);
 }
-console.log(`SEO-ellenőrzés rendben: főoldal + ${adat.megyek.length} területi oldal + ${adat.helyek.length.toLocaleString("hu-HU")} helységnév.`);
+console.log(`SEO-ellenőrzés rendben: főoldal + ${adat.megyek.length} területi oldal + ${helyDb.toLocaleString("hu-HU")} helyoldal.`);

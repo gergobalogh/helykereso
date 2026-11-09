@@ -121,8 +121,8 @@ const VETO_OSZTALY = [
 // a magyar neveket többnyire így használja); a bánsági körzeteknél rendes
 // román exonim van. A kárpátaljai bejegyzések járási szintűek (ld. alább).
 export const MEGYEK = [
-  { q: "Q182624", kod: "CJ", hu: "Kolozsvár", ro: "Cluj", de: "Klausenburg", orszag: "RO" },
-  { q: "Q45868", kod: "AB", hu: "Nagy-Albás", ro: "Alba", de: "Alba Iulia", orszag: "RO" },
+  { q: "Q182624", kod: "CJ", hu: "Kolozs", ro: "Cluj", de: "Klausenburg", orszag: "RO" },
+  { q: "Q45868", kod: "AB", hu: "Fehér", ro: "Alba", de: "Alba Iulia", orszag: "RO" },
   { q: "Q182614", kod: "BV", hu: "Brassó", ro: "Brașov", de: "Kronstadt", orszag: "RO" },
   { q: "Q188959", kod: "CV", hu: "Kovászna", ro: "Covasna", de: null, orszag: "RO" },
   { q: "Q190702", kod: "HR", hu: "Hargita", ro: "Harghita", de: "Hargitha", orszag: "RO" },

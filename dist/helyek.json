@@ -1,5 +1,5 @@
 {
- "verzio": "4.0.0",
+ "verzio": "4.1.0",
  "generatas": "2026-10-12T06:16:54.602Z",
  "forras": "Wikidata (CC0) + javitasok.json + javitasokHu.json + nincsMagyarNev.json + kia/nemetJavitasok.json (Szabó M. Attila: Erdélyi és moldvai helységnévtár, szabo.adatbank.ro, 2021-10-23)",
  "licenc": "A helynevek, a megyék és a koordináták a Wikidata-ból származnak (CC0 1.0). A német nevek egy része a Szabó M. Attila: Erdélyi és moldvai helységnévtárból (Erdélyi Magyar Adatbank / Transindex, szabo.adatbank.ro) való, amely nem CC0-licenc alatt áll; ezeknél a forrás megjelölése kötelező. A kézzel javított nevek (javitasok.json, javitasokHu.json) a projekt szerzőjének munkája.",
@@ -74,7 +74,7 @@
   {
    "q": "Q182624",
    "kod": "CJ",
-   "hu": "Kolozsvár",
+   "hu": "Kolozs",
    "ro": "Cluj",
    "de": "Klausenburg",
    "orszag": "RO"
@@ -82,7 +82,7 @@
   {
    "q": "Q45868",
    "kod": "AB",
-   "hu": "Nagy-Albás",
+   "hu": "Fehér",
    "ro": "Alba",
    "de": "Alba Iulia",
    "orszag": "RO"

@@ -19,6 +19,8 @@ const fajlok = [
   "sitemap.xml",
   "og-image.png",
   "megyek",
+  "hely",
+  "helyut.mjs",
 ];
 
 await rm(dist, { recursive: true, force: true });

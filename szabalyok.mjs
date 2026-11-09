@@ -445,7 +445,7 @@ export function deHasznalhato(de) {
  * footerben mutatja, az `ellenoriz.mjs` pedig egyezést szól kő, ha hiányzik
  * vagy nem egyezik a `szabalyok.mjs`-belivel.
  */
-export const VERZIO = "4.0.0";
+export const VERZIO = "4.1.0";
 
 /**
  * Cirill átírás latinra (ukrán + szerb cirill). Közös helyen kell, mert

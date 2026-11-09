@@ -4,6 +4,8 @@
 // alapértelmezett, és a romániai sorokon nincs ország. (A `letolt.mjs`
 // `ORSZAG_NEV`-jének a tükre — szándékosan nincs importálva, mert ez
 // statikus oldal, nincs építési lépés.)
+import { helyUtak } from "./helyut.mjs";
+
 const ORSZAG_NEV = { HU: "Magyarország", UA: "Ukrajna", RS: "Szerbia" };
 
 const mezo = document.getElementById("mezo");
@@ -27,6 +29,7 @@ const MERES_KESLELTETES = 800;
 let helyek = [];
 let megyek = new Map();
 let nevek = new Map(); // q -> keresésre szánt szöveg
+let utak = new Map(); // q -> a hely saját oldala (`hely/ms/szoverd`)
 let terkep = null;
 let jeloloReteg = null;
 let jelolok = new Map(); // q -> Leaflet circleMarker
@@ -465,11 +468,11 @@ function kirajzol(lista, keresett) {
     //
     // Kivétel az a toldalék, amit a sor elején már kiraktunk: ugyanaz a
     // szöveg kétszer a sorban ("Butești (Mogos község) · Mogos község ·
-    // Nagy-Albás megye") csak egy sort szolgálna.
+    // Fehér megye") csak egy sort szolgálna.
     if (h.kozsegNev && h.kozsegNev !== h.utalo) resz.push(h.kozsegNev);
     const m = megyek.get(h.megye);
     // A megyeszékhely neve ugyanaz, mint a megyé: akkor sem írjuk ki, ha
-    // önmagában áll a sorban ("Kolozsvár · Kolozsvár megye"), mert nem
+    // önmagában áll a sorban ("Maros · Maros megye"), mert nem
     // mond semmit.
     //
     // A terület fajtája a megyeadatból jön: ami nincs megadva, az "megye"
@@ -483,6 +486,7 @@ function kirajzol(lista, keresett) {
     if (h.orszag && ORSZAG_NEV[h.orszag]) resz.push(ORSZAG_NEV[h.orszag]);
     // A forrás linkje, és hogyan javíthatja, aki észrevessze a hibát.
     if (resz.length) meta.append(document.createTextNode(resz.join(" · ")));
+    if (utak.has(h.q)) metaLink(meta, "minden neve", `./${utak.get(h.q)}`);
     const wikipedia = wikipediaLink(h);
     if (wikipedia) metaLink(meta, "Wikipedia", wikipedia);
     const forras = wikidataLink(h);
@@ -640,6 +644,7 @@ talalat.addEventListener("click", (event) => {
   if (link) {
     const url = new URL(link.href);
     if (url.hostname.endsWith("wikipedia.org")) muvelet = "wikipedia";
+    else if (url.origin === window.location.origin && url.pathname.includes("/hely/")) muvelet = "place-page";
     else if (url.hostname === "www.wikidata.org" && url.searchParams.get("action") === "edit") {
       muvelet = "wikidata-edit";
     } else if (url.hostname === "www.wikidata.org") muvelet = "wikidata";
@@ -658,6 +663,7 @@ async function betolt() {
   const adat = await valasz.json();
   helyek = adat.helyek;
   megyek = new Map(adat.megyek.map((m) => [m.kod, m]));
+  utak = helyUtak(helyek);
 
   // Egyszer előkészítjük, hogy kereséskor csak össze kell hasonlítani.
   //

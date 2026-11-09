@@ -34,7 +34,13 @@
       .kartya strong,.hely strong{font-size:1.08rem}.szam,.nevek{display:block;color:var(--halvany);font-size:.86rem}
       .helyek{display:grid;gap:8px;margin:28px 0 0;padding:0;list-style:none}.hely{padding:12px 15px}.hely>a{text-decoration:none}.hely>a:hover{text-decoration:underline}.forras{margin-left:7px;font-size:.78rem}
       footer{margin-top:42px;padding-top:18px;border-top:1px solid #cfc5b6;color:var(--halvany);font-size:.86rem}
-      @media(min-width:720px){.helyek{grid-template-columns:1fr 1fr}}
+      .morzsa{margin-bottom:24px;font-size:.9rem;color:var(--halvany)}
+      .nevlista{display:grid;grid-template-columns:max-content 1fr;gap:6px 18px;margin:24px 0 0;padding:18px 20px;border:1px solid var(--vonal);border-radius:10px;background:var(--lap)}
+      .nevlista dt{color:var(--halvany)}.nevlista dd{margin:0;font-size:1.25rem;font-weight:700}
+      .megjegyzes{color:var(--halvany);font-size:.9rem}h2{margin:36px 0 0;font-size:1.3rem}
+      .szomszedok{display:grid;gap:6px;margin:14px 0 0;padding:0;list-style:none}.szomszedok span{color:var(--halvany);font-size:.86rem}
+      .linkek{margin-top:32px}
+      @media(min-width:720px){.helyek,.szomszedok{grid-template-columns:1fr 1fr}}
     </style>
   </head>
   <body>
@@ -46,30 +52,30 @@
         <p>6617 erdélyi, partiumi, bánsági, kárpátaljai és határ menti helység magyar, román és német neve, megyék szerint. Válassz területet, vagy használd a <a href="../">gyors keresőt</a>.</p>
       </header>
       <ul class="racs">
-        <li class="kartya"><a href="./ar.html"><strong>Arad megye</strong><span class="szam">287 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./bek.html"><strong>Békés megye</strong><span class="szam">76 helység · Magyarország</span></a></li>
-        <li class="kartya"><a href="./bn.html"><strong>Beszterce-Nászád megye</strong><span class="szam">257 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./bh.html"><strong>Bihar megye</strong><span class="szam">454 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./bv.html"><strong>Brassó megye</strong><span class="szam">172 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./csc.html"><strong>Csongrád-Csanád megye</strong><span class="szam">62 helység · Magyarország</span></a></li>
-        <li class="kartya"><a href="./dbn.html"><strong>Dél-Bánság körzet</strong><span class="szam">102 helység · Szerbia</span></a></li>
-        <li class="kartya"><a href="./ebn.html"><strong>Észak-Bánság körzet</strong><span class="szam">54 helység · Szerbia</span></a></li>
-        <li class="kartya"><a href="./hjb.html"><strong>Hajdú-Bihar megye</strong><span class="szam">84 helység · Magyarország</span></a></li>
-        <li class="kartya"><a href="./hr.html"><strong>Hargita megye</strong><span class="szam">272 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./hd.html"><strong>Hunyad megye</strong><span class="szam">492 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./zk.html"><strong>Kárpátalja</strong><span class="szam">597 helység · Ukrajna</span></a></li>
-        <li class="kartya"><a href="./cj.html"><strong>Kolozsvár megye</strong><span class="szam">440 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./cv.html"><strong>Kovászna megye</strong><span class="szam">131 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./kbn.html"><strong>Közép-Bánság körzet</strong><span class="szam">61 helység · Szerbia</span></a></li>
-        <li class="kartya"><a href="./cs.html"><strong>Krassó-Szörény megye</strong><span class="szam">312 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./mm.html"><strong>Máramaros megye</strong><span class="szam">247 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./ms.html"><strong>Maros megye</strong><span class="szam">521 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./ab.html"><strong>Nagy-Albás megye</strong><span class="szam">721 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./szb.html"><strong>Szabolcs-Szatmár-Bereg megye</strong><span class="szam">230 helység · Magyarország</span></a></li>
-        <li class="kartya"><a href="./sm.html"><strong>Szatmár megye</strong><span class="szam">238 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./sb.html"><strong>Szeben megye</strong><span class="szam">189 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./sj.html"><strong>Szilágy megye</strong><span class="szam">290 helység · Románia</span></a></li>
-        <li class="kartya"><a href="./tm.html"><strong>Temes megye</strong><span class="szam">328 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./ar"><strong>Arad megye</strong><span class="szam">287 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./bek"><strong>Békés megye</strong><span class="szam">76 helység · Magyarország</span></a></li>
+        <li class="kartya"><a href="./bn"><strong>Beszterce-Nászád megye</strong><span class="szam">257 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./bh"><strong>Bihar megye</strong><span class="szam">454 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./bv"><strong>Brassó megye</strong><span class="szam">172 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./csc"><strong>Csongrád-Csanád megye</strong><span class="szam">62 helység · Magyarország</span></a></li>
+        <li class="kartya"><a href="./dbn"><strong>Dél-Bánság körzet</strong><span class="szam">102 helység · Szerbia</span></a></li>
+        <li class="kartya"><a href="./ebn"><strong>Észak-Bánság körzet</strong><span class="szam">54 helység · Szerbia</span></a></li>
+        <li class="kartya"><a href="./ab"><strong>Fehér megye</strong><span class="szam">721 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./hjb"><strong>Hajdú-Bihar megye</strong><span class="szam">84 helység · Magyarország</span></a></li>
+        <li class="kartya"><a href="./hr"><strong>Hargita megye</strong><span class="szam">272 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./hd"><strong>Hunyad megye</strong><span class="szam">492 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./zk"><strong>Kárpátalja</strong><span class="szam">597 helység · Ukrajna</span></a></li>
+        <li class="kartya"><a href="./cj"><strong>Kolozs megye</strong><span class="szam">440 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./cv"><strong>Kovászna megye</strong><span class="szam">131 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./kbn"><strong>Közép-Bánság körzet</strong><span class="szam">61 helység · Szerbia</span></a></li>
+        <li class="kartya"><a href="./cs"><strong>Krassó-Szörény megye</strong><span class="szam">312 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./mm"><strong>Máramaros megye</strong><span class="szam">247 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./ms"><strong>Maros megye</strong><span class="szam">521 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./szb"><strong>Szabolcs-Szatmár-Bereg megye</strong><span class="szam">230 helység · Magyarország</span></a></li>
+        <li class="kartya"><a href="./sm"><strong>Szatmár megye</strong><span class="szam">238 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./sb"><strong>Szeben megye</strong><span class="szam">189 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./sj"><strong>Szilágy megye</strong><span class="szam">290 helység · Románia</span></a></li>
+        <li class="kartya"><a href="./tm"><strong>Temes megye</strong><span class="szam">328 helység · Románia</span></a></li>
       </ul>
       <footer>
         <a href="../">Helynévkereső</a> · Adatok: <a href="https://www.wikidata.org/">Wikidata</a> (CC0)

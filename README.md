@@ -26,9 +26,11 @@ megyét akarod böngészni. A határon túli sorokon ott az ország is
 | `szabalyok.mjs` és `VERZIO` | Az adat verziója egy helyen (`szabalyok.mjs` → `VERZIO`), a története a [`CHANGELOG.md`](CHANGELOG.md)-ben. |
 | `index.html` | Az oldal. |
 | `keres.js` | A keresés és a találatok kirajzolása. |
-| `seo.mjs` | Legenerálja a JavaScript nélkül is olvasható megyeoldalakat, és éles webcímmel a sitemapet. |
+| `seo.mjs` | Legenerálja a JavaScript nélkül is olvasható megyeoldalakat és a 6617 helyoldalt, és éles webcímmel a sitemapet. |
+| `helyut.mjs` | A helyoldalak címe (`hely/ms/szoverd`), egy helyen: a `seo.mjs` és a `keres.js` is ezt használja. |
+| `hely/` | Helyenként egy oldal (nevek, község, a környék helységei); a `seo.mjs` kimenete. Verziózva, mert a Cloudflare a repó gyökerét szolgálja ki build nélkül. |
 | `seo-check.mjs` | Ellenőrzi a metaadatokat, a strukturált adatot, a kanonikus címeket és a generált megyeoldalakat. |
-| `megyek/` | A 24 statikus, indexelhető területi jegyzék; a `seo.mjs` kimenete. |
+| `megyek/` | A 24 statikus, indexelhető területi jegyzék; a `seo.mjs` kimenete. A canonical és a sitemap a `.html` nélküli címet adja meg (`/megyek/sb`), mert a Cloudflare a `.html`-eset arra irányítja át. |
 | `javitasok.json` | Kézzel javított **német** nevek. Olvassa a `letolt.mjs`. |
 | `javitasokHu.json` | Kézzel javított **magyar** nevek, ugyanerre a célra. |
 | `kia/nemetJavitasok.json` | A KIA ellenőrzött **német** nevei, Q-számmal. A `letolt.mjs` olvassa; a `javitasok.json` mögé sorolódik. |

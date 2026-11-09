@@ -22,6 +22,19 @@ romántól ("Vále"/"Vale", "Dealu Ștefăniței"/"Dealul Ștefăniței"), ezér
 `szabalyok.mjs` `ugyanazANev()` függvénye ezt elfogadja. Ez csak az
 ellenőrzésen fut, keresésre nem.
 
+## 4.1.0 — 2026-11-09
+
+**Minden helynek saját oldala van, és két megye neve javítva.**
+
+- **Helyoldalak:** `hely/<megye>/<név>` (pl. `/hely/ms/szoverd`), 6617 oldal: a
+  hely nevei, a községe, a község többi helysége és a nyolc legközelebbi hely.
+  A megyeoldalak és a találatok („minden neve”) ide linkelnek, a sitemap
+  6643 címet sorol fel. A cím a `helyut.mjs`-ből jön.
+- **Megyenevek:** „Kolozsvár megye” helyett **Kolozs megye**, „Nagy-Albás
+  megye” helyett **Fehér megye** (`letolt.mjs`, `MEGYEK`).
+- **Canonical:** a megyeoldalak a `.html` nélküli címüket adják meg, mert a
+  Cloudflare a `.html`-eset átirányítja.
+
 ## 4.0.0 — 2026-10-12
 
 **A KIA német nevei bekerülnek: 653-ról 2137 helyre.** Új mező a sorban
