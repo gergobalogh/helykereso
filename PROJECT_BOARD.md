@@ -4,7 +4,7 @@
 - **What:** Hungarian, Romanian and German names of Transylvanian places side by side; a mivelkezdjem.hu experiment
 - **URL:** https://helykereso.gergobalogh.me
 - **Post where:** your Facebook profile; Transylvanian Facebook groups (shortlist in `inspiration/docs/placesearch-facebook-groups.md`)
-- **Next:** Place pages live from 2026-11-09 (4.1.0): resubmit the sitemap in Search Console and inspect a few place pages (done the same day, see below); around 2026-11-23 check helykereso's impressions and indexed count with gergobalogh.me's `scripts/search-console-baseline.py` (filter on helykereso). Later: a pitch video (/pitch-video), then the posts: your Facebook profile and one group from the shortlist (where a group bans self-promotion, ask an admin first).
+- **Next:** Place pages live from 2026-11-09 (4.1.0): sitemap submitted in Search Console (sc-domain:gergobalogh.me) and indexing requested for /hely/ms/szoverd, /hely/cj/kolozsvar, /hely/zk/beregszasz and /megyek/cj on 2026-11-09, all four were unknown to Google before; around 2026-11-23 check helykereso's impressions and indexed count with gergobalogh.me's `scripts/search-console-baseline.py` (filter on helykereso). Later: a pitch video (/pitch-video), then the posts: your Facebook profile and one group from the shortlist (where a group bans self-promotion, ask an admin first).
 - **Updated:** 2026-11-09
 
 ## Build
