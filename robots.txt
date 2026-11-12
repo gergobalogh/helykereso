@@ -1,10 +1,6 @@
 User-agent: *
 Allow: /
 
-# A Cloudflare a saját blokkját (Content-Signal, tanító crawlerek) ennek a fájlnak a tetejére teszi, és abban a
-# Google-Extended tiltva van. A Google az azonos crawlerre vonatkozó csoportokat összevonja, és a kevésbé szigorú
-# szabályt követi, így ez az Allow engedi, hogy a Gemini appok válaszaiban szerepeljen az oldal (tulajdonos,
-# 2026-11-12). A többi tanító crawler tiltva marad.
 User-agent: Google-Extended
 Allow: /
 

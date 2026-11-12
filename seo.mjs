@@ -356,7 +356,9 @@ if (siteUrlErtek) {
   );
   await writeFile(
     new URL("./robots.txt", import.meta.url),
-    `User-agent: *\nAllow: /\nSitemap: ${new URL("sitemap.xml", alap).href}\n`,
+    // A Cloudflare saját blokkja (a fájl tetején) tiltja a Google-Extendedet; a Google a kevésbé szigorú
+    // szabályt követi, így ez az Allow engedi a Gemini appok válaszait (tulajdonos, 2026-11-12).
+    `User-agent: *\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: ${new URL("sitemap.xml", alap).href}\n`,
   );
 
   const foOldalUrl = new URL("./index.html", import.meta.url);
