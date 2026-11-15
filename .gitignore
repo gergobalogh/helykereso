@@ -20,3 +20,4 @@ node_modules/
 # A helyoldalak a gyökérben (`hely/`) verziózva vannak, mert a Cloudflare a
 # repó gyökerét szolgálja ki build nélkül; a `dist/` másolatuk felesleges.
 /dist/hely/
+.wrangler/
